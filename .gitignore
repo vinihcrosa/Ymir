@@ -1,6 +1,12 @@
 # Reference docs (legacy project — internal only)
 .docs/
 
+# Spec files (working documents — not repo artifacts)
+.specs/
+
+# Doxygen output
+docs/api/
+
 # Build
 build/
 cmake-build-*/

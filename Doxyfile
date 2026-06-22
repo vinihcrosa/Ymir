@@ -1,0 +1,32 @@
+PROJECT_NAME           = "Ymir"
+PROJECT_NUMBER         = 0.1.0
+PROJECT_BRIEF          = "General-purpose physics engine"
+
+INPUT                  = core/include \
+                         naval/include \
+                         adapters/include \
+                         include
+RECURSIVE              = YES
+FILE_PATTERNS          = *.h *.hpp
+
+OUTPUT_DIRECTORY       = docs/api
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+
+EXTRACT_ALL            = NO
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = NO
+
+WARN_AS_ERROR          = YES
+QUIET                  = NO
+
+JAVADOC_AUTOBRIEF      = YES
+QT_AUTOBRIEF           = NO
+
+ALPHABETICAL_INDEX     = YES
+HTML_DYNAMIC_SECTIONS  = YES
+
+GENERATE_TREEVIEW      = YES
+DISABLE_INDEX          = NO
+
+HAVE_DOT               = NO

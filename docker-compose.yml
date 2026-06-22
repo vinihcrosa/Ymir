@@ -1,0 +1,30 @@
+services:
+  build:
+    build:
+      context: .
+      dockerfile: docker/linux-x86_64/Dockerfile
+      target: builder
+    volumes:
+      - .:/src
+      - ymir_build:/build
+    working_dir: /src
+    command: >
+      sh -c "cmake -B /build -S /src -GNinja -DCMAKE_BUILD_TYPE=Release -DYMIR_BUILD_TESTS=ON
+             && cmake --build /build --parallel"
+
+  test:
+    build:
+      context: .
+      dockerfile: docker/linux-x86_64/Dockerfile
+      target: builder
+    volumes:
+      - .:/src
+      - ymir_build:/build
+    working_dir: /src
+    command: >
+      sh -c "cmake -B /build -S /src -GNinja -DCMAKE_BUILD_TYPE=Release -DYMIR_BUILD_TESTS=ON
+             && cmake --build /build --parallel
+             && ctest --test-dir /build --output-on-failure"
+
+volumes:
+  ymir_build:

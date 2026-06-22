@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Linux x86_64
+            os: ubuntu-22.04
+            cmake_extra: ""
+
+          - name: macOS ARM64
+            os: macos-14
+            cmake_extra: ""
+
+          - name: Windows x86_64
+            os: windows-latest
+            cmake_extra: >-
+              -DCMAKE_TOOLCHAIN_FILE=$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            ninja-build \
+            libcgal-dev \
+            libsundials-dev
+
+      - name: Install dependencies (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          brew install ninja cgal sundials
+
+      - name: Install dependencies (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          # vcpkg is pre-installed on windows-latest
+          # CGAL and SUNDIALS are optional until M1/M2 — skipped here to avoid
+          # long compile times. Add when needed:
+          #   vcpkg install cgal:x64-windows sundials:x64-windows
+          choco install ninja --no-progress
+
+      - name: Configure
+        run: >
+          cmake -B build
+          -DCMAKE_BUILD_TYPE=Release
+          -DYMIR_BUILD_TESTS=ON
+          ${{ matrix.cmake_extra }}
+
+      - name: Build
+        run: cmake --build build --parallel
+
+      - name: Test
+        run: ctest --test-dir build --output-on-failure

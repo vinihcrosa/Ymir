@@ -1,0 +1,32 @@
+---
+BasedOnStyle: LLVM
+Language: Cpp
+Standard: c++17
+
+IndentWidth: 4
+ColumnLimit: 100
+TabWidth: 4
+UseTab: Never
+
+BreakBeforeBraces: Allman
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+
+SortIncludes: true
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex:    '^<ymir/'
+    Priority: 1
+  - Regex:    '^<catch2/'
+    Priority: 2
+  - Regex:    '^<'
+    Priority: 3
+  - Regex:    '.*'
+    Priority: 4
+
+PointerAlignment: Left
+ReferenceAlignment: Left
+SpaceBeforeParens: ControlStatements
+SpaceAfterCStyleCast: false
+SpacesInContainerLiterals: false
