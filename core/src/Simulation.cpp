@@ -1,47 +1,54 @@
 #include <ymir/core/Simulation.h>
 
-#include <ymir/core/Body.h>
-#include <ymir/core/ForceModel.h>
-#include <ymir/core/integrator/CvodeIntegrator.h>
-
 #include <stdexcept>
+#include <string>
 
 namespace ymir
 {
 
-Simulation::Simulation(std::unique_ptr<Body> body, const CvodeConfig& config)
-    : body_(std::move(body))
-    , integrator_(std::make_unique<CvodeIntegrator>(config))
+void Simulation::addBody(int id, std::unique_ptr<AbstractBody> body)
 {
-}
+    if (bodies_.count(id))
+        throw std::invalid_argument(
+            "Simulation::addBody: duplicate id " + std::to_string(id));
 
-Simulation::~Simulation() = default;
-
-void Simulation::addForceModel(std::unique_ptr<ForceModel> model)
-{
-    modelPtrs_.push_back(model.get());
-    ownedModels_.push_back(std::move(model));
-}
-
-void Simulation::initialize()
-{
-    integrator_->initialize(*body_, modelPtrs_);
-    t_           = 0.0;
-    initialized_ = true;
+    order_.push_back(body.get());
+    bodies_.emplace(id, std::move(body));
 }
 
 void Simulation::step(double dt)
 {
-    if (!initialized_)
-        throw std::logic_error("Simulation::step called before initialize()");
-
-    integrator_->step(*body_, dt);
+    for (AbstractBody* b : order_)
+        b->step(dt);
     t_ += dt;
 }
 
-BodyState Simulation::state() const
+AbstractBody& Simulation::body(int id)
 {
-    return body_->state(t_, 0.0);
+    auto it = bodies_.find(id);
+    if (it == bodies_.end())
+        throw std::out_of_range(
+            "Simulation::body: id not found " + std::to_string(id));
+    return *it->second;
+}
+
+const AbstractBody& Simulation::body(int id) const
+{
+    auto it = bodies_.find(id);
+    if (it == bodies_.end())
+        throw std::out_of_range(
+            "Simulation::body: id not found " + std::to_string(id));
+    return *it->second;
+}
+
+BodyState Simulation::state(int id) const
+{
+    return body(id).state();
+}
+
+bool Simulation::hasBody(int id) const noexcept
+{
+    return bodies_.count(id) > 0;
 }
 
 } // namespace ymir

@@ -5,7 +5,7 @@
 #include <ymir/naval/NavalEnvironment.h>
 #include <ymir/naval/NavalSimulation.h>
 #include <ymir/naval/PhysicalConstants.h>
-#include <ymir/core/Body.h>
+#include <ymir/core/RigidBody6DOF.h>
 #include <ymir/core/Types.h>
 
 #include <memory>
@@ -13,17 +13,16 @@
 using Catch::Approx;
 using namespace ymir::naval;
 
-static std::unique_ptr<ymir::Body> makeTestBody()
+static std::unique_ptr<ymir::RigidBody6DOF> makeTestBody(const ymir::CvodeConfig& cfg = {})
 {
     ymir::Matrix6x6 mass{};
     for (int i = 0; i < 6; ++i) mass[i][i] = 1000.0;
 
-    ymir::Matrix6x6 damp{};
+    ymir::Matrix6x6 added{};
+    ymir::Vector6   q{};
+    ymir::Vector6   qdot{};
 
-    ymir::Vector6 q{};
-    ymir::Vector6 qdot{};
-
-    return std::make_unique<ymir::Body>(mass, damp, q, qdot);
+    return std::make_unique<ymir::RigidBody6DOF>(0, mass, added, q, qdot, cfg);
 }
 
 TEST_CASE("NavalContext default construction")
@@ -61,7 +60,7 @@ TEST_CASE("NavalSimulation constructs without crash")
     cfg.reltol = 1e-6;
     cfg.abstol = 1e-9;
 
-    NavalSimulation sim(makeTestBody(), cfg);
+    NavalSimulation sim(makeTestBody(cfg));
     sim.initialize();
     REQUIRE(sim.time() == Approx(0.0));
 }
@@ -72,7 +71,7 @@ TEST_CASE("NavalSimulation step advances time")
     cfg.reltol = 1e-6;
     cfg.abstol = 1e-9;
 
-    NavalSimulation sim(makeTestBody(), cfg);
+    NavalSimulation sim(makeTestBody(cfg));
     sim.initialize();
     sim.step(0.1);
     REQUIRE(sim.time() == Approx(0.1).margin(1e-10));

@@ -12,7 +12,7 @@
 namespace ymir
 {
 
-class Body;
+class RigidBody6DOF;
 class ForceModel;
 
 /**
@@ -37,20 +37,20 @@ public:
     CvodeIntegrator& operator=(CvodeIntegrator&&)      = delete;
 
     /** Allocate CVODE memory and set initial conditions from body. */
-    void initialize(Body& body, std::vector<ForceModel*>& models);
+    void initialize(RigidBody6DOF& body, std::vector<ForceModel*>& models);
 
     /** Advance body state by dt seconds. Throws on CVODE error. */
-    void step(Body& body, double dt);
+    void step(RigidBody6DOF& body, double dt);
 
     /** Reinitialize CVODE with the body's current state (no reallocation). */
-    void reset(Body& body);
+    void reset(RigidBody6DOF& body);
 
     double time() const noexcept { return t_; }
 
     // Public so the static rhs() callback can access it — not user API.
     struct RhsContext
     {
-        Body*                     body   = nullptr;
+        RigidBody6DOF*            body   = nullptr;
         std::vector<ForceModel*>* models = nullptr;
     };
 

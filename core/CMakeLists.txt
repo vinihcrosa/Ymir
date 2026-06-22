@@ -1,6 +1,6 @@
 add_library(ymir_core STATIC
     src/core.cpp
-    src/Body.cpp
+    src/RigidBody6DOF.cpp
     src/Simulation.cpp
     src/integrator/CvodeIntegrator.cpp
 )

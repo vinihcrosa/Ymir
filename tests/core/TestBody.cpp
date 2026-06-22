@@ -1,7 +1,7 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
 
-#include <ymir/core/Body.h>
+#include <ymir/core/RigidBody6DOF.h>
 #include <ymir/core/math/LinearAlgebra.h>
 
 using Catch::Matchers::WithinAbs;
@@ -19,13 +19,13 @@ static Matrix6x6 diagonalMass(double m, double Ixx, double Iyy, double Izz)
     return M;
 }
 
-TEST_CASE("Body: invTotalMass * totalMass ≈ I", "[body]")
+TEST_CASE("RigidBody6DOF: invTotalMass * totalMass ≈ I", "[body]")
 {
-    Matrix6x6 mass     = diagonalMass(1000.0, 5e5, 4e5, 3e5);
-    Matrix6x6 added    = diagonalMass(200.0,  1e5, 0.8e5, 0.6e5);
-    Vector6   q{},     qdot{};
+    Matrix6x6 mass  = diagonalMass(1000.0, 5e5, 4e5, 3e5);
+    Matrix6x6 added = diagonalMass(200.0,  1e5, 0.8e5, 0.6e5);
+    Vector6   q{}, qdot{};
 
-    Body body{mass, added, q, qdot};
+    RigidBody6DOF body{0, mass, added, q, qdot};
 
     auto result = math::matMul(body.totalMass(), body.invTotalMass());
 
@@ -34,13 +34,13 @@ TEST_CASE("Body: invTotalMass * totalMass ≈ I", "[body]")
             REQUIRE_THAT(result[i][j], WithinAbs(i == j ? 1.0 : 0.0, 1e-10));
 }
 
-TEST_CASE("Body: computeAcceleration F/m for diagonal mass", "[body]")
+TEST_CASE("RigidBody6DOF: computeAcceleration F/m for diagonal mass", "[body]")
 {
     Matrix6x6 mass = diagonalMass(1000.0, 1e5, 1e5, 1e5);
     Matrix6x6 added{};
     Vector6   q{}, qdot{};
 
-    Body body{mass, added, q, qdot};
+    RigidBody6DOF body{0, mass, added, q, qdot};
 
     Forces F;
     F.f[0] = 500.0;  // 500 N in surge
@@ -53,20 +53,20 @@ TEST_CASE("Body: computeAcceleration F/m for diagonal mass", "[body]")
         REQUIRE_THAT(acc[i], WithinAbs(0.0, 1e-12));
 }
 
-TEST_CASE("Body: state() returns correct snapshot", "[body]")
+TEST_CASE("RigidBody6DOF: state() returns correct snapshot", "[body]")
 {
     Matrix6x6 mass = diagonalMass(1000.0, 1e5, 1e5, 1e5);
     Matrix6x6 added{};
     Vector6   q{1.0, 2.0, 3.0, 0.1, 0.2, 0.3};
     Vector6   qdot{4.0, 5.0, 6.0, 0.4, 0.5, 0.6};
 
-    Body      body{mass, added, q, qdot};
-    BodyState s = body.state(10.0, 0.1);
+    RigidBody6DOF body{0, mass, added, q, qdot};
+    BodyState     s = body.state();
 
-    REQUIRE_THAT(s.x(),     WithinAbs(1.0, 1e-15));
-    REQUIRE_THAT(s.y(),     WithinAbs(2.0, 1e-15));
-    REQUIRE_THAT(s.yaw(),   WithinAbs(0.3, 1e-15));
-    REQUIRE_THAT(s.u(),     WithinAbs(4.0, 1e-15));
-    REQUIRE_THAT(s.r(),     WithinAbs(0.6, 1e-15));
-    REQUIRE_THAT(s.time(),  WithinAbs(10.0, 1e-15));
+    REQUIRE_THAT(s.x(),    WithinAbs(1.0, 1e-15));
+    REQUIRE_THAT(s.y(),    WithinAbs(2.0, 1e-15));
+    REQUIRE_THAT(s.yaw(),  WithinAbs(0.3, 1e-15));
+    REQUIRE_THAT(s.u(),    WithinAbs(4.0, 1e-15));
+    REQUIRE_THAT(s.r(),    WithinAbs(0.6, 1e-15));
+    REQUIRE_THAT(s.time(), WithinAbs(0.0, 1e-15));  // time starts at 0
 }

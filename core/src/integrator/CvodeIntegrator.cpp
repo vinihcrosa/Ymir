@@ -1,6 +1,6 @@
 #include <ymir/core/integrator/CvodeIntegrator.h>
 
-#include <ymir/core/Body.h>
+#include <ymir/core/RigidBody6DOF.h>
 #include <ymir/core/ForceModel.h>
 #include <ymir/core/Forces.h>
 
@@ -18,13 +18,13 @@ namespace ymir
 {
 
 // ---------------------------------------------------------------------------
-// RHS — CVODE callback (static member → has friend access to Body private)
+// RHS — CVODE callback (static member → has friend access to RigidBody6DOF)
 // ---------------------------------------------------------------------------
 
 int CvodeIntegrator::rhsCallback(sunrealtype t_rhs, N_Vector y, N_Vector ydot, void* user_data)
 {
-    auto* ctx = static_cast<CvodeIntegrator::RhsContext*>(user_data);
-    Body& body = *ctx->body;
+    auto*          ctx  = static_cast<CvodeIntegrator::RhsContext*>(user_data);
+    RigidBody6DOF& body = *ctx->body;
 
     // 1. Extract q and qdot from CVODE state vector
     Vector6 q{}, qdot{};
@@ -37,9 +37,9 @@ int CvodeIntegrator::rhsCallback(sunrealtype t_rhs, N_Vector y, N_Vector ydot, v
     // 2. Update body state so ForceModels read current kinematics
     body.setState(q, qdot);
 
-    // 3. Sum all forces
-    BodyState state = body.state(static_cast<double>(t_rhs), 0.0);
-    Forces Ft = Forces::zero();
+    // 3. Sum all forces (pass t_rhs as the evaluation time, not body.time())
+    BodyState state{q, qdot, static_cast<double>(t_rhs), 0.0};
+    Forces    Ft = Forces::zero();
     for (ForceModel* model : *ctx->models)
         Ft += model->compute(state);
 
@@ -88,12 +88,11 @@ CvodeIntegrator::~CvodeIntegrator()
     if (sunCtx_) SUNContext_Free(&sunCtx_);
 }
 
-void CvodeIntegrator::initialize(Body& body, std::vector<ForceModel*>& models)
+void CvodeIntegrator::initialize(RigidBody6DOF& body, std::vector<ForceModel*>& models)
 {
     ctx_ = RhsContext{&body, &models};
     t_   = 0.0;
 
-    // Build initial state vector
     y_ = N_VNew_Serial(12, sunCtx_);
     if (!y_)
         throw std::runtime_error("CvodeIntegrator: N_VNew_Serial failed");
@@ -106,7 +105,6 @@ void CvodeIntegrator::initialize(Body& body, std::vector<ForceModel*>& models)
         NV_Ith_S(y_, i + 6) = qdot[i];
     }
 
-    // CVODE init
     if (CVodeInit(mem_, CvodeIntegrator::rhsCallback, t_, y_) != CV_SUCCESS)
         throw std::runtime_error("CvodeIntegrator: CVodeInit failed");
 
@@ -121,7 +119,6 @@ void CvodeIntegrator::initialize(Body& body, std::vector<ForceModel*>& models)
 
     CVodeSetUserData(mem_, &ctx_);
 
-    // Dense matrix + linear solver (12x12)
     A_ = SUNDenseMatrix(12, 12, sunCtx_);
     if (!A_)
         throw std::runtime_error("CvodeIntegrator: SUNDenseMatrix failed");
@@ -134,7 +131,7 @@ void CvodeIntegrator::initialize(Body& body, std::vector<ForceModel*>& models)
         throw std::runtime_error("CvodeIntegrator: CVodeSetLinearSolver failed");
 }
 
-void CvodeIntegrator::step(Body& body, double dt)
+void CvodeIntegrator::step(RigidBody6DOF& body, double dt)
 {
     double t_target = t_ + dt;
 
@@ -145,7 +142,6 @@ void CvodeIntegrator::step(Body& body, double dt)
             "CvodeIntegrator: CVode failed with flag " + std::to_string(flag));
     }
 
-    // Write CVODE output back to body
     Vector6 q{}, qdot{};
     for (int i = 0; i < 6; ++i)
     {
@@ -155,7 +151,7 @@ void CvodeIntegrator::step(Body& body, double dt)
     body.setState(q, qdot);
 }
 
-void CvodeIntegrator::reset(Body& body)
+void CvodeIntegrator::reset(RigidBody6DOF& body)
 {
     const Vector6& q    = body.q();
     const Vector6& qdot = body.qdot();
