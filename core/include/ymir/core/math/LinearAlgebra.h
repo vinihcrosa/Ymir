@@ -2,8 +2,10 @@
 
 #include <ymir/core/Types.h>
 
+#include <algorithm>
 #include <stdexcept>
 #include <cmath>
+#include <vector>
 
 namespace ymir::math
 {
@@ -117,6 +119,80 @@ inline Matrix6x6 matMul(const Matrix6x6& A, const Matrix6x6& B) noexcept
             result[i][j] = sum;
         }
     return result;
+}
+
+// ---------------------------------------------------------------------------
+// bilinear — 2D bilinear interpolation; clamps at all borders
+// z_matrix[i][j] corresponds to (x_vec[i], y_vec[j])
+// ---------------------------------------------------------------------------
+
+inline double bilinear(
+    const std::vector<double>& x_vec,
+    const std::vector<double>& y_vec,
+    const std::vector<std::vector<double>>& z_matrix,
+    double x_query,
+    double y_query) noexcept
+{
+    // Clamp x
+    if (x_query <= x_vec.front())
+    {
+        // bilinear on first row → 1D in y
+        double t = 0.0;
+        if (y_vec.size() > 1)
+        {
+            if (y_query <= y_vec.front()) return z_matrix[0].front();
+            if (y_query >= y_vec.back())  return z_matrix[0].back();
+            auto it = std::lower_bound(y_vec.begin(), y_vec.end(), y_query);
+            std::size_t j1 = static_cast<std::size_t>(it - y_vec.begin());
+            std::size_t j0 = j1 - 1;
+            t = (y_query - y_vec[j0]) / (y_vec[j1] - y_vec[j0]);
+            return z_matrix[0][j0] * (1.0 - t) + z_matrix[0][j1] * t;
+        }
+        return z_matrix[0][0];
+    }
+    if (x_query >= x_vec.back())
+    {
+        std::size_t iN = x_vec.size() - 1;
+        if (y_vec.size() > 1)
+        {
+            if (y_query <= y_vec.front()) return z_matrix[iN].front();
+            if (y_query >= y_vec.back())  return z_matrix[iN].back();
+            auto it = std::lower_bound(y_vec.begin(), y_vec.end(), y_query);
+            std::size_t j1 = static_cast<std::size_t>(it - y_vec.begin());
+            std::size_t j0 = j1 - 1;
+            double t = (y_query - y_vec[j0]) / (y_vec[j1] - y_vec[j0]);
+            return z_matrix[iN][j0] * (1.0 - t) + z_matrix[iN][j1] * t;
+        }
+        return z_matrix[iN][0];
+    }
+
+    // Find x bracket
+    auto ix = std::lower_bound(x_vec.begin(), x_vec.end(), x_query);
+    std::size_t i1 = static_cast<std::size_t>(ix - x_vec.begin());
+    std::size_t i0 = i1 - 1;
+    double tx = (x_query - x_vec[i0]) / (x_vec[i1] - x_vec[i0]);
+
+    // Clamp y
+    if (y_query <= y_vec.front())
+        return z_matrix[i0].front() * (1.0 - tx) + z_matrix[i1].front() * tx;
+    if (y_query >= y_vec.back())
+        return z_matrix[i0].back() * (1.0 - tx) + z_matrix[i1].back() * tx;
+
+    // Find y bracket
+    auto iy = std::lower_bound(y_vec.begin(), y_vec.end(), y_query);
+    std::size_t j1 = static_cast<std::size_t>(iy - y_vec.begin());
+    std::size_t j0 = j1 - 1;
+    double ty = (y_query - y_vec[j0]) / (y_vec[j1] - y_vec[j0]);
+
+    double z00 = z_matrix[i0][j0];
+    double z01 = z_matrix[i0][j1];
+    double z10 = z_matrix[i1][j0];
+    double z11 = z_matrix[i1][j1];
+
+    return z00 * (1.0 - tx) * (1.0 - ty)
+         + z01 * (1.0 - tx) *        ty
+         + z10 *        tx  * (1.0 - ty)
+         + z11 *        tx  *        ty;
 }
 
 } // namespace ymir::math

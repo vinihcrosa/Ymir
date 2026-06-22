@@ -20,6 +20,8 @@ namespace ymir
 class BodyState
 {
 public:
+    BodyState() noexcept = default;
+
     BodyState(Vector6 q, Vector6 qdot, double time, double dt) noexcept
         : q_(q), qdot_(qdot), time_(time), dt_(dt)
     {
