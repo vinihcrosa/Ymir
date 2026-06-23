@@ -5,6 +5,7 @@ add_executable(ymir_tests
     core/TestBody.cpp
     core/TestForceModel.cpp
     core/TestIntegrator.cpp
+    core/TestSimulationIntegration.cpp
 )
 
 target_link_libraries(ymir_tests
