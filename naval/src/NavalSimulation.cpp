@@ -52,7 +52,7 @@ void NavalSimulation::step(double dt)
 
     constexpr double tau  = 16.5;
     const double     alpha = 1.0 - std::exp(-dt / tau);
-    const ymir::Vector6& q = sim_.state(0).q();
+    const ymir::Vector6 q = sim_.state(0).q();
     for (int i = 0; i < 6; ++i)
         q_avg_[i] += alpha * (q[i] - q_avg_[i]);
 }

@@ -42,3 +42,20 @@ target_link_libraries(ymir_naval_tests
 )
 
 catch_discover_tests(ymir_naval_tests)
+
+# Adapters tests
+add_executable(ymir_adapters_tests
+    adapters/TestScenarioReader.cpp
+)
+
+target_link_libraries(ymir_adapters_tests
+    PRIVATE
+        ymir_adapters
+        Catch2::Catch2WithMain
+)
+
+target_compile_definitions(ymir_adapters_tests
+    PRIVATE YMIR_EXAMPLES_DIR="${CMAKE_SOURCE_DIR}/examples"
+)
+
+catch_discover_tests(ymir_adapters_tests)

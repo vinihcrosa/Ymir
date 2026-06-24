@@ -28,6 +28,9 @@ public:
     Simulation(const Simulation&)            = delete;
     Simulation& operator=(const Simulation&) = delete;
 
+    Simulation(Simulation&&)                 = default;
+    Simulation& operator=(Simulation&&)      = default;
+
     /** Register a body. Throws std::invalid_argument on duplicate id. */
     void addBody(int id, std::unique_ptr<AbstractBody> body);
 

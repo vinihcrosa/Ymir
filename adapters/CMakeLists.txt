@@ -1,5 +1,6 @@
 add_library(ymir_adapters STATIC
     src/adapters.cpp
+    src/json/ScenarioReader.cpp
 )
 
 target_include_directories(ymir_adapters
