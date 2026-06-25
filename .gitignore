@@ -9,6 +9,8 @@ docs/api/
 
 # Build
 build/
+build-*/
+build_*/
 cmake-build-*/
 *.o
 *.a
