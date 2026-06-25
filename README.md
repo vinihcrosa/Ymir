@@ -1,57 +1,73 @@
 # Ymir
 
-General-purpose physics engine. Designed to simulate the dynamics of physical bodies under arbitrary force systems — extensible to any domain. Coupled with any viewer or simulator via a clean C API.
+6-DOF naval physics simulator — rigid-body hydrodynamics for ships and floating platforms under current, wind, waves, thrusters, rudders, and tug interactions.
 
-**Current scope: naval domain.** First implementation covers 6-DOF hydrodynamics for ships and floating platforms (current, wind, waves, thrusters, rudders, tugs). The architecture is domain-agnostic by design.
+The engine is domain-agnostic by design. The naval module is the first application.
 
-## What it does (naval module)
-
-- Simulates vessel motion under current, wind, and waves
-- Models propulsion (thrusters, rudders), mooring forces, and tug interactions
-- Exposes a C API (`DLL`/`.so`/`.dylib`) for integration with Unity, C#, Python, or any host
-- Runs in fast-time (pure simulation) or real-time (frame-driven by external host)
-
-## Requirements
-
-| Concern | Decision |
-|---------|----------|
-| Language | C++17 |
-| Mesh library | CGAL |
-| ODE solver | SUNDIALS CVODE |
-| Build system | CMake ≥ 3.16 |
-| Tests | Catch2 |
-| Docs | Doxygen |
-| Targets | Linux, macOS, Windows — x86_64 & ARM64 |
-
-## Architecture
-
-Ports and Adapters. Physics core is pure library — no I/O, no rendering, no file dependencies. Adapters handle JSON input, CSV output, and the public C API.
+## Repository layout
 
 ```
 ymir/
-├── core/           # Pure physics — forces, integrator, vessel state
-├── adapters/       # JSON I/O, CSV writer, C API (DLL boundary)
-├── applications/   # Executables: fasttime, realtime
-├── tests/          # Catch2 unit + integration tests
-├── docs/           # Architecture docs, design decisions
-└── include/        # Public C headers (DLL interface)
+├── apps/
+│   ├── server/        real-time server (WebSocket, Protobuf, API handlers)
+│   └── fast-time/     batch accelerated simulation (no live clients)
+├── libs/
+│   ├── common/        math utilities, physical constants, shared types
+│   ├── physics/       bodies, force modules, CVODE integrator
+│   ├── simulation/    tick orchestration, event system
+│   ├── world/         wave engine, environment, terrain state
+│   ├── vessel/        vessel config, control modes, actuator state
+│   └── persistence/   JSON scenario reader (SQLite planned)
+├── tests/             mirrors libs/ structure
+└── docs/
+    ├── architecture/  architecture wiki and ADR index
+    ├── guides/        building.md, contributing.md
+    └── adr/           Architecture Decision Records
 ```
 
-> Folder structure is provisional — see `docs/` as the project evolves.
+## Bounded contexts
+
+Each context is a CMake static library. The linker enforces dependency rules — no target may link to a context it does not depend on.
+
+| Context | CMake target | Include prefix | Directory |
+|---------|-------------|----------------|-----------|
+| Common | `ymir_common` | `ymir/common/` | `libs/common/` |
+| Physics | `ymir_physics` | `ymir/physics/` | `libs/physics/` |
+| Simulation | `ymir_simulation` | `ymir/simulation/` | `libs/simulation/` |
+| World | `ymir_world` | `ymir/world/` | `libs/world/` |
+| Vessel | `ymir_vessel` | `ymir/vessel/` | `libs/vessel/` |
+| Persistence | `ymir_persistence` | `ymir/persistence/` | `libs/persistence/` |
+
+**Common** — shared math, physical constants, and primitive types; no dependencies on other Ymir libraries.  
+**Physics** — rigid-body dynamics: state integration, force accumulation, and all force-module implementations.  
+**Simulation** — tick orchestration, real-time vs. fast-time loop, deterministic step sequence, pub/sub event system.  
+**World** — state repository for all entities and environment; wave engine, terrain, ambient conditions.  
+**Vessel** — vessel configuration, mutable actuator/control state, control modes (drift, LOS, berth maneuver).  
+**Persistence** — I/O adapters translating between external formats (JSON) and domain objects.
+
+See [docs/architecture/bounded-contexts.md](docs/architecture/bounded-contexts.md) for the full dependency table and responsibility breakdown.
 
 ## Building
+
+### Prerequisites
+
+| Requirement | Version |
+|-------------|---------|
+| C++ compiler | GCC 9+ or Clang 10+ (C++17) |
+| CMake | 3.20+ |
+| SUNDIALS | 6.x (`SUNDIALS::cvode`) |
+| Catch2 | 3.x (tests) |
+| nlohmann/json | any recent release (persistence) |
+
+### Commands
 
 ```bash
 cmake -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build
+ctest --test-dir build
 ```
 
-Cross-compilation targets and packaging scripts will be documented once the build system is established.
+## Further reading
 
-## Design principles
-
-- **No global state** in the physics core
-- **No runtime allocations** inside the integration loop
-- **Pure C interface** at the DLL boundary — no STL, no exceptions crossing the ABI
-- Every public function documented with Doxygen
-- Every module covered by unit tests before integration
+- [docs/architecture/README.md](docs/architecture/README.md) — architecture wiki: bounded-context map, data-flow diagrams, ADR index
+- [AGENTS.md](AGENTS.md) — contributor rules, coding standards, include conventions, commit discipline

@@ -14,12 +14,51 @@ There is a reference implementation in `.docs/` (legacy naval project). Use it t
 
 ---
 
-## Architecture rules
+## Architecture overview
 
-### Ports and Adapters
+See [docs/architecture/README.md](docs/architecture/README.md) for the full architecture wiki, including the repository structure, bounded-context map, and ADR index.
 
-- `core/` must have zero knowledge of I/O, file formats, or rendering
-- All external dependencies (JSON, CSV, SUNDIALS, CGAL) live in adapters, not core
+See [docs/architecture/bounded-contexts.md](docs/architecture/bounded-contexts.md) for the authoritative table of bounded contexts, CMake targets, include prefixes, and dependency rules.
+
+### Repository layout
+
+```
+ymir/
+├── apps/
+│   ├── server/        real-time server: WebSocket, Protobuf, API handlers
+│   └── fast-time/     batch accelerated: no live clients
+├── libs/
+│   ├── common/        ymir_common — math utilities, physical constants, shared types
+│   ├── physics/       ymir_physics — bodies, force modules, CVODE integrator
+│   ├── simulation/    ymir_simulation — tick orchestration, event system
+│   ├── world/         ymir_world — wave engine, environment, terrain state
+│   ├── vessel/        ymir_vessel — vessel config, control modes, actuator state
+│   └── persistence/   ymir_persistence — JSON scenario reader (SQLite planned)
+├── tests/             mirrors libs/ structure
+└── docs/
+    ├── architecture/  this wiki
+    ├── guides/        building.md, contributing.md
+    └── adr/           Architecture Decision Records
+```
+
+### Bounded Contexts
+
+Each bounded context is one CMake static library. The linker enforces dependency rules — no target may link to a context it should not depend on (ADR-003). Include prefix, directory name, and CMake target name are all identical by design (ADR-002).
+
+| Context | CMake target | Include prefix | Directory | Dependencies |
+|---------|-------------|----------------|-----------|-------------|
+| Common | `ymir_common` | `ymir/common/` | `libs/common/` | none |
+| Physics | `ymir_physics` | `ymir/physics/` | `libs/physics/` | `ymir_common`, `SUNDIALS::cvode` |
+| Simulation | `ymir_simulation` | `ymir/simulation/` | `libs/simulation/` | `ymir_physics`, `ymir_common` |
+| World | `ymir_world` | `ymir/world/` | `libs/world/` | `ymir_physics`, `ymir_common` |
+| Vessel | `ymir_vessel` | `ymir/vessel/` | `libs/vessel/` | `ymir_physics`, `ymir_common` |
+| Persistence | `ymir_persistence` | `ymir/persistence/` | `libs/persistence/` | `ymir_physics`, `ymir_world`, `ymir_vessel`, `nlohmann_json` |
+
+### Architecture rules
+
+- No context may `#include` a header from a context it does not depend on
+- `libs/physics/` must have zero knowledge of I/O, file formats, or rendering
+- All external dependencies (JSON, CSV, SUNDIALS, CGAL) live in `libs/persistence/` or adapter apps, not in `libs/physics/` or `libs/common/`
 - The C API in `include/` is the only public surface — everything else is internal
 
 ### C API boundary
@@ -33,8 +72,42 @@ There is a reference implementation in `.docs/` (legacy naval project). Use it t
 
 - No heap allocation inside the integration loop (pre-allocate in constructors)
 - No global mutable state — every simulation is an isolated object
-- Force modules: pure functions of state — receive `const VesselState&`, return `Forces`
+- Force modules: pure functions of state — receive `const BodyState&`, return `Forces`
 - CVODE memory owned by `BodyDynamics`, cleaned up in destructor
+
+---
+
+## Include conventions
+
+Use the bounded-context include prefix. Examples:
+
+```cpp
+// Common math and types
+#include <ymir/common/math/LinearAlgebra.h>
+#include <ymir/common/math/AngleUtils.h>
+#include <ymir/common/Types.h>
+#include <ymir/common/PhysicalConstants.h>
+
+// Physics — body state, force model, integrator
+#include <ymir/physics/BodyState.h>
+#include <ymir/physics/ForceModel.h>
+#include <ymir/physics/RigidBody6DOF.h>
+#include <ymir/physics/forces/CurrentForces.h>
+#include <ymir/physics/NavalForceModel.h>
+
+// Simulation
+#include <ymir/simulation/Simulation.h>
+
+// World
+#include <ymir/world/World.h>
+#include <ymir/world/Environment.h>
+
+// Vessel
+#include <ymir/vessel/VesselConfig.h>
+
+// Persistence
+#include <ymir/persistence/json/ScenarioReader.h>
+```
 
 ---
 
@@ -69,13 +142,16 @@ There is a reference implementation in `.docs/` (legacy naval project). Use it t
 - Every force module has a unit test before it is integrated into `RHS`
 - Unit tests use analytical solutions or known limits (e.g., zero current → zero current force)
 - Integration tests run a full simulation and assert on conserved quantities or known maneuver behavior
-- Test files mirror source structure: `tests/core/forces/TestCurrentForces.cpp`
+- Test files mirror source structure: `tests/physics/forces/TestCurrentForces.cpp`
+- Test executables are defined in `tests/CMakeLists.txt` and linked via `Ymir::*` targets
+- Coverage target: ≥80% line coverage measured via `-DYMIR_ENABLE_COVERAGE=ON`
 
 ---
 
 ## Documentation
 
 - Architecture decisions go in `docs/adr/` as ADR files (Architecture Decision Records)
+- Architecture wiki lives in `docs/architecture/` — see [README](docs/architecture/README.md)
 - Public API docs generated by Doxygen from source
 - No inline `// TODO` without a linked issue or a `// REASON:` explanation
 
@@ -125,16 +201,19 @@ Ymir follows **Conventional Commits** ([conventionalcommits.org](https://www.con
 | `ci`        | CI/CD pipeline changes                      |
 | `chore`     | Maintenance — no production code change     |
 
-### Scopes (examples)
+### Scopes
 
-| Scope      | What it covers                  |
-| ---------- | ------------------------------- |
-| `core`     | Engine-agnostic physics core    |
-| `naval`    | Naval-domain force modules      |
-| `api`      | Public C API (`include/`)       |
-| `adapters` | I/O adapters (JSON, CSV)        |
-| `tests`    | Test infrastructure             |
-| `build`    | CMake and toolchain             |
+| Scope        | What it covers                                  |
+| ------------ | ----------------------------------------------- |
+| `common`     | Shared math, types, physical constants          |
+| `physics`    | Rigid-body dynamics, force modules, integrator  |
+| `simulation` | Tick orchestration, event system                |
+| `world`      | Wave engine, environment, terrain state         |
+| `vessel`     | Vessel configuration, control modes             |
+| `persistence`| I/O adapters (JSON, future SQLite)              |
+| `api`        | Public C API (`include/`)                       |
+| `tests`      | Test infrastructure                             |
+| `build`      | CMake and toolchain                             |
 
 ### Rules
 
@@ -146,9 +225,9 @@ Ymir follows **Conventional Commits** ([conventionalcommits.org](https://www.con
 ### Examples
 
 ```text
-feat(naval): add current force model for cross-flow drag
+feat(physics): add current force model for cross-flow drag
 
-fix(core): correct inverted sign in restoring force heave term
+fix(physics): correct inverted sign in restoring force heave term
 
 refactor(api): replace raw pointer with unique_ptr in BodyDynamics
 

@@ -2,10 +2,9 @@ PROJECT_NAME           = "Ymir"
 PROJECT_NUMBER         = 0.1.0
 PROJECT_BRIEF          = "General-purpose physics engine"
 
-INPUT                  = core/include \
-                         naval/include \
-                         adapters/include \
-                         include
+INPUT                  = libs/ \
+                         apps/ \
+                         docs/architecture/
 RECURSIVE              = YES
 FILE_PATTERNS          = *.h *.hpp
 
@@ -13,7 +12,7 @@ OUTPUT_DIRECTORY       = docs/api
 GENERATE_HTML          = YES
 GENERATE_LATEX         = NO
 
-EXTRACT_ALL            = NO
+EXTRACT_ALL            = YES
 EXTRACT_PRIVATE        = NO
 EXTRACT_STATIC         = NO
 
