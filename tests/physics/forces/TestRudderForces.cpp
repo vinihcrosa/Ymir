@@ -5,6 +5,8 @@
 #include <ymir/vessel/NavalContext.h>
 #include <ymir/physics/BodyState.h>
 
+#include <cmath>
+
 using Catch::Approx;
 using namespace ymir::naval;
 
@@ -20,20 +22,24 @@ static NavalContext makeCtx(double u = 5.0)
     return ctx;
 }
 
-TEST_CASE("RudderForces zero angle produces no lateral force")
+static RudderForces::Config makeSingleRudder()
 {
     RudderForces::Config cfg{};
     RudderForces::RudderConfig r{};
     r.position    = {-50.0, 0.0, -3.0};
     r.area        = 20.0;
     r.aspectRatio = 2.0;
-    r.angle_deg   = 0.0;
     cfg.rudders.push_back(r);
+    return cfg;
+}
 
-    RudderForces model(cfg);
+TEST_CASE("RudderForces zero angle produces no lateral force")
+{
+    RudderForces model(makeSingleRudder());
     NavalContext ctx = makeCtx(5.0);
     model.bindContext(&ctx);
 
+    model.setActuatorState(0, {0.0});
     auto forces = model.compute(ctx.state);
     REQUIRE(forces.f[1] == Approx(0.0).margin(1e-6));
     REQUIRE(forces.f[5] == Approx(0.0).margin(1e-6));
@@ -41,19 +47,44 @@ TEST_CASE("RudderForces zero angle produces no lateral force")
 
 TEST_CASE("RudderForces positive angle produces sway force and yaw moment")
 {
-    RudderForces::Config cfg{};
-    RudderForces::RudderConfig r{};
-    r.position    = {-50.0, 0.0, -3.0};
-    r.area        = 20.0;
-    r.aspectRatio = 2.0;
-    r.angle_deg   = 20.0;  // 20 degree rudder
-    cfg.rudders.push_back(r);
+    RudderForces model(makeSingleRudder());
+    NavalContext ctx = makeCtx(5.0);
+    model.bindContext(&ctx);
 
-    RudderForces model(cfg);
+    model.setActuatorState(0, {20.0 * M_PI / 180.0});
+    auto forces = model.compute(ctx.state);
+    REQUIRE(forces.f[1] != Approx(0.0).margin(1e-3));
+    REQUIRE(forces.f[5] != Approx(0.0).margin(1e-3));
+}
+
+TEST_CASE("RudderForces setActuatorState angle=0.3 rad produces expected lateral force")
+{
+    RudderForces model(makeSingleRudder());
+    NavalContext ctx = makeCtx(5.0);
+    model.bindContext(&ctx);
+
+    model.setActuatorState(0, {0.3});
+    auto forces = model.compute(ctx.state);
+    REQUIRE(forces.f[1] != Approx(0.0).margin(1e-3));
+}
+
+TEST_CASE("RudderForces setActuatorState angle=0 rad produces zero lateral force")
+{
+    RudderForces model(makeSingleRudder());
+    NavalContext ctx = makeCtx(5.0);
+    model.bindContext(&ctx);
+
+    model.setActuatorState(0, {0.0});
+    auto forces = model.compute(ctx.state);
+    REQUIRE(forces.f[1] == Approx(0.0).margin(1e-6));
+}
+
+TEST_CASE("RudderForces default state is zero angle")
+{
+    RudderForces model(makeSingleRudder());
     NavalContext ctx = makeCtx(5.0);
     model.bindContext(&ctx);
 
     auto forces = model.compute(ctx.state);
-    REQUIRE(forces.f[1] != Approx(0.0).margin(1e-3));
-    REQUIRE(forces.f[5] != Approx(0.0).margin(1e-3));
+    REQUIRE(forces.f[1] == Approx(0.0).margin(1e-6));
 }

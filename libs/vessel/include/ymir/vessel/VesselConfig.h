@@ -139,7 +139,9 @@ struct ThrusterConfig
     double rotationSpeedMax       = 150.0; // RPM
     double pitchRatio             = 1.0;
     double rotationTime           = 50.0;  // s — 1st-order time constant
-    double azimuthSpeed           = 0.087; // rad/s (~5 deg/s)
+    double azimuthSpeed           = 5.0;   // deg/s — azimuth rate limit
+    double pitchRate              = 5.0;   // deg/s — pitch rate limit
+    double initialRPM             = 0.0;   // RPM at construction (warm-start)
     double maximumPowerW          = 5e6;   // W
     double hullEfficiency         = 0.95;
     double asternEfficiency       = 0.50;

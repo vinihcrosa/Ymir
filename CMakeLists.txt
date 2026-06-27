@@ -32,6 +32,10 @@ if(YMIR_ENABLE_COVERAGE)
     add_link_options(-fprofile-instr-generate -fcoverage-mapping)
 endif()
 
+if(YMIR_BUILD_TESTS)
+    enable_testing()
+endif()
+
 add_subdirectory(libs/common)
 add_subdirectory(libs/physics)
 add_subdirectory(libs/simulation)
@@ -45,7 +49,6 @@ if(YMIR_BUILD_APPS)
 endif()
 
 if(YMIR_BUILD_TESTS)
-    enable_testing()
     add_subdirectory(tests)
 endif()
 

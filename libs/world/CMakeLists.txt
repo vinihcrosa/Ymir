@@ -1,4 +1,7 @@
 add_library(ymir_world STATIC
+    src/Environment.cpp
+    src/CouplingRegistry.cpp
+    src/World.cpp
     src/wave/WaveComponent.cpp
     src/wave/WaveForces.cpp
     src/wave/WaveSpectrum.cpp

@@ -2,11 +2,15 @@
 
 #include <ymir/physics/BodyState.h>
 #include <ymir/physics/RigidBody6DOF.h>
+#include <ymir/physics/NavalForceModel.h>
+#include <ymir/physics/forces/ThrustForces.h>
+#include <ymir/physics/forces/RudderForces.h>
 #include <ymir/simulation/Simulation.h>
 #include <ymir/vessel/NavalContext.h>
-#include <ymir/world/NavalEnvironment.h>
-#include <ymir/physics/NavalForceModel.h>
+#include <ymir/vessel/DynamicVessel.h>
+#include <ymir/world/Environment.h>
 
+#include <map>
 #include <memory>
 #include <vector>
 
@@ -14,45 +18,69 @@ namespace ymir::naval
 {
 
 /**
- * Orchestrator for the naval domain.
+ * N-body naval orchestrator.
  *
- * Owns a Simulation (multi-body container) with a single RigidBody6DOF
- * registered at ID 0. Maintains NavalContext and EMA state per step.
+ * Each body is registered via addBody(id, body) and may optionally have
+ * naval force models, and a DynamicVessel aggregate root.
+ * step(dt) processes all bodies in ascending ID order.
  */
-class NavalSimulation
+class [[deprecated("Use NavalDomain + World. NavalSimulation will be removed in Phase 3.")]] NavalSimulation
 {
 public:
-    explicit NavalSimulation(std::unique_ptr<ymir::RigidBody6DOF> body);
+    NavalSimulation() = default;
 
     NavalSimulation(const NavalSimulation&)            = delete;
     NavalSimulation& operator=(const NavalSimulation&) = delete;
 
-    /** Register a naval force model. Force model is added to the body. */
-    void addNavalForceModel(std::unique_ptr<NavalForceModel> model);
+    /** Register a rigid body under the given ID. */
+    void addBody(int id, std::unique_ptr<ymir::RigidBody6DOF> body);
 
-    /** Bind contexts and prepare EMA state. First step() will init CVODE. */
+    /** Register a naval force model bound to a specific body. */
+    void addNavalForceModel(int bodyId, std::unique_ptr<NavalForceModel> model);
+
+    /**
+     * Register a DynamicVessel for a body.
+     * tf and rf are non-owning; pass nullptr to skip sync for that actuator type.
+     */
+    void registerVessel(int bodyId, DynamicVessel& vessel,
+                        ThrustForces* tf = nullptr,
+                        RudderForces* rf = nullptr);
+
+    /** Bind contexts and initialise EMA state for all entries. */
     void initialize();
 
     void step(double dt);
 
-    /** Reset CVODE time, EMA, and force model states. Does not reset position. */
+    /** Reset CVODE time, EMA, and force model states for all entries. */
     void reset();
 
-    void setEnvironment(const NavalEnvironment& env);
+    void setEnvironment(const ymir::Environment& env);
 
-    ymir::BodyState state() const;
-    double          time()  const noexcept;
+    /**
+     * Return body state for the given ID.
+     * @throws std::out_of_range if bodyId was not registered.
+     */
+    ymir::BodyState state(int bodyId) const;
+
+    double time() const noexcept;
 
 private:
-    NavalContext buildContext(double dt) const;
+    struct BodyEntry
+    {
+        ymir::RigidBody6DOF*          body   = nullptr;
+        std::vector<NavalForceModel*> models;
+        NavalContext                  ctx{};
+        ymir::Vector6                 q_avg{};
+        DynamicVessel*                vessel = nullptr;
+        ThrustForces*                 thrust = nullptr;
+        RudderForces*                 rudder = nullptr;
+    };
 
-    ymir::Simulation        sim_;
-    ymir::RigidBody6DOF*    body_ptr_ = nullptr;  // non-owning; sim_ holds the unique_ptr
-    NavalEnvironment        env_{};
-    NavalContext            ctx_{};
-    ymir::Vector6           q_avg_{};
+    NavalContext buildContext(int id, const BodyEntry& entry, double dt) const;
 
-    std::vector<NavalForceModel*> navalModels_;
+    ymir::Simulation          sim_;
+    ymir::Environment         env_{};
+    std::map<int, BodyEntry>  entries_;
 };
 
 } // namespace ymir::naval

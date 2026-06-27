@@ -18,9 +18,13 @@ public:
         std::array<double, 3> position{};      // body frame attachment point (m)
         double                area         = 20.0;  // m²
         double                aspectRatio  = 2.0;
-        double                angle_deg    = 0.0;   // rudder angle (+port, −starboard typical)
-        double                rateLimit    = 5.0;   // deg/s
         std::size_t           thrusterIdx  = 0;     // linked thruster for slipstream (SIZE_MAX = none)
+    };
+
+    /** External actuator state fed by Rudder entity each tick. */
+    struct RudderCommand
+    {
+        double currentAngle_rad = 0.0;
     };
 
     struct Config
@@ -33,12 +37,15 @@ public:
 
     std::string name() const override { return "rudder"; }
 
+    /** Set actuator state for rudder [id]. Call before computeNaval each tick. */
+    void setActuatorState(std::size_t id, const RudderCommand& cmd) noexcept;
+
 private:
     Forces computeNaval(const BodyState& state, const NavalContext& ctx) override;
 
-    Config               cfg_;
-    const ThrustForces*  thrust_;
-    std::vector<double>  currentAngle_;  // dynamic rudder angle state (deg)
+    Config                     cfg_;
+    const ThrustForces*        thrust_;
+    std::vector<RudderCommand> commands_;  // external actuator state
 };
 
 } // namespace ymir::naval

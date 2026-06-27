@@ -10,12 +10,21 @@ namespace ymir::naval
 
 ThrustForces::ThrustForces(const Config& cfg)
     : cfg_(cfg)
-    , currentRPM_(cfg.thrusters.size(), 0.0)
+    , commands_(cfg.thrusters.size())
     , lastThrust_(cfg.thrusters.size(), 0.0)
 {
-    // Initialize currentRPM to commandRPM (instantaneous start)
     for (std::size_t i = 0; i < cfg_.thrusters.size(); ++i)
-        currentRPM_[i] = cfg_.thrusters[i].commandRPM;
+    {
+        commands_[i].currentRPM         = cfg_.thrusters[i].initialRPM;
+        commands_[i].currentAzimuth_deg = cfg_.thrusters[i].azimuth_deg;
+        commands_[i].currentPitch       = cfg_.thrusters[i].pitchRatio;
+    }
+}
+
+void ThrustForces::setActuatorState(std::size_t id, const ThrusterCommand& cmd) noexcept
+{
+    if (id < commands_.size())
+        commands_[id] = cmd;
 }
 
 double ThrustForces::getThrust(std::size_t id) const noexcept
@@ -24,27 +33,16 @@ double ThrustForces::getThrust(std::size_t id) const noexcept
     return lastThrust_[id];
 }
 
-Forces ThrustForces::computeNaval(const BodyState& state, const NavalContext& ctx)
+Forces ThrustForces::computeNaval(const BodyState& /*state*/, const NavalContext& /*ctx*/)
 {
     Forces ft;
-    const double dt = state.dt();
 
     for (std::size_t i = 0; i < cfg_.thrusters.size(); ++i)
     {
-        const auto& t = cfg_.thrusters[i];
+        const auto& t   = cfg_.thrusters[i];
+        const auto& cmd = commands_[i];
 
-        // First-order RPM lag
-        if (dt > 0.0 && t.rpmTimeCst > 0.0)
-        {
-            double alpha    = 1.0 - std::exp(-dt / t.rpmTimeCst);
-            currentRPM_[i] += alpha * (t.commandRPM - currentRPM_[i]);
-        }
-        else
-        {
-            currentRPM_[i] = t.commandRPM;
-        }
-
-        double n = currentRPM_[i] / 60.0;  // rev/s
+        double n = cmd.currentRPM / 60.0;  // rev/s
         if (std::abs(n) < 1e-9)
         {
             lastThrust_[i] = 0.0;
@@ -52,9 +50,8 @@ Forces ThrustForces::computeNaval(const BodyState& state, const NavalContext& ct
         }
 
         // Open-water thrust: T = rho * n^2 * D^4 * Kt
-        // Simple Kt approximation from pitch ratio P/D
         double D  = t.diameter;
-        double PD = t.pitchRatio;
+        double PD = cmd.currentPitch;
         double Kt = 0.4 * PD - 0.1;  // linear approximation, valid ~0.5 < P/D < 1.2
         Kt = std::max(0.05, std::min(Kt, 0.5));
 
@@ -62,8 +59,8 @@ Forces ThrustForces::computeNaval(const BodyState& state, const NavalContext& ct
         double T = sign_n * cfg_.rho * n * n * D * D * D * D * Kt;
         lastThrust_[i] = T;
 
-        // Resolve force into body frame using azimuth
-        double az_rad = t.azimuth_deg * M_PI / 180.0;
+        // Resolve force into body frame using current azimuth
+        double az_rad = cmd.currentAzimuth_deg * M_PI / 180.0;
         double fx = T * std::cos(az_rad);
         double fy = T * std::sin(az_rad);
         double fz = 0.0;

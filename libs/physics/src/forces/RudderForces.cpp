@@ -13,35 +13,26 @@ namespace ymir::naval
 RudderForces::RudderForces(const Config& cfg, const ThrustForces* thrust)
     : cfg_(cfg)
     , thrust_(thrust)
-    , currentAngle_(cfg.rudders.size(), 0.0)
+    , commands_(cfg.rudders.size())
 {
-    for (std::size_t i = 0; i < cfg_.rudders.size(); ++i)
-        currentAngle_[i] = cfg_.rudders[i].angle_deg;
 }
 
-Forces RudderForces::computeNaval(const BodyState& state, const NavalContext& ctx)
+void RudderForces::setActuatorState(std::size_t id, const RudderCommand& cmd) noexcept
+{
+    if (id < commands_.size())
+        commands_[id] = cmd;
+}
+
+Forces RudderForces::computeNaval(const BodyState& /*state*/, const NavalContext& ctx)
 {
     Forces fr;
-    const double dt = state.dt();
 
     for (std::size_t i = 0; i < cfg_.rudders.size(); ++i)
     {
-        const auto& r = cfg_.rudders[i];
+        const auto& r   = cfg_.rudders[i];
+        const auto& cmd = commands_[i];
 
-        // Rate-limited rudder dynamics
-        if (dt > 0.0 && r.rateLimit > 0.0)
-        {
-            double error  = r.angle_deg - currentAngle_[i];
-            double max_dg = r.rateLimit * dt;
-            double delta  = std::max(-max_dg, std::min(max_dg, error));
-            currentAngle_[i] += delta;
-        }
-        else
-        {
-            currentAngle_[i] = r.angle_deg;
-        }
-
-        double alpha_rad = currentAngle_[i] * M_PI / 180.0;
+        double alpha_rad = cmd.currentAngle_rad;
         if (std::abs(alpha_rad) < 1e-9) continue;
 
         // Inflow speed at rudder (body frame u + optional slipstream)

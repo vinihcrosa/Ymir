@@ -1,6 +1,7 @@
 add_library(ymir_simulation STATIC
     src/Simulation.cpp
     src/NavalSimulation.cpp
+    src/NavalDomain.cpp
 )
 add_library(Ymir::Simulation ALIAS ymir_simulation)
 
@@ -15,6 +16,8 @@ target_include_directories(ymir_simulation
 target_link_libraries(ymir_simulation
     PUBLIC
         ymir_physics
+        ymir_vessel
+        ymir_world
         ymir_common
 )
 

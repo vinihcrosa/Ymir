@@ -64,6 +64,10 @@ add_executable(ymir_simulation_tests
     simulation/TestNavalInfra.cpp
     simulation/TestNavalIntegration.cpp
     simulation/TestSimulationIntegration.cpp
+    simulation/TestVesselIntegration.cpp
+    simulation/TestCouplingForceModel.cpp
+    simulation/TestNavalDomain.cpp
+    simulation/TestNavalDomainCoupling.cpp
 )
 
 target_link_libraries(ymir_simulation_tests
@@ -75,6 +79,10 @@ target_link_libraries(ymir_simulation_tests
 catch_discover_tests(ymir_simulation_tests)
 
 add_executable(ymir_world_tests
+    world/TestEnvironment.cpp
+    world/TestIDomain.cpp
+    world/TestCouplingRegistry.cpp
+    world/TestWorld.cpp
     world/TestWaveForces.cpp
     world/TestWaveSpectrum.cpp
 )

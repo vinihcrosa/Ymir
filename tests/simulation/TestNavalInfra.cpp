@@ -2,8 +2,11 @@
 #include <catch2/catch_approx.hpp>
 
 #include <ymir/vessel/NavalContext.h>
-#include <ymir/world/NavalEnvironment.h>
+#include <ymir/world/Environment.h>
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 #include <ymir/simulation/NavalSimulation.h>
+#pragma clang diagnostic pop
 #include <ymir/common/PhysicalConstants.h>
 #include <ymir/physics/RigidBody6DOF.h>
 #include <ymir/common/Types.h>
@@ -47,11 +50,11 @@ TEST_CASE("PhysicalConstants values")
 
 TEST_CASE("NavalEnvironment default values")
 {
-    NavalEnvironment env{};
-    REQUIRE(env.currentSpeed == Approx(0.0));
-    REQUIRE(env.windSpeed == Approx(0.0));
-    REQUIRE(env.waterDepth == Approx(100.0));
-    REQUIRE(env.tide == Approx(0.0));
+    ymir::Environment env{};
+    REQUIRE(env.currentSpeed() == Approx(0.0));
+    REQUIRE(env.windSpeed() == Approx(0.0));
+    REQUIRE(env.waterDepth() == Approx(100.0));
+    REQUIRE(env.tide() == Approx(0.0));
 }
 
 TEST_CASE("NavalSimulation constructs without crash")
@@ -60,7 +63,8 @@ TEST_CASE("NavalSimulation constructs without crash")
     cfg.reltol = 1e-6;
     cfg.abstol = 1e-9;
 
-    NavalSimulation sim(makeTestBody(cfg));
+    NavalSimulation sim;
+    sim.addBody(0, makeTestBody(cfg));
     sim.initialize();
     REQUIRE(sim.time() == Approx(0.0));
 }
@@ -71,7 +75,8 @@ TEST_CASE("NavalSimulation step advances time")
     cfg.reltol = 1e-6;
     cfg.abstol = 1e-9;
 
-    NavalSimulation sim(makeTestBody(cfg));
+    NavalSimulation sim;
+    sim.addBody(0, makeTestBody(cfg));
     sim.initialize();
     sim.step(0.1);
     REQUIRE(sim.time() == Approx(0.1).margin(1e-10));
