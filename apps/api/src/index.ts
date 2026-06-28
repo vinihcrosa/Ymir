@@ -3,7 +3,8 @@ import cors from '@fastify/cors'
 import { healthRoutes } from './routes/health.js'
 import { vesselRoutes } from './routes/vessels.js'
 import { scenarioRoutes } from './routes/scenarios.js'
-import { runMigrations, seedIfEmpty } from './db/index.js'
+import { runMigrations } from './db/index.js'
+import { seedVessel1, seedPlaceholdersIfEmpty } from './db/seed-vessel1.js'
 
 const app = Fastify({ logger: true })
 
@@ -17,7 +18,8 @@ const host = process.env.HOST ?? '0.0.0.0'
 
 try {
   runMigrations()
-  seedIfEmpty()
+  seedVessel1()
+  seedPlaceholdersIfEmpty()
   await app.listen({ port, host })
 } catch (err) {
   app.log.error(err)

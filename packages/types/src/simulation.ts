@@ -1,4 +1,5 @@
 import { Type, Static } from '@sinclair/typebox'
+import { VesselConfigDTO } from './vessel.js'
 
 export const VesselStateDTO = Type.Object({
   id: Type.Number(),
@@ -24,5 +25,6 @@ export const WorkerMessageDTO = Type.Union([
   Type.Object({ type: Type.Literal('ready') }),
   Type.Object({ type: Type.Literal('state'), payload: SimulationStateDTO }),
   Type.Object({ type: Type.Literal('error'), message: Type.String() }),
+  Type.Object({ type: Type.Literal('vessel_config'), payload: VesselConfigDTO }),
 ])
 export type WorkerMessageDTO = Static<typeof WorkerMessageDTO>
