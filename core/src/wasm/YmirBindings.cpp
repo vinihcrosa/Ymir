@@ -90,22 +90,12 @@ static std::unique_ptr<ymir::RigidBody6DOF> makeBodyAt(int id, double x, double 
     ymir::Matrix6x6 mass  = vlccMassMatrix();
     ymir::Matrix6x6 added = vlccAddedMass();
 
-    // Heave equilibrium: RestoringForces computes dq2 = q[2] + draft - tide.
-    // At equilibrium dq2 = -netBuoyancy / hydro_rest[2][2].
-    // Starting at q[2]=0 would produce a 4.9 MN heave impulse that couples
-    // to surge/pitch through the off-diagonal added mass (A[0][4]=21 MN·s²/m).
-    constexpr double kDraft          = 23.0;
-    constexpr double kHydroRest33    = 213018.0;
-    constexpr double kVolumetricW    = 4355971.5;
-    constexpr double kVesselMass     = 450150.0;
-    const     double netBuoyancy     = kVesselMass * 9.80665 - kVolumetricW;
-    const     double q2_eq           = -kDraft - netBuoyancy / kHydroRest33;
-
     ymir::Vector6 q{};
-    q[0] = x;     // surge position (m)
-    q[1] = y;     // sway  position (m)
-    q[2] = q2_eq; // heave at floating equilibrium (~-23.28 m)
-    q[5] = psi;   // yaw heading   (rad)
+    q[0] = x;   // surge position (m)
+    q[1] = y;   // sway  position (m)
+    q[5] = psi; // yaw heading   (rad)
+    // q[2] (heave) is settled to floating equilibrium by NavalDomain::initialize()
+    // via RestoringForces::applyStaticEquilibrium — no hardcoding needed here.
     ymir::Vector6 qdot{};  // at rest
 
     ymir::RK45Config cfg{};

@@ -28,6 +28,13 @@ public:
     /** Called by NavalSimulation::reset() on stateful models. Default: no-op. */
     virtual void resetState() noexcept {}
 
+    /**
+     * Called by NavalDomain::initialize() to place the body at static equilibrium.
+     * Models with a static load (e.g. RestoringForces) update q in-place.
+     * Default: no-op.
+     */
+    virtual void applyStaticEquilibrium(ymir::Vector6& /*q*/) const noexcept {}
+
     // ForceModel::compute — asserts context bound, delegates to computeNaval
     Forces compute(const BodyState& state) final;
 

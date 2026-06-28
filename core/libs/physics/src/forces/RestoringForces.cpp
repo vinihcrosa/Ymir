@@ -13,6 +13,14 @@ RestoringForces::RestoringForces(const RestoringConfig& cfg)
 {
 }
 
+void RestoringForces::applyStaticEquilibrium(ymir::Vector6& q) const noexcept
+{
+    // Heave equilibrium (tide=0 assumed at init): dq2 = q[2] - orig[2] + draft = 0
+    // → q[2] = orig[2] - draft - netBuoyancy / hydro_rest[2][2]
+    if (cfg_.hydro_rest[2][2] > 0.0)
+        q[2] = cfg_.wavesOriginPosition[2] - cfg_.draft - netBuoyancy_ / cfg_.hydro_rest[2][2];
+}
+
 Forces RestoringForces::computeNaval(const BodyState& state, const NavalContext& ctx)
 {
     const auto& q    = state.q();

@@ -26,6 +26,9 @@ public:
 
     std::string name() const override { return "restoring"; }
 
+    /** Settles heave (q[2]) to the static floating equilibrium. */
+    void applyStaticEquilibrium(ymir::Vector6& q) const noexcept override;
+
 private:
     Forces computeNaval(const BodyState& state, const NavalContext& ctx) override;
 

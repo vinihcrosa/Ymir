@@ -60,10 +60,11 @@ public:
 
     Vector6 computeAcceleration(const Forces& totalForce) const noexcept;
 
+    /** Set body state (position and velocity). Safe to call before the first step. */
+    void setState(const Vector6& q, const Vector6& qdot) noexcept;
+
 private:
     friend class RK45Integrator;
-
-    void setState(const Vector6& q, const Vector6& qdot) noexcept;
     void setAcceleration(const Vector6& qddot) noexcept;
 
     int       id_;

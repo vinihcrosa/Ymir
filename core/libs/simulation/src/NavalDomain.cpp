@@ -58,7 +58,14 @@ void NavalDomain::initialize()
 {
     for (auto& [id, entry] : entries_)
     {
-        entry.q_avg = sim_.state(id).q();
+        // Settle the body at static equilibrium before the first step.
+        // Each force model (e.g. RestoringForces) adjusts the relevant DOFs.
+        ymir::Vector6 q_eq = sim_.state(id).q();
+        for (naval::NavalForceModel* m : entry.models)
+            m->applyStaticEquilibrium(q_eq);
+        entry.body->setState(q_eq, ymir::Vector6{});
+
+        entry.q_avg = q_eq;
         if (env_ != nullptr)
             entry.ctx = buildContext(id, entry, 0.0);
         for (naval::NavalForceModel* m : entry.models)
