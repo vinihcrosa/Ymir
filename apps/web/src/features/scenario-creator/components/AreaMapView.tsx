@@ -3,6 +3,7 @@ import L from 'leaflet'
 import { useEffect } from 'react'
 import { useScenarioStore } from '../store'
 import { useSimulationStore } from '../../../stores/simulationStore'
+import { useVesselPanelStore } from '../../../stores/vesselPanelStore'
 import { VesselMarker } from './VesselMarker'
 import { latlngToMeters, metersToLatLng } from '../../../lib/geo'
 
@@ -22,6 +23,7 @@ function AreaBoundsFitter({ coordinates }: { coordinates: [number, number][][] }
 export function AreaMapView() {
   const { area, vessels, updateVesselPosition } = useScenarioStore()
   const { status, state } = useSimulationStore()
+  const { selectedVesselId, open: openPanel } = useVesselPanelStore()
   const isRunning = status === 'running'
 
   // Default center: Rio de Janeiro
@@ -84,12 +86,14 @@ export function AreaMapView() {
             latLng={latLng}
             headingDeg={headingDeg}
             draggable={!isRunning}
+            selected={selectedVesselId === vessel.vesselId}
             onDragEnd={([lat, lng]) => {
               if (area) {
                 const { x, y } = latlngToMeters(lat, lng, area.origin)
                 updateVesselPosition(vessel.vesselId, x, y)
               }
             }}
+            onClick={openPanel}
           />
         )
       })}

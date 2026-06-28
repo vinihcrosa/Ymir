@@ -69,6 +69,7 @@ add_executable(ymir_simulation_tests
     simulation/TestCouplingForceModel.cpp
     simulation/TestNavalDomain.cpp
     simulation/TestNavalDomainCoupling.cpp
+    simulation/TestActuatorIntegration.cpp
 )
 
 target_link_libraries(ymir_simulation_tests

@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import type { SimulationStateDTO } from '@ymir/types'
+import { useVesselPanelStore } from './vesselPanelStore'
 
 type Status = 'idle' | 'loading' | 'ready' | 'running' | 'error'
 
@@ -48,6 +49,26 @@ export const useSimulationStore = create<SimulationStore>((set, get) => ({
             const { scenarioVessels } = get()
             if (scenarioVessels.length > 0) {
               get().worker!.postMessage({ type: 'loadScenario', vessels: scenarioVessels })
+            }
+            // Re-sync any actuator state that was set before the worker was created.
+            const panel = useVesselPanelStore.getState()
+            if (panel.selectedVesselId !== null) {
+              const vesselId = panel.selectedVesselId
+              const w = get().worker!
+              Object.entries(panel.thrusterPowers).forEach(([id, pct]) => {
+                const thrusterId = Number(id)
+                w.postMessage({
+                  type: 'setActuator', vesselId, deviceType: 'thruster',
+                  deviceId: thrusterId, value: pct,
+                  value2: panel.thrusterAzimuths[thrusterId] ?? 0,
+                })
+              })
+              Object.entries(panel.rudderAngles).forEach(([id, deg]) => {
+                w.postMessage({
+                  type: 'setActuator', vesselId, deviceType: 'rudder',
+                  deviceId: Number(id), value: deg,
+                })
+              })
             }
             get().worker!.postMessage({ type: 'start', dt })
             set({ status: 'running' })

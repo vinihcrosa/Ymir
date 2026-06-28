@@ -47,7 +47,8 @@ function applyScenarioVessels(vessels: ScenarioDraftVessel[]) {
   simulation = new SimulationClass()
 
   for (const v of vessels) {
-    simulation.addVessel(v.vesselId)
+    const psi = v.headingDeg * (Math.PI / 180)
+    simulation.addVesselAt(v.vesselId, v.x, v.y, psi)
   }
 }
 
@@ -108,6 +109,19 @@ self.addEventListener('message', (e: MessageEvent) => {
       pendingVessels = vessels
       if (simulation) {
         applyScenarioVessels(vessels)
+      }
+      break
+    }
+    case 'setActuator': {
+      if (!simulation) break
+      const { vesselId, deviceType, deviceId, value, value2 } = e.data as {
+        type: string; vesselId: number; deviceType: 'rudder' | 'thruster'
+        deviceId: number; value: number; value2?: number
+      }
+      if (deviceType === 'rudder' && typeof simulation.setRudderAngle === 'function') {
+        simulation.setRudderAngle(vesselId, deviceId, value)
+      } else if (deviceType === 'thruster' && typeof simulation.setThrusterCommand === 'function') {
+        simulation.setThrusterCommand(vesselId, deviceId, value, value2 ?? 0)
       }
       break
     }

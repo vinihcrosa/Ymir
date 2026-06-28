@@ -48,15 +48,20 @@ Forces CurrentForces::computeObokata(const BodyState& state, const NavalContext&
                         ? cfg_.sectionLocalPositions[i]
                         : -cfg_.length_BP / 2.0 + i * dx;
 
-        // Current velocity at section (body frame), include yaw-induced velocity
-        double vrel_x = vc_x;
-        double vrel_y = vc_y - r * xi;
+        // Water velocity relative to hull section at xi.
+        // vessel velocity at section = (vc_x, vc_y + r*xi)  [body-frame rotation]
+        // water_vel_relative_to_section = fluid_vel - vessel_vel_at_section
+        //   = (cu - vc_x, cv - vc_y) - (0, r*xi)
+        //   = (-vc_x_residual, -vc_y_residual - r*xi)   where speedToWater = vesselVel - fluidVel
+        // This matches the MATLAB relativeVelocity convention: atan2(-v - r*xi, -u).
+        double water_x = -vc_x;
+        double water_y = -vc_y - r * xi;
 
-        double v2 = vrel_x * vrel_x + vrel_y * vrel_y;
+        double v2 = water_x * water_x + water_y * water_y;
         if (v2 < 1e-12) continue;
 
         // Incidence angle 0..360
-        double angle_rad = std::atan2(vrel_y, vrel_x);
+        double angle_rad = std::atan2(water_y, water_x);
         double angle_deg = ymir::math::wrapTo360(ymir::math::rad2deg(angle_rad));
 
         double cdx = ymir::math::linear(cfg_.angles, cfg_.cdx, angle_deg);
@@ -100,7 +105,8 @@ Forces CurrentForces::computeRegular(const BodyState& state, const NavalContext&
     double v2 = vc_x * vc_x + vc_y * vc_y;
     if (v2 < 1e-12) return Forces::zero();
 
-    double angle_rad = std::atan2(vc_y, vc_x);
+    // Same sign convention as OBOKATA: negate to match MATLAB relativeVelocity
+    double angle_rad = std::atan2(-vc_y, -vc_x);
     double angle_deg = ymir::math::wrapTo360(ymir::math::rad2deg(angle_rad));
 
     double cdx = ymir::math::linear(cfg_.angles, cfg_.cdx, angle_deg);

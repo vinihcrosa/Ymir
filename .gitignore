@@ -44,3 +44,6 @@ node_modules/
 dist/
 *.profraw
 .wasm-stage/apps/web/coverage
+apps/web/coverage/
+apps/web/test-results/
+test-results/
