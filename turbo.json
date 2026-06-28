@@ -21,6 +21,11 @@
       "outputs": ["coverage/**"],
       "cache": true
     },
+    "test:e2e": {
+      "dependsOn": ["^build"],
+      "outputs": ["playwright-report/**", "test-results/**"],
+      "cache": false
+    },
     "lint": {
       "outputs": [],
       "cache": true

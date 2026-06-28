@@ -139,12 +139,60 @@ Use the bounded-context include prefix. Examples:
 
 ## Testing
 
+### Regra global — toda feature deve ser testada
+
+**Cobertura mínima obrigatória: 80%** em linhas, funções, branches e statements.  
+Nenhuma feature é considerada completa sem testes que satisfaçam este limiar.
+
+### C++ (libs/physics, libs/simulation, libs/vessel, …)
+
 - Every force module has a unit test before it is integrated into `RHS`
 - Unit tests use analytical solutions or known limits (e.g., zero current → zero current force)
 - Integration tests run a full simulation and assert on conserved quantities or known maneuver behavior
 - Test files mirror source structure: `tests/physics/forces/TestCurrentForces.cpp`
 - Test executables are defined in `tests/CMakeLists.txt` and linked via `Ymir::*` targets
-- Coverage target: ≥80% line coverage measured via `-DYMIR_ENABLE_COVERAGE=ON`
+- Coverage measured via `-DYMIR_ENABLE_COVERAGE=ON` (gcov/llvm-cov)
+
+### Frontend (apps/web)
+
+Dois níveis de teste, ambos obrigatórios para features de UI:
+
+| Nível | Ferramenta | Localização | O que testa |
+|-------|-----------|-------------|-------------|
+| Unit / Component | **Vitest** + Testing Library | `src/**/*.test.{ts,tsx}` | Lógica pura, hooks, stores, componentes isolados |
+| E2E / Flow | **Playwright** | `e2e/**/*.spec.ts` | Fluxos completos de usuário no browser |
+
+**Comandos:**
+
+```bash
+# Unit tests + cobertura (enforces 80% threshold — falha abaixo)
+pnpm --filter @ymir/web test
+
+# E2E (requer servidor rodando ou usa webServer do playwright.config.ts)
+pnpm --filter @ymir/web test:e2e
+
+# Modo watch (desenvolvimento)
+pnpm --filter @ymir/web test:watch
+```
+
+**Regras de cobertura:**
+
+- Thresholds configurados em `apps/web/vitest.config.ts` — `lines: 80, functions: 80, branches: 80`
+- `pnpm test` falha se qualquer threshold não for atingido (bloqueante em CI)
+- Excluções válidas: `src/main.tsx`, arquivos `*.d.ts`, barris `index.ts` sem lógica
+- Mocks de módulos externos (Leaflet, WASM) são aceitos e não contam contra cobertura
+
+**Playwright:**
+
+- Configuração em `apps/web/playwright.config.ts`
+- Browser: Chromium (headless em CI, headed em dev)
+- `webServer` inicia `vite dev` automaticamente antes dos testes
+- Toda feature nova deve ter ao menos um teste E2E cobrindo o happy path
+
+### Backend (apps/api)
+
+- Testes unitários de serviços e repositórios: a definir quando volume justificar framework
+- Enquanto não configurado: testar manualmente via `curl` e documentar no `SUMMARY.md` da task
 
 ---
 

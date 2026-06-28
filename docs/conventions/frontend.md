@@ -189,3 +189,79 @@ features/simulation/components/
 - Sem `console.log` em código de produção
 - Ordenação de imports: `externos → @ymir/* → features/ → components/ → relativos`
 - Componentes funcionais apenas — sem class components
+
+---
+
+## Testes
+
+### Obrigatoriedade
+
+**Toda feature de UI deve ter testes antes de ser considerada completa.**  
+Cobertura mínima: **80%** em linhas, funções, branches e statements.  
+O build CI falha se os thresholds não forem atingidos (`pnpm test` retorna exit 1).
+
+### Dois níveis obrigatórios
+
+| Nível | Ferramenta | Onde | O que testar |
+|-------|-----------|------|-------------|
+| Unit / Component | Vitest + Testing Library | `src/**/*.test.{ts,tsx}` | Lógica pura, hooks, stores, componentes isolados |
+| E2E / Fluxo | Playwright | `e2e/**/*.spec.ts` | Happy path e fluxos críticos no browser real |
+
+### Convenções de testes unitários (Vitest)
+
+```typescript
+// src/features/scenario-creator/store.test.ts
+import { renderHook, act } from '@testing-library/react'
+import { useScenarioStore } from './store'
+
+describe('useScenarioStore', () => {
+  beforeEach(() => {
+    useScenarioStore.getState().reset()
+  })
+
+  it('adds a vessel to the scenario', () => {
+    const { result } = renderHook(() => useScenarioStore())
+    act(() => {
+      result.current.addVessel({ vesselId: 1, name: 'VLCC' })
+    })
+    expect(result.current.vessels).toHaveLength(1)
+    expect(result.current.vessels[0].vesselId).toBe(1)
+  })
+})
+```
+
+- Arquivo de teste co-localizado com o arquivo testado: `Foo.tsx` → `Foo.test.tsx`
+- `describe` agrupa por módulo/componente; `it` descreve comportamento observável
+- Mocks externos (Leaflet, fetch, WASM) em `src/test/mocks/`
+- Setup global em `src/test/setup.ts` (já configurado)
+- Rodar: `pnpm --filter @ymir/web test`
+
+### Convenções de testes E2E (Playwright)
+
+```typescript
+// e2e/scenario-creator.spec.ts
+import { test, expect } from '@playwright/test'
+
+test('instrutor cria e inicia simulação', async ({ page }) => {
+  await page.goto('/')
+  await page.getByRole('combobox', { name: /área/i }).selectOption('baia_de_guanabara')
+  await page.getByRole('button', { name: /adicionar vessel/i }).click()
+  await page.getByRole('button', { name: /iniciar/i }).click()
+  await expect(page.getByText(/rodando/i)).toBeVisible()
+})
+```
+
+- Usar `getByRole` / `getByText` / `getByLabel` — nunca seletores CSS frágeis
+- Um arquivo por feature: `e2e/scenario-creator.spec.ts`
+- Toda feature nova: ao menos um spec cobrindo o happy path
+- Rodar: `pnpm --filter @ymir/web test:e2e`
+- Config em `apps/web/playwright.config.ts` (Chromium, webServer automático)
+
+### Comandos
+
+```bash
+pnpm --filter @ymir/web test          # unit + coverage (CI gate)
+pnpm --filter @ymir/web test:watch    # modo watch (desenvolvimento)
+pnpm --filter @ymir/web test:e2e      # E2E headless
+pnpm --filter @ymir/web test:e2e:ui   # E2E com UI do Playwright
+```
