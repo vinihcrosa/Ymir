@@ -5,9 +5,15 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 if(NOT EMSCRIPTEN)
-    message(FATAL_ERROR "This CMakeLists is for Emscripten only. Use: emcmake cmake -f CMakeLists.wasm.txt")
+    message(FATAL_ERROR "This CMakeLists is for Emscripten only. Use: bash build-wasm.sh")
 endif()
 
+configure_file(
+    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/version.h.in
+    ${CMAKE_BINARY_DIR}/include/ymir/version.h
+)
+
+include(cmake/CompilerWarnings.cmake)
 include(cmake/Emscripten.cmake)
 
 # Core libs (subset — no persistence, no apps)

@@ -13,7 +13,7 @@ set(YMIR_EMSCRIPTEN_LINK_FLAGS
     "-sENVIRONMENT=worker"
     "-sINITIAL_MEMORY=67108864"   # 64 MiB
     "-sALLOW_MEMORY_GROWTH=1"
-    "-sEXPORTED_RUNTIME_METHODS=['ccall','cwrap']"
+    "-sEXPORTED_RUNTIME_METHODS=ccall,cwrap"
     "--bind"                       # Embind
     "-sNO_FILESYSTEM=1"
     "-O3"

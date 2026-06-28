@@ -26,8 +26,6 @@ services:
       dockerfile: docker/web/Dockerfile
     ports:
       - "5173:5173"
-    volumes:
-      - ./apps/web/public/wasm:/app/apps/web/public/wasm:ro
     depends_on:
       - api
 
