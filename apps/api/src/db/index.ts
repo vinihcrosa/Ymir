@@ -12,6 +12,20 @@ export const db = drizzle(sqlite, { schema })
 
 export function runMigrations() {
   sqlite.exec(`
+    CREATE TABLE IF NOT EXISTS areas (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      description TEXT,
+      origin_lat REAL NOT NULL,
+      origin_lng REAL NOT NULL,
+      polygon TEXT NOT NULL,
+      gravity REAL NOT NULL,
+      magnetic_correction REAL NOT NULL,
+      water_density REAL NOT NULL,
+      air_density REAL NOT NULL,
+      created_at TEXT NOT NULL
+    );
+
     CREATE TABLE IF NOT EXISTS vessels (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL,
@@ -26,11 +40,14 @@ export function runMigrations() {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL,
       description TEXT,
+      area_id INTEGER REFERENCES areas(id),
       duration REAL NOT NULL,
       dt REAL NOT NULL DEFAULT 0.1,
       initial_conditions TEXT NOT NULL,
       created_at TEXT NOT NULL
     );
+
+
 
     CREATE TABLE IF NOT EXISTS vessel_physical_props (
       vessel_id INTEGER PRIMARY KEY REFERENCES vessels(id),
@@ -113,4 +130,10 @@ export function runMigrations() {
       forces_amplitude TEXT NOT NULL
     );
   `)
+
+  // Guard: add area_id to scenarios for databases created before this column existed.
+  const cols = sqlite.pragma('table_info(scenarios)') as Array<{ name: string }>
+  if (!cols.some(c => c.name === 'area_id')) {
+    sqlite.exec('ALTER TABLE scenarios ADD COLUMN area_id INTEGER REFERENCES areas(id);')
+  }
 }

@@ -1,5 +1,19 @@
 import { sqliteTable, integer, real, text } from 'drizzle-orm/sqlite-core'
 
+export const areas = sqliteTable('areas', {
+  id: integer('id').primaryKey({ autoIncrement: true }),
+  name: text('name').notNull(),
+  description: text('description'),
+  originLat: real('origin_lat').notNull(),
+  originLng: real('origin_lng').notNull(),
+  polygon: text('polygon').notNull(),       // JSON GeoJSON Polygon
+  gravity: real('gravity').notNull(),
+  magneticCorrection: real('magnetic_correction').notNull(),
+  waterDensity: real('water_density').notNull(),
+  airDensity: real('air_density').notNull(),
+  createdAt: text('created_at').notNull(),
+})
+
 export const vessels = sqliteTable('vessels', {
   id: integer('id').primaryKey({ autoIncrement: true }),
   name: text('name').notNull(),
@@ -14,6 +28,7 @@ export const scenarios = sqliteTable('scenarios', {
   id: integer('id').primaryKey({ autoIncrement: true }),
   name: text('name').notNull(),
   description: text('description'),
+  areaId: integer('area_id').references(() => areas.id),
   duration: real('duration').notNull(),
   dt: real('dt').notNull().default(0.1),
   initialConditions: text('initial_conditions').notNull(), // JSON string

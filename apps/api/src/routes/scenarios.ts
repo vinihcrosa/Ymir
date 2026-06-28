@@ -10,6 +10,7 @@ function rowToScenario(row: typeof scenarios.$inferSelect): ScenarioDTO {
     ...row,
     initialConditions: JSON.parse(row.initialConditions),
     description: row.description ?? undefined,
+    areaId: row.areaId ?? undefined,
     createdAt: row.createdAt,
   }
 }

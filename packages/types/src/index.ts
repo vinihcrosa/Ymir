@@ -1,3 +1,4 @@
 export * from './vessel.js'
 export * from './scenario.js'
 export * from './simulation.js'
+export * from './area.js'

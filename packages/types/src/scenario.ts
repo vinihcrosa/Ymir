@@ -15,6 +15,8 @@ export const ScenarioDTO = Type.Object({
   id: Type.Number(),
   name: Type.String(),
   description: Type.Optional(Type.String()),
+  /** Area where the simulation takes place — required for new scenarios */
+  areaId: Type.Optional(Type.Number()),
   duration: Type.Number({ description: 'Scenario duration [s]' }),
   dt: Type.Number({ description: 'Time step [s]', default: 0.1 }),
   initialConditions: Type.Array(InitialCondition),
