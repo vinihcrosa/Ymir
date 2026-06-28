@@ -87,6 +87,14 @@ public:
     /** Return Euclidean distance between two registered bodies. Asserts both ids exist. */
     double distanceBetween(int idA, int idB) const;
 
+    /**
+     * Serialize all body states to a JSON string.
+     *
+     * Format: {"t":<sim_time>,"vessels":[{"id":<n>,"x":...,"y":...,"z":...,"phi":...,"theta":...,"psi":...,"u":...,"v":...,"r":...},...]}
+     * Used by the WASM binding to transfer state to JavaScript.
+     */
+    std::string serializeStateJson() const;
+
     NavalDomain(const NavalDomain&)            = delete;
     NavalDomain& operator=(const NavalDomain&) = delete;
     NavalDomain(NavalDomain&&)                 = delete;

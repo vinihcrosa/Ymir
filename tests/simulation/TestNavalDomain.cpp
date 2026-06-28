@@ -282,3 +282,51 @@ TEST_CASE("NavalDomain regression: matches NavalSimulation within 1e-8 over 1000
         }
     }
 }
+
+// ---------------------------------------------------------------------------
+// serializeStateJson
+// ---------------------------------------------------------------------------
+
+TEST_CASE("NavalDomain: serializeStateJson produces valid JSON with expected keys", "[naval_domain]")
+{
+    ymir::Environment      env;
+    ymir::CouplingRegistry coupling;
+    ymir::NavalDomain      domain;
+
+    ymir::Vector6 q0{}, qd0{};
+    q0[0] = 5.0; q0[5] = 0.1;
+    domain.addBody(0, makeBody(0, 1e6, q0, qd0));
+    domain.onAddedToWorld(env, coupling);
+    domain.initialize();
+    domain.step(0.1);
+
+    const std::string json = domain.serializeStateJson();
+
+    REQUIRE(json.find("\"t\":") != std::string::npos);
+    REQUIRE(json.find("\"vessels\":") != std::string::npos);
+    REQUIRE(json.find("\"id\":0") != std::string::npos);
+    REQUIRE(json.find("\"x\":") != std::string::npos);
+    REQUIRE(json.find("\"psi\":") != std::string::npos);
+    REQUIRE(json.find("\"u\":") != std::string::npos);
+    REQUIRE(json.find("\"r\":") != std::string::npos);
+    REQUIRE(json.front() == '{');
+    REQUIRE(json.back()  == '}');
+}
+
+TEST_CASE("NavalDomain: serializeStateJson t advances with steps", "[naval_domain]")
+{
+    ymir::Environment      env;
+    ymir::CouplingRegistry coupling;
+    ymir::NavalDomain      domain;
+
+    domain.addBody(0, makeBody(0));
+    domain.onAddedToWorld(env, coupling);
+    domain.initialize();
+    domain.step(0.5);
+    domain.step(0.5);
+
+    const std::string json = domain.serializeStateJson();
+    const std::size_t tpos = json.find("\"t\":") + 4;
+    const double      t    = std::stod(json.substr(tpos));
+    REQUIRE(t == Approx(1.0).margin(1e-9));
+}

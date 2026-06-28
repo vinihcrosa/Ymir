@@ -4,6 +4,7 @@
 
 #include <cassert>
 #include <cmath>
+#include <sstream>
 #include <stdexcept>
 
 namespace ymir {
@@ -186,6 +187,38 @@ naval::NavalContext NavalDomain::buildContext(int id, const BodyEntry& entry, do
 
     return naval::NavalContext{bs, speedToWater, speedToWind, entry.q_avg,
                                env_->waterDepth(), env_->tide()};
+}
+
+std::string NavalDomain::serializeStateJson() const
+{
+    std::ostringstream os;
+    os << "{\"t\":" << sim_.time() << ",\"vessels\":[";
+
+    bool first = true;
+    for (const auto& [id, entry] : entries_)
+    {
+        const BodyState s = sim_.state(id);
+        const Vector6&  q = s.q();
+        const Vector6& qd = s.qdot();
+
+        if (!first) os << ',';
+        first = false;
+
+        os << "{\"id\":"   << id
+           << ",\"x\":"    << q[0]
+           << ",\"y\":"    << q[1]
+           << ",\"z\":"    << q[2]
+           << ",\"phi\":"  << q[3]
+           << ",\"theta\":" << q[4]
+           << ",\"psi\":"  << q[5]
+           << ",\"u\":"    << qd[0]
+           << ",\"v\":"    << qd[1]
+           << ",\"r\":"    << qd[5]
+           << '}';
+    }
+
+    os << "]}";
+    return os.str();
 }
 
 } // namespace ymir
