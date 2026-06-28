@@ -1,1 +1,0 @@
-{"version":3,"file":"vessel.d.ts","sourceRoot":"","sources":["../src/vessel.ts"],"names":[],"mappings":"AAAA,OAAO,EAAQ,MAAM,EAAE,MAAM,mBAAmB,CAAA;AAEhD,eAAO,MAAM,SAAS;;;;;;;;EAQpB,CAAA;AAEF,MAAM,MAAM,SAAS,GAAG,MAAM,CAAC,OAAO,SAAS,CAAC,CAAA;AAEhD,eAAO,MAAM,eAAe;;;;;;EAA4C,CAAA;AACxE,MAAM,MAAM,eAAe,GAAG,MAAM,CAAC,OAAO,eAAe,CAAC,CAAA"}
