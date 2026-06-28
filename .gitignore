@@ -36,3 +36,8 @@ Thumbs.db
 
 .claude/
 .discussions/
+
+# Node / pnpm / Turborepo
+node_modules/
+.turbo/
+*.tsbuildinfo

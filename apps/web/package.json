@@ -1,0 +1,25 @@
+{
+  "name": "@ymir/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@ymir/types": "workspace:*",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zustand": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "typescript": "^5.8.0",
+    "vite": "^6.3.0"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "ymir",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "build:wasm": "turbo run build:wasm",
+    "clean": "turbo run clean"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.4"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@9.15.4"
+}

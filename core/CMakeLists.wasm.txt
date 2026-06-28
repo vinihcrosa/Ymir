@@ -1,0 +1,37 @@
+cmake_minimum_required(VERSION 3.20)
+project(ymir_wasm VERSION 0.1.0 LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+if(NOT EMSCRIPTEN)
+    message(FATAL_ERROR "This CMakeLists is for Emscripten only. Use: emcmake cmake -f CMakeLists.wasm.txt")
+endif()
+
+include(cmake/Emscripten.cmake)
+
+# Core libs (subset — no persistence, no apps)
+add_subdirectory(libs/common)
+add_subdirectory(libs/physics)
+add_subdirectory(libs/vessel)
+add_subdirectory(libs/simulation)
+add_subdirectory(libs/world)
+
+# WASM module
+add_executable(ymir_wasm src/wasm/YmirBindings.cpp)
+
+target_link_libraries(ymir_wasm
+    PRIVATE
+        ymir_simulation
+        ymir_world
+        ymir_vessel
+        ymir_physics
+        ymir_common
+)
+
+set_target_properties(ymir_wasm PROPERTIES
+    OUTPUT_NAME "ymir"
+    SUFFIX ".js"
+)
+
+target_link_options(ymir_wasm PRIVATE ${YMIR_EMSCRIPTEN_LINK_FLAGS})

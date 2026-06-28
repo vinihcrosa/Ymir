@@ -1,0 +1,10 @@
+{
+  "name": "@ymir/core",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build:wasm": "bash build-wasm.sh",
+    "test": "ctest --test-dir build --output-on-failure",
+    "clean": "rm -rf build build-wasm"
+  }
+}
