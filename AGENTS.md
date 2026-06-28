@@ -156,7 +156,8 @@ Use the bounded-context include prefix. Examples:
 | --- | --- |
 | Architecture Decision Records | `docs/adr/<phase>/adr-NNN.md` |
 | Architecture wiki | `docs/architecture/` |
-| Feature planning (PRD, tech spec, task breakdown) | `docs/planning/<feature>/` |
+| PRDs (product requirements, roadmap, modules) | `docs/planning/prds/` |
+| Feature planning (tech spec, task breakdown) | `docs/planning/<feature>/` |
 | Codebase specs (architecture, conventions, stack) | `docs/specs/codebase/` |
 | Feature specs | `docs/specs/features/<feature>/` |
 | Project specs (roadmap, state) | `docs/specs/project/` |
