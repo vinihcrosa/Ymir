@@ -111,7 +111,8 @@ std::vector<BodyPosition> NavalDomain::allBodyPositions() const
     result.reserve(entries_.size());
     for (const auto& [id, entry] : entries_)
     {
-        const auto& q = sim_.state(id).q();
+        const BodyState bs = sim_.state(id);
+        const auto& q = bs.q();
         result.push_back(BodyPosition{id, q[0], q[1], q[2]});
     }
     return result;
@@ -132,8 +133,10 @@ double NavalDomain::distanceBetween(int idA, int idB) const
     assert(entries_.count(idA) && "NavalDomain::distanceBetween: unknown idA");
     assert(entries_.count(idB) && "NavalDomain::distanceBetween: unknown idB");
 
-    const auto& qA = sim_.state(idA).q();
-    const auto& qB = sim_.state(idB).q();
+    const BodyState bsA = sim_.state(idA);
+    const BodyState bsB = sim_.state(idB);
+    const auto& qA = bsA.q();
+    const auto& qB = bsB.q();
     const double dx = qA[0] - qB[0];
     const double dy = qA[1] - qB[1];
     const double dz = qA[2] - qB[2];
