@@ -1,5 +1,6 @@
 #pragma once
 
+#include <ymir/physics/integrator/IIntegrator.h>
 #include <ymir/physics/integrator/CvodeConfig.h>
 
 #include <sundials/sundials_context.h>
@@ -12,9 +13,6 @@
 namespace ymir
 {
 
-class RigidBody6DOF;
-class ForceModel;
-
 /**
  * CVODE/BDF integrator for 6-DOF rigid body dynamics.
  *
@@ -25,7 +23,7 @@ class ForceModel;
  * Non-copyable and non-movable: CVODE's user_data pointer references
  * internal context by address (see D-10 in STATE.md).
  */
-class CvodeIntegrator
+class CvodeIntegrator : public IIntegrator
 {
 public:
     explicit CvodeIntegrator(const CvodeConfig& config = {});
@@ -37,15 +35,15 @@ public:
     CvodeIntegrator& operator=(CvodeIntegrator&&)      = delete;
 
     /** Allocate CVODE memory and set initial conditions from body. */
-    void initialize(RigidBody6DOF& body, std::vector<ForceModel*>& models);
+    void initialize(RigidBody6DOF& body, std::vector<ForceModel*>& models) override;
 
     /** Advance body state by dt seconds. Throws on CVODE error. */
-    void step(RigidBody6DOF& body, double dt);
+    void step(RigidBody6DOF& body, double dt) override;
 
     /** Reinitialize CVODE with the body's current state (no reallocation). */
-    void reset(RigidBody6DOF& body);
+    void reset(RigidBody6DOF& body) override;
 
-    double time() const noexcept { return t_; }
+    double time() const noexcept override { return t_; }
 
     // Public so the static rhs() callback can access it — not user API.
     struct RhsContext

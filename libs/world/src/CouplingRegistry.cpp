@@ -5,7 +5,7 @@
 namespace ymir {
 
 void CouplingRegistry::addLink(int producerBodyId, int consumerBodyId) {
-    for (const auto& l : links_)
+    for ([[maybe_unused]] const auto& l : links_)
         assert(!(l.producerBodyId == producerBodyId && l.consumerBodyId == consumerBodyId));
     links_.push_back({producerBodyId, consumerBodyId, Forces::zero(), false});
     resolved_.emplace(consumerBodyId, Forces::zero());

@@ -18,7 +18,7 @@ void World::addDomain(std::unique_ptr<IDomain> domain)
 {
     assert(domain != nullptr);
     const std::string newName = domain->name();
-    for (const auto& d : domains_)
+    for ([[maybe_unused]] const auto& d : domains_)
         assert(d->name() != newName && "World::addDomain: duplicate domain name");
 
     domain->onAddedToWorld(env_, coupling_);
