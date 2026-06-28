@@ -23,12 +23,6 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(Catch2 nlohmann_json)
 
 # ---------------------------------------------------------------------------
-# SUNDIALS CVODE — ODE integrator (system package, required from M1)
-# ---------------------------------------------------------------------------
-find_package(SUNDIALS 6.0 REQUIRED)
-message(STATUS "SUNDIALS found: ${SUNDIALS_VERSION}")
-
-# ---------------------------------------------------------------------------
 # CGAL — mesh and geometry library (system package, required from M2)
 # ---------------------------------------------------------------------------
 find_package(CGAL QUIET)

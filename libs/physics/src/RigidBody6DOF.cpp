@@ -1,5 +1,5 @@
 #include <ymir/physics/RigidBody6DOF.h>
-#include <ymir/physics/integrator/CvodeIntegrator.h>
+#include <ymir/physics/integrator/RK45Integrator.h>
 #include <ymir/common/math/LinearAlgebra.h>
 
 namespace ymir
@@ -10,7 +10,7 @@ RigidBody6DOF::RigidBody6DOF(int                id,
                                const Matrix6x6&   addedMass,
                                const Vector6&     initialQ,
                                const Vector6&     initialQdot,
-                               const CvodeConfig& config)
+                               const RK45Config&  config)
     : id_(id)
     , massMatrix_(massMatrix)
     , addedMass_(addedMass)
@@ -19,7 +19,7 @@ RigidBody6DOF::RigidBody6DOF(int                id,
     , q_(initialQ)
     , qdot_(initialQdot)
     , qddot_{}
-    , integrator_(std::make_unique<CvodeIntegrator>(config))
+    , integrator_(std::make_unique<RK45Integrator>(config))
 {
 }
 

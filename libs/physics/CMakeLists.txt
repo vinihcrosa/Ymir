@@ -3,7 +3,6 @@ add_library(ymir_physics STATIC
     src/naval_physics.cpp
     src/RigidBody6DOF.cpp
     src/NavalForceModel.cpp
-    src/integrator/CvodeIntegrator.cpp
     src/integrator/RK45Integrator.cpp
     src/forces/CurrentForces.cpp
     src/forces/DampingForces.cpp
@@ -28,7 +27,6 @@ target_include_directories(ymir_physics
 target_link_libraries(ymir_physics
     PUBLIC
         ymir_common
-        SUNDIALS::cvode
 )
 
 target_set_warnings(ymir_physics)

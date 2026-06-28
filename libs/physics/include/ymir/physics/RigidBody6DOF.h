@@ -3,7 +3,9 @@
 #include <ymir/physics/AbstractBody.h>
 #include <ymir/physics/Forces.h>
 #include <ymir/common/Types.h>
-#include <ymir/physics/integrator/CvodeConfig.h>
+#include <ymir/physics/integrator/RK45Integrator.h>
+#include <ymir/physics/integrator/CvodeConfig.h>   // backward compat alias
+#include <ymir/physics/integrator/IIntegrator.h>
 
 #include <memory>
 #include <vector>
@@ -11,17 +13,11 @@
 namespace ymir
 {
 
-class CvodeIntegrator;
-class RK45Integrator;
-
 /**
- * Concrete 6-DOF rigid body with CVODE/BDF integration.
+ * Concrete 6-DOF rigid body with RK45 adaptive integration.
  *
  * Owns its mass matrices, kinematic state, force models, and integrator.
- * CVODE is initialized lazily on the first step() call.
- *
- * Non-copyable and non-movable: CvodeIntegrator::user_data holds an
- * address-stable pointer to its internal RhsContext (see D-10).
+ * Integrator is initialized lazily on the first step() call.
  */
 class RigidBody6DOF final : public AbstractBody
 {
@@ -31,7 +27,7 @@ public:
                   const Matrix6x6&   addedMass,
                   const Vector6&     initialQ,
                   const Vector6&     initialQdot,
-                  const CvodeConfig& config = {});
+                  const RK45Config&  config = {});
 
     ~RigidBody6DOF();
 
@@ -47,7 +43,7 @@ public:
     BodyState state() const noexcept override;
     int       id()    const noexcept override { return id_; }
 
-    /** Reset CVODE time to 0, reinitialise from current body state. */
+    /** Reset integrator time to 0, reinitialise from current body state. */
     void reset();
 
     // Read-only access (used by CvodeIntegrator and tests)
@@ -65,7 +61,6 @@ public:
     Vector6 computeAcceleration(const Forces& totalForce) const noexcept;
 
 private:
-    friend class CvodeIntegrator;
     friend class RK45Integrator;
 
     void setState(const Vector6& q, const Vector6& qdot) noexcept;
@@ -85,7 +80,7 @@ private:
     std::vector<std::unique_ptr<ForceModel>> ownedModels_;
     std::vector<ForceModel*>                 modelPtrs_;
 
-    std::unique_ptr<CvodeIntegrator> integrator_;
+    std::unique_ptr<IIntegrator> integrator_;
     double t_           = 0.0;
     bool   initialized_ = false;
 };
