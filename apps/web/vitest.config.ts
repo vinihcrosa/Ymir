@@ -18,8 +18,19 @@ export default defineConfig({
       exclude: [
         'src/test/**',
         'src/main.tsx',
+        'src/App.tsx',
         'src/**/*.d.ts',
         'src/**/index.ts',
+        // Leaflet components — require canvas/browser, tested via E2E
+        'src/features/scenario-creator/components/AreaMapView.tsx',
+        'src/features/scenario-creator/components/VesselMarker.tsx',
+        // Pure layout composition — no logic to unit test
+        'src/features/scenario-creator/components/Sidebar.tsx',
+        'src/features/scenario-creator/ScenarioCreatorPage.tsx',
+        // Web Workers — not runnable in jsdom
+        'src/workers/**',
+        // Legacy component superseded by ScenarioCreatorPage
+        'src/components/TelemetryPanel.tsx',
       ],
       thresholds: {
         lines: 80,

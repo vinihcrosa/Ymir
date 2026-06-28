@@ -3,14 +3,24 @@ import type { SimulationStateDTO } from '@ymir/types'
 
 type Status = 'idle' | 'loading' | 'ready' | 'running' | 'error'
 
+interface ScenarioDraftVessel {
+  vesselId: number
+  name: string
+  x: number
+  y: number
+  headingDeg: number
+}
+
 interface SimulationStore {
   status: Status
   error: string | null
   state: SimulationStateDTO | null
   worker: Worker | null
+  scenarioVessels: ScenarioDraftVessel[]
   start: (dt?: number) => void
   stop: () => void
   reset: () => void
+  loadScenario: (vessels: ScenarioDraftVessel[]) => void
 }
 
 export const useSimulationStore = create<SimulationStore>((set, get) => ({
@@ -18,6 +28,7 @@ export const useSimulationStore = create<SimulationStore>((set, get) => ({
   error: null,
   state: null,
   worker: null,
+  scenarioVessels: [],
 
   start(dt = 0.05) {
     let { worker } = get()
@@ -32,12 +43,16 @@ export const useSimulationStore = create<SimulationStore>((set, get) => ({
       worker.onmessage = (e: MessageEvent) => {
         const msg = e.data as { type: string; payload?: SimulationStateDTO; message?: string }
         switch (msg.type) {
-          case 'ready':
+          case 'ready': {
             set({ status: 'ready' })
-            // Auto-start once ready
+            const { scenarioVessels } = get()
+            if (scenarioVessels.length > 0) {
+              get().worker!.postMessage({ type: 'loadScenario', vessels: scenarioVessels })
+            }
             get().worker!.postMessage({ type: 'start', dt })
             set({ status: 'running' })
             break
+          }
           case 'state':
             set({ state: msg.payload ?? null })
             break
@@ -69,6 +84,14 @@ export const useSimulationStore = create<SimulationStore>((set, get) => ({
     if (worker) {
       worker.terminate()
     }
-    set({ status: 'idle', error: null, state: null, worker: null })
+    set({ status: 'idle', error: null, state: null, worker: null, scenarioVessels: [] })
+  },
+
+  loadScenario(vessels: ScenarioDraftVessel[]) {
+    set({ scenarioVessels: vessels })
+    const { worker } = get()
+    if (worker) {
+      worker.postMessage({ type: 'loadScenario', vessels })
+    }
   },
 }))

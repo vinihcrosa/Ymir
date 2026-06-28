@@ -1,12 +1,5 @@
-import { TelemetryPanel } from './components/TelemetryPanel.js'
+import { ScenarioCreatorPage } from './features/scenario-creator/ScenarioCreatorPage'
 
 export default function App() {
-  return (
-    <div>
-      <h1 style={{ fontFamily: 'monospace', padding: '1rem 1rem 0' }}>
-        Ymir Naval Simulation
-      </h1>
-      <TelemetryPanel />
-    </div>
-  )
+  return <ScenarioCreatorPage />
 }

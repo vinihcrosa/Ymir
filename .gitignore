@@ -43,4 +43,4 @@ node_modules/
 *.tsbuildinfo
 dist/
 *.profraw
-.wasm-stage/
+.wasm-stage/apps/web/coverage

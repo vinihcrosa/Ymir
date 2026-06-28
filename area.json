@@ -1,0 +1,39 @@
+{
+  "name": "baia_de_guanabara",
+  "description": "Baía de Guanabara",
+  "coverage": {
+    "origin": {
+      "latitude": -22.831342,
+      "longitude": -43.17055
+    },
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -43.4166607,
+          -23.3083375
+        ],
+        [
+          -43.4166607,
+          -22.3
+        ],
+        [
+          -42.666668,
+          -22.3
+        ],
+        [
+          -42.666668,
+          -23.3083375
+        ],
+        [
+          -43.4166607,
+          -23.3083375
+        ]
+      ]
+    ]
+  },
+  "gravity": 9.81,
+  "magneticCorrection": -22,
+  "waterDensity": 1.025,
+  "airDensity": 0.001275
+}
