@@ -10,6 +10,8 @@ interface ScenarioDraftVessel { vesselId: number; name: string; x: number; y: nu
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let simulation: any = null
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let SimulationClass: (new () => any) | null = null
 let loopHandle: ReturnType<typeof setInterval> | null = null
 let pendingVessels: ScenarioDraftVessel[] = []
 
@@ -36,15 +38,16 @@ function stopLoop() {
 
 function applyScenarioVessels(vessels: ScenarioDraftVessel[]) {
   stopLoop()
-  // Reset simulation state
-  if (typeof simulation.reset === 'function') simulation.reset()
-  // Add all vessels
+  // addVessel after step() is undefined behaviour in the C++ engine — the CVODE
+  // integrator is already initialised for existing bodies. The only safe path is
+  // to reconstruct the YmirSimulation from scratch (per the C++ comment in
+  // YmirBindings.cpp). Emscripten Embind objects must be .delete()d to free heap.
+  if (simulation && typeof simulation.delete === 'function') simulation.delete()
+  if (!SimulationClass) return
+  simulation = new SimulationClass()
+
   for (const v of vessels) {
     simulation.addVessel(v.vesselId)
-    // Set initial position if supported
-    if (typeof simulation.setInitialConditions === 'function') {
-      simulation.setInitialConditions(v.vesselId, v.x, v.y, v.headingDeg * Math.PI / 180)
-    }
   }
 }
 
@@ -54,25 +57,23 @@ async function initWasm() {
     // eslint-disable-next-line @typescript-eslint/no-implied-eval, @typescript-eslint/no-explicit-any
     const { default: createYmirModule } = await (new Function('u', 'return import(u)'))('/wasm/ymir.js') as any
     const Module = await createYmirModule()
-    simulation = new Module.YmirSimulation()
+    SimulationClass = Module.YmirSimulation
   } catch {
     const Module = await createMockModule()
-    simulation = new Module.YmirSimulation()
+    SimulationClass = Module.YmirSimulation
   }
+
+  simulation = new SimulationClass!()
 
   const config = await fetchVesselConfig(1)
   if (config) {
     self.postMessage({ type: 'vessel_config', payload: config })
-    // WASM mock ignores physics params; real Embind module will accept them via loadConfig().
-    if (typeof simulation.loadConfig === 'function') {
-      simulation.loadConfig(JSON.stringify(config))
-    }
   }
 
   if (pendingVessels.length > 0) {
     applyScenarioVessels(pendingVessels)
   } else {
-    // Fallback for backward compat — start with default vessel
+    // Fallback: start with a single default vessel (ID=1)
     simulation.addVessel(1)
   }
 
