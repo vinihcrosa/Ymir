@@ -23,5 +23,6 @@ COPY apps/api/package.json ./apps/api/
 RUN pnpm install --frozen-lockfile --prod
 COPY --from=builder /app/packages/types/dist/ ./packages/types/dist/
 COPY --from=builder /app/apps/api/dist/ ./apps/api/dist/
+COPY area.json vessel1.json ./
 EXPOSE 3000
 CMD ["node", "apps/api/dist/index.js"]

@@ -16,7 +16,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 // Default: vessel1.json at repo root, two directories above apps/api/
 const VESSEL1_PATH =
-  process.env.VESSEL1_JSON_PATH ?? resolve(__dirname, '../../../../../vessel1.json')
+  process.env.VESSEL1_JSON_PATH ?? resolve(__dirname, '../../../../vessel1.json')
 
 interface Vessel1Json {
   name: string

@@ -7,7 +7,7 @@ import { areas } from './schema.js'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const AREA_JSON_PATH =
-  process.env.AREA_JSON_PATH ?? resolve(__dirname, '../../../../../area.json')
+  process.env.AREA_JSON_PATH ?? resolve(__dirname, '../../../../area.json')
 
 interface AreaJson {
   name: string

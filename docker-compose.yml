@@ -14,11 +14,11 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ymir_db:/app/apps/api
+      - ymir_db:/app/data
     environment:
       PORT: "3000"
       HOST: "0.0.0.0"
-      DB_PATH: "/app/apps/api/ymir.db"
+      DB_PATH: "/app/data/ymir.db"
 
   web:
     build:
