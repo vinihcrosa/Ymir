@@ -1,30 +1,35 @@
 services:
-  build:
+  core:
     build:
       context: .
       dockerfile: docker/linux-x86_64/Dockerfile
-      target: builder
-    volumes:
-      - .:/src
-      - ymir_build:/build
-    working_dir: /src
-    command: >
-      sh -c "cmake -B /build -S /src -GNinja -DCMAKE_BUILD_TYPE=Release -DYMIR_BUILD_TESTS=ON
-             && cmake --build /build --parallel"
+      target: ci
+    restart: "no"
 
-  test:
+  api:
     build:
       context: .
-      dockerfile: docker/linux-x86_64/Dockerfile
-      target: builder
+      dockerfile: docker/api/Dockerfile
+      target: runner
+    ports:
+      - "3000:3000"
     volumes:
-      - .:/src
-      - ymir_build:/build
-    working_dir: /src
-    command: >
-      sh -c "cmake -B /build -S /src -GNinja -DCMAKE_BUILD_TYPE=Release -DYMIR_BUILD_TESTS=ON
-             && cmake --build /build --parallel
-             && ctest --test-dir /build --output-on-failure"
+      - ymir_db:/app/apps/api
+    environment:
+      PORT: "3000"
+      HOST: "0.0.0.0"
+      DB_PATH: "/app/apps/api/ymir.db"
+
+  web:
+    build:
+      context: .
+      dockerfile: docker/web/Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./apps/web/public/wasm:/app/apps/web/public/wasm:ro
+    depends_on:
+      - api
 
 volumes:
-  ymir_build:
+  ymir_db:

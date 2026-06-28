@@ -18,29 +18,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 100 \
     && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-12 100
 
-# SUNDIALS 7.7.0 from source (Ubuntu 22.04 ships 5.8.0, project requires >= 6.0)
-ARG SUNDIALS_VERSION=7.7.0
-RUN curl -fsSL "https://github.com/LLNL/sundials/releases/download/v${SUNDIALS_VERSION}/sundials-${SUNDIALS_VERSION}.tar.gz" \
-        | tar xz -C /tmp \
-    && cmake -B /tmp/sundials-build -S /tmp/sundials-${SUNDIALS_VERSION} \
-        -GNinja \
-        -DCMAKE_BUILD_TYPE=Release \
-        -DBUILD_SHARED_LIBS=ON \
-        -DBUILD_TESTING=OFF \
-        -DEXAMPLES_INSTALL=OFF \
-        -DCMAKE_INSTALL_PREFIX=/usr/local \
-    && cmake --build /tmp/sundials-build --parallel \
-    && cmake --install /tmp/sundials-build \
-    && rm -rf /tmp/sundials-${SUNDIALS_VERSION} /tmp/sundials-build
-
 WORKDIR /src
-
-# Stage 2: ci — copies source, configures, builds, and tests
+# Stage 2: ci — copies source, builds, and tests
 FROM builder AS ci
 
-COPY . /src
+COPY core/ /src/core/
 
-RUN cmake -B /build -S /src \
+RUN cmake -B /build -S /src/core \
         -GNinja \
         -DCMAKE_BUILD_TYPE=Release \
         -DYMIR_BUILD_TESTS=ON \
