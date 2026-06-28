@@ -175,6 +175,25 @@ Version is declared in `CMakeLists.txt` (`project(Ymir VERSION x.y.z)`) and expo
 
 ---
 
+## Web Stack Conventions
+
+The monorepo includes a Node.js API and a React frontend. Before writing any code in `apps/` or `packages/`, read the relevant convention file:
+
+- **Backend** (`apps/api`): [docs/conventions/backend.md](docs/conventions/backend.md)
+- **Frontend** (`apps/web`): [docs/conventions/frontend.md](docs/conventions/frontend.md)
+
+Key rules that apply to both:
+
+- TypeBox is the **only** validation library — no Zod, Yup, or manual checks
+- Every request schema must be declared on the Fastify route (body, params, querystring)
+- Layered architecture: Route → Service → Repository → DB (no layer skipping)
+- File size limit: ~200 lines — split if exceeded
+- `import type` for type-only imports
+- No `any` without a documented reason
+- No `console.log` in production code
+
+---
+
 ## Commit discipline
 
 Ymir follows **Conventional Commits** ([conventionalcommits.org](https://www.conventionalcommits.org)):
@@ -210,10 +229,13 @@ Ymir follows **Conventional Commits** ([conventionalcommits.org](https://www.con
 | `simulation` | Tick orchestration, event system                |
 | `world`      | Wave engine, environment, terrain state         |
 | `vessel`     | Vessel configuration, control modes             |
-| `persistence`| I/O adapters (JSON, future SQLite)              |
-| `api`        | Public C API (`include/`)                       |
+| `persistence`| I/O adapters (JSON, SQLite)                     |
+| `api`        | apps/api — Fastify backend                      |
+| `web`        | apps/web — React frontend                       |
+| `types`      | packages/types — shared TypeBox schemas         |
+| `wasm`       | Emscripten build, YmirBindings.cpp              |
 | `tests`      | Test infrastructure                             |
-| `build`      | CMake and toolchain                             |
+| `build`      | CMake, Docker, toolchain                        |
 
 ### Rules
 
