@@ -4,6 +4,7 @@ add_library(ymir_physics STATIC
     src/RigidBody6DOF.cpp
     src/NavalForceModel.cpp
     src/integrator/CvodeIntegrator.cpp
+    src/integrator/RK45Integrator.cpp
     src/forces/CurrentForces.cpp
     src/forces/DampingForces.cpp
     src/forces/InertialForces.cpp

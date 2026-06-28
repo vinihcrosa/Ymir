@@ -50,6 +50,7 @@ catch_discover_tests(ymir_physics_tests)
 
 add_executable(ymir_integrator_tests
     physics/TestIntegrator.cpp
+    physics/TestIntegratorRK45.cpp
 )
 
 target_link_libraries(ymir_integrator_tests

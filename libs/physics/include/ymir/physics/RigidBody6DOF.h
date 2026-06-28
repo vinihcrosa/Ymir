@@ -12,6 +12,7 @@ namespace ymir
 {
 
 class CvodeIntegrator;
+class RK45Integrator;
 
 /**
  * Concrete 6-DOF rigid body with CVODE/BDF integration.
@@ -65,6 +66,7 @@ public:
 
 private:
     friend class CvodeIntegrator;
+    friend class RK45Integrator;
 
     void setState(const Vector6& q, const Vector6& qdot) noexcept;
     void setAcceleration(const Vector6& qddot) noexcept;
