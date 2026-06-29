@@ -83,7 +83,7 @@ describe('VesselPanel', () => {
     useVesselPanelStore.getState().open(1, 1)
     await screen.findByText('Dimensões')
 
-    fireEvent.click(screen.getByRole('button', { name: 'Controles' }))
+    fireEvent.click(screen.getByRole('tab', { name: 'Controles' }))
     const sliders = await screen.findAllByRole('slider')
     // first slider is the rudder
     fireEvent.change(sliders[0], { target: { value: '20' } })
@@ -100,7 +100,7 @@ describe('VesselPanel', () => {
     render(<VesselPanel />)
     useVesselPanelStore.getState().open(1, 1)
     await screen.findByText('Dimensões')
-    fireEvent.click(screen.getByRole('button', { name: 'Controles' }))
+    fireEvent.click(screen.getByRole('tab', { name: 'Controles' }))
     // azimuthal thruster shows "azimutal" label
     expect(await screen.findByText(/azimutal/)).toBeInTheDocument()
   })
