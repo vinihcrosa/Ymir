@@ -1,5 +1,5 @@
-import { ScenarioCreatorPage } from './features/scenario-creator/ScenarioCreatorPage'
+import { AppShell } from './features/shell/AppShell'
 
 export default function App() {
-  return <ScenarioCreatorPage />
+  return <AppShell />
 }

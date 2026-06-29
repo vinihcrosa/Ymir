@@ -1,0 +1,41 @@
+/* Global baseline for the instructor UI. Token CSS variables are injected at
+ * runtime by applyThemeVars(); the static values here mirror tokens.ts for the
+ * app frame so first paint is correct before React mounts. */
+
+:root {
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+  --color-surface: #ffffff;
+  --color-surfaceAlt: #f9fafb;
+  --color-textPrimary: #101013;
+  --color-border: #e5e7eb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--color-textPrimary);
+  background: var(--color-surfaceAlt);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Numeric/telemetry values use the mono face for tabular alignment. */
+.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+button {
+  font-family: inherit;
+}

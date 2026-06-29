@@ -14,6 +14,7 @@ let simulation: any = null
 let SimulationClass: (new () => any) | null = null
 let loopHandle: ReturnType<typeof setInterval> | null = null
 let pendingVessels: ScenarioDraftVessel[] = []
+let engine: 'wasm' | 'mock' = 'mock'
 
 function post(msg: WorkerMessageDTO) {
   self.postMessage(msg)
@@ -59,9 +60,11 @@ async function initWasm() {
     const { default: createYmirModule } = await (new Function('u', 'return import(u)'))('/wasm/ymir.js') as any
     const Module = await createYmirModule()
     SimulationClass = Module.YmirSimulation
+    engine = 'wasm'
   } catch {
     const Module = await createMockModule()
     SimulationClass = Module.YmirSimulation
+    engine = 'mock'
   }
 
   simulation = new SimulationClass!()
@@ -78,7 +81,7 @@ async function initWasm() {
     simulation.addVessel(1)
   }
 
-  post({ type: 'ready' })
+  post({ type: 'ready', engine })
 }
 
 function startLoop(dt: number) {

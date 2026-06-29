@@ -212,8 +212,11 @@ function GeralTab({ config, vesselId }: { config: VesselConfigDTO; vesselId: num
   const { vessels: draftVessels } = useScenarioStore()
   const isRunning = status === 'running'
 
+  // `vesselId` here is the instance id (selectedVesselId). The live sim state and
+  // the draft list are both keyed by instance id, so the type-id field must not
+  // be used — otherwise a 2nd vessel of the same type reads the wrong draft row.
   const liveVessel = isRunning ? state?.vessels.find(v => v.id === vesselId) : null
-  const draft = draftVessels.find(v => v.vesselId === vesselId)
+  const draft = draftVessels.find(v => v.instanceId === vesselId)
 
   const x = liveVessel ? liveVessel.x : (draft?.x ?? 0)
   const y = liveVessel ? liveVessel.y : (draft?.y ?? 0)

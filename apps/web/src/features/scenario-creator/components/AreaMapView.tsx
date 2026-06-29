@@ -4,8 +4,21 @@ import { useEffect } from 'react'
 import { useScenarioStore } from '../store'
 import { useSimulationStore } from '../../../stores/simulationStore'
 import { useVesselPanelStore } from '../../../stores/vesselPanelStore'
+import { useMapStore } from '../../../stores/mapStore'
 import { VesselMarker } from './VesselMarker'
 import { latlngToMeters, metersToLatLng } from '../../../lib/geo'
+
+// Registers the live Leaflet map instance into the map store so external chrome
+// (the floating zoom pill) can drive zoomIn/zoomOut.
+function MapRefBinder() {
+  const map = useMap()
+  const setMap = useMapStore(s => s.setMap)
+  useEffect(() => {
+    setMap(map)
+    return () => setMap(null)
+  }, [map, setMap])
+  return null
+}
 
 // Inner component that adjusts map bounds when area changes
 function AreaBoundsFitter({ coordinates }: { coordinates: [number, number][][] }) {
@@ -41,8 +54,10 @@ export function AreaMapView() {
     <MapContainer
       center={area ? [area.origin.latitude, area.origin.longitude] : defaultCenter}
       zoom={defaultZoom}
+      zoomControl={false}
       style={{ height: '100%', width: '100%' }}
     >
+      <MapRefBinder />
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

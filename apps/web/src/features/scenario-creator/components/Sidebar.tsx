@@ -2,23 +2,23 @@ import { ScenarioForm } from './ScenarioForm'
 import { VesselList } from './VesselList'
 import { SimulationControls } from './SimulationControls'
 import { EnvironmentConditionPanel } from './EnvironmentConditionPanel'
+import { tokens } from '../../../theme/tokens'
 
 export function Sidebar() {
   return (
     <aside style={{
-      width: '320px',
-      minWidth: '320px',
-      height: '100vh',
+      width: tokens.size.sidebar,
+      minWidth: tokens.size.sidebar,
+      height: '100%',
       overflowY: 'auto',
-      padding: '1rem',
+      padding: tokens.space.lg,
       boxSizing: 'border-box',
-      background: '#fff',
-      borderRight: '1px solid #e5e7eb',
+      background: tokens.color.surface,
+      borderRight: `1px solid ${tokens.color.border}`,
       display: 'flex',
       flexDirection: 'column',
-      gap: '1.5rem',
+      gap: tokens.space.xl,
     }}>
-      <h2 style={{ margin: 0, fontSize: '1.125rem', fontWeight: 700 }}>Criar Cenário</h2>
       <ScenarioForm />
       <VesselList />
       <SimulationControls />
