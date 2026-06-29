@@ -47,3 +47,14 @@ dist/
 apps/web/coverage/
 apps/web/test-results/
 test-results/
+
+# SQLite runtime database
+apps/api/*.db
+apps/api/*.db-shm
+apps/api/*.db-wal
+
+# Test coverage output
+packages/types/coverage/
+
+# Ad-hoc data files
+current.json
