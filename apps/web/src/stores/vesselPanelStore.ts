@@ -2,14 +2,15 @@ import { create } from 'zustand'
 import type { VesselConfigDTO } from '@ymir/types'
 
 interface VesselPanelStore {
-  selectedVesselId: number | null
+  selectedVesselId: number | null   // instanceId — used for actuator commands
+  vesselTypeId: number | null       // vessel type — used for config fetch
   config: VesselConfigDTO | null
   configLoading: boolean
   rudderAngles: Record<number, number>
   thrusterPowers: Record<number, number>
   thrusterAzimuths: Record<number, number>
 
-  open: (vesselId: number) => void
+  open: (instanceId: number, vesselTypeId: number) => void
   close: () => void
   setConfig: (config: VesselConfigDTO | null, loading: boolean) => void
   setRudderAngle: (rudderId: number, deg: number) => void
@@ -19,21 +20,23 @@ interface VesselPanelStore {
 
 export const useVesselPanelStore = create<VesselPanelStore>((set) => ({
   selectedVesselId: null,
+  vesselTypeId: null,
   config: null,
   configLoading: false,
   rudderAngles: {},
   thrusterPowers: {},
   thrusterAzimuths: {},
 
-  open: (vesselId) => set({
-    selectedVesselId: vesselId,
+  open: (instanceId, vesselTypeId) => set({
+    selectedVesselId: instanceId,
+    vesselTypeId,
     config: null,
     configLoading: true,
     rudderAngles: {},
     thrusterPowers: {},
     thrusterAzimuths: {},
   }),
-  close: () => set({ selectedVesselId: null, config: null, configLoading: false }),
+  close: () => set({ selectedVesselId: null, vesselTypeId: null, config: null, configLoading: false }),
   setConfig: (config, loading) => set({ config, configLoading: loading }),
   setRudderAngle: (rudderId, deg) => set((s) => ({
     rudderAngles: { ...s.rudderAngles, [rudderId]: deg },

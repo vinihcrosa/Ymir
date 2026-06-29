@@ -60,7 +60,7 @@ export function AreaMapView() {
         // During simulation, use live state; otherwise use draft position
         let latLng: [number, number]
         if (isRunning && state && area) {
-          const liveVessel = state.vessels.find(v => v.id === vessel.vesselId)
+          const liveVessel = state.vessels.find(v => v.id === vessel.instanceId)
           if (liveVessel) {
             latLng = metersToLatLng(liveVessel.x, liveVessel.y, area.origin)
           } else {
@@ -75,22 +75,23 @@ export function AreaMapView() {
         }
 
         const headingDeg = isRunning && state
-          ? ((state.vessels.find(v => v.id === vessel.vesselId)?.psi ?? 0) * 180 / Math.PI)
+          ? ((state.vessels.find(v => v.id === vessel.instanceId)?.psi ?? 0) * 180 / Math.PI)
           : vessel.headingDeg
 
         return (
           <VesselMarker
-            key={vessel.vesselId}
-            vesselId={vessel.vesselId}
+            key={vessel.instanceId}
+            vesselId={vessel.instanceId}
+            vesselTypeId={vessel.vesselId}
             name={vessel.name}
             latLng={latLng}
             headingDeg={headingDeg}
             draggable={!isRunning}
-            selected={selectedVesselId === vessel.vesselId}
+            selected={selectedVesselId === vessel.instanceId}
             onDragEnd={([lat, lng]) => {
               if (area) {
                 const { x, y } = latlngToMeters(lat, lng, area.origin)
-                updateVesselPosition(vessel.vesselId, x, y)
+                updateVesselPosition(vessel.instanceId, x, y)
               }
             }}
             onClick={openPanel}

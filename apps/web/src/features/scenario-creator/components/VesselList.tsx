@@ -34,7 +34,7 @@ export function VesselList() {
         </div>
       )}
       {vessels.map(v => (
-        <div key={v.vesselId} style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', marginBottom: '0.5rem', fontSize: '0.875rem' }}>
+        <div key={v.instanceId} style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', marginBottom: '0.5rem', fontSize: '0.875rem' }}>
           <span style={{ flex: 1 }}>{v.name}</span>
           <span style={{ color: '#666' }}>{v.x.toFixed(1)}, {v.y.toFixed(1)}m</span>
           <input
@@ -42,13 +42,13 @@ export function VesselList() {
             min={0}
             max={360}
             value={v.headingDeg.toFixed(0)}
-            onChange={e => updateVesselHeading(v.vesselId, Number(e.target.value))}
+            onChange={e => updateVesselHeading(v.instanceId, Number(e.target.value))}
             style={{ width: '60px', padding: '0.25rem' }}
             title="Rumo (°)"
             aria-label="Rumo"
           />
           <span>°</span>
-          <button type="button" onClick={() => removeVessel(v.vesselId)} title="Remover" aria-label="Remover embarcação">×</button>
+          <button type="button" onClick={() => removeVessel(v.instanceId)} title="Remover" aria-label="Remover embarcação">×</button>
         </div>
       ))}
       {vessels.length === 0 && <p style={{ color: '#888', fontSize: '0.875rem' }}>Nenhuma embarcação adicionada.</p>}

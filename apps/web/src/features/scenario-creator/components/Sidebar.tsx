@@ -1,6 +1,7 @@
 import { ScenarioForm } from './ScenarioForm'
 import { VesselList } from './VesselList'
 import { SimulationControls } from './SimulationControls'
+import { EnvironmentConditionPanel } from './EnvironmentConditionPanel'
 
 export function Sidebar() {
   return (
@@ -21,6 +22,7 @@ export function Sidebar() {
       <ScenarioForm />
       <VesselList />
       <SimulationControls />
+      <EnvironmentConditionPanel />
     </aside>
   )
 }

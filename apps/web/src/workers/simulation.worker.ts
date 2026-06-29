@@ -6,7 +6,7 @@ import createMockModule from './mock-wasm.js'
 const API_BASE = (self as unknown as { VITE_API_URL?: string }).VITE_API_URL
   ?? 'http://localhost:3000'
 
-interface ScenarioDraftVessel { vesselId: number; name: string; x: number; y: number; headingDeg: number }
+interface ScenarioDraftVessel { instanceId: number; vesselId: number; name: string; x: number; y: number; headingDeg: number }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let simulation: any = null
@@ -48,7 +48,7 @@ function applyScenarioVessels(vessels: ScenarioDraftVessel[]) {
 
   for (const v of vessels) {
     const psi = v.headingDeg * (Math.PI / 180)
-    simulation.addVesselAt(v.vesselId, v.x, v.y, psi)
+    simulation.addVesselAt(v.instanceId, v.x, v.y, psi)
   }
 }
 
@@ -109,6 +109,14 @@ self.addEventListener('message', (e: MessageEvent) => {
       pendingVessels = vessels
       if (simulation) {
         applyScenarioVessels(vessels)
+      }
+      break
+    }
+    case 'loadEnvironment': {
+      if (!simulation) break
+      const json = (e.data as { type: string; json: string }).json
+      if (typeof simulation.loadEnvironment === 'function') {
+        simulation.loadEnvironment(json)
       }
       break
     }

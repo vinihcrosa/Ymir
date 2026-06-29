@@ -76,6 +76,9 @@ importers:
       '@playwright/test':
         specifier: ^1.61.1
         version: 1.61.1
+      '@sinclair/typebox':
+        specifier: ^0.34.0
+        version: 0.34.49
       '@testing-library/jest-dom':
         specifier: ^6.9.1
         version: 6.9.1
@@ -116,9 +119,15 @@ importers:
         specifier: ^0.34.0
         version: 0.34.49
     devDependencies:
+      '@vitest/coverage-v8':
+        specifier: ^4.1.9
+        version: 4.1.9(vitest@4.1.9)
       typescript:
         specifier: ^5.8.0
         version: 5.9.3
+      vitest:
+        specifier: ^4.1.9
+        version: 4.1.9(@types/node@22.20.0)(@vitest/coverage-v8@4.1.9)(jsdom@29.1.1)(vite@6.4.3(@types/node@22.20.0)(tsx@4.22.4))
 
 packages:
 

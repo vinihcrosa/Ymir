@@ -375,14 +375,14 @@ function ControlesTab({ config, vesselId }: { config: VesselConfigDTO; vesselId:
 type PanelTab = 'geral' | 'controles'
 
 export function VesselPanel() {
-  const { selectedVesselId, config, configLoading, close, setConfig } = useVesselPanelStore()
+  const { selectedVesselId, vesselTypeId, config, configLoading, close, setConfig } = useVesselPanelStore()
   const [activeTab, setActiveTab] = useState<PanelTab>('geral')
 
   useEffect(() => {
-    if (selectedVesselId == null) return
+    if (selectedVesselId == null || vesselTypeId == null) return
     let cancelled = false
     setConfig(null, true)
-    fetch(`${API_BASE}/vessels/${selectedVesselId}/config`)
+    fetch(`${API_BASE}/vessels/${vesselTypeId}/config`)
       .then(r => r.ok ? r.json() as Promise<VesselConfigDTO> : null)
       .then(cfg => { if (!cancelled) setConfig(cfg, false) })
       .catch(() => { if (!cancelled) setConfig(null, false) })

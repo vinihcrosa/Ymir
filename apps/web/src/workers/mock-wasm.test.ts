@@ -39,4 +39,51 @@ describe('MockYmirSimulation', () => {
     // should have moved forward (x > 0 with heading psi=0)
     expect(state.vessels[0].x).toBeGreaterThan(0)
   })
+
+  // loadEnvironment integration tests (task_04)
+  it('loadEnvironment is a function on the simulation instance', async () => {
+    const { YmirSimulation } = await createMockModule()
+    const sim = new YmirSimulation()
+    expect(typeof sim.loadEnvironment).toBe('function')
+  })
+
+  it('loadEnvironment with empty string does not throw', async () => {
+    const { YmirSimulation } = await createMockModule()
+    const sim = new YmirSimulation()
+    sim.addVessel(1)
+    expect(() => sim.loadEnvironment('')).not.toThrow()
+  })
+
+  it('loadEnvironment with "{}" does not throw', async () => {
+    const { YmirSimulation } = await createMockModule()
+    const sim = new YmirSimulation()
+    sim.addVessel(1)
+    expect(() => sim.loadEnvironment('{}')).not.toThrow()
+  })
+
+  it('loadEnvironment followed by step does not throw', async () => {
+    const { YmirSimulation } = await createMockModule()
+    const sim = new YmirSimulation()
+    sim.addVessel(1)
+    const json = JSON.stringify({
+      currentSeries: [[{ t: 0, speed: 1.0, dirNaut: 90 }]],
+      windSeries: [],
+      waveSeries: [],
+    })
+    sim.loadEnvironment(json)
+    expect(() => sim.step(0.1)).not.toThrow()
+  })
+
+  it('loadEnvironment called twice does not throw (idempotent re-load)', async () => {
+    const { YmirSimulation } = await createMockModule()
+    const sim = new YmirSimulation()
+    sim.addVessel(1)
+    const json1 = JSON.stringify({ currentSeries: [[{ t: 0, speed: 1.0, dirNaut: 90 }]], windSeries: [], waveSeries: [] })
+    const json2 = JSON.stringify({ currentSeries: [[{ t: 0, speed: 2.0, dirNaut: 270 }]], windSeries: [], waveSeries: [] })
+    expect(() => {
+      sim.loadEnvironment(json1)
+      sim.loadEnvironment(json2)
+      sim.step(0.1)
+    }).not.toThrow()
+  })
 })

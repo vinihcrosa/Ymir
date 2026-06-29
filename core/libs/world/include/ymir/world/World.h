@@ -2,6 +2,7 @@
 
 #include <ymir/world/CouplingRegistry.h>
 #include <ymir/world/Environment.h>
+#include <ymir/world/EnvironmentTimeline.h>
 #include <ymir/world/IDomain.h>
 #include <ymir/world/WorldSnapshot.h>
 
@@ -50,6 +51,12 @@ public:
     /** Read-only shared environment. */
     const Environment& environment() const noexcept { return env_; }
 
+    /** Mutable environmental condition timeline. */
+    EnvironmentTimeline& timeline() noexcept { return timeline_; }
+
+    /** Read-only environmental condition timeline. */
+    const EnvironmentTimeline& timeline() const noexcept { return timeline_; }
+
     /** Shared coupling registry owned by this world. */
     CouplingRegistry& couplingRegistry() noexcept { return coupling_; }
 
@@ -59,6 +66,7 @@ public:
 private:
     double                             time_ = 0.0;
     Environment                        env_;
+    EnvironmentTimeline                timeline_;
     CouplingRegistry                   coupling_;
     std::vector<std::unique_ptr<IDomain>> domains_;
 };

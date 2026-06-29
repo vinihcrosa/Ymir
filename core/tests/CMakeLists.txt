@@ -82,11 +82,14 @@ catch_discover_tests(ymir_simulation_tests)
 
 add_executable(ymir_world_tests
     world/TestEnvironment.cpp
+    world/TestEnvironmentTimeline.cpp
     world/TestIDomain.cpp
     world/TestCouplingRegistry.cpp
     world/TestWorld.cpp
+    world/TestWorldTimeline.cpp
     world/TestWaveForces.cpp
     world/TestWaveSpectrum.cpp
+    world/TestJsonSmoke.cpp
 )
 
 target_link_libraries(ymir_world_tests

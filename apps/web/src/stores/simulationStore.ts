@@ -1,10 +1,12 @@
 import { create } from 'zustand'
 import type { SimulationStateDTO } from '@ymir/types'
 import { useVesselPanelStore } from './vesselPanelStore'
+import { useEnvironmentStore } from './environmentStore'
 
 type Status = 'idle' | 'loading' | 'ready' | 'running' | 'error'
 
 interface ScenarioDraftVessel {
+  instanceId: number
   vesselId: number
   name: string
   x: number
@@ -69,6 +71,10 @@ export const useSimulationStore = create<SimulationStore>((set, get) => ({
                   deviceId: Number(id), value: deg,
                 })
               })
+            }
+            const envStore = useEnvironmentStore.getState()
+            if (envStore.hasConditions()) {
+              get().worker!.postMessage({ type: 'loadEnvironment', json: envStore.toJson() })
             }
             get().worker!.postMessage({ type: 'start', dt })
             set({ status: 'running' })

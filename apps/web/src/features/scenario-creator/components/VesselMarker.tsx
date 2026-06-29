@@ -1,15 +1,17 @@
+import { useRef, useMemo } from 'react'
 import { Marker, Tooltip } from 'react-leaflet'
 import L from 'leaflet'
 
 interface VesselMarkerProps {
-  vesselId: number
+  vesselId: number      // instanceId — unique physics identifier
+  vesselTypeId: number  // vessel type — for config lookup
   name: string
   latLng: [number, number]
   headingDeg: number
   draggable: boolean
   selected?: boolean
   onDragEnd: (latLng: [number, number]) => void
-  onClick?: (vesselId: number) => void
+  onClick?: (instanceId: number, typeId: number) => void
 }
 
 function createVesselIcon(headingDeg: number, selected: boolean): L.DivIcon {
@@ -31,21 +33,34 @@ function createVesselIcon(headingDeg: number, selected: boolean): L.DivIcon {
   })
 }
 
-export function VesselMarker({ vesselId, name, latLng, headingDeg, draggable, selected = false, onDragEnd, onClick }: VesselMarkerProps) {
+export function VesselMarker({ vesselId, vesselTypeId, name, latLng, headingDeg, draggable, selected = false, onDragEnd, onClick }: VesselMarkerProps) {
+  // Refs hold the latest callbacks without causing eventHandlers to be recreated.
+  // Direct assignment in render is the correct pattern for "always-current" refs.
+  const onDragEndRef = useRef(onDragEnd)
+  const onClickRef = useRef(onClick)
+  onDragEndRef.current = onDragEnd
+  onClickRef.current = onClick
+
+  // Stable eventHandlers object — created once per vessel mount (vesselId/vesselTypeId never
+  // change for a given mounted instance). react-leaflet only re-registers Leaflet listeners
+  // when this object reference changes, so click is never unregistered during simulation.
+  const eventHandlers = useMemo(() => ({
+    dragend: (e: L.DragEndEvent) => {
+      const { lat, lng } = (e.target as L.Marker).getLatLng()
+      onDragEndRef.current([lat, lng])
+    },
+    click: () => onClickRef.current?.(vesselId, vesselTypeId),
+  }), [vesselId, vesselTypeId])
+
   const icon = createVesselIcon(headingDeg, selected)
+
   return (
     <Marker
       key={vesselId}
       position={latLng}
       icon={icon}
       draggable={draggable}
-      eventHandlers={{
-        dragend: (e) => {
-          const { lat, lng } = (e.target as L.Marker).getLatLng()
-          onDragEnd([lat, lng])
-        },
-        click: () => onClick?.(vesselId),
-      }}
+      eventHandlers={eventHandlers}
     >
       <Tooltip>{name}</Tooltip>
     </Marker>

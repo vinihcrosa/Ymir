@@ -2,7 +2,8 @@ import { create } from 'zustand'
 import type { AreaDTO, CreateScenarioDTO } from '@ymir/types'
 
 export interface ScenarioDraftVessel {
-  vesselId: number
+  instanceId: number   // unique per scenario instance — used by physics engine and React keys
+  vesselId: number     // vessel type ID — used for config lookup only
   name: string
   x: number        // meters, relative to area origin
   y: number        // meters
@@ -14,12 +15,13 @@ interface ScenarioStore {
   areaId: number | null
   area: AreaDTO | null
   vessels: ScenarioDraftVessel[]
+  _nextInstanceId: number
   setName: (name: string) => void
   setArea: (area: AreaDTO) => void
   addVessel: (v: Pick<ScenarioDraftVessel, 'vesselId' | 'name'>) => void
-  removeVessel: (vesselId: number) => void
-  updateVesselPosition: (vesselId: number, x: number, y: number) => void
-  updateVesselHeading: (vesselId: number, headingDeg: number) => void
+  removeVessel: (instanceId: number) => void
+  updateVesselPosition: (instanceId: number, x: number, y: number) => void
+  updateVesselHeading: (instanceId: number, headingDeg: number) => void
   reset: () => void
   toCreateScenarioDTO: () => CreateScenarioDTO
 }
@@ -30,21 +32,23 @@ export const useScenarioStore = create<ScenarioStore>((set, get) => ({
   areaId: null,
   area: null,
   vessels: [],
+  _nextInstanceId: 1,
   setName: (name) => set({ name }),
   setArea: (area) => set({ area, areaId: area.id }),
   addVessel: (v) => set((s) => ({
-    vessels: [...s.vessels, { ...v, x: 0, y: 0, headingDeg: 0 }]
+    _nextInstanceId: s._nextInstanceId + 1,
+    vessels: [...s.vessels, { instanceId: s._nextInstanceId, ...v, x: 0, y: 0, headingDeg: 0 }]
   })),
-  removeVessel: (vesselId) => set((s) => ({
-    vessels: s.vessels.filter(v => v.vesselId !== vesselId)
+  removeVessel: (instanceId) => set((s) => ({
+    vessels: s.vessels.filter(v => v.instanceId !== instanceId)
   })),
-  updateVesselPosition: (vesselId, x, y) => set((s) => ({
-    vessels: s.vessels.map(v => v.vesselId === vesselId ? { ...v, x, y } : v)
+  updateVesselPosition: (instanceId, x, y) => set((s) => ({
+    vessels: s.vessels.map(v => v.instanceId === instanceId ? { ...v, x, y } : v)
   })),
-  updateVesselHeading: (vesselId, headingDeg) => set((s) => ({
-    vessels: s.vessels.map(v => v.vesselId === vesselId ? { ...v, headingDeg: ((headingDeg % 360) + 360) % 360 } : v)
+  updateVesselHeading: (instanceId, headingDeg) => set((s) => ({
+    vessels: s.vessels.map(v => v.instanceId === instanceId ? { ...v, headingDeg: ((headingDeg % 360) + 360) % 360 } : v)
   })),
-  reset: () => set({ name: 'Cenário', areaId: null, area: null, vessels: [] }),
+  reset: () => set({ name: 'Cenário', areaId: null, area: null, vessels: [], _nextInstanceId: 1 }),
   toCreateScenarioDTO: () => {
     const { name, areaId, vessels } = get()
     return {
@@ -53,7 +57,7 @@ export const useScenarioStore = create<ScenarioStore>((set, get) => ({
       duration: 3600,
       dt: 0.05,
       initialConditions: vessels.map(v => ({
-        vesselId: v.vesselId,
+        vesselId: v.instanceId,
         x: v.x,
         y: v.y,
         psi: v.headingDeg * Math.PI / 180,

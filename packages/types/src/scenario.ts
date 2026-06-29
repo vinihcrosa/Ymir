@@ -1,4 +1,5 @@
 import { Type, Static } from '@sinclair/typebox'
+import { EnvironmentProfileDTO } from './environment.js'
 
 export const InitialCondition = Type.Object({
   vesselId: Type.Number(),
@@ -21,6 +22,7 @@ export const ScenarioDTO = Type.Object({
   dt: Type.Number({ description: 'Time step [s]', default: 0.1 }),
   initialConditions: Type.Array(InitialCondition),
   createdAt: Type.String({ format: 'date-time' }),
+  environment: Type.Optional(EnvironmentProfileDTO),
 })
 export type ScenarioDTO = Static<typeof ScenarioDTO>
 

@@ -9,6 +9,7 @@ namespace ymir {
 void World::step(double dt)
 {
     time_ += dt;
+    timeline_.advanceStep(time_, env_);
     coupling_.reset();
     for (auto& d : domains_) d->step(dt);
     coupling_.resolve();

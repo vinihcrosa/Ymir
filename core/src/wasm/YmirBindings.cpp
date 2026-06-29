@@ -339,6 +339,17 @@ public:
         return world_->time();
     }
 
+    /**
+     * Load the full environment timeline from a JSON string.
+     * Empty string or bare "{}" are accepted as no-ops — the timeline stays empty.
+     * @param json  Serialized EnvironmentProfileDTO (currentSeries / windSeries / waveSeries).
+     */
+    void loadEnvironment(const std::string& json)
+    {
+        if (json.empty() || json == "{}") return;
+        world_->timeline().loadJson(json);
+    }
+
 private:
     std::unique_ptr<ymir::World> world_;
     ymir::NavalDomain*           domain_;
@@ -364,5 +375,6 @@ EMSCRIPTEN_BINDINGS(ymir)
         .function("step",               &YmirSimulation::step)
         .function("getState",           &YmirSimulation::getState)
         .function("reset",              &YmirSimulation::reset)
-        .function("getTime",            &YmirSimulation::getTime);
+        .function("getTime",            &YmirSimulation::getTime)
+        .function("loadEnvironment",    &YmirSimulation::loadEnvironment);
 }
