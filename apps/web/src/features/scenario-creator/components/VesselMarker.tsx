@@ -52,7 +52,16 @@ export function VesselMarker({ vesselId, vesselTypeId, name, latLng, headingDeg,
     click: () => onClickRef.current?.(vesselId, vesselTypeId),
   }), [vesselId, vesselTypeId])
 
-  const icon = createVesselIcon(headingDeg, selected)
+  // Memoize the icon so it is NOT rebuilt on every position tick. During a running
+  // simulation the map re-renders ~20 Hz; recreating the DivIcon each time makes
+  // Leaflet replace the marker's DOM element, which swallows clicks (mousedown and
+  // mouseup land on different elements). Rebuild only when the rounded heading or
+  // selection changes — keeps the marker clickable at any time during the run.
+  const roundedHeading = Math.round(headingDeg)
+  const icon = useMemo(
+    () => createVesselIcon(roundedHeading, selected),
+    [roundedHeading, selected],
+  )
 
   return (
     <Marker
