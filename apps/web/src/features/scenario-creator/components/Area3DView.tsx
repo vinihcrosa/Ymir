@@ -1,6 +1,6 @@
 import { Suspense, useMemo, useRef, useEffect } from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
-import { useGLTF, Clone } from '@react-three/drei'
+import { useGLTF, Clone, FlyControls } from '@react-three/drei'
 import * as THREE from 'three'
 import { useScenarioStore } from '../store'
 import { useSimulationStore } from '../../../stores/simulationStore'
@@ -15,7 +15,7 @@ const AREA_PARTS = [`${AREA_BASE}/batimetria.glb`, `${AREA_BASE}/ilhas.glb`, `${
 
 // Onboard cameras from vessel_config (celso_furtado): local offset (metres) +
 // local yaw (deg) in the vessel frame.
-const CAMERAS: Record<CameraId, { x: number; y: number; z: number; yawDeg: number }> = {
+const CAMERAS: Record<Exclude<CameraId, 'Free'>, { x: number; y: number; z: number; yawDeg: number }> = {
   Front: { x: 0, y: 31.5, z: -58.8, yawDeg: 0 },
   Back: { x: 0, y: 31.5, z: -80.94, yawDeg: 180 },
   Bridge: { x: 0, y: 31.5, z: -61.58, yawDeg: 0 },
@@ -68,7 +68,8 @@ function CameraRig({ target, cameraId }: { target: { x: number; y: number; headi
       camera.lookAt(0, 0, 0)
       return
     }
-    const cam = CAMERAS[cameraId]
+    const cam = CAMERAS[cameraId as Exclude<CameraId, 'Free'>]
+    if (!cam) return
     const vesselYaw = headingToSceneYaw((target.headingDeg * Math.PI) / 180)
     const [bx, by, bz] = simToScene(target.x, target.y)
     const up = new THREE.Vector3(0, 1, 0)
@@ -82,6 +83,20 @@ function CameraRig({ target, cameraId }: { target: { x: number; y: number; headi
     camera.lookAt(bx + off.x + ahead.x, by + off.y + ahead.y, bz + off.z + ahead.z)
   }, [camera, target, cameraId])
   return null
+}
+
+/** Free-fly camera: WASD to move, R/F up-down, drag the mouse to look. Positioned
+ *  once near the target on entry, then driven entirely by the user. */
+function FreeCamera({ target }: { target: { x: number; y: number; headingDeg: number } | null }) {
+  const { camera } = useThree()
+  useEffect(() => {
+    const [bx, , bz] = target ? simToScene(target.x, target.y) : [0, 0, 0]
+    camera.position.set(bx, 600, bz + 900)
+    camera.lookAt(bx, 0, bz)
+    // run once on entering free mode
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  return <FlyControls movementSpeed={300} rollSpeed={0.4} dragToLook makeDefault />
 }
 
 export function Area3DView() {
@@ -121,7 +136,9 @@ export function Area3DView() {
         <planeGeometry args={[80000, 80000]} />
         <meshStandardMaterial color={tokens.color.accent} transparent opacity={0.55} />
       </mesh>
-      <CameraRig target={target} cameraId={cameraId} />
+      {cameraId === 'Free'
+        ? <FreeCamera target={target} />
+        : <CameraRig target={target} cameraId={cameraId} />}
     </Canvas>
   )
 }

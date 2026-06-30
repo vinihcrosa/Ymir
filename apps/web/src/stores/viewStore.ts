@@ -1,8 +1,8 @@
 import { create } from 'zustand'
 
 export type ViewMode = 'map' | '3d'
-/** Onboard camera ids from vessel_config (celso_furtado). */
-export type CameraId = 'Front' | 'Back' | 'Bridge' | 'Starboard' | 'Portside'
+/** Onboard camera ids from vessel_config (celso_furtado), plus a free-fly camera. */
+export type CameraId = 'Front' | 'Back' | 'Bridge' | 'Starboard' | 'Portside' | 'Free'
 
 interface ViewStore {
   mode: ViewMode
