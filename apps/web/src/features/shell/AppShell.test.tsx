@@ -70,12 +70,27 @@ describe('AppShell', () => {
     await waitFor(() => expect(fetch).toHaveBeenCalled())
   })
 
-  it('Build triggers scenario save + simulation start', async () => {
+  it('Play starts the simulation (no implicit save)', async () => {
     useScenarioStore.getState().setArea(mockArea)
     useScenarioStore.getState().addVessel({ vesselId: 1, name: 'VLCC' })
     render(<MemoryRouter><AppShell /></MemoryRouter>)
-    fireEvent.click(screen.getByRole('button', { name: /Build simulation/i }))
-    await waitFor(() => expect(fetch).toHaveBeenCalled())
-    expect(['loading', 'running']).toContain(useSimulationStore.getState().status)
+    fireEvent.click(screen.getByRole('button', { name: /Reproduzir/i }))
+    await waitFor(() => expect(['loading', 'running']).toContain(useSimulationStore.getState().status))
+    // Play must not persist the scenario — that is the explicit "Salvar cenário" action.
+    expect(fetch).not.toHaveBeenCalledWith(
+      expect.stringContaining('/scenarios'),
+      expect.objectContaining({ method: 'POST' }),
+    )
+  })
+
+  it('pause freezes without resetting (status paused, state kept)', async () => {
+    useScenarioStore.getState().setArea(mockArea)
+    useScenarioStore.getState().addVessel({ vesselId: 1, name: 'VLCC' })
+    render(<MemoryRouter><AppShell /></MemoryRouter>)
+    // Simulate a running sim with elapsed state, then pause via the store.
+    useSimulationStore.setState({ status: 'running', state: { t: 12.3, vessels: [] } })
+    useSimulationStore.getState().pause()
+    expect(useSimulationStore.getState().status).toBe('paused')
+    expect(useSimulationStore.getState().state?.t).toBe(12.3)
   })
 })

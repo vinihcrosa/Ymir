@@ -19,10 +19,11 @@ describe('SimulationControls (status strip)', () => {
     expect(screen.getByText(/iniciando/i)).toBeInTheDocument()
   })
 
-  it('shows ready status text', () => {
-    useSimulationStore.setState({ status: 'ready' })
+  it('shows paused status text with elapsed time preserved', () => {
+    useSimulationStore.setState({ status: 'paused', state: { t: 12.3, vessels: [] } })
     render(<SimulationControls />)
-    expect(screen.getByText(/pronto/i)).toBeInTheDocument()
+    expect(screen.getByText(/Pausado/i)).toBeInTheDocument()
+    expect(screen.getByText(/12\.3s/)).toBeInTheDocument()
   })
 
   it('shows running status with elapsed time', () => {

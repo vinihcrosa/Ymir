@@ -61,7 +61,7 @@ describe('simulationStore — loadScenario', () => {
   it('posts loadScenario message to existing worker', () => {
     // Manually set a mock worker into the store
     const mockWorker = new MockWorker()
-    useSimulationStore.setState({ worker: mockWorker as unknown as Worker, status: 'ready' })
+    useSimulationStore.setState({ worker: mockWorker as unknown as Worker, status: 'paused' })
 
     const vessels = [{ instanceId: 2, vesselId: 2, name: 'Ship B', x: 10, y: 20, headingDeg: 0 }]
     store().loadScenario(vessels)
@@ -72,20 +72,20 @@ describe('simulationStore — loadScenario', () => {
 })
 
 describe('simulationStore — stop', () => {
-  it('sets status to ready and sends stop message to worker', () => {
+  it('sets status to paused and sends stop message to worker', () => {
     const mockWorker = new MockWorker()
     useSimulationStore.setState({ worker: mockWorker as unknown as Worker, status: 'running' })
 
-    store().stop()
+    store().pause()
 
-    expect(store().status).toBe('ready')
+    expect(store().status).toBe('paused')
     expect(mockWorker.postMessage).toHaveBeenCalledWith({ type: 'stop' })
   })
 
-  it('sets status to ready even when no worker is present', () => {
+  it('sets status to paused even when no worker is present', () => {
     useSimulationStore.setState({ status: 'running', worker: null })
-    store().stop()
-    expect(store().status).toBe('ready')
+    store().pause()
+    expect(store().status).toBe('paused')
   })
 })
 
@@ -121,7 +121,7 @@ describe('simulationStore — reset', () => {
 
 describe('simulationStore — start (with mock worker)', () => {
   it('transitions to loading then running after worker emits ready', () => {
-    store().start(0.05)
+    store().play(0.05)
 
     // Status should be loading while worker is being set up
     expect(store().status).toBe('loading')
@@ -139,7 +139,7 @@ describe('simulationStore — start (with mock worker)', () => {
     const vessels = [{ instanceId: 4, vesselId: 4, name: 'Ship D', x: 1, y: 2, headingDeg: 180 }]
     useSimulationStore.setState({ scenarioVessels: vessels })
 
-    store().start(0.05)
+    store().play(0.05)
 
     const mockWorker = store().worker as unknown as MockWorker
     mockWorker._emit({ type: 'ready' })
@@ -158,7 +158,7 @@ describe('simulationStore — start (with mock worker)', () => {
   })
 
   it('sets status to error when worker emits error message', () => {
-    store().start()
+    store().play()
     const mockWorker = store().worker as unknown as MockWorker
     mockWorker._emit({ type: 'error', message: 'WASM failed to load' })
 
@@ -167,14 +167,14 @@ describe('simulationStore — start (with mock worker)', () => {
   })
 
   it('uses Unknown error fallback when error message is undefined', () => {
-    store().start()
+    store().play()
     const mockWorker = store().worker as unknown as MockWorker
     mockWorker._emit({ type: 'error' })
     expect(store().error).toBe('Unknown error')
   })
 
   it('handles state message with undefined payload (sets null)', () => {
-    store().start()
+    store().play()
     const mockWorker = store().worker as unknown as MockWorker
     mockWorker._emit({ type: 'ready' })
     mockWorker._emit({ type: 'state' })
@@ -183,8 +183,8 @@ describe('simulationStore — start (with mock worker)', () => {
 
   it('calls postMessage on existing worker when start called again', () => {
     const mockWorker = new MockWorker()
-    useSimulationStore.setState({ worker: mockWorker as unknown as Worker, status: 'ready' })
-    store().start(0.1)
+    useSimulationStore.setState({ worker: mockWorker as unknown as Worker, status: 'paused' })
+    store().play(0.1)
     expect(mockWorker.postMessage).toHaveBeenCalledWith({ type: 'start', dt: 0.1 })
     expect(store().status).toBe('running')
   })
@@ -196,7 +196,7 @@ describe('simulationStore — loadEnvironment on start', () => {
       currentSeries: [[{ t: 0, speed: 1.0, dirNaut: 90 }]],
     })
 
-    store().start(0.05)
+    store().play(0.05)
     const mockWorker = store().worker as unknown as MockWorker
     mockWorker._emit({ type: 'ready' })
 
@@ -210,7 +210,7 @@ describe('simulationStore — loadEnvironment on start', () => {
   })
 
   it('does not send loadEnvironment when environment is empty', () => {
-    store().start(0.05)
+    store().play(0.05)
     const mockWorker = store().worker as unknown as MockWorker
     mockWorker._emit({ type: 'ready' })
 
@@ -223,7 +223,7 @@ describe('simulationStore — loadEnvironment on start', () => {
       currentSeries: [[{ t: 0, speed: 2.0, dirNaut: 180 }]],
     })
 
-    store().start(0.05)
+    store().play(0.05)
     const mockWorker = store().worker as unknown as MockWorker
     mockWorker._emit({ type: 'ready' })
 
@@ -244,7 +244,7 @@ describe('simulationStore — loadEnvironment on start', () => {
       windSeries: [[{ t: 0, speed: 5.0, dirNaut: 0 }]],
     })
 
-    store().start(0.05)
+    store().play(0.05)
     const mockWorker = store().worker as unknown as MockWorker
     mockWorker._emit({ type: 'ready' })
 
@@ -256,7 +256,7 @@ describe('simulationStore — loadEnvironment on start', () => {
     const vessels = [{ instanceId: 1, vesselId: 1, name: 'Ship A', x: 0, y: 0, headingDeg: 0 }]
     useSimulationStore.setState({ scenarioVessels: vessels })
 
-    store().start(0.05)
+    store().play(0.05)
     const mockWorker = store().worker as unknown as MockWorker
     mockWorker._emit({ type: 'ready' })
 
