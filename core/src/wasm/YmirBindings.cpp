@@ -37,6 +37,8 @@
 #include <ymir/physics/forces/CurrentForces.h>
 #include <ymir/common/Types.h>
 
+#include <cmath>
+
 #include <map>
 #include <memory>
 #include <stdexcept>
@@ -222,10 +224,30 @@ static ymir::naval::RudderForces::Config vlccRudderConfig()
 {
     ymir::naval::RudderForces::Config cfg{};
     ymir::naval::RudderForces::RudderConfig rc{};
-    rc.position    = {-171.0, 0.0, 6.0};
-    rc.area        = 60.0;   // vessel1.json rudder[0].area (m²)
-    rc.aspectRatio = 1.5;    // typical for VLCC balanced rudder (span²/area)
-    rc.thrusterIdx = 0;
+    rc.position         = {-171.0, 0.0, 6.0};
+    rc.area             = 60.0;   // vessel1.json rudder[0].area (m²)
+    rc.thrusterIdx      = 0;
+    rc.thrusterDiameter = 9.2;    // matches vlccThrustConfig() propeller diameter
+    rc.hullEfficiency   = 0.95;   // vessel1.json thruster[0].hullEfficiency
+
+    // Geometric slipstream factor (rudder.m ctor): p1 = 0.5 + 0.5/(1 + 0.15·X/D),
+    // X = planar rudder↔thruster spacing.
+    const double thrusterX = -170.0, thrusterY = 0.0;
+    const double X  = std::sqrt((thrusterX - rc.position[0]) * (thrusterX - rc.position[0])
+                              + (thrusterY - rc.position[1]) * (thrusterY - rc.position[1]));
+    rc.p1 = 0.5 + 0.5 / (1.0 + 0.15 * (X / rc.thrusterDiameter));
+
+    // Representative balanced-rudder coefficient table {angle_deg, Cl, Cd} over
+    // the full inflow range: Cl = 1.3·sin 2β (Cl_max ≈ 1.3),
+    // Cd = 0.04 + 0.10·(1 − cos 2β) (Cd ≈ 0.11 at 35°).
+    for (int a = 0; a <= 360; a += 5)
+    {
+        const double ar = a * M_PI / 180.0;
+        rc.coefficients.push_back({ static_cast<double>(a),
+                                    1.3 * std::sin(2.0 * ar),
+                                    0.04 + 0.10 * (1.0 - std::cos(2.0 * ar)) });
+    }
+
     cfg.rudders.push_back(rc);
     return cfg;
 }

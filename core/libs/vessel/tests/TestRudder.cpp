@@ -150,8 +150,14 @@ TEST_CASE("Rudder integration — update+toCommand+setActuatorState produces non
     RudderForces::RudderConfig rc{};
     rc.position    = {-50.0, 0.0, -3.0};
     rc.area        = 20.0;
-    rc.aspectRatio = 2.0;
     rc.thrusterIdx = std::numeric_limits<std::size_t>::max();  // no slipstream
+    for (int a = 0; a <= 360; a += 5)  // balanced-rudder foil table {angle_deg, Cl, Cd}
+    {
+        const double ar = a * M_PI / 180.0;
+        rc.coefficients.push_back({static_cast<double>(a),
+                                   1.3 * std::sin(2.0 * ar),
+                                   0.04 + 0.10 * (1.0 - std::cos(2.0 * ar))});
+    }
 
     RudderForces::Config rfCfg{};
     rfCfg.rudders.push_back(rc);

@@ -227,7 +227,6 @@ TEST_CASE("DynamicVessel — full tick sequence updateControl→updateStates→s
     RudderForces::RudderConfig rc{};
     rc.position     = {-55.0, 0.0, -3.0};
     rc.area         = 20.0;
-    rc.aspectRatio  = 2.0;
     rc.thrusterIdx  = std::numeric_limits<std::size_t>::max(); // no slipstream
     rfCfg.rudders.push_back(rc);
     RudderForces rf(rfCfg);

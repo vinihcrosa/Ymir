@@ -3,6 +3,7 @@
 #include <ymir/physics/NavalForceModel.h>
 
 #include <array>
+#include <limits>
 #include <vector>
 
 namespace ymir::naval
@@ -15,10 +16,15 @@ class RudderForces final : public NavalForceModel
 public:
     struct RudderConfig
     {
-        std::array<double, 3> position{};      // body frame attachment point (m)
-        double                area         = 20.0;  // m²
-        double                aspectRatio  = 2.0;
-        std::size_t           thrusterIdx  = 0;     // linked thruster for slipstream (SIZE_MAX = none)
+        std::array<double, 3> position{};            // body frame attachment point (m)
+        double                area             = 20.0; // m²
+        std::size_t           thrusterIdx      = std::numeric_limits<std::size_t>::max(); // linked thruster for slipstream (max = standalone)
+        double                thrusterDiameter = 5.0;  // m — propeller diameter for slipstream actuator term
+        double                hullEfficiency   = 1.0;  // wake fraction applied to forward inflow (Va·w)
+        double                p1               = 1.0;  // geometric slipstream factor (0.5..1), precomputed from rudder/thruster spacing
+
+        // Foil coefficient table: each entry = {angle_deg, Cl, Cd}, interpolated vs inflow incidence β.
+        std::vector<std::array<double, 3>> coefficients;
     };
 
     /** External actuator state fed by Rudder entity each tick. */

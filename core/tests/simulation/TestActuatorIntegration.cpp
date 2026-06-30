@@ -98,14 +98,30 @@ static CurrentForces::Config simpleCurrentCfg(double length = 100.0, double beam
     return c;
 }
 
+// Representative balanced-rudder coefficient table {angle_deg, Cl, Cd} over the
+// full inflow range. Cl = 1.2·sin 2β (Cl_max ≈ 1.2), Cd = 0.05 + 0.3·(1 − cos 2β)
+// (Cd ≈ 0.25 at 35°) — realistic magnitudes for a ship rudder.
+static std::vector<std::array<double, 3>> foilTable()
+{
+    std::vector<std::array<double, 3>> t;
+    for (int a = 0; a <= 360; a += 5)
+    {
+        const double ar = a * M_PI / 180.0;
+        t.push_back({static_cast<double>(a),
+                     1.3 * std::sin(2.0 * ar),
+                     0.04 + 0.10 * (1.0 - std::cos(2.0 * ar))});
+    }
+    return t;
+}
+
 static RudderForces::Config singleRudderCfg()
 {
     RudderForces::Config c{};
     RudderForces::RudderConfig rc{};
-    rc.position    = {-52.0, 0.0, -3.0};
-    rc.area        = 20.0;
-    rc.aspectRatio = 2.0;
-    rc.thrusterIdx = 0;
+    rc.position     = {-52.0, 0.0, -3.0};
+    rc.area         = 20.0;
+    rc.thrusterIdx  = 0;
+    rc.coefficients = foilTable();
     c.rudders.push_back(rc);
     return c;
 }
@@ -410,7 +426,7 @@ TEST_CASE("Actuator integration: VLCC max thrust + max rudder stays stable (no i
     // Rudder: VLCC balanced rudder
     RudderForces::Config rCfg{};
     RudderForces::RudderConfig rc{};
-    rc.position = {-171.0, 0.0, 6.0}; rc.area = 60.0; rc.aspectRatio = 1.5; rc.thrusterIdx = 0;
+    rc.position = {-171.0, 0.0, 6.0}; rc.area = 60.0; rc.thrusterIdx = 0; rc.coefficients = foilTable();
     rCfg.rudders.push_back(rc);
     auto rudder = std::make_unique<RudderForces>(rCfg, thrustPtr);
     RudderForces* rudderPtr = rudder.get();
