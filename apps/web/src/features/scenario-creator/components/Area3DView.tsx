@@ -18,6 +18,12 @@ const AREA_PARTS = [`${AREA_BASE}/batimetria.glb`, `${AREA_BASE}/ilhas.glb`, `${
 // the keel. Sink the model by that so the waterline sits on the sea plane (Y=0).
 const VESSEL_WATERLINE = 4.45
 
+// The mesh's bow points along local -Z, but a heading of 0 (East) must point the
+// bow along scene +X. Rotate the hull -90° so its bow leads in the direction of
+// travel (not beam-on, not stern-first). Applied to the model AND the onboard
+// cameras (whose offsets are in the mesh's local, -Z-forward frame).
+const VESSEL_YAW_OFFSET = -Math.PI / 2
+
 // Onboard cameras from vessel_config (celso_furtado): local offset (metres) +
 // local yaw (deg) in the vessel frame.
 const CAMERAS: Record<Exclude<CameraId, 'Free'>, { x: number; y: number; z: number; yawDeg: number }> = {
@@ -52,7 +58,7 @@ function VesselModel({ x, y, headingDeg, roll, pitch, heave }: {
   const { scene } = useGLTF(VESSEL_URL)
   // Heave bobs the hull on the waterline (sim z is down-positive → up = -z).
   const [px, py, pz] = simToScene(x, y, -VESSEL_WATERLINE - heave)
-  const yaw = headingToSceneYaw((headingDeg * Math.PI) / 180)
+  const yaw = headingToSceneYaw((headingDeg * Math.PI) / 180) + VESSEL_YAW_OFFSET
   return (
     // Outer: position + heading (yaw about scene up). Inner: attitude in the
     // heading-aligned frame — pitch about the beam axis (X), roll about the
@@ -77,7 +83,7 @@ function CameraRig({ target, cameraId }: { target: { x: number; y: number; headi
     }
     const cam = CAMERAS[cameraId as Exclude<CameraId, 'Free'>]
     if (!cam) return
-    const vesselYaw = headingToSceneYaw((target.headingDeg * Math.PI) / 180)
+    const vesselYaw = headingToSceneYaw((target.headingDeg * Math.PI) / 180) + VESSEL_YAW_OFFSET
     const [bx, by, bz] = simToScene(target.x, target.y)
     const up = new THREE.Vector3(0, 1, 0)
     // Camera position: local offset rotated by the vessel heading.
@@ -98,7 +104,7 @@ function FreeCamera({ target }: { target: { x: number; y: number; headingDeg: nu
   const { camera } = useThree()
   useEffect(() => {
     const [bx, , bz] = target ? simToScene(target.x, target.y) : [0, 0, 0]
-    camera.position.set(bx, 600, bz + 900)
+    camera.position.set(bx + 400, 350, bz + 700)
     camera.lookAt(bx, 0, bz)
     // run once on entering free mode
     // eslint-disable-next-line react-hooks/exhaustive-deps
