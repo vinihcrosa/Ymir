@@ -19,4 +19,10 @@ describe('CameraSelector', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Ponte' }))
     expect(useViewStore.getState().cameraId).toBe('Bridge')
   })
+
+  it('offers the free-fly camera', () => {
+    render(<CameraSelector />)
+    fireEvent.click(screen.getByRole('button', { name: 'Livre' }))
+    expect(useViewStore.getState().cameraId).toBe('Free')
+  })
 })

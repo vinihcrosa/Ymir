@@ -7,6 +7,7 @@ const CAMERAS: { id: CameraId; label: string }[] = [
   { id: 'Back', label: 'Popa' },
   { id: 'Starboard', label: 'Boreste' },
   { id: 'Portside', label: 'Bombordo' },
+  { id: 'Free', label: 'Livre' },
 ]
 
 /** Onboard-camera picker shown over the 3D view (Proa/Ponte/Popa/Boreste/Bombordo). */
