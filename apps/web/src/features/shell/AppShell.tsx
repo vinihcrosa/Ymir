@@ -9,6 +9,7 @@ import { AlertDialog } from '../../ui/Modal'
 import { Sidebar } from '../scenario-creator/components/Sidebar'
 import { AreaMapView } from '../scenario-creator/components/AreaMapView'
 import { VesselPanel } from '../scenario-creator/components/VesselPanel'
+import { VesselPicker } from '../scenario-creator/components/VesselPicker'
 import { ScenarioInfoPanel } from '../scenario-info/ScenarioInfoPanel'
 import { useScenarioStore } from '../scenario-creator/store'
 import { useSimulationStore } from '../../stores/simulationStore'
@@ -23,11 +24,12 @@ const API_BASE = import.meta.env.VITE_API_URL ?? 'http://localhost:3000'
  * scenario-setup sidebar and the per-vessel panel dock on top of the map.
  */
 export function AppShell() {
-  const { name, vessels, toCreateScenarioDTO } = useScenarioStore()
+  const { name, vessels, setName, toCreateScenarioDTO } = useScenarioStore()
   const { status, state, scenarioVessels, play, pause, loadScenario, applyEnvironment } = useSimulationStore()
   const { zoomIn, zoomOut } = useMapStore()
   const [confirmNoOwnship, setConfirmNoOwnship] = useState(false)
   const [infoOpen, setInfoOpen] = useState(false)
+  const [pickerOpen, setPickerOpen] = useState(false)
   const navigate = useNavigate()
 
   async function saveScenario() {
@@ -85,14 +87,26 @@ export function AppShell() {
       <nav aria-label="Caminho do cenário" style={{ display: 'flex', alignItems: 'center', gap: tokens.space.sm, fontSize: tokens.fontSize.body, color: tokens.color.textSubtle }}>
         <span>Pasta pai</span>
         <span aria-hidden="true">›</span>
-        <span style={{ color: tokens.color.textPrimary, fontWeight: tokens.fontWeight.medium }}>{name}</span>
+        <input
+          value={name}
+          onChange={e => setName(e.target.value)}
+          aria-label="Nome do cenário"
+          style={{
+            border: '1px solid transparent', background: 'transparent',
+            color: tokens.color.textPrimary, fontWeight: tokens.fontWeight.medium,
+            fontSize: tokens.fontSize.body, fontFamily: tokens.font.sans,
+            padding: '2px 4px', borderRadius: tokens.radius.sm, width: 160,
+          }}
+          onFocus={e => { e.currentTarget.style.borderColor = tokens.color.border }}
+          onBlur={e => { e.currentTarget.style.borderColor = 'transparent' }}
+        />
       </nav>
     </div>
   )
 
   const center = (
     <div style={{ display: 'flex', alignItems: 'center', gap: tokens.space.sm }}>
-      <IconButton icon="+" label="Adicionar embarcação" variant="accent" />
+      <IconButton icon="+" label="Adicionar embarcação" variant={pickerOpen ? 'active' : 'accent'} onClick={() => setPickerOpen(o => !o)} />
       <IconButton icon="ⓘ" label="Informações do cenário" variant={infoOpen ? 'active' : 'ghost'} onClick={() => setInfoOpen(o => !o)} />
       <IconButton icon="☁" label="Sincronizar" />
       <IconButton icon="⚙" label="Configurações" />
@@ -107,8 +121,9 @@ export function AppShell() {
   )
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
-      <TopBar left={logo} center={center} right={right} actionsDisabled={vessels.length === 0 ? 'center' : 'none'} />
+    <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
+      <TopBar left={logo} center={center} right={right} />
+      <VesselPicker open={pickerOpen} onClose={() => setPickerOpen(false)} />
       <div style={{ flex: 1, display: 'flex', minHeight: 0 }}>
         <Sidebar />
         <div style={{ flex: 1, position: 'relative' }}>

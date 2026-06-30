@@ -17,28 +17,20 @@ describe('ScenarioForm', () => {
     useScenarioStore.getState().reset()
   })
 
-  it('renders scenario name input', () => {
-    render(<ScenarioForm />)
-    expect(screen.getByRole('textbox')).toBeInTheDocument()
-  })
-
-  it('renders area select', () => {
+  it('renders the area select', () => {
     render(<ScenarioForm />)
     expect(screen.getByRole('combobox')).toBeInTheDocument()
     expect(screen.getByText('Baía de Guanabara')).toBeInTheDocument()
   })
 
-  it('updates name on input change', () => {
-    render(<ScenarioForm />)
-    const input = screen.getByRole('textbox')
-    fireEvent.change(input, { target: { value: 'Novo Cenário' } })
-    expect(useScenarioStore.getState().name).toBe('Novo Cenário')
-  })
-
   it('sets area on select change', () => {
     render(<ScenarioForm />)
-    const select = screen.getByRole('combobox')
-    fireEvent.change(select, { target: { value: '1' } })
+    fireEvent.change(screen.getByRole('combobox'), { target: { value: '1' } })
     expect(useScenarioStore.getState().areaId).toBe(1)
+  })
+
+  it('no longer owns the scenario name field (moved to the breadcrumb)', () => {
+    render(<ScenarioForm />)
+    expect(screen.queryByRole('textbox')).toBeNull()
   })
 })

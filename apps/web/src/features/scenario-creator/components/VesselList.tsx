@@ -1,53 +1,69 @@
-import { useState } from 'react'
 import { useScenarioStore } from '../store'
-import { useVessels } from '../hooks/use-vessels'
-import { Button } from '../../../ui/Button'
 import { tokens } from '../../../theme/tokens'
 
+/**
+ * Management list of vessels already added to the scenario. Adding happens via
+ * the top-bar "+" (VesselPicker); this list handles per-vessel heading and
+ * removal with a readable two-line row.
+ */
 export function VesselList() {
-  const { area, vessels, addVessel, removeVessel, updateVesselHeading } = useScenarioStore()
-  const { vessels: available, loading } = useVessels()
-  const [showPicker, setShowPicker] = useState(false)
+  const { vessels, removeVessel, updateVesselHeading } = useScenarioStore()
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: tokens.space.sm }}>
-        <strong style={{ fontSize: tokens.fontSize.body }}>Embarcações ({vessels.length})</strong>
-        <Button variant="ghost" size="sm" disabled={!area} onClick={() => setShowPicker(p => !p)}>+ Adicionar</Button>
-      </div>
-      {showPicker && (
-        <div style={{ background: tokens.color.surfaceAlt, padding: tokens.space.sm, marginBottom: tokens.space.sm, borderRadius: tokens.radius.md, border: `1px solid ${tokens.color.border}` }}>
-          {loading ? <span>Carregando...</span> : available.map(v => (
-            <button
-              key={v.id}
-              type="button"
-              onClick={() => { addVessel({ vesselId: v.id, name: v.name }); setShowPicker(false) }}
-              style={{ display: 'block', width: '100%', textAlign: 'left', padding: tokens.space.xs, marginBottom: tokens.space.xs, background: 'transparent', border: 'none', borderRadius: tokens.radius.sm, cursor: 'pointer', fontSize: tokens.fontSize.label, color: tokens.color.textPrimary }}
-            >
-              {v.name}
-            </button>
-          ))}
-        </div>
+      <strong style={{ fontSize: tokens.fontSize.body, display: 'block', marginBottom: tokens.space.sm }}>
+        Embarcações ({vessels.length})
+      </strong>
+
+      {vessels.length === 0 && (
+        <p style={{ color: tokens.color.textHcSubtle, fontSize: tokens.fontSize.label }}>
+          Use o + na barra superior para adicionar.
+        </p>
       )}
+
       {vessels.map(v => (
-        <div key={v.instanceId} style={{ display: 'flex', gap: tokens.space.sm, alignItems: 'center', marginBottom: tokens.space.sm, fontSize: tokens.fontSize.label }}>
-          <span style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{v.name}</span>
-          <span className="mono" style={{ color: tokens.color.textSubtle }}>{v.x.toFixed(1)}, {v.y.toFixed(1)}m</span>
-          <input
-            type="number"
-            min={0}
-            max={360}
-            value={v.headingDeg.toFixed(0)}
-            onChange={e => updateVesselHeading(v.instanceId, Number(e.target.value))}
-            style={{ width: 56, padding: tokens.space.xs, border: `1px solid ${tokens.color.border}`, borderRadius: tokens.radius.sm, fontFamily: tokens.font.mono }}
-            title="Rumo (°)"
-            aria-label="Rumo"
-          />
-          <span style={{ color: tokens.color.textSubtle }}>°</span>
-          <button type="button" onClick={() => removeVessel(v.instanceId)} title="Remover" aria-label="Remover embarcação" style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: tokens.color.textSubtle, fontSize: tokens.fontSize.title }}>×</button>
+        <div
+          key={v.instanceId}
+          style={{
+            border: `1px solid ${tokens.color.border}`,
+            borderRadius: tokens.radius.md,
+            padding: tokens.space.sm,
+            marginBottom: tokens.space.sm,
+            background: tokens.color.surface,
+          }}
+        >
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: tokens.space.xs }}>
+            <span style={{ fontSize: tokens.fontSize.label, fontWeight: tokens.fontWeight.medium, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={v.name}>
+              {v.name}
+            </span>
+            <button
+              type="button"
+              onClick={() => removeVessel(v.instanceId)}
+              title="Remover"
+              aria-label={`Remover ${v.name}`}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', color: tokens.color.textSubtle, fontSize: tokens.fontSize.title, lineHeight: 1, flexShrink: 0 }}
+            >
+              ×
+            </button>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: tokens.space.sm, marginTop: tokens.space.xs, fontSize: tokens.fontSize.sm, color: tokens.color.textSubtle }}>
+            <span className="mono">x {v.x.toFixed(0)}  y {v.y.toFixed(0)} m</span>
+            <span style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+              Rumo
+              <input
+                type="number"
+                min={0}
+                max={360}
+                value={v.headingDeg.toFixed(0)}
+                onChange={e => updateVesselHeading(v.instanceId, Number(e.target.value))}
+                style={{ width: 52, padding: '2px 4px', border: `1px solid ${tokens.color.border}`, borderRadius: tokens.radius.sm, fontFamily: tokens.font.mono }}
+                aria-label={`Rumo ${v.name}`}
+              />
+              °
+            </span>
+          </div>
         </div>
       ))}
-      {vessels.length === 0 && <p style={{ color: tokens.color.textHcSubtle, fontSize: tokens.fontSize.label }}>Nenhuma embarcação adicionada.</p>}
     </div>
   )
 }
