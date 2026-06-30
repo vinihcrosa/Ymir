@@ -13,6 +13,11 @@ const AREA_BASE = '/assets/3d/baia_de_guanabara'
 const VESSEL_URL = '/assets/3d/vessel/celso_furtado.glb'
 const AREA_PARTS = [`${AREA_BASE}/batimetria.glb`, `${AREA_BASE}/ilhas.glb`, `${AREA_BASE}/ponte.glb`]
 
+// The celso_furtado mesh origin is at the KEEL (world Y 0→46.3 = keel→masthead),
+// and its design waterline (vessel_config waterInteraction points) is ~4.45 m above
+// the keel. Sink the model by that so the waterline sits on the sea plane (Y=0).
+const VESSEL_WATERLINE = 4.45
+
 // Onboard cameras from vessel_config (celso_furtado): local offset (metres) +
 // local yaw (deg) in the vessel frame.
 const CAMERAS: Record<Exclude<CameraId, 'Free'>, { x: number; y: number; z: number; yawDeg: number }> = {
@@ -43,7 +48,7 @@ function AreaScene() {
 
 function VesselModel({ x, y, headingDeg }: { x: number; y: number; headingDeg: number }) {
   const { scene } = useGLTF(VESSEL_URL)
-  const [px, py, pz] = simToScene(x, y)
+  const [px, py, pz] = simToScene(x, y, -VESSEL_WATERLINE)
   return (
     <group position={[px, py, pz]} rotation={[0, headingToSceneYaw((headingDeg * Math.PI) / 180), 0]}>
       <Clone object={scene} />
