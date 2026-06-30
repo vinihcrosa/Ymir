@@ -20,31 +20,32 @@ public:
         std::vector<double> wamitFrequencies;  // rad/s
         std::vector<double> wamitDirections;   // rad (math convention)
 
-        // RAO tables [dof][freq][dir] — magnitude (m/m or rad/m) and phase (rad)
+        // 1st-order excitation transfer function [dof][freq][dir] —
+        // magnitude (N/m or N·m/m) and phase (rad)
         std::vector<std::vector<std::vector<double>>> raoMagnitude;
         std::vector<std::vector<std::vector<double>>> raoPhase;
 
-        // Slow-drift QTF (optional — zero if empty) [freq_pair][dir]
-        std::vector<std::vector<double>> qtfMagnitude;
+        // 2nd-order mean-drift coefficient [dof][freq][dir] — steady drift force
+        // per unit wave-amplitude² (N/m² or N·m/m²). Only surge(0)/sway(1)/yaw(5)
+        // are physically populated; other DOF are ignored. Empty ⇒ no drift.
+        std::vector<std::vector<std::vector<double>>> meanDriftCoeff;
 
-        // Wave drift damping coefficient
-        double driftDampingCoeff = 0.0;
+        // Wave-drift damping coefficients vs incidence direction, indexed to
+        // wamitDirections. bw = in-line, br = cross-coupling term. Populate
+        // surge(0)/sway(1)/yaw(5). Empty vector ⇒ no damping for that DOF.
+        std::array<std::vector<double>, 6> driftDampingBw;
+        std::array<std::vector<double>, 6> driftDampingBr;
     };
 
     WaveForces(const Config& cfg, const WaveSpectrum& spectrum);
 
     std::string name() const override { return "wave"; }
 
-    void resetState() noexcept override;
-
 private:
     Forces computeNaval(const BodyState& state, const NavalContext& ctx) override;
 
     Config                     cfg_;
     std::vector<WaveComponent> components_;  // snapshot from WaveSpectrum
-
-    // Per-DOF filtered RAO state for slow-drift
-    std::array<double, 6> q_rao_prev_{};
 };
 
 } // namespace ymir::naval
