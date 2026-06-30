@@ -25,7 +25,9 @@ describe('AppShell', () => {
   beforeEach(() => {
     useScenarioStore.getState().reset()
     useSimulationStore.getState().reset()
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: () => Promise.resolve({}) }))
+    // Sidebar hooks fetch /areas and /vessels (expect arrays); the scenario save
+    // POSTs to /scenarios. Return an array by default so list hooks don't throw.
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: () => Promise.resolve([]) }))
   })
 
   it('renders the top bar (breadcrumb + save) and floating controls', () => {
