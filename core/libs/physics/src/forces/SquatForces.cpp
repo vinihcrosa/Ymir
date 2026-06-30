@@ -12,8 +12,11 @@ SquatForces::SquatForces(const Config& cfg)
     : cfg_(cfg)
     , nabla_(cfg.volumetricWeight / (rho_water * g))
 {
+    // Squat coefficient Cs lookup — matches MATLAB VesselFastTime.squatForce
+    // ordering (dynamics repo): Cb>1 passes through, then the banded table.
     double Cb = cfg.blockCoefficient;
-    if      (Cb < 0.7) Cs_ = 1.7;
+    if      (Cb > 1.0) Cs_ = Cb;
+    else if (Cb < 0.7) Cs_ = 1.7;
     else if (Cb < 0.8) Cs_ = 2.0;
     else               Cs_ = 2.4;
 }
