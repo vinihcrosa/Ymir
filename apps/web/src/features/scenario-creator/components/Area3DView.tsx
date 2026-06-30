@@ -5,6 +5,7 @@ import * as THREE from 'three'
 import { useScenarioStore } from '../store'
 import { useSimulationStore } from '../../../stores/simulationStore'
 import { useVesselPanelStore } from '../../../stores/vesselPanelStore'
+import { useViewStore, type CameraId } from '../../../stores/viewStore'
 import { AREA_ROT_X, simToScene, headingToSceneYaw } from '../../../lib/geo3d'
 import { tokens } from '../../../theme/tokens'
 
@@ -12,8 +13,15 @@ const AREA_BASE = '/assets/3d/baia_de_guanabara'
 const VESSEL_URL = '/assets/3d/vessel/celso_furtado.glb'
 const AREA_PARTS = [`${AREA_BASE}/batimetria.glb`, `${AREA_BASE}/ilhas.glb`, `${AREA_BASE}/ponte.glb`]
 
-// Onboard "Front" camera offset from vessel_config (local metres, vessel frame).
-const FRONT_CAM = { x: 0, y: 31.5, z: -58.8 }
+// Onboard cameras from vessel_config (celso_furtado): local offset (metres) +
+// local yaw (deg) in the vessel frame.
+const CAMERAS: Record<CameraId, { x: number; y: number; z: number; yawDeg: number }> = {
+  Front: { x: 0, y: 31.5, z: -58.8, yawDeg: 0 },
+  Back: { x: 0, y: 31.5, z: -80.94, yawDeg: 180 },
+  Bridge: { x: 0, y: 31.5, z: -61.58, yawDeg: 0 },
+  Starboard: { x: 16.32, y: 31.5, z: -61.3, yawDeg: 0 },
+  Portside: { x: -16.32, y: 31.5, z: -61.3, yawDeg: 0 },
+}
 
 /** The Baía meshes are Z-up; rotate to Y-up and recentre horizontally on the sim
  *  origin so vessels (near 0,0) sit on the bay. */
@@ -50,9 +58,9 @@ function VesselModel({ x, y, headingDeg }: { x: number; y: number; headingDeg: n
   )
 }
 
-/** Camera anchored to the selected vessel's onboard Front camera; falls back to a
+/** Camera anchored to the selected vessel's chosen onboard camera; falls back to a
  *  bay overview when nothing is selected. */
-function CameraRig({ target }: { target: { x: number; y: number; headingDeg: number } | null }) {
+function CameraRig({ target, cameraId }: { target: { x: number; y: number; headingDeg: number } | null; cameraId: CameraId }) {
   const { camera } = useThree()
   useEffect(() => {
     if (!target) {
@@ -60,17 +68,19 @@ function CameraRig({ target }: { target: { x: number; y: number; headingDeg: num
       camera.lookAt(0, 0, 0)
       return
     }
-    const yaw = headingToSceneYaw((target.headingDeg * Math.PI) / 180)
+    const cam = CAMERAS[cameraId]
+    const vesselYaw = headingToSceneYaw((target.headingDeg * Math.PI) / 180)
     const [bx, by, bz] = simToScene(target.x, target.y)
-    // Place the camera at the Front offset rotated into world space.
-    const off = new THREE.Vector3(FRONT_CAM.x, FRONT_CAM.y, FRONT_CAM.z)
-    off.applyAxisAngle(new THREE.Vector3(0, 1, 0), yaw)
+    const up = new THREE.Vector3(0, 1, 0)
+    // Camera position: local offset rotated by the vessel heading.
+    const off = new THREE.Vector3(cam.x, cam.y, cam.z).applyAxisAngle(up, vesselYaw)
     camera.position.set(bx + off.x, by + off.y, bz + off.z)
-    // Look level toward the horizon along the vessel heading (out the bridge),
-    // not down at the console.
-    const ahead = new THREE.Vector3(0, -250, -1500).applyAxisAngle(new THREE.Vector3(0, 1, 0), yaw)
+    // Look direction: vessel heading + this camera's own local yaw, aimed slightly
+    // down toward the water so the sea + horizon are visible.
+    const aimYaw = vesselYaw + (cam.yawDeg * Math.PI) / 180
+    const ahead = new THREE.Vector3(0, -250, -1500).applyAxisAngle(up, aimYaw)
     camera.lookAt(bx + off.x + ahead.x, by + off.y + ahead.y, bz + off.z + ahead.z)
-  }, [camera, target])
+  }, [camera, target, cameraId])
   return null
 }
 
@@ -89,6 +99,7 @@ export function Area3DView() {
   }), [vessels, running, state])
 
   const target = posed.find((p) => p.instanceId === selectedVesselId) ?? posed[0] ?? null
+  const cameraId = useViewStore((s) => s.cameraId)
 
   return (
     <Canvas
@@ -110,7 +121,7 @@ export function Area3DView() {
         <planeGeometry args={[80000, 80000]} />
         <meshStandardMaterial color={tokens.color.accent} transparent opacity={0.55} />
       </mesh>
-      <CameraRig target={target} />
+      <CameraRig target={target} cameraId={cameraId} />
     </Canvas>
   )
 }

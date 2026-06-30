@@ -10,6 +10,7 @@ import { Sidebar } from '../scenario-creator/components/Sidebar'
 import { AreaMapView } from '../scenario-creator/components/AreaMapView'
 import { Area3DView } from '../scenario-creator/components/Area3DView'
 import { ViewToggle } from '../scenario-creator/components/ViewToggle'
+import { CameraSelector } from '../scenario-creator/components/CameraSelector'
 import { VesselPanel } from '../scenario-creator/components/VesselPanel'
 import { VesselPicker } from '../scenario-creator/components/VesselPicker'
 import { ScenarioInfoPanel } from '../scenario-info/ScenarioInfoPanel'
@@ -133,6 +134,7 @@ export function AppShell() {
         <div style={{ flex: 1, position: 'relative' }}>
           {mode === 'map' ? <AreaMapView /> : <Area3DView />}
           <ViewToggle />
+          {mode === '3d' && <CameraSelector />}
           <VesselPanel />
           <ScenarioInfoPanel open={infoOpen} onClose={() => setInfoOpen(false)} />
           {mode === 'map' && <MapActions onZoomIn={zoomIn} onZoomOut={zoomOut} />}
