@@ -9,6 +9,7 @@ import { AlertDialog } from '../../ui/Modal'
 import { Sidebar } from '../scenario-creator/components/Sidebar'
 import { AreaMapView } from '../scenario-creator/components/AreaMapView'
 import { VesselPanel } from '../scenario-creator/components/VesselPanel'
+import { ScenarioInfoPanel } from '../scenario-info/ScenarioInfoPanel'
 import { useScenarioStore } from '../scenario-creator/store'
 import { useSimulationStore } from '../../stores/simulationStore'
 import { useMapStore } from '../../stores/mapStore'
@@ -33,6 +34,7 @@ export function AppShell() {
   const { status, start, stop, loadScenario } = useSimulationStore()
   const { zoomIn, zoomOut } = useMapStore()
   const [confirmNoOwnship, setConfirmNoOwnship] = useState(false)
+  const [infoOpen, setInfoOpen] = useState(false)
   const navigate = useNavigate()
 
   async function saveScenario() {
@@ -78,7 +80,7 @@ export function AppShell() {
   const center = (
     <div style={{ display: 'flex', alignItems: 'center', gap: tokens.space.sm }}>
       <IconButton icon="+" label="Adicionar embarcação" variant="accent" />
-      <IconButton icon="ⓘ" label="Informações do cenário" />
+      <IconButton icon="ⓘ" label="Informações do cenário" variant={infoOpen ? 'active' : 'ghost'} onClick={() => setInfoOpen(o => !o)} />
       <IconButton icon="☁" label="Sincronizar" />
       <IconButton icon="⚙" label="Configurações" />
     </div>
@@ -99,6 +101,7 @@ export function AppShell() {
         <div style={{ flex: 1, position: 'relative' }}>
           <AreaMapView />
           <VesselPanel />
+          <ScenarioInfoPanel open={infoOpen} onClose={() => setInfoOpen(false)} />
           <MapActions onZoomIn={zoomIn} onZoomOut={zoomOut} />
           <SimulationControl
             state={pillState(status)}
