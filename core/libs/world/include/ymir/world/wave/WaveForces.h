@@ -41,6 +41,10 @@ public:
 
     std::string name() const override { return "wave"; }
 
+    /** Replace the wave field (e.g. when the scenario sea state changes) without
+     *  rebuilding the model — keeps the RAO tables, swaps the spectral components. */
+    void setSpectrum(const WaveSpectrum& spectrum);
+
 private:
     Forces computeNaval(const BodyState& state, const NavalContext& ctx) override;
 

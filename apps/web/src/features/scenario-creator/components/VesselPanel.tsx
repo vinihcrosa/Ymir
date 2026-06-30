@@ -98,6 +98,9 @@ function GeralTab({ config, vesselId }: { config: VesselConfigDTO; vesselId: num
   const u = liveVessel?.u ?? 0
   const v = liveVessel?.v ?? 0
   const r = liveVessel?.r ?? 0
+  const rollDeg = (liveVessel?.phi ?? 0) * 180 / Math.PI
+  const pitchDeg = (liveVessel?.theta ?? 0) * 180 / Math.PI
+  const heave = liveVessel?.z ?? 0
 
   return (
     <>
@@ -120,6 +123,9 @@ function GeralTab({ config, vesselId }: { config: VesselConfigDTO; vesselId: num
             <Field label="u (surge)" mono>{u.toFixed(2)} m/s</Field>
             <Field label="v (sway)" mono>{v.toFixed(2)} m/s</Field>
             <Field label="r (yaw)" mono>{r.toFixed(4)} rad/s</Field>
+            <Field label="φ (roll)" mono>{rollDeg.toFixed(2)} °</Field>
+            <Field label="θ (pitch)" mono>{pitchDeg.toFixed(2)} °</Field>
+            <Field label="heave" mono>{heave.toFixed(2)} m</Field>
           </>
         )}
       </Card>

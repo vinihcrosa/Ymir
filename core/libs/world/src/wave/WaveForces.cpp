@@ -43,6 +43,11 @@ WaveForces::WaveForces(const Config& cfg, const WaveSpectrum& spectrum)
 {
 }
 
+void WaveForces::setSpectrum(const WaveSpectrum& spectrum)
+{
+    components_ = spectrum.components();
+}
+
 Forces WaveForces::computeNaval(const BodyState& state, const NavalContext& ctx)
 {
     if (components_.empty()) return Forces::zero();

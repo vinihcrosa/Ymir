@@ -35,6 +35,9 @@
 #include <ymir/physics/forces/RestoringForces.h>
 #include <ymir/physics/forces/InertialForces.h>
 #include <ymir/physics/forces/CurrentForces.h>
+#include <ymir/world/wave/WaveForces.h>
+#include <ymir/world/wave/WaveSpectrum.h>
+#include "WaveRaoData.h"
 #include <ymir/common/Types.h>
 
 #include <cmath>
@@ -112,6 +115,21 @@ static std::unique_ptr<ymir::RigidBody6DOF> makeBodyAt(int id, double x, double 
 // ---------------------------------------------------------------------------
 // Force-model factories — all parameters from vessel1.json
 // ---------------------------------------------------------------------------
+
+// Build a wave spectrum from scenario sea-state params (spectrum: 0=JONSWAP,
+// 1=PIERSON, 2=REGULAR). Hs=0 yields a calm sea (~no excitation).
+static ymir::naval::WaveSpectrum makeWaveSpectrum(double Hs, double Tp, double dirDeg, double gamma, int spectrum)
+{
+    ymir::naval::WaveSpectrum::Config c{};
+    c.spectrumType = spectrum == 2 ? ymir::naval::WaveSpectrumType::REGULAR
+                   : spectrum == 1 ? ymir::naval::WaveSpectrumType::PIERSON
+                                   : ymir::naval::WaveSpectrumType::JONSWAP;
+    c.significantWaveHeight = Hs;
+    c.peakPeriod            = Tp > 0.0 ? Tp : 8.0;
+    c.gamma                 = gamma > 0.0 ? gamma : 3.3;
+    c.mainDirection_deg     = dirDeg;
+    return ymir::naval::WaveSpectrum(c);
+}
 
 static ymir::naval::InertialConfig vlccInertialConfig()
 {
@@ -305,6 +323,13 @@ public:
         rudders_[id] = rudderModel.get();
         domain_->addNavalForceModel(id, std::move(rudderModel));
 
+        // Wave excitation (1st-order RAO from vessel1.json). Starts calm; the sea
+        // state is applied via setWaveConditions when the scenario loads waves.
+        auto waveModel = std::make_unique<ymir::naval::WaveForces>(
+            ymir::naval::vlccWaveConfig(), makeWaveSpectrum(0.0, 8.0, 0.0, 3.3, 0));
+        waves_[id] = waveModel.get();
+        domain_->addNavalForceModel(id, std::move(waveModel));
+
         domain_->initialize();
         initialized_ = true;
     }
@@ -372,6 +397,17 @@ public:
         world_->timeline().loadJson(json);
     }
 
+    /**
+     * Apply a scenario sea state to every vessel's wave model. Drives the 6-DOF
+     * wave excitation (heave/roll/pitch + surge/sway/yaw) so vessels respond to
+     * waves instead of translating rigidly. spectrum: 0=JONSWAP,1=PIERSON,2=REGULAR.
+     */
+    void setWaveConditions(double Hs, double Tp, double dirDeg, double gamma, int spectrum)
+    {
+        for (auto& [id, w] : waves_)
+            w->setSpectrum(makeWaveSpectrum(Hs, Tp, dirDeg, gamma, spectrum));
+    }
+
 private:
     std::unique_ptr<ymir::World> world_;
     ymir::NavalDomain*           domain_;
@@ -380,6 +416,7 @@ private:
     // Non-owning pointers — models owned by domain_ via addNavalForceModel.
     std::map<int, ymir::naval::ThrustForces*> thrusters_;
     std::map<int, ymir::naval::RudderForces*> rudders_;
+    std::map<int, ymir::naval::WaveForces*>   waves_;
 };
 
 // ---------------------------------------------------------------------------
@@ -398,5 +435,6 @@ EMSCRIPTEN_BINDINGS(ymir)
         .function("getState",           &YmirSimulation::getState)
         .function("reset",              &YmirSimulation::reset)
         .function("getTime",            &YmirSimulation::getTime)
-        .function("loadEnvironment",    &YmirSimulation::loadEnvironment);
+        .function("loadEnvironment",    &YmirSimulation::loadEnvironment)
+        .function("setWaveConditions",  &YmirSimulation::setWaveConditions);
 }
