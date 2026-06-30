@@ -69,5 +69,16 @@ Scope: physics/force model only. Sources read in full: MATLAB `VesselFastTime.m`
 - EOM assembly / mass: `core/libs/physics/src/RigidBody6DOF.cpp:8-60`; force summation `core/libs/physics/src/integrator/RK45Integrator.cpp:104-123`
 - Suction / mooring lines / fenders / anchor / memory-function: **no files exist** (force header dir has only the 9 listed in CurrentForces.h…WindForces.h).
 
+## Progress / status
+
+- **D5 (squat Cs table)** — ✅ fixed (`SquatForces.cpp`), parity test added. Commit `186b24c`.
+- **D1 (Obokata current)** — ⏳ partial: roll/pitch arm moments `f[3]`/`f[4]` added per MATLAB 652-658 (`CurrentForces.cpp`), test added, commit `7a5092e`. Remaining: per-section spatial current-field sampling, submerged-depth area basis `(wavesOriginPosition_z − z)·(L/N)`, and the `cdz` cross-flow yaw term (647-650) — these depend on the `wavesOriginPosition(3)` sign/draft convention and need validation against MATLAB reference output before porting.
+- **D3 (thruster Kt/Kq+J)** — handed to a dedicated worktree session (chip started).
+- **D4 (rudder Cl/Cd table + slipstream)** — handed to a dedicated worktree session (chip started).
+- **D2 (2nd-order wave forces + DOF mask)** — handed to a dedicated worktree session (chip started).
+- **D6/D7 (suction, mooring lines, fenders, anchor, radiation memory-function)** — deferred; gated on UI features (anchors/towlines) that are themselves deferred.
+
+Note: D1's remaining terms, D2, D3 and D4 are faithful-reimplementation tasks that must be checked against MATLAB numeric reference runs; they are not driven by the JS test suite.
+
 ## Bottom line
 Faithful: inertial, damping, wind, hydrostatic restoring. Partial/diverging: current-Obokata (D1), wave (1st-order only, D2), thruster (D3), rudder (D4), squat (D5). Missing entirely: wave mean/slow drift + wave-drift damping (D2), ship-to-ship/bank suction, mooring lines, fenders, anchor (D6), radiation memory-function (D7). The highest-impact gaps for matching the reference are **D3 (propeller Kt/Kq+J), D4 (rudder coefficient table+slipstream), and D2 (2nd-order wave forces)**.
