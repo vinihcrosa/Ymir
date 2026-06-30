@@ -2,6 +2,9 @@ import { Type, Static } from '@sinclair/typebox'
 import { EnvironmentProfileDTO } from './environment.js'
 
 export const InitialCondition = Type.Object({
+  /** Per-scenario body identifier used by the physics engine. */
+  instanceId: Type.Number(),
+  /** Vessel TYPE id — used to load the vessel config when the scenario is reopened. */
   vesselId: Type.Number(),
   x: Type.Number({ default: 0, description: 'Initial surge position [m]' }),
   y: Type.Number({ default: 0, description: 'Initial sway position [m]' }),

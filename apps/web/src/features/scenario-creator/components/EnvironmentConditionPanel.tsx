@@ -1,6 +1,9 @@
+import { useState } from 'react'
 import { useEnvironmentStore } from '../../../stores/environmentStore'
 import type { EnvironmentConditionDTO, WaveConditionDTO } from '@ymir/types'
 import { tokens } from '../../../theme/tokens'
+import { Tabs } from '../../../ui/Tabs'
+import { Slider } from '../../../ui/Slider'
 
 const panelStyle: React.CSSProperties = {
   background: tokens.color.surface,
@@ -494,8 +497,12 @@ export function EnvironmentConditionPanel() {
     removeWindKeyframe,
   } = useEnvironmentStore()
 
-  return (
-    <div style={panelStyle} data-testid="environment-condition-panel">
+  // Rain/fog are UI-only for now (not yet consumed by the physics engine).
+  const [rain, setRain] = useState(0)
+  const [fog, setFog] = useState(0)
+
+  const conditions = (
+    <>
       <UniformSection
         title="Current"
         sectionPrefix="current"
@@ -519,6 +526,27 @@ export function EnvironmentConditionPanel() {
       />
 
       <WaveSection />
+    </>
+  )
+
+  const visibility = (
+    <div style={{ paddingTop: tokens.space.sm }}>
+      <Slider label="Chuva" value={rain} min={0} max={100} unit="%" onChange={setRain} />
+      <Slider label="Neblina" value={fog} min={0} max={100} unit="%" onChange={setFog} />
+      <p style={{ fontSize: tokens.fontSize.xs, color: tokens.color.textHcSubtle, marginTop: tokens.space.sm }}>
+        Visibilidade é visual; ainda não afeta a dinâmica.
+      </p>
+    </div>
+  )
+
+  return (
+    <div style={panelStyle} data-testid="environment-condition-panel">
+      <Tabs
+        tabs={[
+          { id: 'conditions', label: 'Correnteza, vento e ondas', content: conditions },
+          { id: 'visibility', label: 'Visibilidade', content: visibility },
+        ]}
+      />
     </div>
   )
 }

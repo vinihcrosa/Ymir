@@ -73,6 +73,7 @@ describe('useScenarioStore', () => {
     const dto = useScenarioStore.getState().toCreateScenarioDTO()
     expect(dto.initialConditions).toHaveLength(1)
     expect(dto.initialConditions[0].psi).toBeCloseTo(Math.PI / 2)
+    expect(dto.initialConditions[0].instanceId).toBe(1)
     expect(dto.initialConditions[0].vesselId).toBe(1)
     expect(dto.areaId).toBe(42)
   })

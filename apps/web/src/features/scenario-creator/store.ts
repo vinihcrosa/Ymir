@@ -57,7 +57,8 @@ export const useScenarioStore = create<ScenarioStore>((set, get) => ({
       duration: 3600,
       dt: 0.05,
       initialConditions: vessels.map(v => ({
-        vesselId: v.instanceId,
+        instanceId: v.instanceId,
+        vesselId: v.vesselId,
         x: v.x,
         y: v.y,
         psi: v.headingDeg * Math.PI / 180,

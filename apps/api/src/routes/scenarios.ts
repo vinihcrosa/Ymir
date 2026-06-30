@@ -6,9 +6,13 @@ import { eq } from 'drizzle-orm'
 import { ScenarioDTO, CreateScenarioDTO } from '@ymir/types'
 
 function rowToScenario(row: typeof scenarios.$inferSelect): ScenarioDTO {
+  // Legacy rows persisted before InitialCondition gained `instanceId` stored the
+  // body id under `vesselId`. Backfill it so the response satisfies the schema.
+  const initialConditions = (JSON.parse(row.initialConditions) as Array<Record<string, number>>)
+    .map((ic) => ({ instanceId: ic.instanceId ?? ic.vesselId, ...ic }))
   return {
     ...row,
-    initialConditions: JSON.parse(row.initialConditions),
+    initialConditions,
     description: row.description ?? undefined,
     areaId: row.areaId ?? undefined,
     createdAt: row.createdAt,
