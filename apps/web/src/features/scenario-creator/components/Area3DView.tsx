@@ -46,12 +46,21 @@ function AreaScene() {
   )
 }
 
-function VesselModel({ x, y, headingDeg }: { x: number; y: number; headingDeg: number }) {
+function VesselModel({ x, y, headingDeg, roll, pitch, heave }: {
+  x: number; y: number; headingDeg: number; roll: number; pitch: number; heave: number
+}) {
   const { scene } = useGLTF(VESSEL_URL)
-  const [px, py, pz] = simToScene(x, y, -VESSEL_WATERLINE)
+  // Heave bobs the hull on the waterline (sim z is down-positive → up = -z).
+  const [px, py, pz] = simToScene(x, y, -VESSEL_WATERLINE - heave)
+  const yaw = headingToSceneYaw((headingDeg * Math.PI) / 180)
   return (
-    <group position={[px, py, pz]} rotation={[0, headingToSceneYaw((headingDeg * Math.PI) / 180), 0]}>
-      <Clone object={scene} />
+    // Outer: position + heading (yaw about scene up). Inner: attitude in the
+    // heading-aligned frame — pitch about the beam axis (X), roll about the
+    // longitudinal axis (Z). Signs are calibratable.
+    <group position={[px, py, pz]} rotation={[0, yaw, 0]}>
+      <group rotation={[pitch, 0, roll]}>
+        <Clone object={scene} />
+      </group>
     </group>
   )
 }
@@ -107,8 +116,8 @@ export function Area3DView() {
   const posed = useMemo(() => vessels.map((v) => {
     const live = running ? state?.vessels.find((s) => s.id === v.instanceId) : null
     return live
-      ? { instanceId: v.instanceId, x: live.x, y: live.y, headingDeg: (live.psi * 180) / Math.PI }
-      : { instanceId: v.instanceId, x: v.x, y: v.y, headingDeg: v.headingDeg }
+      ? { instanceId: v.instanceId, x: live.x, y: live.y, headingDeg: (live.psi * 180) / Math.PI, roll: live.phi, pitch: live.theta, heave: live.z }
+      : { instanceId: v.instanceId, x: v.x, y: v.y, headingDeg: v.headingDeg, roll: 0, pitch: 0, heave: 0 }
   }), [vessels, running, state])
 
   const target = posed.find((p) => p.instanceId === selectedVesselId) ?? posed[0] ?? null
@@ -126,7 +135,7 @@ export function Area3DView() {
       <Suspense fallback={null}>
         <AreaScene />
         {posed.map((p) => (
-          <VesselModel key={p.instanceId} x={p.x} y={p.y} headingDeg={p.headingDeg} />
+          <VesselModel key={p.instanceId} x={p.x} y={p.y} headingDeg={p.headingDeg} roll={p.roll} pitch={p.pitch} heave={p.heave} />
         ))}
       </Suspense>
       {/* Sea at the waterline (Y=0). Large enough to read as open water to the
