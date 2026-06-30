@@ -5,9 +5,12 @@ import { AppShell } from './AppShell'
 import { useScenarioStore } from '../scenario-creator/store'
 import { useSimulationStore } from '../../stores/simulationStore'
 
-// Leaflet map can't render in jsdom — stub the map surface (covered by e2e).
+// Leaflet map + Three canvas can't render in jsdom — stub both backgrounds.
 vi.mock('../scenario-creator/components/AreaMapView', () => ({
   AreaMapView: () => <div data-testid="map" />,
+}))
+vi.mock('../scenario-creator/components/Area3DView', () => ({
+  Area3DView: () => <div data-testid="area-3d-view" />,
 }))
 
 vi.stubGlobal('Worker', class {

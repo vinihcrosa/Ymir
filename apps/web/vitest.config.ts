@@ -21,9 +21,10 @@ export default defineConfig({
         'src/App.tsx',
         'src/**/*.d.ts',
         'src/**/index.ts',
-        // Leaflet components — require canvas/browser, tested via E2E
+        // Leaflet + Three.js scene components — require canvas/WebGL, tested via E2E
         'src/features/scenario-creator/components/AreaMapView.tsx',
         'src/features/scenario-creator/components/VesselMarker.tsx',
+        'src/features/scenario-creator/components/Area3DView.tsx',
         // Pure layout composition — no logic to unit test
         'src/features/scenario-creator/components/Sidebar.tsx',
         // Web Workers — not runnable in jsdom

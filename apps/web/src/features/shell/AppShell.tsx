@@ -8,12 +8,15 @@ import { MapActions } from '../../ui/MapActions'
 import { AlertDialog } from '../../ui/Modal'
 import { Sidebar } from '../scenario-creator/components/Sidebar'
 import { AreaMapView } from '../scenario-creator/components/AreaMapView'
+import { Area3DView } from '../scenario-creator/components/Area3DView'
+import { ViewToggle } from '../scenario-creator/components/ViewToggle'
 import { VesselPanel } from '../scenario-creator/components/VesselPanel'
 import { VesselPicker } from '../scenario-creator/components/VesselPicker'
 import { ScenarioInfoPanel } from '../scenario-info/ScenarioInfoPanel'
 import { useScenarioStore } from '../scenario-creator/store'
 import { useSimulationStore } from '../../stores/simulationStore'
 import { useMapStore } from '../../stores/mapStore'
+import { useViewStore } from '../../stores/viewStore'
 import { tokens } from '../../theme/tokens'
 
 const API_BASE = import.meta.env.VITE_API_URL ?? 'http://localhost:3000'
@@ -27,6 +30,7 @@ export function AppShell() {
   const { name, vessels, setName, toCreateScenarioDTO } = useScenarioStore()
   const { status, state, scenarioVessels, play, pause, loadScenario, applyEnvironment } = useSimulationStore()
   const { zoomIn, zoomOut } = useMapStore()
+  const { mode } = useViewStore()
   const [confirmNoOwnship, setConfirmNoOwnship] = useState(false)
   const [infoOpen, setInfoOpen] = useState(false)
   const [pickerOpen, setPickerOpen] = useState(false)
@@ -127,10 +131,11 @@ export function AppShell() {
       <div style={{ flex: 1, display: 'flex', minHeight: 0 }}>
         <Sidebar />
         <div style={{ flex: 1, position: 'relative' }}>
-          <AreaMapView />
+          {mode === 'map' ? <AreaMapView /> : <Area3DView />}
+          <ViewToggle />
           <VesselPanel />
           <ScenarioInfoPanel open={infoOpen} onClose={() => setInfoOpen(false)} />
-          <MapActions onZoomIn={zoomIn} onZoomOut={zoomOut} />
+          {mode === 'map' && <MapActions onZoomIn={zoomIn} onZoomOut={zoomOut} />}
           <SimulationControl
             running={status === 'running'}
             disabled={vessels.length === 0}
