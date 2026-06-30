@@ -1,16 +1,16 @@
-# Graph Report - Ymir  (2026-06-29)
+# Graph Report - nostalgic-thompson-49408c  (2026-06-30)
 
 ## Corpus Check
-- 393 files · ~312,511 words
+- 445 files · ~339,278 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 5041 nodes · 5997 edges · 430 communities (413 shown, 17 thin omitted)
-- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 40 edges (avg confidence: 0.88)
+- 5603 nodes · 6660 edges · 447 communities (430 shown, 17 thin omitted)
+- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 41 edges (avg confidence: 0.88)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `2bb65da4`
+- Built from commit: `3c41918d`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -417,18 +417,35 @@
 - [[_COMMUNITY_Community 426|Community 426]]
 - [[_COMMUNITY_Community 427|Community 427]]
 - [[_COMMUNITY_Community 428|Community 428]]
+- [[_COMMUNITY_Community 430|Community 430]]
+- [[_COMMUNITY_Community 431|Community 431]]
+- [[_COMMUNITY_Community 432|Community 432]]
+- [[_COMMUNITY_Community 433|Community 433]]
+- [[_COMMUNITY_Community 434|Community 434]]
+- [[_COMMUNITY_Community 435|Community 435]]
+- [[_COMMUNITY_Community 436|Community 436]]
+- [[_COMMUNITY_Community 437|Community 437]]
+- [[_COMMUNITY_Community 438|Community 438]]
+- [[_COMMUNITY_Community 439|Community 439]]
+- [[_COMMUNITY_Community 440|Community 440]]
+- [[_COMMUNITY_Community 441|Community 441]]
+- [[_COMMUNITY_Community 442|Community 442]]
+- [[_COMMUNITY_Community 443|Community 443]]
+- [[_COMMUNITY_Community 444|Community 444]]
+- [[_COMMUNITY_Community 445|Community 445]]
+- [[_COMMUNITY_Community 448|Community 448]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `StubDomain` - 36 edges
-2. `YmirSimulation` - 28 edges
-3. `Task Breakdown` - 20 edges
-4. `NavalDomain` - 20 edges
-5. `Monorepo Migration — Design` - 17 edges
-6. `Tasks` - 17 edges
-7. `compilerOptions` - 16 edges
-8. `useScenarioStore` - 16 edges
-9. `World (thin orchestrator)` - 16 edges
-10. `Ymir Agent Guidelines` - 15 edges
+2. `useScenarioStore` - 26 edges
+3. `YmirSimulation` - 25 edges
+4. `Task Breakdown` - 20 edges
+5. `NavalDomain` - 20 edges
+6. `Monorepo Migration — Design` - 17 edges
+7. `Tasks` - 17 edges
+8. `compilerOptions` - 16 edges
+9. `useSimulationStore` - 16 edges
+10. `World (thin orchestrator)` - 16 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `AI-Assisted Development Guidelines` --references--> `Compozy CLI`  [INFERRED]
@@ -440,16 +457,16 @@
 - `Web App index.html` --related_to--> `ymir_wasm WASM Module`  [INFERRED]
   apps/web/index.html → core/CMakeLists.wasm.txt
 - `defaultCfg()` --references--> `CvodeConfig`  [EXTRACTED]
-  .claude/worktrees/upbeat-torvalds-50df58/core/tests/simulation/TestActuatorIntegration.cpp → core/tests/simulation/TestActuatorIntegration.cpp
+  /Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/simulation/TestActuatorIntegration.cpp → core/tests/simulation/TestActuatorIntegration.cpp
 
 ## Import Cycles
 - None detected.
 
-## Communities (430 total, 17 thin omitted)
+## Communities (447 total, 17 thin omitted)
 
 ### Community 0 - "Vessel Domain Concepts"
-Cohesion: 0.15
-Nodes (31): ActuatorState, BerthManeuverSystem, DynamicVessel, ManeuverController, NavalSimulation N-body Refactor, PrescribedController, Rudder Entity, Rudder Entity (+23 more)
+Cohesion: 0.14
+Nodes (32): ActuatorState, BerthManeuverSystem, DynamicVessel, ManeuverController, NavalSimulation N-body Refactor, PrescribedController, Rudder Entity, Rudder Entity (+24 more)
 
 ### Community 1 - "API Database Layer"
 Cohesion: 0.07
@@ -460,20 +477,20 @@ Cohesion: 0.18
 Nodes (11): lower, upper, dimensions, beam, bounds, draft, lengthPerpendiculars, mass (+3 more)
 
 ### Community 3 - "WASM Bindings"
-Cohesion: 0.07
-Nodes (40): Config, InertialConfig, map, Matrix6x6, RestoringConfig, RigidBody6DOF, RudderForces, string (+32 more)
+Cohesion: 0.12
+Nodes (9): string, val, YmirSimulation, domain_, initialized_, rudders_, thrusters_, waves_ (+1 more)
 
 ### Community 4 - "Physics Bodies & Persistence"
 Cohesion: 0.05
-Nodes (50): AbstractBody, BodyDefinition, namespace, namespace, namespace, json, Matrix6x6, path (+42 more)
+Nodes (50): AbstractBody, BodyDefinition, namespace, namespace, json, Matrix6x6, path, string (+42 more)
 
 ### Community 5 - "Architecture & Integrators"
 Cohesion: 0.05
 Nodes (55): Ymir Architecture: Bounded Contexts, IIntegrator Abstract Interface, RK45 Dormand-Prince Integrator, ymir_common CMake Target (INTERFACE), ymir_persistence CMake Target (STATIC), ymir_physics CMake Target (STATIC), ymir_simulation CMake Target (STATIC), ymir_vessel CMake Target (STATIC) (+47 more)
 
 ### Community 6 - "Web Frontend Deps"
-Cohesion: 0.06
-Nodes (35): dependencies, leaflet, react, react-dom, react-leaflet, @types/leaflet, @ymir/types, zustand (+27 more)
+Cohesion: 0.05
+Nodes (42): dependencies, leaflet, react, react-dom, react-leaflet, react-router-dom, @react-three/drei, @react-three/fiber (+34 more)
 
 ### Community 7 - "Roadmap & ADRs"
 Cohesion: 0.08
@@ -481,7 +498,7 @@ Nodes (33): ADR D-MONO-01: pnpm + Turborepo (not NX), ADR D-MONO-02: Dormand-Pri
 
 ### Community 8 - "NavalDomain Simulation"
 Cohesion: 0.21
-Nodes (20): array, BodyEntry, NavalContext, string, array, BodyEntry, NavalContext, string (+12 more)
+Nodes (20): array, BodyEntry, NavalContext, string, bodyState(), buildContext(), distanceBetween(), initialize() (+12 more)
 
 ### Community 9 - "Repo Reorganization"
 Cohesion: 0.14
@@ -493,19 +510,19 @@ Nodes (14): Ymir Agent Guidelines, AI-Assisted Development Guidelines, Architect
 
 ### Community 11 - "Physics Library Headers"
 Cohesion: 0.07
-Nodes (26): namespace, namespace, namespace, BodyState, Forces, BodyState, Forces, Matrix6x6 (+18 more)
+Nodes (26): namespace, namespace, BodyState, Forces, BodyState, Forces, Matrix6x6, string (+18 more)
 
 ### Community 12 - "Monorepo Build Pipeline"
 Cohesion: 0.07
 Nodes (27): cache, dependsOn, outputs, cache, inputs, outputs, cache, cache (+19 more)
 
 ### Community 13 - "Scenario Creator UI"
-Cohesion: 0.09
-Nodes (18): AreaMapView(), Sidebar(), card, cardTitle, content, ControlesTab(), header, panel (+10 more)
+Cohesion: 0.06
+Nodes (30): card, cardTitle, content, ControlesTab(), header, panel, PanelTab, row (+22 more)
 
 ### Community 14 - "WASM Web Workers"
-Cohesion: 0.11
-Nodes (12): SimulationStateDTO, SimulationStore, ActuatorStore, createMockModule(), MockYmirSimulation, applyScenarioVessels(), fetchVesselConfig(), initWasm() (+4 more)
+Cohesion: 0.12
+Nodes (11): SimulationStateDTO, ActuatorStore, createMockModule(), MockYmirSimulation, applyScenarioVessels(), fetchVesselConfig(), initWasm(), pendingVessels (+3 more)
 
 ### Community 15 - "API Package Deps"
 Cohesion: 0.11
@@ -516,12 +533,12 @@ Cohesion: 0.18
 Nodes (23): 12-Step Simulation Tick, AnchoringSystem + Chain + Catenary, CollisionSystem (Broad/Narrow Phase + Response), ymir::Environment (World Layer), EventBus (Pub/Sub), apps/fast-time (Batch Runner), MooringSystem + MooringCable, Protobuf Message Schemas (proto/) (+15 more)
 
 ### Community 17 - "BerthManeuverSystem"
-Cohesion: 0.18
-Nodes (30): BerthManeuverSystem(), buildNavMc(), checkTransitions(), computeLateralError(), currentPhase(), PID::reset(), PID::update(), setCouplingRegistry() (+22 more)
+Cohesion: 0.21
+Nodes (26): checkTransitions(), computeLateralError(), currentPhase(), PID::reset(), PID::update(), setCouplingRegistry(), update(), updateNavigating() (+18 more)
 
 ### Community 18 - "Coupling Domain Tests"
-Cohesion: 0.11
-Nodes (27): BodyState, Config, CvodeConfig, DynamicVessel, RigidBody6DOF, unique_ptr, Vector6, VesselConfig (+19 more)
+Cohesion: 0.09
+Nodes (33): BodyState, Config, CvodeConfig, DynamicVessel, RigidBody6DOF, size_t, unique_ptr, Vector6 (+25 more)
 
 ### Community 19 - "NavalSimulation Core"
 Cohesion: 0.09
@@ -540,20 +557,16 @@ Cohesion: 0.26
 Nodes (21): fast-time App CMakeLists, server App CMakeLists, Web App index.html, core CMakeLists, core WASM CMakeLists, core Tests CMakeLists, GitHub CI Workflow, ymir_common Library CMakeLists (+13 more)
 
 ### Community 23 - "Scenario Creator Hooks"
-Cohesion: 0.12
-Nodes (18): ScenarioForm(), mockArea, VesselList(), GeralTab(), MOCK_AREA, useAreas(), MOCK_VESSEL, useVessels() (+10 more)
+Cohesion: 0.10
+Nodes (25): AreaMapView(), controlStyle, labelStyle, ScenarioForm(), Sidebar(), SimulationControls(), mockArea, mockArea (+17 more)
 
 ### Community 24 - "Web TypeScript Config"
 Cohesion: 0.11
 Nodes (18): compilerOptions, allowImportingTsExtensions, esModuleInterop, jsx, lib, module, moduleResolution, noEmit (+10 more)
 
 ### Community 25 - "Actuator Integration Tests"
-Cohesion: 0.14
-Nodes (28): array, Config, CvodeConfig, InertialConfig, RestoringConfig, RigidBody6DOF, unique_ptr, vector (+20 more)
-
-### Community 26 - "Simulation UI Controls"
-Cohesion: 0.16
-Nodes (9): SimulationControls(), mockArea, fmt(), TelemetryPanel(), VesselRow(), ScenarioDraftVessel, Status, MockWorker (+1 more)
+Cohesion: 0.18
+Nodes (23): Config, CvodeConfig, InertialConfig, RestoringConfig, RigidBody6DOF, unique_ptr, defaultCfg(), makeBody() (+15 more)
 
 ### Community 27 - "Shared Types Package"
 Cohesion: 0.14
@@ -568,8 +581,8 @@ Cohesion: 0.13
 Nodes (22): BodyState, ForceModel, Forces, Matrix6x6, RK45Config, unique_ptr, Vector6, addForceModel() (+14 more)
 
 ### Community 30 - "IDomain Interface Tests"
-Cohesion: 0.20
-Nodes (8): BodyPosition, string, vector, BodyPosition, string, vector, StubDomain, TrackingDomain
+Cohesion: 0.16
+Nodes (10): BodyPosition, BodyState, string, vector, BodyPosition, BodyState, string, vector (+2 more)
 
 ### Community 31 - "Legacy Wave & Docs"
 Cohesion: 0.16
@@ -580,8 +593,8 @@ Cohesion: 0.06
 Nodes (33): As três structs que aparecem nas perguntas, Contexto geral: o que já existe e o que vamos construir, Discussões de Design — Camada de Embarcação, O problema concreto, O problema concreto, O problema concreto, O problema concreto, O tick depois da Fase 1 (com controlador) (+25 more)
 
 ### Community 33 - "State & Types Bridge"
-Cohesion: 0.14
-Nodes (13): VesselStateDTO, WorkerMessageDTO, CreateVesselDTO, EOTEntryDTO, Matrix6x6, VesselConfigDTO, VesselConnectionPointDTO, VesselCurrentDTO (+5 more)
+Cohesion: 0.07
+Nodes (28): Architecture Decision Records, Condition List Layout, Core Features, Direction Input Convention, F1 — Condition Management, F2 — Uniform Condition Input, F3 — Vectorial Composition, F4 — Temporal Keyframes (+20 more)
 
 ### Community 34 - "Scenario JSON Data"
 Cohesion: 0.12
@@ -600,8 +613,8 @@ Cohesion: 0.20
 Nodes (15): D8: Thruster and Rudder as Entities with Own State, Legacy BerthManeuverSystem (FSM Docking), Legacy FilterActuator (1st Order Low-Pass), Legacy ManeuverController (LOS + PID), Legacy PrescribedController, Legacy RateLimitedActuator, Legacy ManeuverSystem, BerthManeuverSystem FSM (Docking with Tugs) (+7 more)
 
 ### Community 38 - "Bounded Context Arch"
-Cohesion: 0.33
-Nodes (15): Architecture: Bounded Contexts, Architecture: Data Flow and Tick Sequence, Architecture README, Bounded Context Architecture, CVODE Integration Loop, 12-Step Deterministic Tick Sequence, ymir_common (CMake target), ymir_persistence (CMake target) (+7 more)
+Cohesion: 0.25
+Nodes (18): Architecture: Bounded Contexts, Architecture: Data Flow and Tick Sequence, Architecture README, BodyEntry (NavalSimulation per-body struct), Bounded Context Architecture, CVODE Integration Loop, NavalSimulation, 12-Step Deterministic Tick Sequence (+10 more)
 
 ### Community 39 - "Types TypeScript Config"
 Cohesion: 0.14
@@ -612,8 +625,8 @@ Cohesion: 0.16
 Nodes (12): compilerOptions, declaration, esModuleInterop, module, moduleResolution, outDir, rootDir, skipLibCheck (+4 more)
 
 ### Community 41 - "ManeuverController Impl"
-Cohesion: 0.25
-Nodes (9): activeWaypointIdx(), ManeuverController(), PID::reset(), PID::update(), waypointsExhausted(), Config, size_t, Config (+1 more)
+Cohesion: 0.13
+Nodes (18): activeWaypointIdx(), ManeuverController(), PID::reset(), PID::update(), update(), waypointsExhausted(), Config, NavalContext (+10 more)
 
 ### Community 42 - "Simulation & World Headers"
 Cohesion: 0.06
@@ -640,8 +653,8 @@ Cohesion: 0.17
 Nodes (12): Architecture Decisions Log, D10: User Owns Vessel; NavalSimulation Receives Reference, D11: NavalSimulation Becomes Multi-Body in Phase 1, D1: World as Domain Orchestrator, D2: Jacobi (Loose) Coupling as Default, D3: Domain Creates and Registers Its Own Bodies, D4: Bodies with Multiple Domains via ForceModels, D5: NavalSimulation Replaced by NavalDomain+World in Phase 2 (+4 more)
 
 ### Community 48 - "Map & Geo Components"
-Cohesion: 0.27
-Nodes (7): createVesselIcon(), VesselMarker(), VesselMarkerProps, isInsidePolygon(), latlngToMeters(), metersToLatLng(), origin
+Cohesion: 0.20
+Nodes (10): MapRefBinder(), createVesselIcon(), VesselMarker(), VesselMarkerProps, isInsidePolygon(), latlngToMeters(), metersToLatLng(), origin (+2 more)
 
 ### Community 49 - "Initial Velocity Scenarios"
 Cohesion: 0.18
@@ -661,7 +674,7 @@ Nodes (22): array, BodyState, Config, Forces, NavalContext, RudderCommand, size_
 
 ### Community 53 - "Thrust Force Model"
 Cohesion: 0.10
-Nodes (27): array, BodyState, Config, Forces, NavalContext, size_t, ThrusterCommand, vector (+19 more)
+Nodes (27): BodyState, Config, Forces, NavalContext, size_t, ThrusterCommand, computeNaval(), getPower() (+19 more)
 
 ### Community 54 - "Legacy Force Models"
 Cohesion: 0.22
@@ -680,8 +693,8 @@ Cohesion: 0.14
 Nodes (15): interpolate(), PrescribedController(), update(), Config, NavalContext, Rudder, Thruster, TimeSeries (+7 more)
 
 ### Community 58 - "TugParametricForces"
-Cohesion: 0.14
-Nodes (12): BerthManeuverSystem, computeNaval(), naval(), TugParametricForces(), namespace, BodyState, Forces, NavalContext (+4 more)
+Cohesion: 0.22
+Nodes (8): computeNaval(), TugParametricForces(), BodyState, Forces, NavalContext, BodyState, Forces, NavalContext
 
 ### Community 59 - "Web Node TypeScript Config"
 Cohesion: 0.20
@@ -692,16 +705,16 @@ Cohesion: 0.20
 Nodes (10): waves, angle, meanDriftForceAmplitude, meanDriftForcePhase, omega, originPosition, RAOAmplitude, RAOPhase (+2 more)
 
 ### Community 61 - "DynamicVessel Tests"
-Cohesion: 0.22
-Nodes (9): DynamicVessel, NavalContext, VesselConfig, DynamicVessel, NavalContext, VesselConfig, makeCtx(), VesselFixture (+1 more)
+Cohesion: 0.15
+Nodes (13): BerthManeuverSystem, naval(), namespace, DynamicVessel, NavalContext, VesselConfig, makeCtx(), VesselFixture (+5 more)
 
 ### Community 62 - "ManeuverController Tests"
 Cohesion: 0.20
 Nodes (12): Config, NavalContext, RudderConfig, ThrusterConfig, makeCfg(), makeCtx(), makeRudderCfg(), makeThrusterCfg() (+4 more)
 
 ### Community 63 - "Wave Forces Impl"
-Cohesion: 0.15
-Nodes (13): BodyState, Config, Forces, NavalContext, WaveSpectrum, BodyState, Config, Forces (+5 more)
+Cohesion: 0.14
+Nodes (16): BodyState, Config, Forces, NavalContext, vector, WaveSpectrum, BodyState, Config (+8 more)
 
 ### Community 64 - "CouplingForceModel Tests"
 Cohesion: 0.27
@@ -729,7 +742,7 @@ Nodes (10): connectionPoints, current, coefficients, midshipDistance, name, rudd
 
 ### Community 70 - "Restoring Forces"
 Cohesion: 0.15
-Nodes (13): BodyState, Forces, NavalContext, RestoringConfig, Vector6, BodyState, Forces, NavalContext (+5 more)
+Nodes (13): BodyState, Forces, NavalContext, RestoringConfig, Vector6, applyStaticEquilibrium(), computeNaval(), RestoringForces() (+5 more)
 
 ### Community 71 - "Squat Forces"
 Cohesion: 0.18
@@ -789,7 +802,7 @@ Nodes (6): frontal, frontalHeight, lateral, lateralHeight, area, area
 
 ### Community 85 - "Community 85"
 Cohesion: 0.36
-Nodes (6): NavalContext, RudderConfig, NavalContext, RudderConfig, makeCfg(), makeCtx()
+Nodes (6): NavalContext, RudderConfig, makeCfg(), makeCtx(), NavalContext, RudderConfig
 
 ### Community 86 - "Community 86"
 Cohesion: 0.36
@@ -797,7 +810,7 @@ Nodes (6): NavalContext, ThrusterConfig, makeCfg(), makeCtx(), NavalContext, Thr
 
 ### Community 87 - "Community 87"
 Cohesion: 0.24
-Nodes (10): Config, NavalContext, Config, NavalContext, makeCtx(), makeCtxVel(), makeSingleThruster(), makeTableThruster() (+2 more)
+Nodes (10): Config, NavalContext, makeCtx(), makeCtxVel(), makeSingleThruster(), makeTableThruster(), Config, NavalContext (+2 more)
 
 ### Community 88 - "Community 88"
 Cohesion: 0.36
@@ -809,7 +822,7 @@ Nodes (5): Forces, Forces, makeForces(), requireForcesApproxEqual(), requireForc
 
 ### Community 90 - "Community 90"
 Cohesion: 0.27
-Nodes (11): array, Config, NavalContext, vector, array, Config, NavalContext, vector (+3 more)
+Nodes (11): array, Config, NavalContext, vector, makeCtx(), makeSingleRudder(), makeTable(), array (+3 more)
 
 ### Community 91 - "Community 91"
 Cohesion: 0.43
@@ -889,15 +902,15 @@ Nodes (3): namespace, ymir(), namespace
 
 ### Community 111 - "Community 111"
 Cohesion: 0.40
-Nodes (3): namespace, namespace, naval()
+Nodes (3): namespace, naval(), namespace
 
 ### Community 112 - "Community 112"
 Cohesion: 0.40
-Nodes (3): namespace, namespace, naval()
+Nodes (3): namespace, naval(), namespace
 
 ### Community 113 - "Community 113"
 Cohesion: 0.29
-Nodes (4): namespace, namespace, naval(), namespace
+Nodes (4): namespace, naval(), namespace, namespace
 
 ### Community 114 - "Community 114"
 Cohesion: 0.40
@@ -1048,8 +1061,8 @@ Cohesion: 0.07
 Nodes (26): Agent Management, CLI Command Reference, Common Flags, `compozy agents inspect <name>`, `compozy agents list`, `compozy archive`, `compozy exec [prompt]`, `compozy ext doctor` (+18 more)
 
 ### Community 175 - "Community 175"
-Cohesion: 0.09
-Nodes (21): addKfBtnStyle, addSeriesBtnStyle, cardHeaderStyle, cardStyle, EnvironmentConditionPanel(), fieldGroupStyle, helperStyle, inputStyle (+13 more)
+Cohesion: 0.07
+Nodes (27): addKfBtnStyle, addSeriesBtnStyle, cardHeaderStyle, cardStyle, EnvironmentConditionPanel(), fieldGroupStyle, helperStyle, inputStyle (+19 more)
 
 ### Community 176 - "Community 176"
 Cohesion: 0.07
@@ -1064,12 +1077,12 @@ Cohesion: 0.07
 Nodes (25): Architecture Decision Records, Build Order, CMake Dependency Graph, Component Overview, Core Interfaces, Development Sequencing, Documentation Files to Create, Doxygen Configuration (+17 more)
 
 ### Community 179 - "Community 179"
-Cohesion: 0.23
-Nodes (19): CouplingPort, DomainRegistry, Environment (World-level shared), GlobalClock, IDomain Interface, Multi-Physics Co-Simulation (World as Domain Orchestrator), NavalDomain, NavalEnvironment (deprecated type alias) (+11 more)
+Cohesion: 0.18
+Nodes (27): CouplingForceModel, CouplingPort, CouplingRegistry, DomainRegistry, Environment (World-level shared), GlobalClock, IDomain Interface, Jacobi Coupling (one-tick latency) (+19 more)
 
 ### Community 180 - "Community 180"
 Cohesion: 0.17
-Nodes (26): Environment, json, string, vector, Environment, json, string, vector (+18 more)
+Nodes (26): Environment, json, string, vector, pair, Spectrum, advanceStep(), composeVectorial() (+18 more)
 
 ### Community 181 - "Community 181"
 Cohesion: 0.08
@@ -1172,8 +1185,8 @@ Cohesion: 0.13
 Nodes (14): ADR-XXX: [Title], Alternative 1: [Name], Alternative 2: [Name], Alternatives Considered, Consequences, Context, Date, Decision (+6 more)
 
 ### Community 206 - "Community 206"
-Cohesion: 0.24
-Nodes (9): EnvironmentConditionDTO, EnvironmentProfileDTO, WaveConditionDTO, InitialCondition, ScenarioDTO, DEFAULT_CURRENT_KEYFRAME, DEFAULT_WAVE_KEYFRAME, DEFAULT_WIND_KEYFRAME (+1 more)
+Cohesion: 0.11
+Nodes (18): MyScenariosPage(), navigate, scenarios, ScenarioCard(), ScenarioCardProps, useScenarios(), CreateAreaDTO, OriginDTO (+10 more)
 
 ### Community 207 - "Community 207"
 Cohesion: 0.12
@@ -1248,8 +1261,8 @@ Cohesion: 0.14
 Nodes (12): Common Failures, Overview, Pre-Commit and Pre-PR Gate, Rationalization Prevention, Red Flags, Scope of Verification, The Gate Function, The Iron Law (+4 more)
 
 ### Community 225 - "Community 225"
-Cohesion: 0.13
-Nodes (14): ADR-XXX: [Title], Alternative 1: [Name], Alternative 2: [Name], Alternatives Considered, Consequences, Context, Date, Decision (+6 more)
+Cohesion: 0.07
+Nodes (28): ADR-XXX: [Title], Alternative 1: [Name], Alternative 2: [Name], Alternatives Considered, Consequences, Context, Date, Decision (+20 more)
 
 ### Community 226 - "Community 226"
 Cohesion: 0.14
@@ -1288,8 +1301,8 @@ Cohesion: 0.15
 Nodes (11): Anti-Pattern: End-Of-Flow Bureaucracy, Anti-Pattern: Technical Drift On Technical-Sounding Features, Anti-Pattern: "This Feature Is Too Simple For Full Brainstorming", Asking Questions, Checklist, Create PRD, Error Handling, Key Principles (+3 more)
 
 ### Community 235 - "Community 235"
-Cohesion: 0.13
-Nodes (14): ADR-XXX: [Title], Alternative 1: [Name], Alternative 2: [Name], Alternatives Considered, Consequences, Context, Date, Decision (+6 more)
+Cohesion: 0.07
+Nodes (28): ADR-XXX: [Title], Alternative 1: [Name], Alternative 2: [Name], Alternatives Considered, Consequences, Context, Date, Decision (+20 more)
 
 ### Community 236 - "Community 236"
 Cohesion: 0.15
@@ -1344,8 +1357,8 @@ Cohesion: 0.17
 Nodes (10): Deliverables, Dependent Files, Implementation Details, Overview, Related ADRs, Relevant Files, Subtasks, Success Criteria (+2 more)
 
 ### Community 249 - "Community 249"
-Cohesion: 0.19
-Nodes (19): BodyPosition POD Struct, CouplingForceModel, CouplingRegistry, IDomain Abstract Interface, Jacobi Coupling (one-tick latency), NavalEnvironment (deprecated alias for Environment), NavalSimulation (Deprecated), WorldSnapshot (+11 more)
+Cohesion: 0.27
+Nodes (11): BodyPosition POD Struct, IDomain Abstract Interface, NavalSimulation (Deprecated), Phase-02 World Workflow Memory, Task 01: ymir::Environment Class, Task 02: IDomain Interface + BodyPosition, Task 03: CouplingRegistry, Task 04: CouplingForceModel (+3 more)
 
 ### Community 250 - "Community 250"
 Cohesion: 0.17
@@ -1496,8 +1509,8 @@ Cohesion: 0.18
 Nodes (9): Apps (stubs), C API Planejada, Contextos e Responsabilidades, Fluxo de Dados (runtime), Integrador ODE, Modelo de Bounded Contexts, Módulos de Força (ymir_physics), Regras Arquiteturais (AGENTS.md) (+1 more)
 
 ### Community 287 - "Community 287"
-Cohesion: 0.23
-Nodes (9): CouplingRegistry, Environment, string, CouplingRegistry, Environment, string, EnvCaptureDomain, capturedCurrentSpeed (+1 more)
+Cohesion: 0.17
+Nodes (12): BodyState, CouplingRegistry, Environment, string, IDomain, BodyState, CouplingRegistry, Environment (+4 more)
 
 ### Community 288 - "Community 288"
 Cohesion: 0.18
@@ -1517,7 +1530,7 @@ Nodes (9): Contexto, Critérios de Aceitação, Feature Spec: Vessel Data — Ba
 
 ### Community 292 - "Community 292"
 Cohesion: 0.20
-Nodes (7): namespace, namespace, namespace, IDomain, ymir(), namespace, ymir()
+Nodes (7): namespace, namespace, IDomain, ymir(), namespace, namespace, ymir()
 
 ### Community 293 - "Community 293"
 Cohesion: 0.20
@@ -1532,8 +1545,8 @@ Cohesion: 0.20
 Nodes (8): API (Fastify), C++ (atual), Frontend (React), Gate checks (C++), Integrador RK45 (substitui TestIntegrator.cpp), Testes Planejados (pós-migração), WASM smoke test (browser), Ymir — Testing
 
 ### Community 296 - "Community 296"
-Cohesion: 0.24
-Nodes (8): IDomain, unique_ptr, WorldSnapshot, unique_ptr, WorldSnapshot, addDomain(), snapshot(), step()
+Cohesion: 0.28
+Nodes (7): unique_ptr, WorldSnapshot, addDomain(), snapshot(), step(), unique_ptr, WorldSnapshot
 
 ### Community 297 - "Community 297"
 Cohesion: 0.20
@@ -1600,8 +1613,8 @@ Cohesion: 0.25
 Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_04.md
 
 ### Community 313 - "Community 313"
-Cohesion: 0.13
-Nodes (13): Errors / Corrections, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_05.md, Errors / Corrections, Important Decisions (+5 more)
+Cohesion: 0.10
+Nodes (19): Errors / Corrections, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_05.md, Errors / Corrections, Important Decisions (+11 more)
 
 ### Community 314 - "Community 314"
 Cohesion: 0.25
@@ -1616,8 +1629,8 @@ Cohesion: 0.25
 Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_08.md
 
 ### Community 317 - "Community 317"
-Cohesion: 0.13
-Nodes (13): Current State, Handoffs, Open Risks, Shared Decisions, Shared Learnings, Workflow Memory, Current State, Handoffs (+5 more)
+Cohesion: 0.10
+Nodes (19): Current State, Handoffs, Open Risks, Shared Decisions, Shared Learnings, Workflow Memory, Current State, Handoffs (+11 more)
 
 ### Community 318 - "Community 318"
 Cohesion: 0.25
@@ -1724,20 +1737,20 @@ Cohesion: 0.29
 Nodes (6): Current State, Handoffs, Open Risks, Shared Decisions, Shared Learnings, Workflow Memory
 
 ### Community 344 - "Community 344"
-Cohesion: 0.15
-Nodes (11): Files / Surfaces, Important Decisions, Objective Snapshot, Task Memory: task_04.md, Verification Evidence, Files / Surfaces, Important Decisions, Objective Snapshot (+3 more)
+Cohesion: 0.12
+Nodes (16): Files / Surfaces, Important Decisions, Objective Snapshot, Task Memory: task_04.md, Verification Evidence, Files / Surfaces, Important Decisions, Objective Snapshot (+8 more)
 
 ### Community 345 - "Community 345"
-Cohesion: 0.22
-Nodes (9): update(), NavalContext, Rudder, Thruster, vector, NavalContext, Rudder, Thruster (+1 more)
+Cohesion: 0.12
+Nodes (14): AREA_PARTS, CAMERAS, SceneErrorBoundary, VesselModel(), AMP_WEIGHTS, deriveWaves(), DIR_SPREAD, GerstnerWave (+6 more)
 
 ### Community 346 - "Community 346"
 Cohesion: 0.29
 Nodes (6): Current State, Handoffs, Open Risks, Shared Decisions, Shared Learnings, Workflow Memory
 
 ### Community 347 - "Community 347"
-Cohesion: 0.15
-Nodes (11): Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Task Memory: task_09.md, Files / Surfaces, Important Decisions, Learnings (+3 more)
+Cohesion: 0.12
+Nodes (16): Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Task Memory: task_09.md, Files / Surfaces, Important Decisions, Learnings (+8 more)
 
 ### Community 348 - "Community 348"
 Cohesion: 0.29
@@ -1772,12 +1785,12 @@ Cohesion: 0.53
 Nodes (6): frontal, frontalHeight, lateral, lateralHeight, area, area
 
 ### Community 356 - "Community 356"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_01.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_01.md, Errors / Corrections (+6 more)
 
 ### Community 357 - "Community 357"
-Cohesion: 0.40
-Nodes (6): size_t, WorldSnapshot, bodyCount(), snapshotContainsBody(), size_t, WorldSnapshot
+Cohesion: 0.10
+Nodes (17): inputStyle, ScenarioInfoPanel(), ScenarioInfoPanelProps, mockArea, Card, CardProps, CardRoot(), CardSectionProps (+9 more)
 
 ### Community 358 - "Community 358"
 Cohesion: 0.29
@@ -1824,171 +1837,243 @@ Cohesion: 0.50
 Nodes (4): Compozy Artifact Directory Structure, Compozy CLI, Extensions, Compozy Reusable Agents
 
 ### Community 370 - "Community 370"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_02.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_02.md, Errors / Corrections (+6 more)
 
 ### Community 371 - "Community 371"
 Cohesion: 0.53
 Nodes (4): string, string, emptyJson(), singleCurrentJson()
 
 ### Community 374 - "Community 374"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_03.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_03.md, Errors / Corrections (+6 more)
 
 ### Community 375 - "Community 375"
 Cohesion: 0.40
 Nodes (3): namespace, namespace, ymir()
 
 ### Community 390 - "Community 390"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_05.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_05.md, Errors / Corrections (+6 more)
 
 ### Community 391 - "Community 391"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_06.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_06.md, Errors / Corrections (+6 more)
 
 ### Community 392 - "Community 392"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_07.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_07.md, Errors / Corrections (+6 more)
 
 ### Community 393 - "Community 393"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_08.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_08.md, Errors / Corrections (+6 more)
 
 ### Community 394 - "Community 394"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_09.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_09.md, Errors / Corrections (+6 more)
 
 ### Community 395 - "Community 395"
-Cohesion: 0.29
-Nodes (8): NavalForceModel, RigidBody6DOF, unique_ptr, NavalForceModel, RigidBody6DOF, unique_ptr, addBody(), addNavalForceModel()
+Cohesion: 0.12
+Nodes (16): 1. Design tokens, 2. Component primitives to build, 3. Screen-by-screen plan, 4. Phasing, 5. Dynamics (physics only), 6. Test plan, DEFERRED (leave unimplemented per instruction), Key file map (target app, absolute paths) (+8 more)
 
 ### Community 396 - "Community 396"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_01.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_01.md, Errors / Corrections (+6 more)
 
 ### Community 397 - "Community 397"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_02.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_02.md, Errors / Corrections (+6 more)
 
 ### Community 398 - "Community 398"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_03.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_03.md, Errors / Corrections (+6 more)
 
 ### Community 399 - "Community 399"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_04.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_04.md, Errors / Corrections (+6 more)
 
 ### Community 400 - "Community 400"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_06.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_06.md, Errors / Corrections (+6 more)
 
 ### Community 401 - "Community 401"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_07.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_07.md, Errors / Corrections (+6 more)
 
 ### Community 402 - "Community 402"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_08.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_08.md, Errors / Corrections (+6 more)
 
 ### Community 403 - "Community 403"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_01.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_01.md, Errors / Corrections (+6 more)
 
 ### Community 404 - "Community 404"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_02.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_02.md, Errors / Corrections (+6 more)
 
 ### Community 405 - "Community 405"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_03.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_03.md, Errors / Corrections (+6 more)
 
 ### Community 406 - "Community 406"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_05.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_05.md, Errors / Corrections (+6 more)
 
 ### Community 407 - "Community 407"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_06.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_06.md, Errors / Corrections (+6 more)
 
 ### Community 408 - "Community 408"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_07.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_07.md, Errors / Corrections (+6 more)
 
 ### Community 409 - "Community 409"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_02.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_02.md, Errors / Corrections (+6 more)
 
 ### Community 410 - "Community 410"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_03.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_03.md, Errors / Corrections (+6 more)
 
 ### Community 411 - "Community 411"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_04.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_04.md, Errors / Corrections (+6 more)
 
 ### Community 412 - "Community 412"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_05.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_05.md, Errors / Corrections (+6 more)
 
 ### Community 413 - "Community 413"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_06.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_06.md, Errors / Corrections (+6 more)
 
 ### Community 414 - "Community 414"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_07.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_07.md, Errors / Corrections (+6 more)
 
 ### Community 415 - "Community 415"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_08.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_08.md, Errors / Corrections (+6 more)
 
 ### Community 416 - "Community 416"
-Cohesion: 0.25
-Nodes (7): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_09.md
+Cohesion: 0.13
+Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_09.md, Errors / Corrections (+6 more)
 
 ### Community 417 - "Community 417"
-Cohesion: 0.29
-Nodes (6): Current State, Handoffs, Open Risks, Shared Decisions, Shared Learnings, Workflow Memory
+Cohesion: 0.15
+Nodes (12): Current State, Handoffs, Open Risks, Shared Decisions, Shared Learnings, Workflow Memory, Current State, Handoffs (+4 more)
 
 ### Community 418 - "Community 418"
-Cohesion: 0.29
-Nodes (7): DynamicVessel, RudderForces, ThrustForces, DynamicVessel, RudderForces, ThrustForces, registerVessel()
+Cohesion: 0.16
+Nodes (12): AlertDialog(), AlertDialogProps, badgeStyle, bodyStyle, buttonBase, cancelButtonStyle, cardStyle, footerStyle (+4 more)
 
 ### Community 419 - "Community 419"
-Cohesion: 0.29
-Nodes (6): Current State, Handoffs, Open Risks, Shared Decisions, Shared Learnings, Workflow Memory
+Cohesion: 0.15
+Nodes (12): Current State, Handoffs, Open Risks, Shared Decisions, Shared Learnings, Workflow Memory, Current State, Handoffs (+4 more)
 
 ### Community 420 - "Community 420"
-Cohesion: 0.29
-Nodes (6): Files / Surfaces, Important Decisions, Objective Snapshot, Ready for Next Run, Task Memory: task_04.md, Verification Evidence
+Cohesion: 0.15
+Nodes (12): Files / Surfaces, Important Decisions, Objective Snapshot, Ready for Next Run, Task Memory: task_04.md, Verification Evidence, Files / Surfaces, Important Decisions (+4 more)
 
 ### Community 421 - "Community 421"
-Cohesion: 0.29
-Nodes (6): Current State, Handoffs, Open Risks, Shared Decisions, Shared Learnings, Workflow Memory
+Cohesion: 0.15
+Nodes (12): Current State, Handoffs, Open Risks, Shared Decisions, Shared Learnings, Workflow Memory, Current State, Handoffs (+4 more)
 
 ### Community 422 - "Community 422"
 Cohesion: 0.53
 Nodes (4): CouplingRegistry, Environment, CouplingRegistry, Environment
 
 ### Community 423 - "Community 423"
-Cohesion: 0.40
-Nodes (5): BodyPosition, vector, BodyPosition, vector, allBodyPositions()
+Cohesion: 0.15
+Nodes (12): (a) Home / "Meus cenários" — scenario list, (b) Running simulation UI, Components, Instructor App — Home (Meus cenários) + Running Simulation UI, Key Portuguese strings (`config/intl/translations-pt-BR.json`), Layout, Layout & flow, Notable stubs / non-wired UI (+4 more)
 
 ### Community 424 - "Community 424"
-Cohesion: 0.40
-Nodes (5): CouplingRegistry, Environment, CouplingRegistry, Environment, onAddedToWorld()
+Cohesion: 0.15
+Nodes (12): Components inventory & states, Condicoes ambientais do cenario e da simulacao, Design tokens (from get_variable_defs + observed), Exact text & labels (verbatim from pixels), Interactions / flows, Layout regions (full screen = 1920×972), Notes — DEFER (not yet cleanly implementable), Purpose / when shown (+4 more)
 
 ### Community 425 - "Community 425"
 Cohesion: 0.40
 Nodes (4): BodyPosition, vector, BodyPosition, vector
 
 ### Community 426 - "Community 426"
+Cohesion: 0.27
+Nodes (6): mockArea, VesselPicker(), VesselPickerProps, MOCK_VESSEL, useVessels(), VesselDTO
+
+### Community 427 - "Community 427"
+Cohesion: 0.09
+Nodes (24): Area3DView(), CAMERAS, CameraSelector(), ViewToggle(), CameraId, useViewStore, ViewMode, ViewStore (+16 more)
+
+### Community 428 - "Community 428"
+Cohesion: 0.20
+Nodes (9): map, RudderForces, ThrustForces, WaveSpectrum, World, EMSCRIPTEN_BINDINGS(), makeWaveSpectrum(), WaveForces (+1 more)
+
+### Community 430 - "Community 430"
+Cohesion: 0.18
+Nodes (10): 1. Routes (`app/Root/index.tsx`, react-router-dom `<Routes>`), 2. End-to-end flow, 3. Step orders (local, not routed), 4. Form state strategy, 5. Validation, 6. Panel system, 7. Component inventory (name → responsibility → key props), 8. Portuguese UI strings (+2 more)
+
+### Community 431 - "Community 431"
+Cohesion: 0.22
+Nodes (8): hintsRowStyle, inputStyle, labelStyle, readoutStyle, rootStyle, Slider(), SliderProps, topRowStyle
+
+### Community 432 - "Community 432"
+Cohesion: 0.25
+Nodes (6): Button(), ButtonProps, ButtonSize, ButtonVariant, sizeStyle, VariantStyle
+
+### Community 433 - "Community 433"
+Cohesion: 0.29
+Nodes (8): NavalForceModel, RigidBody6DOF, unique_ptr, addBody(), addNavalForceModel(), NavalForceModel, RigidBody6DOF, unique_ptr
+
+### Community 434 - "Community 434"
+Cohesion: 0.31
+Nodes (7): Config, RestoringConfig, vlccCurrentConfig(), vlccDampingConfig(), vlccRestoringConfig(), vlccRudderConfig(), vlccThrustConfig()
+
+### Community 435 - "Community 435"
+Cohesion: 0.22
+Nodes (8): Architecture overview, Guidance for building matching primitives (Ymir web), i18n setup (`config/intl/`), Instructor Design-System Inventory, Provider / app wiring (`App.tsx`), Reusable components (name → purpose → key props/variants), Styling approach, Theme tokens (`TechnomarTheme`)
+
+### Community 436 - "Community 436"
+Cohesion: 0.22
+Nodes (8): Components, Design tokens (from get_variable_defs + observed), Embarcacoes, ancoras e linhas, Exact text & labels (verbatim Portuguese/English as shown), Interactions / flows, Layout regions, Notes (DEFER / not-yet-implementable), Purpose / when shown
+
+### Community 437 - "Community 437"
+Cohesion: 0.32
+Nodes (8): InertialConfig, Matrix6x6, RigidBody6DOF, unique_ptr, makeBodyAt(), vlccAddedMass(), vlccInertialConfig(), vlccMassMatrix()
+
+### Community 438 - "Community 438"
+Cohesion: 0.25
+Nodes (7): Components & visible states, Design tokens (from get_variable_defs + observed), Exact text & labels (verbatim), Interactions / flows, Layout do instrutor (app shell / topbar / panels), Layout regions (1920 × 972 reference frame), Notes (DEFER / not yet implementable)
+
+### Community 439 - "Community 439"
+Cohesion: 0.25
+Nodes (7): Components, Design tokens (from get_variable_defs + observed), Exact text & labels (verbatim), Informacoes do cenario e da simulacao, Interactions / flows, Layout regions (frame is 1920×972), Notes
+
+### Community 440 - "Community 440"
+Cohesion: 0.29
+Nodes (6): (1) Mapping table — MATLAB module → Ymir equivalent, (2) Physics discrepancies / missing force terms, (3) File:line pointers (Ymir) per force term, Bottom line, Progress / status, Ymir vs MATLAB Dynamics — Naval Physics Comparison
+
+### Community 441 - "Community 441"
+Cohesion: 0.29
+Nodes (7): DynamicVessel, RudderForces, ThrustForces, registerVessel(), DynamicVessel, RudderForces, ThrustForces
+
+### Community 442 - "Community 442"
+Cohesion: 0.40
+Nodes (5): array, vector, foilTable(), array, vector
+
+### Community 443 - "Community 443"
 Cohesion: 0.67
-Nodes (4): BodyEntry (NavalSimulation per-body struct), NavalSimulation, ADR-001: DynamicVessel as Integration Hub (Phase 1), ADR-004: NavalSimulation Refactor for N Bodies
+Nodes (4): BerthManeuverSystem(), buildNavMc(), Config, Config
+
+### Community 444 - "Community 444"
+Cohesion: 0.40
+Nodes (5): BodyPosition, vector, allBodyPositions(), BodyPosition, vector
+
+### Community 445 - "Community 445"
+Cohesion: 0.40
+Nodes (5): CouplingRegistry, Environment, onAddedToWorld(), CouplingRegistry, Environment
 
 ## Knowledge Gaps
-- **2695 isolated node(s):** `outputs`, `inputs`, `cache`, `dependsOn`, `outputs` (+2690 more)
+- **3103 isolated node(s):** `outputs`, `inputs`, `cache`, `dependsOn`, `outputs` (+3098 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **17 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -1996,16 +2081,16 @@ Nodes (4): BodyEntry (NavalSimulation per-body struct), NavalSimulation, ADR-001
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `Simulation` connect `Physics Bodies & Persistence` to `Physics Library Headers`, `Community 292`?**
-  _High betweenness centrality (0.003) - this node is a cross-community bridge._
+  _High betweenness centrality (0.001) - this node is a cross-community bridge._
+- **Why does `IDomain` connect `Community 287` to `Community 296`, `Community 292`, `World Orchestrator Tests`, `IDomain Interface Tests`?**
+  _High betweenness centrality (0.001) - this node is a cross-community bridge._
 - **Why does `IDomain` connect `Community 292` to `Community 296`, `World Orchestrator Tests`, `IDomain Interface Tests`, `Community 287`?**
-  _High betweenness centrality (0.002) - this node is a cross-community bridge._
-- **Why does `StubDomain` connect `World Orchestrator Tests` to `Community 296`, `Community 292`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
 - **What connects `outputs`, `inputs`, `cache` to the rest of the system?**
-  _2717 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _3125 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Vessel Domain Concepts` be split into smaller, more focused modules?**
-  _Cohesion score 0.14623655913978495 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.14112903225806453 - nodes in this community are weakly interconnected._
 - **Should `API Database Layer` be split into smaller, more focused modules?**
   _Cohesion score 0.07372549019607844 - nodes in this community are weakly interconnected._
 - **Should `WASM Bindings` be split into smaller, more focused modules?**
-  _Cohesion score 0.07315233785822021 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected._
