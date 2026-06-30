@@ -87,6 +87,16 @@ Forces CurrentForces::computeObokata(const BodyState& state, const NavalContext&
     fc.f[0] = Fx;
     fc.f[1] = Fy;
     fc.f[5] = Mz;
+
+    // Roll/pitch moments: the horizontal current force acts at a vertical arm
+    // (distance from the hydrodynamic origin to the area centroid). Matches
+    // MATLAB VesselFastTime.currentObokata lines 652-658:
+    //   roll  = -Fy * (frontalHeight - originZ) * cos(phi) * cos(theta)
+    //   pitch =  Fx * (lateralHeight - originZ) * cos(phi) * cos(theta)
+    const double cphi_ctheta = std::cos(state.roll()) * std::cos(state.pitch());
+    const double originZ     = cfg_.wavesOriginPosition[2];
+    fc.f[3] = -Fy * (cfg_.frontalHeight - originZ) * cphi_ctheta;
+    fc.f[4] =  Fx * (cfg_.lateralHeight - originZ) * cphi_ctheta;
     return fc;
 }
 

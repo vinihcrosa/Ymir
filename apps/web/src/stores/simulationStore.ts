@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import type { SimulationStateDTO } from '@ymir/types'
+import type { SimulationStateDTO, SimulationEngine } from '@ymir/types'
 import { useVesselPanelStore } from './vesselPanelStore'
 import { useEnvironmentStore } from './environmentStore'
 
@@ -18,6 +18,7 @@ interface SimulationStore {
   status: Status
   error: string | null
   state: SimulationStateDTO | null
+  engine: SimulationEngine | null
   worker: Worker | null
   scenarioVessels: ScenarioDraftVessel[]
   start: (dt?: number) => void
@@ -30,6 +31,7 @@ export const useSimulationStore = create<SimulationStore>((set, get) => ({
   status: 'idle',
   error: null,
   state: null,
+  engine: null,
   worker: null,
   scenarioVessels: [],
 
@@ -44,10 +46,10 @@ export const useSimulationStore = create<SimulationStore>((set, get) => ({
       )
 
       worker.onmessage = (e: MessageEvent) => {
-        const msg = e.data as { type: string; payload?: SimulationStateDTO; message?: string }
+        const msg = e.data as { type: string; payload?: SimulationStateDTO; message?: string; engine?: SimulationEngine }
         switch (msg.type) {
           case 'ready': {
-            set({ status: 'ready' })
+            set({ status: 'ready', engine: msg.engine ?? null })
             const { scenarioVessels } = get()
             if (scenarioVessels.length > 0) {
               get().worker!.postMessage({ type: 'loadScenario', vessels: scenarioVessels })
@@ -111,7 +113,7 @@ export const useSimulationStore = create<SimulationStore>((set, get) => ({
     if (worker) {
       worker.terminate()
     }
-    set({ status: 'idle', error: null, state: null, worker: null, scenarioVessels: [] })
+    set({ status: 'idle', error: null, state: null, engine: null, worker: null, scenarioVessels: [] })
   },
 
   loadScenario(vessels: ScenarioDraftVessel[]) {

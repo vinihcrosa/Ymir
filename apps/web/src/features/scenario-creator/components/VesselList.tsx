@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { useScenarioStore } from '../store'
 import { useVessels } from '../hooks/use-vessels'
+import { Button } from '../../../ui/Button'
+import { tokens } from '../../../theme/tokens'
 
 export function VesselList() {
   const { area, vessels, addVessel, removeVessel, updateVesselHeading } = useScenarioStore()
@@ -9,24 +11,18 @@ export function VesselList() {
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-        <strong>Embarcações ({vessels.length})</strong>
-        <button
-          type="button"
-          disabled={!area}
-          onClick={() => setShowPicker(p => !p)}
-        >
-          + Adicionar
-        </button>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: tokens.space.sm }}>
+        <strong style={{ fontSize: tokens.fontSize.body }}>Embarcações ({vessels.length})</strong>
+        <Button variant="ghost" size="sm" disabled={!area} onClick={() => setShowPicker(p => !p)}>+ Adicionar</Button>
       </div>
       {showPicker && (
-        <div style={{ background: '#f5f5f5', padding: '0.5rem', marginBottom: '0.5rem', borderRadius: '4px' }}>
+        <div style={{ background: tokens.color.surfaceAlt, padding: tokens.space.sm, marginBottom: tokens.space.sm, borderRadius: tokens.radius.md, border: `1px solid ${tokens.color.border}` }}>
           {loading ? <span>Carregando...</span> : available.map(v => (
             <button
               key={v.id}
               type="button"
               onClick={() => { addVessel({ vesselId: v.id, name: v.name }); setShowPicker(false) }}
-              style={{ display: 'block', width: '100%', textAlign: 'left', padding: '0.25rem', marginBottom: '0.25rem' }}
+              style={{ display: 'block', width: '100%', textAlign: 'left', padding: tokens.space.xs, marginBottom: tokens.space.xs, background: 'transparent', border: 'none', borderRadius: tokens.radius.sm, cursor: 'pointer', fontSize: tokens.fontSize.label, color: tokens.color.textPrimary }}
             >
               {v.name}
             </button>
@@ -34,24 +30,24 @@ export function VesselList() {
         </div>
       )}
       {vessels.map(v => (
-        <div key={v.instanceId} style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', marginBottom: '0.5rem', fontSize: '0.875rem' }}>
-          <span style={{ flex: 1 }}>{v.name}</span>
-          <span style={{ color: '#666' }}>{v.x.toFixed(1)}, {v.y.toFixed(1)}m</span>
+        <div key={v.instanceId} style={{ display: 'flex', gap: tokens.space.sm, alignItems: 'center', marginBottom: tokens.space.sm, fontSize: tokens.fontSize.label }}>
+          <span style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{v.name}</span>
+          <span className="mono" style={{ color: tokens.color.textSubtle }}>{v.x.toFixed(1)}, {v.y.toFixed(1)}m</span>
           <input
             type="number"
             min={0}
             max={360}
             value={v.headingDeg.toFixed(0)}
             onChange={e => updateVesselHeading(v.instanceId, Number(e.target.value))}
-            style={{ width: '60px', padding: '0.25rem' }}
+            style={{ width: 56, padding: tokens.space.xs, border: `1px solid ${tokens.color.border}`, borderRadius: tokens.radius.sm, fontFamily: tokens.font.mono }}
             title="Rumo (°)"
             aria-label="Rumo"
           />
-          <span>°</span>
-          <button type="button" onClick={() => removeVessel(v.instanceId)} title="Remover" aria-label="Remover embarcação">×</button>
+          <span style={{ color: tokens.color.textSubtle }}>°</span>
+          <button type="button" onClick={() => removeVessel(v.instanceId)} title="Remover" aria-label="Remover embarcação" style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: tokens.color.textSubtle, fontSize: tokens.fontSize.title }}>×</button>
         </div>
       ))}
-      {vessels.length === 0 && <p style={{ color: '#888', fontSize: '0.875rem' }}>Nenhuma embarcação adicionada.</p>}
+      {vessels.length === 0 && <p style={{ color: tokens.color.textHcSubtle, fontSize: tokens.fontSize.label }}>Nenhuma embarcação adicionada.</p>}
     </div>
   )
 }

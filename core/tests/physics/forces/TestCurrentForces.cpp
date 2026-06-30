@@ -75,6 +75,34 @@ TEST_CASE("CurrentForces OBOKATA current from ahead produces surge force")
     REQUIRE(forces.f[0] != Approx(0.0).margin(1e-4));
 }
 
+// Roll/pitch moments from the current force acting at a vertical arm
+// (MATLAB currentObokata 652-658). With originZ=0, arm = frontal/lateralHeight.
+TEST_CASE("CurrentForces OBOKATA current produces roll/pitch arm moments")
+{
+    auto cfg = makeObokataCfg();
+    cfg.frontalHeight = 5.0;
+    cfg.lateralHeight = 7.0;
+
+    // Current from ahead → surge force Fx → pitch moment f[4] = Fx * lateralHeight.
+    {
+        CurrentForces model(cfg);
+        NavalContext ctx = makeCtx(2.0, 0.0);
+        model.bindContext(&ctx);
+        auto f = model.compute(ctx.state);
+        REQUIRE(f.f[4] == Approx(f.f[0] * cfg.lateralHeight).epsilon(1e-9));
+        REQUIRE(f.f[3] == Approx(-f.f[1] * cfg.frontalHeight).epsilon(1e-9));
+    }
+    // Current from the side → sway force Fy → roll moment f[3] = -Fy * frontalHeight.
+    {
+        CurrentForces model(cfg);
+        NavalContext ctx = makeCtx(0.0, 2.0);
+        model.bindContext(&ctx);
+        auto f = model.compute(ctx.state);
+        REQUIRE(f.f[1] != Approx(0.0).margin(1e-4));
+        REQUIRE(f.f[3] == Approx(-f.f[1] * cfg.frontalHeight).epsilon(1e-9));
+    }
+}
+
 TEST_CASE("CurrentForces REGULAR zero at rest")
 {
     CurrentForces model(makeRegularCfg());

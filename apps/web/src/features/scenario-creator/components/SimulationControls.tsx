@@ -1,64 +1,37 @@
 import { useSimulationStore } from '../../../stores/simulationStore'
-import { useScenarioStore } from '../store'
+import { tokens } from '../../../theme/tokens'
 
-const API_BASE = import.meta.env.VITE_API_URL ?? 'http://localhost:3000'
-
+/**
+ * Compact simulation status strip: lifecycle text + which physics engine is
+ * actually loaded (real WASM vs JS mock fallback). The Build/Play/Stop actions
+ * live in the floating {@link SimulationControl} pill in the app shell.
+ */
 export function SimulationControls() {
-  const { status, state, start, stop, reset, loadScenario } = useSimulationStore()
-  const { areaId, vessels, toCreateScenarioDTO } = useScenarioStore()
-
-  const canStart = areaId !== null && vessels.length > 0 && status !== 'running' && status !== 'loading'
-  const isRunning = status === 'running'
-
-  async function handleStart() {
-    const dto = toCreateScenarioDTO()
-    try {
-      const res = await fetch(`${API_BASE}/scenarios`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(dto),
-      })
-      if (!res.ok) {
-        console.error('Failed to save scenario:', res.status)
-      }
-    } catch (err) {
-      console.error('Network error saving scenario:', err)
-    }
-    loadScenario(vessels)
-    start()
-  }
+  const { status, state, engine } = useSimulationStore()
 
   return (
-    <div style={{ borderTop: '1px solid #ddd', paddingTop: '1rem' }}>
-      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
-        {!isRunning ? (
-          <button
-            type="button"
-            onClick={handleStart}
-            disabled={!canStart}
-            style={{ flex: 1, padding: '0.75rem', background: canStart ? '#1a73e8' : '#ccc', color: 'white', border: 'none', borderRadius: '4px', cursor: canStart ? 'pointer' : 'default' }}
-          >
-            Iniciar Simulação
-          </button>
-        ) : (
-          <button
-            type="button"
-            onClick={stop}
-            style={{ flex: 1, padding: '0.75rem', background: '#dc2626', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
-          >
-            Parar Simulação
-          </button>
-        )}
-        <button type="button" onClick={reset} style={{ padding: '0.75rem', border: '1px solid #ccc', borderRadius: '4px', cursor: 'pointer' }} title="Resetar">↺</button>
-      </div>
-      <div style={{ fontSize: '0.875rem', color: '#666' }}>
+    <div style={{ borderTop: `1px solid ${tokens.color.border}`, paddingTop: tokens.space.md }}>
+      <div style={{ fontSize: tokens.fontSize.label, color: tokens.color.textSubtle }}>
         {status === 'idle' && 'Aguardando configuração'}
         {status === 'loading' && '⌛ Iniciando...'}
         {status === 'ready' && '✓ Pronto'}
         {status === 'running' && state && `▶ Rodando — t = ${state.t.toFixed(1)}s`}
         {status === 'running' && !state && '▶ Rodando'}
-        {status === 'error' && <span style={{ color: 'red' }}>⚠ Erro na simulação</span>}
+        {status === 'error' && <span style={{ color: tokens.color.danger }}>⚠ Erro na simulação</span>}
       </div>
+      {engine === 'mock' && (status === 'ready' || status === 'running') && (
+        <div
+          role="alert"
+          style={{ marginTop: tokens.space.sm, fontSize: tokens.fontSize.sm, color: tokens.color.warningFg, background: tokens.color.warningBg, border: `1px solid ${tokens.color.warningFg}33`, borderRadius: tokens.radius.sm, padding: '0.4rem 0.5rem' }}
+        >
+          ⚠ Física simulada (mock) — o módulo WASM não foi compilado. Rode <code>pnpm build:wasm</code> para a dinâmica real.
+        </div>
+      )}
+      {engine === 'wasm' && (status === 'ready' || status === 'running') && (
+        <div style={{ marginTop: tokens.space.sm, fontSize: tokens.fontSize.sm, color: tokens.color.success }}>
+          ● Física real (WASM)
+        </div>
+      )}
     </div>
   )
 }
