@@ -1,4 +1,4 @@
-import { Suspense, useMemo, useRef, useEffect } from 'react'
+import { Suspense, useMemo, useEffect } from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
 import { useGLTF, Clone, FlyControls } from '@react-three/drei'
 import * as THREE from 'three'
@@ -26,21 +26,14 @@ const CAMERAS: Record<Exclude<CameraId, 'Free'>, { x: number; y: number; z: numb
 /** The Baía meshes are Z-up; rotate to Y-up and recentre horizontally on the sim
  *  origin so vessels (near 0,0) sit on the bay. */
 function AreaScene() {
-  const group = useRef<THREE.Group>(null)
   const parts = AREA_PARTS.map((u) => useGLTF(u))
 
-  useEffect(() => {
-    const g = group.current
-    if (!g) return
-    // Recentre on the horizontal bounding-box centre (keep vertical as-is).
-    const box = new THREE.Box3().setFromObject(g)
-    const c = box.getCenter(new THREE.Vector3())
-    g.position.x -= c.x
-    g.position.z -= c.z
-  }, [])
-
+  // The meshes are modelled about the area's reference origin (= sim 0,0) with Z
+  // up and the water surface at Z=0; the -90° X rotation brings that to Y-up with
+  // the waterline at Y=0. No bbox recentre — a stray vertex in ilhas.glb makes the
+  // combined box bogus, and the native origin already matches the sim frame.
   return (
-    <group ref={group} rotation={[AREA_ROT_X, 0, 0]}>
+    <group rotation={[AREA_ROT_X, 0, 0]}>
       {parts.map((p, i) => (
         <primitive key={i} object={p.scene} />
       ))}
@@ -131,10 +124,11 @@ export function Area3DView() {
           <VesselModel key={p.instanceId} x={p.x} y={p.y} headingDeg={p.headingDeg} />
         ))}
       </Suspense>
-      {/* Water plane at sea level. */}
+      {/* Sea at the waterline (Y=0). Large enough to read as open water to the
+          horizon; the bay terrain/islands sit in it. */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
-        <planeGeometry args={[80000, 80000]} />
-        <meshStandardMaterial color={tokens.color.accent} transparent opacity={0.55} />
+        <planeGeometry args={[200000, 200000]} />
+        <meshStandardMaterial color="#10597f" metalness={0.2} roughness={0.45} />
       </mesh>
       {cameraId === 'Free'
         ? <FreeCamera target={target} />
