@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { TopBar } from '../../ui/TopBar'
 import { IconButton } from '../../ui/IconButton'
 import { Button } from '../../ui/Button'
-import { SimulationControl, type SimulationState } from '../../ui/SimulationControl'
+import { SimulationControl } from '../../ui/SimulationControl'
 import { MapActions } from '../../ui/MapActions'
 import { AlertDialog } from '../../ui/Modal'
 import { Sidebar } from '../scenario-creator/components/Sidebar'
@@ -17,21 +17,14 @@ import { tokens } from '../../theme/tokens'
 
 const API_BASE = import.meta.env.VITE_API_URL ?? 'http://localhost:3000'
 
-function pillState(status: string): SimulationState {
-  if (status === 'running') return 'running'
-  if (status === 'loading') return 'building'
-  if (status === 'ready') return 'ready'
-  return 'idle'
-}
-
 /**
  * Instructor workspace shell (Figma "Layout do instrutor"): a top bar over a
- * full-bleed map, with a floating Build/Play/Stop pill and a zoom control. The
+ * full-bleed map, with a floating Play/Pause control and a zoom control. The
  * scenario-setup sidebar and the per-vessel panel dock on top of the map.
  */
 export function AppShell() {
   const { name, vessels, toCreateScenarioDTO } = useScenarioStore()
-  const { status, start, stop, loadScenario } = useSimulationStore()
+  const { status, state, scenarioVessels, play, pause, loadScenario, applyEnvironment } = useSimulationStore()
   const { zoomIn, zoomOut } = useMapStore()
   const [confirmNoOwnship, setConfirmNoOwnship] = useState(false)
   const [infoOpen, setInfoOpen] = useState(false)
@@ -58,10 +51,30 @@ export function AppShell() {
     void saveScenario()
   }
 
-  function handleBuild() {
-    void saveScenario()
-    loadScenario(vessels)
-    start()
+  // Play boots the engine on first use and resumes after a pause. If vessels were
+  // added/removed while paused, reseed the engine — existing vessels keep their
+  // current (live) position so the scene doesn't jump back to the start.
+  function handlePlay() {
+    const sim = useSimulationStore.getState()
+    if (!sim.worker) {
+      loadScenario(vessels)
+      play()
+      return
+    }
+    const loaded = scenarioVessels
+    const setChanged =
+      vessels.length !== loaded.length ||
+      vessels.some(v => !loaded.some(l => l.instanceId === v.instanceId))
+    if (setChanged) {
+      const live = state?.vessels ?? []
+      const reseed = vessels.map(v => {
+        const lv = live.find(s => s.id === v.instanceId)
+        return lv ? { ...v, x: lv.x, y: lv.y, headingDeg: (lv.psi * 180) / Math.PI } : v
+      })
+      loadScenario(reseed)
+    }
+    applyEnvironment()
+    play()
   }
 
   const logo = (
@@ -104,10 +117,10 @@ export function AppShell() {
           <ScenarioInfoPanel open={infoOpen} onClose={() => setInfoOpen(false)} />
           <MapActions onZoomIn={zoomIn} onZoomOut={zoomOut} />
           <SimulationControl
-            state={pillState(status)}
-            onBuild={handleBuild}
-            onPlay={start}
-            onStop={stop}
+            running={status === 'running'}
+            disabled={vessels.length === 0}
+            onPlay={handlePlay}
+            onPause={pause}
           />
         </div>
       </div>

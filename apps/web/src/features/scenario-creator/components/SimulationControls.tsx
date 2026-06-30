@@ -14,12 +14,13 @@ export function SimulationControls() {
       <div style={{ fontSize: tokens.fontSize.label, color: tokens.color.textSubtle }}>
         {status === 'idle' && 'Aguardando configuração'}
         {status === 'loading' && '⌛ Iniciando...'}
-        {status === 'ready' && '✓ Pronto'}
+        {status === 'paused' && state && `⏸ Pausado — t = ${state.t.toFixed(1)}s`}
+        {status === 'paused' && !state && '⏸ Pausado'}
         {status === 'running' && state && `▶ Rodando — t = ${state.t.toFixed(1)}s`}
         {status === 'running' && !state && '▶ Rodando'}
         {status === 'error' && <span style={{ color: tokens.color.danger }}>⚠ Erro na simulação</span>}
       </div>
-      {engine === 'mock' && (status === 'ready' || status === 'running') && (
+      {engine === 'mock' && (status === 'paused' || status === 'running') && (
         <div
           role="alert"
           style={{ marginTop: tokens.space.sm, fontSize: tokens.fontSize.sm, color: tokens.color.warningFg, background: tokens.color.warningBg, border: `1px solid ${tokens.color.warningFg}33`, borderRadius: tokens.radius.sm, padding: '0.4rem 0.5rem' }}
@@ -27,7 +28,7 @@ export function SimulationControls() {
           ⚠ Física simulada (mock) — o módulo WASM não foi compilado. Rode <code>pnpm build:wasm</code> para a dinâmica real.
         </div>
       )}
-      {engine === 'wasm' && (status === 'ready' || status === 'running') && (
+      {engine === 'wasm' && (status === 'paused' || status === 'running') && (
         <div style={{ marginTop: tokens.space.sm, fontSize: tokens.fontSize.sm, color: tokens.color.success }}>
           ● Física real (WASM)
         </div>

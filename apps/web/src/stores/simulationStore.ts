@@ -3,7 +3,7 @@ import type { SimulationStateDTO, SimulationEngine } from '@ymir/types'
 import { useVesselPanelStore } from './vesselPanelStore'
 import { useEnvironmentStore } from './environmentStore'
 
-type Status = 'idle' | 'loading' | 'ready' | 'running' | 'error'
+type Status = 'idle' | 'loading' | 'running' | 'paused' | 'error'
 
 interface ScenarioDraftVessel {
   instanceId: number
@@ -21,10 +21,14 @@ interface SimulationStore {
   engine: SimulationEngine | null
   worker: Worker | null
   scenarioVessels: ScenarioDraftVessel[]
-  start: (dt?: number) => void
-  stop: () => void
+  /** Start (first time) or resume (after pause) the simulation loop. */
+  play: (dt?: number) => void
+  /** Freeze the loop at the current state — does NOT reset position/time. */
+  pause: () => void
   reset: () => void
   loadScenario: (vessels: ScenarioDraftVessel[]) => void
+  /** Push the current environment profile to a running/paused worker. */
+  applyEnvironment: () => void
 }
 
 export const useSimulationStore = create<SimulationStore>((set, get) => ({
@@ -35,7 +39,7 @@ export const useSimulationStore = create<SimulationStore>((set, get) => ({
   worker: null,
   scenarioVessels: [],
 
-  start(dt = 0.05) {
+  play(dt = 0.05) {
     let { worker } = get()
 
     if (!worker) {
@@ -49,7 +53,8 @@ export const useSimulationStore = create<SimulationStore>((set, get) => ({
         const msg = e.data as { type: string; payload?: SimulationStateDTO; message?: string; engine?: SimulationEngine }
         switch (msg.type) {
           case 'ready': {
-            set({ status: 'ready', engine: msg.engine ?? null })
+            // Worker booted; engine known. We go straight to running below.
+            set({ engine: msg.engine ?? null })
             const { scenarioVessels } = get()
             if (scenarioVessels.length > 0) {
               get().worker!.postMessage({ type: 'loadScenario', vessels: scenarioVessels })
@@ -97,15 +102,25 @@ export const useSimulationStore = create<SimulationStore>((set, get) => ({
 
       set({ worker })
     } else {
+      // Resume from the frozen state — the worker keeps the simulation object,
+      // so position and elapsed time carry over.
       worker.postMessage({ type: 'start', dt })
       set({ status: 'running' })
     }
   },
 
-  stop() {
+  pause() {
     const { worker } = get()
     worker?.postMessage({ type: 'stop' })
-    set({ status: 'ready' })
+    set({ status: 'paused' })
+  },
+
+  applyEnvironment() {
+    const { worker } = get()
+    const envStore = useEnvironmentStore.getState()
+    if (worker && envStore.hasConditions()) {
+      worker.postMessage({ type: 'loadEnvironment', json: envStore.toJson() })
+    }
   },
 
   reset() {

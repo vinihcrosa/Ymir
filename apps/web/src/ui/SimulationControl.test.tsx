@@ -1,62 +1,32 @@
 import { describe, it, expect, vi } from 'vitest'
-import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { SimulationControl } from './SimulationControl'
 
-const noop = () => {}
-
 describe('SimulationControl', () => {
-  it('fires onBuild when the build cell is pressed', async () => {
-    const onBuild = vi.fn()
-    render(<SimulationControl state="idle" onBuild={onBuild} onPlay={noop} onStop={noop} />)
-    await userEvent.click(screen.getByRole('button', { name: 'Build simulation' }))
-    expect(onBuild).toHaveBeenCalledTimes(1)
-  })
-
-  it('uses a custom buildLabel', () => {
-    render(
-      <SimulationControl state="idle" onBuild={noop} onPlay={noop} onStop={noop} buildLabel="Compilar" />,
-    )
-    expect(screen.getByRole('button', { name: 'Compilar' })).toBeDefined()
-  })
-
-  it('disables Play when idle and enables it when ready', () => {
-    const { rerender } = render(
-      <SimulationControl state="idle" onBuild={noop} onPlay={noop} onStop={noop} />,
-    )
-    expect((screen.getByRole('button', { name: 'Reproduzir' }) as HTMLButtonElement).disabled).toBe(true)
-
-    rerender(<SimulationControl state="ready" onBuild={noop} onPlay={noop} onStop={noop} />)
-    expect((screen.getByRole('button', { name: 'Reproduzir' }) as HTMLButtonElement).disabled).toBe(false)
-  })
-
-  it('fires onPlay when enabled', async () => {
+  it('shows Play when not running and fires onPlay', () => {
     const onPlay = vi.fn()
-    render(<SimulationControl state="ready" onBuild={noop} onPlay={onPlay} onStop={noop} />)
-    await userEvent.click(screen.getByRole('button', { name: 'Reproduzir' }))
-    expect(onPlay).toHaveBeenCalledTimes(1)
+    render(<SimulationControl running={false} onPlay={onPlay} onPause={() => {}} />)
+    const btn = screen.getByRole('button', { name: /Reproduzir/i })
+    expect(btn).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: /Pausar/i })).toBeNull()
+    fireEvent.click(btn)
+    expect(onPlay).toHaveBeenCalled()
   })
 
-  it('disables Stop unless running', () => {
-    const { rerender } = render(
-      <SimulationControl state="ready" onBuild={noop} onPlay={noop} onStop={noop} />,
-    )
-    expect((screen.getByRole('button', { name: 'Parar' }) as HTMLButtonElement).disabled).toBe(true)
-
-    rerender(<SimulationControl state="running" onBuild={noop} onPlay={noop} onStop={noop} />)
-    expect((screen.getByRole('button', { name: 'Parar' }) as HTMLButtonElement).disabled).toBe(false)
+  it('shows Pause when running and fires onPause', () => {
+    const onPause = vi.fn()
+    render(<SimulationControl running onPlay={() => {}} onPause={onPause} />)
+    const btn = screen.getByRole('button', { name: /Pausar/i })
+    expect(btn).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: /Reproduzir/i })).toBeNull()
+    fireEvent.click(btn)
+    expect(onPause).toHaveBeenCalled()
   })
 
-  it('fires onStop in the running state', async () => {
-    const onStop = vi.fn()
-    render(<SimulationControl state="running" onBuild={noop} onPlay={noop} onStop={onStop} />)
-    await userEvent.click(screen.getByRole('button', { name: 'Parar' }))
-    expect(onStop).toHaveBeenCalledTimes(1)
-  })
-
-  it('hides the build cell while running and keeps Stop enabled', () => {
-    render(<SimulationControl state="running" onBuild={noop} onPlay={noop} onStop={noop} />)
-    expect(screen.queryByRole('button', { name: 'Build simulation' })).toBeNull()
-    expect((screen.getByRole('button', { name: 'Parar' }) as HTMLButtonElement).disabled).toBe(false)
+  it('respects disabled', () => {
+    const onPlay = vi.fn()
+    render(<SimulationControl running={false} disabled onPlay={onPlay} onPause={() => {}} />)
+    fireEvent.click(screen.getByRole('button', { name: /Reproduzir/i }))
+    expect(onPlay).not.toHaveBeenCalled()
   })
 })
