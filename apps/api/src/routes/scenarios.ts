@@ -3,13 +3,22 @@ import { Type } from '@sinclair/typebox'
 import { db } from '../db/index.js'
 import { scenarios } from '../db/schema.js'
 import { eq } from 'drizzle-orm'
-import { ScenarioDTO, CreateScenarioDTO } from '@ymir/types'
+import { ScenarioDTO, CreateScenarioDTO, type InitialCondition } from '@ymir/types'
 
 function rowToScenario(row: typeof scenarios.$inferSelect): ScenarioDTO {
   // Legacy rows persisted before InitialCondition gained `instanceId` stored the
   // body id under `vesselId`. Backfill it so the response satisfies the schema.
-  const initialConditions = (JSON.parse(row.initialConditions) as Array<Record<string, number>>)
-    .map((ic) => ({ instanceId: ic.instanceId ?? ic.vesselId, ...ic }))
+  const parsed = JSON.parse(row.initialConditions) as Array<Partial<InitialCondition> & { vesselId: number }>
+  const initialConditions: InitialCondition[] = parsed.map((ic) => ({
+    instanceId: ic.instanceId ?? ic.vesselId,
+    vesselId: ic.vesselId,
+    x: ic.x ?? 0,
+    y: ic.y ?? 0,
+    psi: ic.psi ?? 0,
+    u: ic.u ?? 0,
+    v: ic.v ?? 0,
+    r: ic.r ?? 0,
+  }))
   return {
     ...row,
     initialConditions,
