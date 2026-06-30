@@ -304,4 +304,14 @@ describe('integration', () => {
     expect(json.waveSeries[0].Tp).toBe(10)
     expect(json.waveSeries[0].dirNaut).toBe(270)
   })
+
+  it('Visibilidade tab exposes rain and fog sliders', () => {
+    render(<EnvironmentConditionPanel />)
+    expect(screen.getByRole('button', { name: /add current series/i })).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('tab', { name: /Visibilidade/i }))
+    const sliders = screen.getAllByRole('slider')
+    expect(sliders.length).toBe(2)
+    fireEvent.change(sliders[0], { target: { value: '40' } })
+    expect((sliders[0] as HTMLInputElement).value).toBe('40')
+  })
 })
