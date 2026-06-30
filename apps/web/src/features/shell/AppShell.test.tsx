@@ -1,5 +1,6 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { MemoryRouter } from 'react-router-dom'
 import { AppShell } from './AppShell'
 import { useScenarioStore } from '../scenario-creator/store'
 import { useSimulationStore } from '../../stores/simulationStore'
@@ -31,7 +32,7 @@ describe('AppShell', () => {
   })
 
   it('renders the top bar (breadcrumb + save) and floating controls', () => {
-    render(<AppShell />)
+    render(<MemoryRouter><AppShell /></MemoryRouter>)
     expect(screen.getByRole('button', { name: /Salvar cenário/i })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /Aproximar/i })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /Afastar/i })).toBeInTheDocument()
@@ -39,7 +40,7 @@ describe('AppShell', () => {
   })
 
   it('opens the no-ownship alert when saving with no vessels', () => {
-    render(<AppShell />)
+    render(<MemoryRouter><AppShell /></MemoryRouter>)
     fireEvent.click(screen.getByRole('button', { name: /Salvar cenário/i }))
     expect(screen.getByText('Seu cenário não possui um ownship')).toBeInTheDocument()
     // sidebar hooks fetch /areas + /vessels on mount; what must NOT happen is a scenario save
@@ -50,7 +51,7 @@ describe('AppShell', () => {
   })
 
   it('"Salvar mesmo assim" confirms the save and closes the dialog', async () => {
-    render(<AppShell />)
+    render(<MemoryRouter><AppShell /></MemoryRouter>)
     fireEvent.click(screen.getByRole('button', { name: /Salvar cenário/i }))
     fireEvent.click(screen.getByRole('button', { name: /Salvar mesmo assim/i }))
     await waitFor(() => expect(fetch).toHaveBeenCalledWith(
@@ -63,7 +64,7 @@ describe('AppShell', () => {
   it('saves directly (no dialog) when a vessel exists', async () => {
     useScenarioStore.getState().setArea(mockArea)
     useScenarioStore.getState().addVessel({ vesselId: 1, name: 'VLCC' })
-    render(<AppShell />)
+    render(<MemoryRouter><AppShell /></MemoryRouter>)
     fireEvent.click(screen.getByRole('button', { name: /Salvar cenário/i }))
     expect(screen.queryByText(/não possui um ownship/i)).toBeNull()
     await waitFor(() => expect(fetch).toHaveBeenCalled())
@@ -72,7 +73,7 @@ describe('AppShell', () => {
   it('Build triggers scenario save + simulation start', async () => {
     useScenarioStore.getState().setArea(mockArea)
     useScenarioStore.getState().addVessel({ vesselId: 1, name: 'VLCC' })
-    render(<AppShell />)
+    render(<MemoryRouter><AppShell /></MemoryRouter>)
     fireEvent.click(screen.getByRole('button', { name: /Build simulation/i }))
     await waitFor(() => expect(fetch).toHaveBeenCalled())
     expect(['loading', 'running']).toContain(useSimulationStore.getState().status)

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { TopBar } from '../../ui/TopBar'
 import { IconButton } from '../../ui/IconButton'
 import { Button } from '../../ui/Button'
@@ -32,6 +33,7 @@ export function AppShell() {
   const { status, start, stop, loadScenario } = useSimulationStore()
   const { zoomIn, zoomOut } = useMapStore()
   const [confirmNoOwnship, setConfirmNoOwnship] = useState(false)
+  const navigate = useNavigate()
 
   async function saveScenario() {
     try {
@@ -84,7 +86,7 @@ export function AppShell() {
 
   const right = (
     <div style={{ display: 'flex', alignItems: 'center', gap: tokens.space.sm }}>
-      <Button variant="secondary" size="sm">Sair do cenário</Button>
+      <Button variant="secondary" size="sm" onClick={() => navigate('/')}>Sair do cenário</Button>
       <Button variant="dark" size="sm" icon="💾" onClick={handleSave}>Salvar cenário</Button>
     </div>
   )
