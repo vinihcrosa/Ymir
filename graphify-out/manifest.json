@@ -30,9 +30,9 @@
     "semantic_hash": "071d99ec22cff4dcaa9b83deb6ce8173"
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/tests/simulation/TestActuatorIntegration.cpp": {
-    "mtime": 1782639926.6334453,
-    "ast_hash": "7544e3d7b6b570f68ebc33b7ff5f164f",
-    "semantic_hash": "7544e3d7b6b570f68ebc33b7ff5f164f"
+    "mtime": 1782779665.690815,
+    "ast_hash": "8cb50e326a62e9530166af4e8fea67d4",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/tests/simulation/TestCouplingForceModel.cpp": {
     "mtime": 1782596860.1033916,
@@ -140,9 +140,9 @@
     "semantic_hash": "00a727e93e079b567e6948cf5c01b3f0"
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/tests/physics/forces/TestRudderForces.cpp": {
-    "mtime": 1782563396.0216584,
-    "ast_hash": "9c327d15a80092dd6f492093be45bd31",
-    "semantic_hash": "9c327d15a80092dd6f492093be45bd31"
+    "mtime": 1782779665.6900015,
+    "ast_hash": "55e906fe1c28db47d2a2e215f4f20c79",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/tests/physics/forces/TestRestoringForces.cpp": {
     "mtime": 1782363370.2423887,
@@ -170,9 +170,9 @@
     "semantic_hash": "6388a37f3a06d63283fffb35a5c545de"
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/tests/physics/forces/TestThrustForces.cpp": {
-    "mtime": 1782563382.7669654,
-    "ast_hash": "3ee35ce88392b87880eeb632d7ac5039",
-    "semantic_hash": "3ee35ce88392b87880eeb632d7ac5039"
+    "mtime": 1782779842.0212348,
+    "ast_hash": "5ea80e5bcad4f0fefa01fbcaf0d4402b",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/tests/physics/forces/TestCurrentForces.cpp": {
     "mtime": 1782362152.8304667,
@@ -230,9 +230,9 @@
     "semantic_hash": "22f232f6ffd9fc66775dca1930cfb86b"
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/libs/world/include/ymir/world/World.h": {
-    "mtime": 1782599156.9934971,
-    "ast_hash": "8f1cdc1491f07bdae6a74c6fb5441a7c",
-    "semantic_hash": "8f1cdc1491f07bdae6a74c6fb5441a7c"
+    "mtime": 1782738708.241943,
+    "ast_hash": "11bb1f2df236759f7be610bc85e2037b",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/libs/world/include/ymir/world/NavalEnvironment.h": {
     "mtime": 1782595879.6851845,
@@ -265,9 +265,9 @@
     "semantic_hash": "d48233880589c3fe09e733bf3aadbae7"
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/libs/world/src/World.cpp": {
-    "mtime": 1782614515.2196314,
-    "ast_hash": "a9e832f767e26b9e7f85b441ba60c12a",
-    "semantic_hash": "a9e832f767e26b9e7f85b441ba60c12a"
+    "mtime": 1782738708.242278,
+    "ast_hash": "33eeb5a3f426c50b7006e4dd14e11fe8",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/libs/world/src/CouplingRegistry.cpp": {
     "mtime": 1782614510.8108191,
@@ -405,9 +405,9 @@
     "semantic_hash": "d2ec214d09a6d100a7fbf608a7a51a1d"
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/libs/vessel/tests/TestDynamicVessel.cpp": {
-    "mtime": 1782567548.0806296,
-    "ast_hash": "1393c04d64d73a7cd8820097d12ac705",
-    "semantic_hash": "1393c04d64d73a7cd8820097d12ac705"
+    "mtime": 1782779665.6878998,
+    "ast_hash": "3eabfaf69fce03248df8e3c819bbc1e1",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/libs/vessel/tests/TestBerthManeuverSystem.cpp": {
     "mtime": 1782616967.6471822,
@@ -415,9 +415,9 @@
     "semantic_hash": "46872bc856f91f663379d5dddfe347a6"
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/libs/vessel/tests/TestRudder.cpp": {
-    "mtime": 1782564233.1805744,
-    "ast_hash": "0053fc86fa90896bfc7d82d06c4fc034",
-    "semantic_hash": "0053fc86fa90896bfc7d82d06c4fc034"
+    "mtime": 1782779665.6887143,
+    "ast_hash": "781e7b850ddea80510562e4abb6b1c51",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/libs/vessel/src/Thruster.cpp": {
     "mtime": 1782563812.5311391,
@@ -500,9 +500,9 @@
     "semantic_hash": "506d7aee2aa9ad7f9bd7caef34002cd5"
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/libs/physics/include/ymir/physics/forces/RudderForces.h": {
-    "mtime": 1782563344.0948796,
-    "ast_hash": "7d0f9843587ec8b9226a386edbed329b",
-    "semantic_hash": "7d0f9843587ec8b9226a386edbed329b"
+    "mtime": 1782779665.6862042,
+    "ast_hash": "0f5c5d1bb2a9ef286a9807713e0e97e3",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/libs/physics/include/ymir/physics/forces/RestoringForces.h": {
     "mtime": 1782646444.6788185,
@@ -510,9 +510,9 @@
     "semantic_hash": "d9b3e8811f63ab6b8c71579371001aae"
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/libs/physics/include/ymir/physics/forces/ThrustForces.h": {
-    "mtime": 1782563303.0945013,
-    "ast_hash": "056c630cbe80ae8b66ac0ab249c051cc",
-    "semantic_hash": "056c630cbe80ae8b66ac0ab249c051cc"
+    "mtime": 1782779842.0201397,
+    "ast_hash": "528d40f220d4ca09b9aa2c23eea88f4a",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/libs/physics/include/ymir/physics/forces/DampingForces.h": {
     "mtime": 1782363370.2447085,
@@ -570,9 +570,9 @@
     "semantic_hash": "ecabe99b8f7686f8a8ae253d6169cd5d"
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/libs/physics/src/forces/RudderForces.cpp": {
-    "mtime": 1782563364.733958,
-    "ast_hash": "b3854d0a893f8ec35afbd87c1cc7747f",
-    "semantic_hash": "b3854d0a893f8ec35afbd87c1cc7747f"
+    "mtime": 1782779665.686769,
+    "ast_hash": "768b1bc3e71a3185970df3f43aa95c96",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/libs/physics/src/forces/CurrentForces.cpp": {
     "mtime": 1782640478.0733778,
@@ -605,9 +605,9 @@
     "semantic_hash": "a3d3b165df36bc5f67dbc5448def69a8"
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/libs/physics/src/forces/ThrustForces.cpp": {
-    "mtime": 1782563329.8305333,
-    "ast_hash": "d80c668c1f59cee829b6606554dc7e0f",
-    "semantic_hash": "d80c668c1f59cee829b6606554dc7e0f"
+    "mtime": 1782779842.02086,
+    "ast_hash": "a0fdb8f7d348d5060c9557db8dea32fe",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/libs/physics/src/forces/RestoringForces.cpp": {
     "mtime": 1782646455.241987,
@@ -635,14 +635,14 @@
     "semantic_hash": "ae988c43cf70e18fb063fd8715f9357d"
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/src/wasm/YmirBindings.cpp": {
-    "mtime": 1782646474.787896,
-    "ast_hash": "9a8e318697c12e058b9d526c9243856d",
-    "semantic_hash": "9a8e318697c12e058b9d526c9243856d"
+    "mtime": 1782779665.6893864,
+    "ast_hash": "90ff5f4a942f3909fff638a28a4f77a3",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/packages/types/package.json": {
-    "mtime": 1782615521.3945193,
-    "ast_hash": "0517cdd694c64f46a02656830044c49f",
-    "semantic_hash": "0517cdd694c64f46a02656830044c49f"
+    "mtime": 1782738708.243571,
+    "ast_hash": "31c1b91e6b06bfed8b6ab65c8519cb60",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/packages/types/tsconfig.json": {
     "mtime": 1782615525.3529377,
@@ -660,14 +660,14 @@
     "semantic_hash": "1681729d4ba4d817cdb2debc448d7dff"
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/packages/types/src/scenario.ts": {
-    "mtime": 1782625767.8241718,
-    "ast_hash": "7dabdb867e1f48c8c6ec9484a2eecd50",
-    "semantic_hash": "7dabdb867e1f48c8c6ec9484a2eecd50"
+    "mtime": 1782738708.2441998,
+    "ast_hash": "aa29a1e15377bbc4ab79396f8631669a",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/packages/types/src/index.ts": {
-    "mtime": 1782625760.4634345,
-    "ast_hash": "6b4de015104e0ffc2890f6b80248e3ba",
-    "semantic_hash": "6b4de015104e0ffc2890f6b80248e3ba"
+    "mtime": 1782738708.24388,
+    "ast_hash": "481c2a043ec255063e701eb330b44c05",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/packages/types/src/simulation.ts": {
     "mtime": 1782622939.0405514,
@@ -680,9 +680,9 @@
     "semantic_hash": "80c61a6e3b5cbd090fe0ea0fe088360c"
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/apps/web/package.json": {
-    "mtime": 1782629233.3722801,
-    "ast_hash": "f34426227676868c062d06a6a6cd60de",
-    "semantic_hash": "f34426227676868c062d06a6a6cd60de"
+    "mtime": 1782738708.2390924,
+    "ast_hash": "93a4b0defd6b3e265ea145b7fc29bc14",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/apps/web/tsconfig.json": {
     "mtime": 1782628228.842493,
@@ -750,9 +750,9 @@
     "semantic_hash": "59becb2e1e79d8ba4d5a0d6f86b2121f"
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/apps/web/src/features/scenario-creator/store.ts": {
-    "mtime": 1782628042.732463,
-    "ast_hash": "3ca2322b1047da989c114906982a1193",
-    "semantic_hash": "3ca2322b1047da989c114906982a1193"
+    "mtime": 1782740924.270151,
+    "ast_hash": "e156b8b2cd0ce728f8af8150d8269fce",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/apps/web/src/features/scenario-creator/components/ScenarioForm.test.tsx": {
     "mtime": 1782628161.881417,
@@ -765,9 +765,9 @@
     "semantic_hash": "48f4f6f5cd70605468971713a6b7cc35"
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/apps/web/src/features/scenario-creator/components/VesselMarker.tsx": {
-    "mtime": 1782645619.4971254,
-    "ast_hash": "e5bf588a9d955b30aa1376a64ac68cbd",
-    "semantic_hash": "e5bf588a9d955b30aa1376a64ac68cbd"
+    "mtime": 1782742777.6683526,
+    "ast_hash": "0c0e5eab311ba1cbf62bca55d9c703dc",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/apps/web/src/features/scenario-creator/components/SimulationControls.test.tsx": {
     "mtime": 1782628347.2284439,
@@ -785,24 +785,24 @@
     "semantic_hash": "b3e01593ee7c01b52dd5b85ec1683b8c"
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/apps/web/src/features/scenario-creator/components/VesselPanel.tsx": {
-    "mtime": 1782645652.1187508,
-    "ast_hash": "d7b55b2184a5c156ef7d39ddf6dad5c6",
-    "semantic_hash": "d7b55b2184a5c156ef7d39ddf6dad5c6"
+    "mtime": 1782741410.5935178,
+    "ast_hash": "054a59f7d58f6e5929e2e88f4cd36b8b",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/apps/web/src/features/scenario-creator/components/VesselList.tsx": {
-    "mtime": 1782628118.1077294,
-    "ast_hash": "5df20edd5ecbea4d0b030327786e3015",
-    "semantic_hash": "5df20edd5ecbea4d0b030327786e3015"
+    "mtime": 1782740950.3838534,
+    "ast_hash": "1494297e8a7b4b79180147ca1d673d0f",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/apps/web/src/features/scenario-creator/components/Sidebar.tsx": {
-    "mtime": 1782628143.5535364,
-    "ast_hash": "ddae0c58bf99ca2f36feaa37492f8090",
-    "semantic_hash": "ddae0c58bf99ca2f36feaa37492f8090"
+    "mtime": 1782739243.172199,
+    "ast_hash": "f948b4702eba03a4d51bf873ccff87ba",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/apps/web/src/features/scenario-creator/components/AreaMapView.tsx": {
-    "mtime": 1782633104.8548267,
-    "ast_hash": "9975bfdef1a5836742543affdd054cb2",
-    "semantic_hash": "9975bfdef1a5836742543affdd054cb2"
+    "mtime": 1782742033.2081964,
+    "ast_hash": "840b1e8d9dc680036df99f0f2a6c0312",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/apps/web/src/features/scenario-creator/hooks/use-vessels.test.ts": {
     "mtime": 1782628079.158536,
@@ -825,19 +825,19 @@
     "semantic_hash": "8bd33421879bf8c92453b05398e1e12f"
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/apps/web/src/stores/simulationStore.ts": {
-    "mtime": 1782636441.7320223,
-    "ast_hash": "ee35009ddc8941414f9e29b271c576f4",
-    "semantic_hash": "ee35009ddc8941414f9e29b271c576f4"
+    "mtime": 1782740940.4437566,
+    "ast_hash": "3935864c8d3c3ed7012a0cdba7058d7e",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/apps/web/src/stores/simulationStore.test.ts": {
-    "mtime": 1782628320.626414,
-    "ast_hash": "def406d09338cbf5ded8ac54299ebb7e",
-    "semantic_hash": "def406d09338cbf5ded8ac54299ebb7e"
+    "mtime": 1782740985.9976187,
+    "ast_hash": "616fa8f137d1a3bdc6d7562f989c90b1",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/apps/web/src/stores/vesselPanelStore.ts": {
-    "mtime": 1782632988.2203567,
-    "ast_hash": "ac24b040e8dd88b6540958906d7b91e0",
-    "semantic_hash": "ac24b040e8dd88b6540958906d7b91e0"
+    "mtime": 1782741401.3660462,
+    "ast_hash": "ff07f2e39c5ba555521bf30b3c328129",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/apps/web/src/components/TelemetryPanel.tsx": {
     "mtime": 1782616019.761636,
@@ -855,19 +855,19 @@
     "semantic_hash": "3d70487f74e02cb385b686f2a9f68fcb"
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/apps/web/src/workers/simulation.worker.ts": {
-    "mtime": 1782633168.8417115,
-    "ast_hash": "a48cc4776cfe28c1153f6cefa32f9054",
-    "semantic_hash": "a48cc4776cfe28c1153f6cefa32f9054"
+    "mtime": 1782740934.8696182,
+    "ast_hash": "759e50a347a98ae6ed53673b59520a0d",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/apps/web/src/workers/mock-wasm.ts": {
-    "mtime": 1782633147.6321292,
-    "ast_hash": "677810776958aaa54578fc2a43dc9238",
-    "semantic_hash": "677810776958aaa54578fc2a43dc9238"
+    "mtime": 1782740602.1830328,
+    "ast_hash": "ce5eab80bbf167fff4062b97b7aa6ab1",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/apps/web/src/workers/mock-wasm.test.ts": {
-    "mtime": 1782633284.4802835,
-    "ast_hash": "f47ed5183ca88be9e667396d048ba809",
-    "semantic_hash": "f47ed5183ca88be9e667396d048ba809"
+    "mtime": 1782738708.2404544,
+    "ast_hash": "535cbc7f0c5ea7a3cf5f75b3b188fd06",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/apps/api/package.json": {
     "mtime": 1782615850.6975431,
@@ -970,9 +970,9 @@
     "semantic_hash": "de6b9e7bb156f8dc12f68dc3d1a0b649"
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/CMakeLists.wasm.txt": {
-    "mtime": 1782617868.6897635,
-    "ast_hash": "bc80d7c21c353239546a0fd9eccc0fc9",
-    "semantic_hash": "bc80d7c21c353239546a0fd9eccc0fc9"
+    "mtime": 1782738708.2413878,
+    "ast_hash": "d00a0bd7df54a00c7131398ee9069420",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/CMakeLists.txt": {
     "mtime": 1782563947.884737,
@@ -980,9 +980,9 @@
     "semantic_hash": "4230b3da6574a8ddc5095b055bfb5355"
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/tests/CMakeLists.txt": {
-    "mtime": 1782636102.0100932,
-    "ast_hash": "f13e2183fd05335cb26e0ba2d288ee0a",
-    "semantic_hash": "f13e2183fd05335cb26e0ba2d288ee0a"
+    "mtime": 1782738708.2431235,
+    "ast_hash": "68441fa971b800b72bd9efcfc7f28877",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/libs/simulation/CMakeLists.txt": {
     "mtime": 1782598908.2114031,
@@ -990,9 +990,9 @@
     "semantic_hash": "b34f458024ecd2102105181157928e21"
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/libs/world/CMakeLists.txt": {
-    "mtime": 1782598908.209926,
-    "ast_hash": "1ae7467ba9d62ee0becdaeac0ec0f90c",
-    "semantic_hash": "1ae7467ba9d62ee0becdaeac0ec0f90c"
+    "mtime": 1782738708.2416596,
+    "ast_hash": "5750ce972bf52ece4a5b61bdb57e852b",
+    "semantic_hash": ""
   },
   "/Users/viniciusrosa/Documents/GitHub/Ymir/core/libs/common/CMakeLists.txt": {
     "mtime": 1782363409.9153457,
@@ -3872,6 +3872,221 @@
   "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/fast-time/CMakeLists.txt": {
     "mtime": 1782778006.0304403,
     "ast_hash": "c8a11df9b0d9ad89050aece870cd504a",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/core/tests/world/TestWorldTimeline.cpp": {
+    "mtime": 1782737409.6079674,
+    "ast_hash": "946362eeeb9b88c56ba6e1b494066f70",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/core/tests/world/TestEnvironmentTimeline.cpp": {
+    "mtime": 1782737199.0787501,
+    "ast_hash": "14c27dbd5b7927b44458274b8547afe4",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/core/tests/world/TestJsonSmoke.cpp": {
+    "mtime": 1782736686.4326403,
+    "ast_hash": "602ffde7803ce729f7f423a8e8df4770",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/core/libs/world/include/ymir/world/EnvironmentTimeline.h": {
+    "mtime": 1782737105.4558835,
+    "ast_hash": "923d2a98946e4844a220b159f836def1",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/core/libs/world/src/EnvironmentTimeline.cpp": {
+    "mtime": 1782737141.5696263,
+    "ast_hash": "7cfde779d58a262f64c2b3d87d7aab7c",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/packages/types/vitest.config.ts": {
+    "mtime": 1782737999.8354728,
+    "ast_hash": "a9b6d10a2ec259070bc04a7ca64e00d5",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/packages/types/src/environment.ts": {
+    "mtime": 1782737894.5784469,
+    "ast_hash": "03842649ffa11a15839e962ddeaf225e",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/packages/types/src/environment.test.ts": {
+    "mtime": 1782737983.2434366,
+    "ast_hash": "a9631693ae1c2ec089b0f9056c4505bc",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/apps/web/e2e/regression.spec.ts": {
+    "mtime": 1782742253.6761732,
+    "ast_hash": "5b4e151c445cd9e4d99bd3185352a930",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/apps/web/src/features/scenario-creator/ScenarioCreatorPage.test.tsx": {
+    "mtime": 1782739254.1183536,
+    "ast_hash": "4312a51968935a3d72fa5bbaab78610f",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/apps/web/src/features/scenario-creator/components/EnvironmentConditionPanel.tsx": {
+    "mtime": 1782738930.996988,
+    "ast_hash": "2c629966501648e5009cb02f1734d0b7",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/apps/web/src/features/scenario-creator/components/EnvironmentConditionPanel.test.tsx": {
+    "mtime": 1782738995.922227,
+    "ast_hash": "59d4b079e8980c6800d969b70a2ac41b",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/apps/web/src/stores/environmentStore.test.ts": {
+    "mtime": 1782738340.1816478,
+    "ast_hash": "1f30468f823684f1ff992b2543e8c47a",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/apps/web/src/stores/environmentStore.ts": {
+    "mtime": 1782738161.2962358,
+    "ast_hash": "e9159d532d5f2fd8a1d37f5161499be3",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/prd.md": {
+    "mtime": 1782735160.1668947,
+    "ast_hash": "0ec25c7c65a2cca104abbcf985511c46",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/task_04.md": {
+    "mtime": 1782737809.106211,
+    "ast_hash": "33722b85588b359972b3abf5eb33837a",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/task_01.md": {
+    "mtime": 1782736808.267505,
+    "ast_hash": "97e8acd130819a0ad2f75cba58c05a29",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/task_05.md": {
+    "mtime": 1782738077.9099123,
+    "ast_hash": "36600364a6fe77b583e792cc510d9ebd",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/task_02.md": {
+    "mtime": 1782737290.1627433,
+    "ast_hash": "a6acdfac5916536eb9dba6271aa71366",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/task_06.md": {
+    "mtime": 1782738448.5184045,
+    "ast_hash": "6619bf2cb223b3801c3284bc29578abb",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/task_07.md": {
+    "mtime": 1782738785.054889,
+    "ast_hash": "3c545cd0adf4b93e72d3412c272e3f80",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/task_03.md": {
+    "mtime": 1782737544.8742027,
+    "ast_hash": "564f913b5660e583058bcdcde75f45cf",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/task_08.md": {
+    "mtime": 1782739118.4171302,
+    "ast_hash": "38e263de73e4be90fde9581ef1a55806",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/_prd.md": {
+    "mtime": 1782735456.5842602,
+    "ast_hash": "0ec25c7c65a2cca104abbcf985511c46",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/_tasks.md": {
+    "mtime": 1782739360.1593242,
+    "ast_hash": "5a1313f8017b77297103b7cbab3e7692",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/_techspec.md": {
+    "mtime": 1782735994.7677178,
+    "ast_hash": "63dd7633ab875ee22fe0edca71af72bb",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/task_09.md": {
+    "mtime": 1782739353.8013823,
+    "ast_hash": "897190d3bac5403fcc0fec4b97dc078e",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/memory/task_04.md": {
+    "mtime": 1782737770.1688519,
+    "ast_hash": "379c9114531ed38e7a095d1012d5b162",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/memory/task_01.md": {
+    "mtime": 1782736776.4076364,
+    "ast_hash": "6a97ee431a46b8f1523adbfae427997b",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/memory/task_05.md": {
+    "mtime": 1782738054.7844076,
+    "ast_hash": "a20ba394fc68c5cd354ffea03f15844d",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/memory/task_02.md": {
+    "mtime": 1782737266.996169,
+    "ast_hash": "4410dd9375a0f8c74f8083ee9e52fed7",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/memory/task_06.md": {
+    "mtime": 1782738390.8956914,
+    "ast_hash": "567f4fefcb921d911dfe363c1103a692",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/memory/MEMORY.md": {
+    "mtime": 1782739335.2925613,
+    "ast_hash": "3bdd3e95c24564792b7dd4b0cb1f5206",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/memory/task_07.md": {
+    "mtime": 1782738745.4537606,
+    "ast_hash": "ca5859e4b2d689bcc76efb2a91f560da",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/memory/task_03.md": {
+    "mtime": 1782737506.116249,
+    "ast_hash": "8b7b7df1ce7eb5b1089679f8fdc6b6dc",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/memory/task_08.md": {
+    "mtime": 1782739063.105112,
+    "ast_hash": "1fb7dbc7553ebc1985d3069d713d5352",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/memory/task_09.md": {
+    "mtime": 1782739328.5642097,
+    "ast_hash": "42791a17b6102a7278990c04238c44ad",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/adrs/adr-002.md": {
+    "mtime": 1782699050.7538345,
+    "ast_hash": "53b33fa0aa7a0c4455ba101c50df2b6e",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/adrs/adr-006.md": {
+    "mtime": 1782735896.5291808,
+    "ast_hash": "67778c86961de865e7b3faba221bbeef",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/adrs/adr-003.md": {
+    "mtime": 1782699064.989458,
+    "ast_hash": "faa81a39cb26d7ff1d036774e5e1a2c4",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/adrs/adr-004.md": {
+    "mtime": 1782735073.3415089,
+    "ast_hash": "d035bf4fc6328a56d7a8410310af55c1",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/adrs/adr-001.md": {
+    "mtime": 1782699039.6540532,
+    "ast_hash": "c7b3baf716d18dcd8f9dbeeae52b49a2",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.compozy/tasks/environmental-conditions/adrs/adr-005.md": {
+    "mtime": 1782735873.8823802,
+    "ast_hash": "7fe5f0ad00857c34a0473cb196091ad7",
     "semantic_hash": ""
   }
 }

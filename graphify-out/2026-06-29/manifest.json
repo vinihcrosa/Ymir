@@ -1828,5 +1828,2050 @@
     "mtime": 1782363409.9184277,
     "ast_hash": "c8a11df9b0d9ad89050aece870cd504a",
     "semantic_hash": "c8a11df9b0d9ad89050aece870cd504a"
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/turbo.json": {
+    "mtime": 1782778006.2119498,
+    "ast_hash": "15b2385fff857dd92bf0e6768a517cee",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/area.json": {
+    "mtime": 1782778006.0537372,
+    "ast_hash": "867ec7e22ab2d05012c6bf371c48c257",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/package.json": {
+    "mtime": 1782778006.2073805,
+    "ast_hash": "5e5d20a51c6cc068f15532880de2548a",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/vessel1.json": {
+    "mtime": 1782778006.2126553,
+    "ast_hash": "3fa32aec2c656eb610f224f6a5ed3721",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/package.json": {
+    "mtime": 1782778006.0890462,
+    "ast_hash": "b80b86653c16167d51e1ba61430d13cd",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/SmokeTest.cpp": {
+    "mtime": 1782778006.0899231,
+    "ast_hash": "071d99ec22cff4dcaa9b83deb6ce8173",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/simulation/TestActuatorIntegration.cpp": {
+    "mtime": 1782779071.6462185,
+    "ast_hash": "8cb50e326a62e9530166af4e8fea67d4",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/simulation/TestCouplingForceModel.cpp": {
+    "mtime": 1782778006.0946288,
+    "ast_hash": "6c9133e3084c8dc9ddf6a9dc7b307c30",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/simulation/TestVesselIntegration.cpp": {
+    "mtime": 1782778006.09564,
+    "ast_hash": "0b0924e227a33831d07c9360d4cca59a",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/simulation/TestNavalInfra.cpp": {
+    "mtime": 1782778006.0951183,
+    "ast_hash": "f6c66740708bf3d2885baa17bc2c4695",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/simulation/TestSimulationIntegration.cpp": {
+    "mtime": 1782778006.0953572,
+    "ast_hash": "fc3cce23158ef8a43441ec4c2b60c02a",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/simulation/TestNavalDomainCoupling.cpp": {
+    "mtime": 1782778006.0949621,
+    "ast_hash": "3b2fc8844279bf44a0cbb4e0948395c0",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/simulation/TestNavalIntegration.cpp": {
+    "mtime": 1782778006.0952442,
+    "ast_hash": "05d7523d88e22ff95058437c9df72aae",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/simulation/TestNavalDomain.cpp": {
+    "mtime": 1782778006.09481,
+    "ast_hash": "ffbad89325d36a19b39d7f44fb5cd453",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/world/TestWaveSpectrum.cpp": {
+    "mtime": 1782778006.0980017,
+    "ast_hash": "82990032a14ecb67f8a690e318ccd3ee",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/world/TestWorldTimeline.cpp": {
+    "mtime": 1782778006.0984647,
+    "ast_hash": "946362eeeb9b88c56ba6e1b494066f70",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/world/TestWorld.cpp": {
+    "mtime": 1782778006.0981333,
+    "ast_hash": "464de8a23c8068e30152322b83947ba5",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/world/TestCouplingRegistry.cpp": {
+    "mtime": 1782778006.0958226,
+    "ast_hash": "4f7bcdb65cb31fca8166f4a92e3409d0",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/world/TestWaveForces.cpp": {
+    "mtime": 1782778006.0976593,
+    "ast_hash": "82e69fd09fed2b0023a5d8e9cda7fe6c",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/world/TestEnvironment.cpp": {
+    "mtime": 1782778006.0959134,
+    "ast_hash": "71c7b2e9a530e9895aaa4938bd125401",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/world/TestEnvironmentTimeline.cpp": {
+    "mtime": 1782778006.096292,
+    "ast_hash": "14c27dbd5b7927b44458274b8547afe4",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/world/TestJsonSmoke.cpp": {
+    "mtime": 1782778006.097241,
+    "ast_hash": "602ffde7803ce729f7f423a8e8df4770",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/world/TestIDomain.cpp": {
+    "mtime": 1782778006.096399,
+    "ast_hash": "211e8234bfa800253c8b5cd8e0fd89c2",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/common/TestMath.cpp": {
+    "mtime": 1782778006.090091,
+    "ast_hash": "81b5561c8210a6efb594f7d03916b7fe",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/persistence/TestScenarioReader.cpp": {
+    "mtime": 1782778006.090264,
+    "ast_hash": "befa98c789737bf9cfc5101d9ae5c95a",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/physics/TestForces.cpp": {
+    "mtime": 1782778006.090775,
+    "ast_hash": "a621062c4db826ba12268e5295cf73a7",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/physics/TestForceModel.cpp": {
+    "mtime": 1782778006.0906951,
+    "ast_hash": "54313fe27255a915b1b0f7df556fac08",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/physics/TestIntegrator.cpp": {
+    "mtime": 1782778006.090903,
+    "ast_hash": "03b55c45f8c65b0dcc9ec706a7d89d6f",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/physics/TestIntegratorRK45.cpp": {
+    "mtime": 1782778006.0910306,
+    "ast_hash": "a4d47e6b5509bb5ea40570ffe2224f28",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/physics/TestBody.cpp": {
+    "mtime": 1782778006.090583,
+    "ast_hash": "92c2349323ea984027bf924f386c5747",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/physics/forces/TestSquatForces.cpp": {
+    "mtime": 1782778006.0928733,
+    "ast_hash": "00a727e93e079b567e6948cf5c01b3f0",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/physics/forces/TestRudderForces.cpp": {
+    "mtime": 1782778428.8329036,
+    "ast_hash": "55e906fe1c28db47d2a2e215f4f20c79",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/physics/forces/TestRestoringForces.cpp": {
+    "mtime": 1782778006.0921748,
+    "ast_hash": "80c7b3a32586266cb417020c62b0cbe9",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/physics/forces/TestWindForces.cpp": {
+    "mtime": 1782778006.0934083,
+    "ast_hash": "adc632dd9f0c6e241dbd8c44ad4027de",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/physics/forces/TestTugForces.cpp": {
+    "mtime": 1782778006.0930908,
+    "ast_hash": "02e09fbf16fcc5aff2100aa9005907c9",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/physics/forces/TestDampingForces.cpp": {
+    "mtime": 1782778006.091806,
+    "ast_hash": "bb52bbaf70e70d6eaba9272c716c5b87",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/physics/forces/TestInertialForces.cpp": {
+    "mtime": 1782778006.0920787,
+    "ast_hash": "6388a37f3a06d63283fffb35a5c545de",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/physics/forces/TestThrustForces.cpp": {
+    "mtime": 1782778006.0929585,
+    "ast_hash": "3ee35ce88392b87880eeb632d7ac5039",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/physics/forces/TestCurrentForces.cpp": {
+    "mtime": 1782778006.0911605,
+    "ast_hash": "7e014bf5d376e9833a1de8513c15f461",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/simulation/include/ymir/simulation/CouplingForceModel.h": {
+    "mtime": 1782778006.0753336,
+    "ast_hash": "e6076a3f25b927622d6c26ea9999e72c",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/simulation/include/ymir/simulation/Simulation.h": {
+    "mtime": 1782778006.0756288,
+    "ast_hash": "737d37de9813458b572a3f681ee57b0b",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/simulation/include/ymir/simulation/NavalDomain.h": {
+    "mtime": 1782778006.0754385,
+    "ast_hash": "32cc7f5b77e44f4fc20789721641a0b9",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/simulation/include/ymir/simulation/NavalSimulation.h": {
+    "mtime": 1782778006.075538,
+    "ast_hash": "b4f931baddfa43a1c1bf8380f8a86736",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/simulation/src/NavalSimulation.cpp": {
+    "mtime": 1782778006.0761716,
+    "ast_hash": "c1b82179e702b7425d815525b733787f",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/simulation/src/NavalDomain.cpp": {
+    "mtime": 1782778006.0760517,
+    "ast_hash": "b75d5c6f73c4377676c6daf3c46e90d4",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/simulation/src/Simulation.cpp": {
+    "mtime": 1782778006.076282,
+    "ast_hash": "32bbc53715082509596cc3e7bd6323a3",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/world/include/ymir/world/CouplingRegistry.h": {
+    "mtime": 1782778006.0845833,
+    "ast_hash": "35b192551cebde4cfa4c992e323b50e9",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/world/include/ymir/world/Environment.h": {
+    "mtime": 1782778006.0846796,
+    "ast_hash": "7ad237f05ad3043476c9b069167834d5",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/world/include/ymir/world/IDomain.h": {
+    "mtime": 1782778006.086303,
+    "ast_hash": "22f232f6ffd9fc66775dca1930cfb86b",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/world/include/ymir/world/EnvironmentTimeline.h": {
+    "mtime": 1782778006.0861616,
+    "ast_hash": "923d2a98946e4844a220b159f836def1",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/world/include/ymir/world/World.h": {
+    "mtime": 1782778006.0873113,
+    "ast_hash": "11bb1f2df236759f7be610bc85e2037b",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/world/include/ymir/world/NavalEnvironment.h": {
+    "mtime": 1782778006.0864146,
+    "ast_hash": "e889c83fef013412f358b1d8f11a91ec",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/world/include/ymir/world/WorldSnapshot.h": {
+    "mtime": 1782778006.0874066,
+    "ast_hash": "e4ea86debb514bd385477749f3739d2a",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/world/include/ymir/world/wave/WaveSpectrum.h": {
+    "mtime": 1782778006.0877132,
+    "ast_hash": "1f7f4adaff1f4365a1fa3463fe44eafd",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/world/include/ymir/world/wave/WaveComponent.h": {
+    "mtime": 1782778006.0875347,
+    "ast_hash": "cf47dc0de979f4e8f99a19ccac19db00",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/world/include/ymir/world/wave/WaveForces.h": {
+    "mtime": 1782778006.0876129,
+    "ast_hash": "3bf6f8a6febe2bd897d62f3715d63f1d",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/world/src/Environment.cpp": {
+    "mtime": 1782778006.087997,
+    "ast_hash": "d48233880589c3fe09e733bf3aadbae7",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/world/src/EnvironmentTimeline.cpp": {
+    "mtime": 1782778006.0882978,
+    "ast_hash": "7cfde779d58a262f64c2b3d87d7aab7c",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/world/src/World.cpp": {
+    "mtime": 1782778006.0886202,
+    "ast_hash": "33eeb5a3f426c50b7006e4dd14e11fe8",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/world/src/CouplingRegistry.cpp": {
+    "mtime": 1782778006.087899,
+    "ast_hash": "7d10b84fcac37f5677292568c740ffb9",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/world/src/wave/WaveComponent.cpp": {
+    "mtime": 1782778006.0887837,
+    "ast_hash": "416746cc599c9352ead06f1b77a3355c",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/world/src/wave/WaveSpectrum.cpp": {
+    "mtime": 1782778006.0889773,
+    "ast_hash": "21e290b55ed062d2403bd908717e4489",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/world/src/wave/WaveForces.cpp": {
+    "mtime": 1782778006.0888672,
+    "ast_hash": "74cc28a7f4ad7431b29fcbdc1cbb70f0",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/common/include/ymir/common/Types.h": {
+    "mtime": 1782778006.0578098,
+    "ast_hash": "5f8f69c590613ca18938ed0a17c4702d",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/common/include/ymir/common/PhysicalConstants.h": {
+    "mtime": 1782778006.057444,
+    "ast_hash": "0a675c1ca42b6df7877c0331c94269dd",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/common/include/ymir/common/math/LinearAlgebra.h": {
+    "mtime": 1782778006.058969,
+    "ast_hash": "11b6ee0e610e6082e9245f1856b104a4",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/common/include/ymir/common/math/Interpolation.h": {
+    "mtime": 1782778006.0581028,
+    "ast_hash": "57be78be023549f89b28a157711e376c",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/common/include/ymir/common/math/AngleUtils.h": {
+    "mtime": 1782778006.0579915,
+    "ast_hash": "729f6e8b2a02c909bfec53b0a675085b",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/persistence/include/ymir/persistence/json/Scenario.h": {
+    "mtime": 1782778006.0602381,
+    "ast_hash": "520bd29d27c2b1fc880058ff259a19ae",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/persistence/include/ymir/persistence/json/BodyDefinition.h": {
+    "mtime": 1782778006.0601203,
+    "ast_hash": "0ee57c19a5824f5f301d4db969746d0c",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/persistence/include/ymir/persistence/json/ScenarioReader.h": {
+    "mtime": 1782778006.0603485,
+    "ast_hash": "8dc1e8646019bb82d82e710c7eb13693",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/persistence/src/json/ScenarioReader.cpp": {
+    "mtime": 1782778006.0606964,
+    "ast_hash": "b2800ccfe3b12137a4d46fed93124efc",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/vessel/include/ymir/vessel/Rudder.h": {
+    "mtime": 1782778006.0773065,
+    "ast_hash": "9148755b1ffa02d155ca84c7d11b3009",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/vessel/include/ymir/vessel/Thruster.h": {
+    "mtime": 1782778006.0774121,
+    "ast_hash": "fcb5549ad353514776591d8606eb4b3c",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/vessel/include/ymir/vessel/NavalContext.h": {
+    "mtime": 1782778006.077209,
+    "ast_hash": "fb5a7ab7fa56f720ec0442e139a6919e",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/vessel/include/ymir/vessel/VesselConfig.h": {
+    "mtime": 1782778006.0775232,
+    "ast_hash": "7b3f2089ce3f4f61135d85423c84b4bf",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/vessel/include/ymir/vessel/DynamicVessel.h": {
+    "mtime": 1782778006.0770838,
+    "ast_hash": "d9f2c0c8079b1ce085939a2259ff3a27",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/vessel/include/ymir/vessel/VesselState.h": {
+    "mtime": 1782778006.0776105,
+    "ast_hash": "2c74d239a7606c37a8b3137ecca05db6",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/vessel/include/ymir/vessel/controllers/ManeuverController.h": {
+    "mtime": 1782778006.0779226,
+    "ast_hash": "3c3d84a7ceb53ac618019c0ef06ce716",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/vessel/include/ymir/vessel/controllers/PrescribedController.h": {
+    "mtime": 1782778006.0780063,
+    "ast_hash": "d804b04c7faf4448c74de80b6b698f60",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/vessel/include/ymir/vessel/controllers/TugParametricForces.h": {
+    "mtime": 1782778006.0780816,
+    "ast_hash": "2c8a6f172049ff28488016ee6bcee268",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/vessel/include/ymir/vessel/controllers/BerthManeuverSystem.h": {
+    "mtime": 1782778006.0777917,
+    "ast_hash": "85f7905f7668cde5472f46f5ec179182",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/vessel/tests/TestThruster.cpp": {
+    "mtime": 1782778006.0827336,
+    "ast_hash": "f0fad5dc96297c534459a8b7cc90ff04",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/vessel/tests/TestVesselState.cpp": {
+    "mtime": 1782778006.083645,
+    "ast_hash": "6c3981775c89a2aeba6ec270432f4bba",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/vessel/tests/TestManeuverController.cpp": {
+    "mtime": 1782778006.0821185,
+    "ast_hash": "e6c4e4029c97e1b828f145623b4ae46c",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/vessel/tests/TestPrescribedController.cpp": {
+    "mtime": 1782778006.0824926,
+    "ast_hash": "d2ec214d09a6d100a7fbf608a7a51a1d",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/vessel/tests/TestDynamicVessel.cpp": {
+    "mtime": 1782778664.3723738,
+    "ast_hash": "3eabfaf69fce03248df8e3c819bbc1e1",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/vessel/tests/TestBerthManeuverSystem.cpp": {
+    "mtime": 1782778006.0806997,
+    "ast_hash": "46872bc856f91f663379d5dddfe347a6",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/vessel/tests/TestRudder.cpp": {
+    "mtime": 1782779084.1698816,
+    "ast_hash": "781e7b850ddea80510562e4abb6b1c51",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/vessel/src/Thruster.cpp": {
+    "mtime": 1782778006.0797448,
+    "ast_hash": "9323d5795d818ea34b572e1da48de604",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/vessel/src/DynamicVessel.cpp": {
+    "mtime": 1782778006.078273,
+    "ast_hash": "b506c0a78f46d70a507a8ca00feb72ce",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/vessel/src/Rudder.cpp": {
+    "mtime": 1782778006.0794315,
+    "ast_hash": "5580f9f6fe4e1fd47c689a0da0551265",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/vessel/src/controllers/TugParametricForces.cpp": {
+    "mtime": 1782778006.0803266,
+    "ast_hash": "9d09228d294bd4d89753425e1e0345ad",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/vessel/src/controllers/PrescribedController.cpp": {
+    "mtime": 1782778006.0802035,
+    "ast_hash": "788cc6192ef2e3c1dbd6336a2a4f8a19",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/vessel/src/controllers/ManeuverController.cpp": {
+    "mtime": 1782778006.0801122,
+    "ast_hash": "99e531958f27c83e106a1d6639c5566d",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/vessel/src/controllers/BerthManeuverSystem.cpp": {
+    "mtime": 1782778006.0800207,
+    "ast_hash": "83ff2e44a7b07e7f439349194cd592de",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/include/ymir/physics/AbstractBody.h": {
+    "mtime": 1782778006.061773,
+    "ast_hash": "87e82004b4a025c99a5ae481060c40eb",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/include/ymir/physics/ForceModel.h": {
+    "mtime": 1782778006.0623155,
+    "ast_hash": "d5199a6c8f97bc5452ef2c8680480e8a",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/include/ymir/physics/RigidBody6DOF.h": {
+    "mtime": 1782778006.067847,
+    "ast_hash": "e0f74e151c2197d6ba62740cb53d8115",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/include/ymir/physics/Forces.h": {
+    "mtime": 1782778006.0625558,
+    "ast_hash": "c435fdb53fc7e6655acc1d79cd5d7d49",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/include/ymir/physics/BodyState.h": {
+    "mtime": 1782778006.0620787,
+    "ast_hash": "db993c1b1cbdec657f862f7b8687a45b",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/include/ymir/physics/NavalForceModel.h": {
+    "mtime": 1782778006.0654435,
+    "ast_hash": "c659171668002814dc29ba18b8bfa5e9",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/include/ymir/physics/integrator/CvodeConfig.h": {
+    "mtime": 1782778006.07124,
+    "ast_hash": "1b0ffbbcfadbc24bc7b4914a413328b2",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/include/ymir/physics/integrator/RK45Integrator.h": {
+    "mtime": 1782778006.0714269,
+    "ast_hash": "803f124e3c3c3e2ef0cddb904afe7554",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/include/ymir/physics/integrator/IIntegrator.h": {
+    "mtime": 1782778006.071341,
+    "ast_hash": "506d7aee2aa9ad7f9bd7caef34002cd5",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/include/ymir/physics/forces/RudderForces.h": {
+    "mtime": 1782778327.0584912,
+    "ast_hash": "0f5c5d1bb2a9ef286a9807713e0e97e3",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/include/ymir/physics/forces/RestoringForces.h": {
+    "mtime": 1782778006.0695374,
+    "ast_hash": "d9b3e8811f63ab6b8c71579371001aae",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/include/ymir/physics/forces/ThrustForces.h": {
+    "mtime": 1782778006.0702372,
+    "ast_hash": "056c630cbe80ae8b66ac0ab249c051cc",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/include/ymir/physics/forces/DampingForces.h": {
+    "mtime": 1782778006.0690372,
+    "ast_hash": "20d898fab5e9c6bd1125b8a686b3cc81",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/include/ymir/physics/forces/WindForces.h": {
+    "mtime": 1782778006.0708566,
+    "ast_hash": "20f831391308b9ccc741a88b9507eb4f",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/include/ymir/physics/forces/TugForces.h": {
+    "mtime": 1782778006.070639,
+    "ast_hash": "fcf5e467848fdf6d8ef366c70bd0ad35",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/include/ymir/physics/forces/CurrentForces.h": {
+    "mtime": 1782778006.0683014,
+    "ast_hash": "c2b03aa40f55bf0239278f960cce4f6d",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/include/ymir/physics/forces/InertialForces.h": {
+    "mtime": 1782778006.0691397,
+    "ast_hash": "2cb7adbc7aac3a81e3bf65c9f3a8a6cb",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/include/ymir/physics/forces/SquatForces.h": {
+    "mtime": 1782778006.0701272,
+    "ast_hash": "d744e063ccaacbfb7eafd7e229a46123",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/src/naval_physics.cpp": {
+    "mtime": 1782778006.0747728,
+    "ast_hash": "4b2d8a6ffa91e4d7f32934d55613af5c",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/src/physics.cpp": {
+    "mtime": 1782778006.0748749,
+    "ast_hash": "4a6cae1e79a185284b99cb3e5c45dc8d",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/src/RigidBody6DOF.cpp": {
+    "mtime": 1782778006.0717697,
+    "ast_hash": "f54aa24544619ea92d94d18ff92095f5",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/src/NavalForceModel.cpp": {
+    "mtime": 1782778006.0716743,
+    "ast_hash": "d85206bdeb84933b3e4c1741bd628b2b",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/src/integrator/RK45Integrator.cpp": {
+    "mtime": 1782778006.0746822,
+    "ast_hash": "ecabe99b8f7686f8a8ae253d6169cd5d",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/src/forces/RudderForces.cpp": {
+    "mtime": 1782778356.959887,
+    "ast_hash": "768b1bc3e71a3185970df3f43aa95c96",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/src/forces/CurrentForces.cpp": {
+    "mtime": 1782778006.0723116,
+    "ast_hash": "9f4a14852ce2da61a6bd9c5a21c07ca6",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/src/forces/SquatForces.cpp": {
+    "mtime": 1782778006.0742264,
+    "ast_hash": "fd81a3e9eab55db6fa7dc233ce195daa",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/src/forces/InertialForces.cpp": {
+    "mtime": 1782778006.0732634,
+    "ast_hash": "ea437b0ae9ea50a322fc8b592ab4fd3b",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/src/forces/DampingForces.cpp": {
+    "mtime": 1782778006.073155,
+    "ast_hash": "b84cd9d7b2832cf192869e3b2f0895a9",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/src/forces/TugForces.cpp": {
+    "mtime": 1782778006.074412,
+    "ast_hash": "e2091fbb4eb0065e9826eba2543663ec",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/src/forces/WindForces.cpp": {
+    "mtime": 1782778006.0745206,
+    "ast_hash": "a3d3b165df36bc5f67dbc5448def69a8",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/src/forces/ThrustForces.cpp": {
+    "mtime": 1782778006.074326,
+    "ast_hash": "d80c668c1f59cee829b6606554dc7e0f",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/src/forces/RestoringForces.cpp": {
+    "mtime": 1782778006.0739908,
+    "ast_hash": "a2e844a3317c4081e63cd72f28cf882d",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/examples/scenarios/two_bodies_at_rest.json": {
+    "mtime": 1782778006.056545,
+    "ast_hash": "0cf39b1ed8e225e95f14305f8922314f",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/examples/scenarios/body_with_initial_velocity.json": {
+    "mtime": 1782778006.056463,
+    "ast_hash": "649cf299b5e78cd39f15c23e3f8d9395",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/examples/body_types/simple_box.json": {
+    "mtime": 1782778006.0563297,
+    "ast_hash": "77937f1681ee68b2d5c0996650075b7b",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/examples/body_types/dynamic_vessel.json": {
+    "mtime": 1782778006.0561862,
+    "ast_hash": "ae988c43cf70e18fb063fd8715f9357d",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/src/wasm/YmirBindings.cpp": {
+    "mtime": 1782779078.5434012,
+    "ast_hash": "90ff5f4a942f3909fff638a28a4f77a3",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/packages/types/package.json": {
+    "mtime": 1782778006.2086225,
+    "ast_hash": "31c1b91e6b06bfed8b6ab65c8519cb60",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/packages/types/tsconfig.json": {
+    "mtime": 1782778006.2109182,
+    "ast_hash": "f95dc98cb73d0f761fac18606bb674bf",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/packages/types/vitest.config.ts": {
+    "mtime": 1782778006.2111495,
+    "ast_hash": "a9b6d10a2ec259070bc04a7ca64e00d5",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/packages/types/src/area.ts": {
+    "mtime": 1782778006.2089477,
+    "ast_hash": "ee00415d99f3387a96f75d2a7d2d2712",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/packages/types/src/vessel.ts": {
+    "mtime": 1782778006.2108178,
+    "ast_hash": "1681729d4ba4d817cdb2debc448d7dff",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/packages/types/src/environment.ts": {
+    "mtime": 1782778006.2101,
+    "ast_hash": "03842649ffa11a15839e962ddeaf225e",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/packages/types/src/scenario.ts": {
+    "mtime": 1782778006.2105687,
+    "ast_hash": "aa29a1e15377bbc4ab79396f8631669a",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/packages/types/src/environment.test.ts": {
+    "mtime": 1782778006.2093503,
+    "ast_hash": "a9631693ae1c2ec089b0f9056c4505bc",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/packages/types/src/index.ts": {
+    "mtime": 1782778006.210405,
+    "ast_hash": "481c2a043ec255063e701eb330b44c05",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/packages/types/src/simulation.ts": {
+    "mtime": 1782778006.210672,
+    "ast_hash": "98373eba7188cd5a9c101070d73e2e8c",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/tsconfig.node.json": {
+    "mtime": 1782778006.0526934,
+    "ast_hash": "80c61a6e3b5cbd090fe0ea0fe088360c",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/package.json": {
+    "mtime": 1782778006.0337129,
+    "ast_hash": "93a4b0defd6b3e265ea145b7fc29bc14",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/tsconfig.json": {
+    "mtime": 1782778006.052602,
+    "ast_hash": "a7f04a8cb1c9c730398e84259de2b1ea",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/playwright.config.ts": {
+    "mtime": 1782778006.0340226,
+    "ast_hash": "a9ac6ef10f17fe1cc2d228572f23b41a",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/vite.config.ts": {
+    "mtime": 1782778006.0534966,
+    "ast_hash": "4968cc130cba50207a3b9fcc24316f68",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/vitest.config.ts": {
+    "mtime": 1782778006.053626,
+    "ast_hash": "5dc80b48cd52f3894b969adb3d81c62c",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/e2e/smoke.spec.ts": {
+    "mtime": 1782778006.0327978,
+    "ast_hash": "c95563b8c2d88c1ddd2d9aca5ad25833",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/e2e/scenario-creator.spec.ts": {
+    "mtime": 1782778006.0321343,
+    "ast_hash": "05988d6e826f9d1c8ea673a961065d0e",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/e2e/regression.spec.ts": {
+    "mtime": 1782778006.031709,
+    "ast_hash": "5b4e151c445cd9e4d99bd3185352a930",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/e2e/vessel-panel.spec.ts": {
+    "mtime": 1782778006.0332246,
+    "ast_hash": "46ec3bf69224be6f1c3a7ca7723d1dd0",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/e2e/simulation-run.spec.ts": {
+    "mtime": 1782778006.0326734,
+    "ast_hash": "9f373dd81b651e0ed4ca94ddb6f681eb",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/App.tsx": {
+    "mtime": 1782778006.0346472,
+    "ast_hash": "370aed37e9edefdf9566cc40953ae998",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/main.tsx": {
+    "mtime": 1782778006.0443969,
+    "ast_hash": "a7a4b8027c7c252f877891c79f1b36ab",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/test/setup.ts": {
+    "mtime": 1782778006.0485995,
+    "ast_hash": "994c5bf3f0f8742b450d0ab09b0d6bb9",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/features/scenario-creator/store.test.ts": {
+    "mtime": 1782778006.043664,
+    "ast_hash": "9f370caa8827381e7ef708ce93aaf057",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/features/scenario-creator/ScenarioCreatorPage.test.tsx": {
+    "mtime": 1782778006.0355356,
+    "ast_hash": "4312a51968935a3d72fa5bbaab78610f",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/features/scenario-creator/ScenarioCreatorPage.tsx": {
+    "mtime": 1782778006.0358639,
+    "ast_hash": "59becb2e1e79d8ba4d5a0d6f86b2121f",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/features/scenario-creator/store.ts": {
+    "mtime": 1782778006.0440292,
+    "ast_hash": "e156b8b2cd0ce728f8af8150d8269fce",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/features/scenario-creator/components/ScenarioForm.test.tsx": {
+    "mtime": 1782778006.0398226,
+    "ast_hash": "642206c3ea8b87877f477fc5b80ce054",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/features/scenario-creator/components/ScenarioForm.tsx": {
+    "mtime": 1782778006.0401506,
+    "ast_hash": "48f4f6f5cd70605468971713a6b7cc35",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/features/scenario-creator/components/VesselMarker.tsx": {
+    "mtime": 1782778006.0418801,
+    "ast_hash": "0c0e5eab311ba1cbf62bca55d9c703dc",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/features/scenario-creator/components/SimulationControls.test.tsx": {
+    "mtime": 1782778006.040834,
+    "ast_hash": "507265efd734860816bce1423f7491d2",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/features/scenario-creator/components/VesselList.test.tsx": {
+    "mtime": 1782778006.041184,
+    "ast_hash": "4e7e84cb4c9f08e7bf297c75d51b6829",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/features/scenario-creator/components/EnvironmentConditionPanel.tsx": {
+    "mtime": 1782778006.039333,
+    "ast_hash": "2c629966501648e5009cb02f1734d0b7",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/features/scenario-creator/components/SimulationControls.tsx": {
+    "mtime": 1782778006.0410798,
+    "ast_hash": "b3e01593ee7c01b52dd5b85ec1683b8c",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/features/scenario-creator/components/VesselPanel.tsx": {
+    "mtime": 1782778006.0423584,
+    "ast_hash": "054a59f7d58f6e5929e2e88f4cd36b8b",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/features/scenario-creator/components/EnvironmentConditionPanel.test.tsx": {
+    "mtime": 1782778006.0387676,
+    "ast_hash": "59d4b079e8980c6800d969b70a2ac41b",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/features/scenario-creator/components/VesselList.tsx": {
+    "mtime": 1782778006.0414062,
+    "ast_hash": "1494297e8a7b4b79180147ca1d673d0f",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/features/scenario-creator/components/Sidebar.tsx": {
+    "mtime": 1782778006.0405393,
+    "ast_hash": "f948b4702eba03a4d51bf873ccff87ba",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/features/scenario-creator/components/AreaMapView.tsx": {
+    "mtime": 1782778006.0371652,
+    "ast_hash": "840b1e8d9dc680036df99f0f2a6c0312",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/features/scenario-creator/hooks/use-vessels.test.ts": {
+    "mtime": 1782778006.0431533,
+    "ast_hash": "244d3b375522acec2b009e28bb452cd4",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/features/scenario-creator/hooks/use-areas.ts": {
+    "mtime": 1782778006.0428774,
+    "ast_hash": "624dd99bbee4231da6a3d1e74fcbf94f",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/features/scenario-creator/hooks/use-areas.test.ts": {
+    "mtime": 1782778006.042717,
+    "ast_hash": "c2ca2104f6cf8799fb4f15a64615c038",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/features/scenario-creator/hooks/use-vessels.ts": {
+    "mtime": 1782778006.0434031,
+    "ast_hash": "8bd33421879bf8c92453b05398e1e12f",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/stores/simulationStore.ts": {
+    "mtime": 1782778006.0474153,
+    "ast_hash": "3935864c8d3c3ed7012a0cdba7058d7e",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/stores/environmentStore.test.ts": {
+    "mtime": 1782778006.0452242,
+    "ast_hash": "1f30468f823684f1ff992b2543e8c47a",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/stores/simulationStore.test.ts": {
+    "mtime": 1782778006.0464995,
+    "ast_hash": "616fa8f137d1a3bdc6d7562f989c90b1",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/stores/vesselPanelStore.ts": {
+    "mtime": 1782778006.0481708,
+    "ast_hash": "ff07f2e39c5ba555521bf30b3c328129",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/stores/environmentStore.ts": {
+    "mtime": 1782778006.0457928,
+    "ast_hash": "e9159d532d5f2fd8a1d37f5161499be3",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/components/TelemetryPanel.tsx": {
+    "mtime": 1782778006.0351012,
+    "ast_hash": "9962f98fb4dd4733d12266d2705d8c8e",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/lib/geo.test.ts": {
+    "mtime": 1782778006.0442145,
+    "ast_hash": "420d8c14344f8879012e1faee271ce74",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/lib/geo.ts": {
+    "mtime": 1782778006.044308,
+    "ast_hash": "3d70487f74e02cb385b686f2a9f68fcb",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/workers/simulation.worker.ts": {
+    "mtime": 1782778006.0524528,
+    "ast_hash": "759e50a347a98ae6ed53673b59520a0d",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/workers/mock-wasm.ts": {
+    "mtime": 1782778006.051205,
+    "ast_hash": "ce5eab80bbf167fff4062b97b7aa6ab1",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/src/workers/mock-wasm.test.ts": {
+    "mtime": 1782778006.04957,
+    "ast_hash": "535cbc7f0c5ea7a3cf5f75b3b188fd06",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/api/package.json": {
+    "mtime": 1782778006.0278528,
+    "ast_hash": "5f9fec4fefd785dac07d683b533726af",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/api/tsconfig.json": {
+    "mtime": 1782778006.030195,
+    "ast_hash": "2c327d662875b368828eb0a55e359151",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/api/src/index.ts": {
+    "mtime": 1782778006.029334,
+    "ast_hash": "bc48e3584f099dca4c23e2ea21d8b6b6",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/api/src/repositories/area-repository.ts": {
+    "mtime": 1782778006.0294657,
+    "ast_hash": "3e6c861c82a971530895138006f82c64",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/api/src/repositories/vessel-repository.ts": {
+    "mtime": 1782778006.029583,
+    "ast_hash": "6c8ea7e981930a841341a9c44d8d0100",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/api/src/db/schema.ts": {
+    "mtime": 1782778006.0281916,
+    "ast_hash": "1a6508f287c452aaeaa542832cd67643",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/api/src/db/seed-vessel1.ts": {
+    "mtime": 1782778006.0292044,
+    "ast_hash": "890ae473ec2e59c054b1b4ba720ff710",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/api/src/db/seed-area.ts": {
+    "mtime": 1782778006.028462,
+    "ast_hash": "4395d71d31763c78aac99c7fb1b151c2",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/api/src/db/index.ts": {
+    "mtime": 1782778006.0280664,
+    "ast_hash": "462052b23ec7b2e100ca83028059c900",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/api/src/routes/vessels.ts": {
+    "mtime": 1782778006.0299447,
+    "ast_hash": "bbc6c438debfb4684e732d7382599768",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/api/src/routes/areas.ts": {
+    "mtime": 1782778006.0297103,
+    "ast_hash": "2b34bc0aa9b1080ae1d31b8777b06ff6",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/api/src/routes/health.ts": {
+    "mtime": 1782778006.0297928,
+    "ast_hash": "0f1a85e99912df7704910f7f3e020d95",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/api/src/routes/scenarios.ts": {
+    "mtime": 1782778006.029872,
+    "ast_hash": "b72ade3e34abcfd7540dae0ba8aac06b",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/api/src/services/vessel-service.ts": {
+    "mtime": 1782778006.0301213,
+    "ast_hash": "f78bdbb62e5bc03e10e7442dd609949b",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/api/src/services/area-service.ts": {
+    "mtime": 1782778006.030051,
+    "ast_hash": "7ee63b8a53057037441bc0ab77556a2e",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/README.md": {
+    "mtime": 1782778006.027547,
+    "ast_hash": "87b825c8549c46fe91723d4addebc7f5",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docker-compose.yml": {
+    "mtime": 1782778006.0988247,
+    "ast_hash": "c1e4593d414e0d2fb0e0e7235a1773e2",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/AGENTS.md": {
+    "mtime": 1782778006.0262935,
+    "ast_hash": "0f070416f9b0d3222c509331e4752757",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/CLAUDE.md": {
+    "mtime": 1782778005.9555945,
+    "ast_hash": "7d5d8ef8199cff8de932a02b4a50e149",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/pnpm-workspace.yaml": {
+    "mtime": 1782778006.211875,
+    "ast_hash": "de6b9e7bb156f8dc12f68dc3d1a0b649",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/CMakeLists.wasm.txt": {
+    "mtime": 1782778006.054511,
+    "ast_hash": "d00a0bd7df54a00c7131398ee9069420",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/CMakeLists.txt": {
+    "mtime": 1782778006.0538979,
+    "ast_hash": "4230b3da6574a8ddc5095b055bfb5355",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/CMakeLists.txt": {
+    "mtime": 1782778006.0898304,
+    "ast_hash": "68441fa971b800b72bd9efcfc7f28877",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/simulation/CMakeLists.txt": {
+    "mtime": 1782778006.075032,
+    "ast_hash": "b34f458024ecd2102105181157928e21",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/world/CMakeLists.txt": {
+    "mtime": 1782778006.08407,
+    "ast_hash": "5750ce972bf52ece4a5b61bdb57e852b",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/common/CMakeLists.txt": {
+    "mtime": 1782778006.0567207,
+    "ast_hash": "de1649ed613169dc36ca06e4f7d12e8e",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/persistence/CMakeLists.txt": {
+    "mtime": 1782778006.0596511,
+    "ast_hash": "e5539c7790540ab54c2b64e3f79b3e67",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/vessel/CMakeLists.txt": {
+    "mtime": 1782778006.0766659,
+    "ast_hash": "c2238e1e8ec70d1703a04027f82e8c24",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/vessel/tests/CMakeLists.txt": {
+    "mtime": 1782778006.0805125,
+    "ast_hash": "fe7bf2b9ff3c779e47a0ac2f289db6f5",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/libs/physics/CMakeLists.txt": {
+    "mtime": 1782778006.0608568,
+    "ast_hash": "c90c1e48afa98515edbb6e12000ef198",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.agents/skills/cy-workflow-memory/SKILL.md": {
+    "mtime": 1782778005.9977977,
+    "ast_hash": "75698e84de6c4d11a96827c401e03059",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.agents/skills/cy-workflow-memory/references/memory-guidelines.md": {
+    "mtime": 1782778005.9979756,
+    "ast_hash": "fbe5dd0b4ea6bc4fbeb5b7201364fac8",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.agents/skills/compozy/SKILL.md": {
+    "mtime": 1782778005.994067,
+    "ast_hash": "27b6d9b29c0a0c9cf3ebec053c4ddc94",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.agents/skills/compozy/references/workflow-guide.md": {
+    "mtime": 1782778005.9950407,
+    "ast_hash": "7484b7df6677397e2ff8db647537ae95",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.agents/skills/compozy/references/config-reference.md": {
+    "mtime": 1782778005.9947345,
+    "ast_hash": "05245d98f14e2e3b5ca207cf5eb5d9df",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.agents/skills/compozy/references/cli-reference.md": {
+    "mtime": 1782778005.9945753,
+    "ast_hash": "7baa4b28fd0c8c6697069f2c84d62bd7",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.agents/skills/compozy/references/skills-reference.md": {
+    "mtime": 1782778005.9949005,
+    "ast_hash": "fd161453555ff04e96f8b72552ea15bc",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.agents/skills/cy-review-round/SKILL.md": {
+    "mtime": 1782778005.997326,
+    "ast_hash": "7dc015a83f9afa6bb7ad882469eb9efd",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.agents/skills/cy-review-round/references/issue-template.md": {
+    "mtime": 1782778005.9974587,
+    "ast_hash": "523ae1594d5f9a9cae24fb2a66cbe389",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.agents/skills/cy-review-round/references/review-criteria.md": {
+    "mtime": 1782778005.9975777,
+    "ast_hash": "ad690cfd962fbb562967f839e6327b9a",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.agents/skills/cy-final-verify/SKILL.md": {
+    "mtime": 1782778005.996994,
+    "ast_hash": "f854c289f27ed8086db64c24084950f3",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.agents/skills/cy-execute-task/SKILL.md": {
+    "mtime": 1782778005.99667,
+    "ast_hash": "ce73e7030ee708f04782056c2b9886c1",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.agents/skills/cy-execute-task/references/tracking-checklist.md": {
+    "mtime": 1782778005.9968188,
+    "ast_hash": "d5701643ed0b4a0e3bb8abd7298fcf0c",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.agents/skills/cy-create-prd/SKILL.md": {
+    "mtime": 1782778005.9952254,
+    "ast_hash": "a1031dec07b5304bdf9c89c93d4f4ccf",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.agents/skills/cy-create-prd/references/question-protocol.md": {
+    "mtime": 1782778005.9956832,
+    "ast_hash": "8e6a301d254d93e355462a4655b6bb77",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.agents/skills/cy-create-prd/references/prd-template.md": {
+    "mtime": 1782778005.9955935,
+    "ast_hash": "806440e6207a2833b7d97c725b8ebeb3",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.agents/skills/cy-create-prd/references/adr-template.md": {
+    "mtime": 1782778005.9954853,
+    "ast_hash": "44d26f6d99d74759eabbe3bd0b27653f",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.agents/skills/cy-create-tasks/SKILL.md": {
+    "mtime": 1782778005.9959335,
+    "ast_hash": "606920ecee857809aa2f1dc94a7c4c14",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.agents/skills/cy-create-tasks/references/task-context-schema.md": {
+    "mtime": 1782778005.9960895,
+    "ast_hash": "8e508b2ce3a218568cefbc83fc3124ea",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.agents/skills/cy-create-tasks/references/task-template.md": {
+    "mtime": 1782778005.9961824,
+    "ast_hash": "5ec72eccb169768655485bb51418f262",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.agents/skills/cy-fix-reviews/SKILL.md": {
+    "mtime": 1782778005.9971526,
+    "ast_hash": "c9e1203f07790f05c621227040444cc4",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.agents/skills/cy-create-techspec/SKILL.md": {
+    "mtime": 1782778005.9963446,
+    "ast_hash": "352132f96964aaf8a99459dc551a8b26",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.agents/skills/cy-create-techspec/references/techspec-template.md": {
+    "mtime": 1782778005.9965441,
+    "ast_hash": "07db73aaffa7e49fb637844f37c629b0",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.agents/skills/cy-create-techspec/references/adr-template.md": {
+    "mtime": 1782778005.996463,
+    "ast_hash": "44d26f6d99d74759eabbe3bd0b27653f",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/prd.md": {
+    "mtime": 1782778006.0195675,
+    "ast_hash": "0ec25c7c65a2cca104abbcf985511c46",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/task_04.md": {
+    "mtime": 1782778006.0219646,
+    "ast_hash": "33722b85588b359972b3abf5eb33837a",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/task_01.md": {
+    "mtime": 1782778006.0200632,
+    "ast_hash": "97e8acd130819a0ad2f75cba58c05a29",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/task_05.md": {
+    "mtime": 1782778006.022824,
+    "ast_hash": "36600364a6fe77b583e792cc510d9ebd",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/task_02.md": {
+    "mtime": 1782778006.0206733,
+    "ast_hash": "a6acdfac5916536eb9dba6271aa71366",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/task_06.md": {
+    "mtime": 1782778006.0235562,
+    "ast_hash": "6619bf2cb223b3801c3284bc29578abb",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/task_07.md": {
+    "mtime": 1782778006.0238593,
+    "ast_hash": "3c545cd0adf4b93e72d3412c272e3f80",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/task_03.md": {
+    "mtime": 1782778006.0213614,
+    "ast_hash": "564f913b5660e583058bcdcde75f45cf",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/task_08.md": {
+    "mtime": 1782778006.0243654,
+    "ast_hash": "38e263de73e4be90fde9581ef1a55806",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/_prd.md": {
+    "mtime": 1782778005.9987807,
+    "ast_hash": "0ec25c7c65a2cca104abbcf985511c46",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/_tasks.md": {
+    "mtime": 1782778005.9995909,
+    "ast_hash": "5a1313f8017b77297103b7cbab3e7692",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/_techspec.md": {
+    "mtime": 1782778006.0021873,
+    "ast_hash": "63dd7633ab875ee22fe0edca71af72bb",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/task_09.md": {
+    "mtime": 1782778006.0248504,
+    "ast_hash": "897190d3bac5403fcc0fec4b97dc078e",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/memory/task_04.md": {
+    "mtime": 1782778006.015986,
+    "ast_hash": "379c9114531ed38e7a095d1012d5b162",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/memory/task_01.md": {
+    "mtime": 1782778006.0126934,
+    "ast_hash": "6a97ee431a46b8f1523adbfae427997b",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/memory/task_05.md": {
+    "mtime": 1782778006.016982,
+    "ast_hash": "a20ba394fc68c5cd354ffea03f15844d",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/memory/task_02.md": {
+    "mtime": 1782778006.0131617,
+    "ast_hash": "4410dd9375a0f8c74f8083ee9e52fed7",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/memory/task_06.md": {
+    "mtime": 1782778006.0174842,
+    "ast_hash": "567f4fefcb921d911dfe363c1103a692",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/memory/MEMORY.md": {
+    "mtime": 1782778006.012361,
+    "ast_hash": "3bdd3e95c24564792b7dd4b0cb1f5206",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/memory/task_07.md": {
+    "mtime": 1782778006.0179296,
+    "ast_hash": "ca5859e4b2d689bcc76efb2a91f560da",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/memory/task_03.md": {
+    "mtime": 1782778006.014628,
+    "ast_hash": "8b7b7df1ce7eb5b1089679f8fdc6b6dc",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/memory/task_08.md": {
+    "mtime": 1782778006.0185075,
+    "ast_hash": "1fb7dbc7553ebc1985d3069d713d5352",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/memory/task_09.md": {
+    "mtime": 1782778006.0189621,
+    "ast_hash": "42791a17b6102a7278990c04238c44ad",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/adrs/adr-002.md": {
+    "mtime": 1782778006.0056612,
+    "ast_hash": "53b33fa0aa7a0c4455ba101c50df2b6e",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/adrs/adr-006.md": {
+    "mtime": 1782778006.0115812,
+    "ast_hash": "67778c86961de865e7b3faba221bbeef",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/adrs/adr-003.md": {
+    "mtime": 1782778006.009992,
+    "ast_hash": "faa81a39cb26d7ff1d036774e5e1a2c4",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/adrs/adr-004.md": {
+    "mtime": 1782778006.0108564,
+    "ast_hash": "d035bf4fc6328a56d7a8410310af55c1",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/adrs/adr-001.md": {
+    "mtime": 1782778006.0052762,
+    "ast_hash": "c7b3baf716d18dcd8f9dbeeae52b49a2",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.compozy/tasks/environmental-conditions/adrs/adr-005.md": {
+    "mtime": 1782778006.0113633,
+    "ast_hash": "7fe5f0ad00857c34a0473cb196091ad7",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/adr/README.md": {
+    "mtime": 1782778006.0999799,
+    "ast_hash": "03fd968e7f1e30468aa698860ba90243",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/adr/phase-02-world/adr-002.md": {
+    "mtime": 1782778006.1008558,
+    "ast_hash": "674a8410b03e45e5f6ce69ef5b881af0",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/adr/phase-02-world/adr-003.md": {
+    "mtime": 1782778006.1009398,
+    "ast_hash": "cdb46098537b52b358ab57a589a5cd21",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/adr/phase-02-world/adr-004.md": {
+    "mtime": 1782778006.101032,
+    "ast_hash": "dd98de9d4f169207ff39de8a61bd1f72",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/adr/phase-02-world/adr-001.md": {
+    "mtime": 1782778006.1007605,
+    "ast_hash": "e99b6aa474f595450e79223ccd66b048",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/adr/phase-02-world/adr-005.md": {
+    "mtime": 1782778006.101136,
+    "ast_hash": "21c1fb48042ad1dfe947d0736e606f35",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/adr/phase3/adr-001.md": {
+    "mtime": 1782778006.101281,
+    "ast_hash": "48a7ee8a2af52650a70f31de7bfbc785",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/adr/repo-reorganization/adr-002.md": {
+    "mtime": 1782778006.1015394,
+    "ast_hash": "f93d1f9ebd0cf83b83841fc6cb9b9727",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/adr/repo-reorganization/adr-003.md": {
+    "mtime": 1782778006.1016703,
+    "ast_hash": "10558a0f4e3a5558475c19e18484727b",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/adr/repo-reorganization/adr-001.md": {
+    "mtime": 1782778006.101413,
+    "ast_hash": "cedd0243de4b74ee11cd0abb7279dcaa",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/adr/phase-01-vessel/adr-002.md": {
+    "mtime": 1782778006.1002586,
+    "ast_hash": "8f007b11b1aa3bf3a4d9517b370402ba",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/adr/phase-01-vessel/adr-003.md": {
+    "mtime": 1782778006.1004026,
+    "ast_hash": "e1ecc44717e6e3ff73858c43ce670167",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/adr/phase-01-vessel/adr-004.md": {
+    "mtime": 1782778006.1005323,
+    "ast_hash": "78b59f0140c942e1921bbe3d9c58458f",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/adr/phase-01-vessel/adr-001.md": {
+    "mtime": 1782778006.1001475,
+    "ast_hash": "7ddcb1d32766e19d75c186584b7fa4cb",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/discussions/requisitos.md": {
+    "mtime": 1782778006.104391,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/discussions/multi-physics.md": {
+    "mtime": 1782778006.1040318,
+    "ast_hash": "bb40b4e227a6774f02cf7b58b5d92d46",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/discussions/world-architecture.md": {
+    "mtime": 1782778006.1045358,
+    "ast_hash": "be7f6e48ffeb448e8c8e4b72d1af6e73",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/discussions/questions.md": {
+    "mtime": 1782778006.1043632,
+    "ast_hash": "017fa079b8f3da5ac8c41fe6d4413c10",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/discussions/decisions.md": {
+    "mtime": 1782778006.1035066,
+    "ast_hash": "08b801eed761330604fe5298502ac2f3",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/specs/features/monorepo-migration/tasks.md": {
+    "mtime": 1782778006.1200345,
+    "ast_hash": "953fb695a3bb9c1cbcd9324579386840",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/specs/features/monorepo-migration/spec.md": {
+    "mtime": 1782778006.119886,
+    "ast_hash": "809e02dab98a64db4ecc08a75f59db28",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/specs/features/monorepo-migration/design.md": {
+    "mtime": 1782778006.1195886,
+    "ast_hash": "b9df76611faf37aec5d98ccbc1cfb8dd",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/specs/features/vessel-data/spec.md": {
+    "mtime": 1782778006.1206813,
+    "ast_hash": "6d5e18e3614088b365cfab241f485cc8",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/specs/features/scenario-creator/tasks.md": {
+    "mtime": 1782778006.1205475,
+    "ast_hash": "46163e9d4788d467e0a86fc34eb9e276",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/specs/features/scenario-creator/spec.md": {
+    "mtime": 1782778006.1204193,
+    "ast_hash": "433881c3329ae78e15cda13fc23ef7a9",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/specs/features/scenario-creator/design.md": {
+    "mtime": 1782778006.1202466,
+    "ast_hash": "afc45f291655e7c8a87ee92a7ddbfc14",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/specs/project/PROJECT.md": {
+    "mtime": 1782778006.1208029,
+    "ast_hash": "629470a04618d50b040d177245e1a43f",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/specs/project/STATE.md": {
+    "mtime": 1782778006.120956,
+    "ast_hash": "f088e65f24c191782b198bd729ad8e2b",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/specs/project/ROADMAP.md": {
+    "mtime": 1782778006.12088,
+    "ast_hash": "ce43e4c0a0454a7ce4ad89997410a7cb",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/specs/codebase/STACK.md": {
+    "mtime": 1782778006.1191373,
+    "ast_hash": "6d244ab746754918dec0e21d7753e58d",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/specs/codebase/ARCHITECTURE.md": {
+    "mtime": 1782778006.1189706,
+    "ast_hash": "8548f92057a9c2373d53b5c71feaadcf",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/specs/codebase/STRUCTURE.md": {
+    "mtime": 1782778006.119224,
+    "ast_hash": "ea616849db99b9547910028a8448bc83",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/specs/codebase/CONVENTIONS.md": {
+    "mtime": 1782778006.1190548,
+    "ast_hash": "517d35e9183eb2f1e90b748f75e44a71",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/specs/codebase/TESTING.md": {
+    "mtime": 1782778006.1193323,
+    "ast_hash": "5f764b2780a79bf4ac1685e23e6d647a",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-02-world/task_04.md": {
+    "mtime": 1782778006.1123505,
+    "ast_hash": "d9a00698f74985dee6934ab630cabe75",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-02-world/task_01.md": {
+    "mtime": 1782778006.112039,
+    "ast_hash": "a643ccbd469446f457a3ced78087deed",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-02-world/task_05.md": {
+    "mtime": 1782778006.112454,
+    "ast_hash": "083ce5fb4856ac81ea7f6f5dbf0dc5bb",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-02-world/task_02.md": {
+    "mtime": 1782778006.1121416,
+    "ast_hash": "01a7697ee787618cd8640d2d17e11c76",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-02-world/task_06.md": {
+    "mtime": 1782778006.1125612,
+    "ast_hash": "3bcb61f21d5f9d2299a95a2831055df2",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-02-world/task_07.md": {
+    "mtime": 1782778006.1126573,
+    "ast_hash": "6b58f31ed6bd38f3543163dc0f91a361",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-02-world/task_03.md": {
+    "mtime": 1782778006.1122422,
+    "ast_hash": "1e9eb4693c104d896c15c6f4c3c9df1d",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-02-world/_prd.md": {
+    "mtime": 1782778006.110899,
+    "ast_hash": "55d9ff26f6254c5c9e9fc2112ae5335a",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-02-world/_tasks.md": {
+    "mtime": 1782778006.11099,
+    "ast_hash": "47abf6cd27d4ae155cfb2f9e00ee0886",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-02-world/_techspec.md": {
+    "mtime": 1782778006.1111937,
+    "ast_hash": "ee49b9679db3bea3b2bef4935ce47ec3",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-02-world/memory/task_04.md": {
+    "mtime": 1782778006.111707,
+    "ast_hash": "235812d39ca12e2893e8341db91858ef",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-02-world/memory/task_01.md": {
+    "mtime": 1782778006.1114368,
+    "ast_hash": "fa6aff14bbad99b6dc824aecae1bba0f",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-02-world/memory/task_05.md": {
+    "mtime": 1782778006.1117866,
+    "ast_hash": "ea3d93ba17f391a7038765b985fae634",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-02-world/memory/task_02.md": {
+    "mtime": 1782778006.1115246,
+    "ast_hash": "e8f6bcb219ed7b96ee8ebc67a5b836d8",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-02-world/memory/task_06.md": {
+    "mtime": 1782778006.1118658,
+    "ast_hash": "6ddaaeceb86057d432bd0accc04307c3",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-02-world/memory/MEMORY.md": {
+    "mtime": 1782778006.111347,
+    "ast_hash": "ebc8f9200d6974ab16edf8b7929c9931",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-02-world/memory/task_07.md": {
+    "mtime": 1782778006.111935,
+    "ast_hash": "a9c23b3f3446fdcb3281c90bcb5cb680",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-02-world/memory/task_03.md": {
+    "mtime": 1782778006.1116135,
+    "ast_hash": "5b8c446cf556a77ff5227be28a7ad42f",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/prds/prd.md": {
+    "mtime": 1782778006.114625,
+    "ast_hash": "32a66158218a3687e6737fd94a9be4dd",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/prds/roadmap.md": {
+    "mtime": 1782778006.1147547,
+    "ast_hash": "365a67794d24444681cd0b2814e2ce04",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/prds/phases/phase-04-mooring-anchoring.md": {
+    "mtime": 1782778006.1141717,
+    "ast_hash": "8b96086570dc6ada3deac82543b415a0",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/prds/phases/phase-01-vessel.md": {
+    "mtime": 1782778006.1133733,
+    "ast_hash": "15c1f9c363c70b30adbee415d7dc1334",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/prds/phases/phase-03-server.md": {
+    "mtime": 1782778006.1137497,
+    "ast_hash": "63c2b1c892385c850007ccd088a84168",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/prds/phases/phase-02-world.md": {
+    "mtime": 1782778006.1134934,
+    "ast_hash": "dfa7963cadfac8bac420c262e18c4589",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/prds/phases/phase-05-collisions.md": {
+    "mtime": 1782778006.114377,
+    "ast_hash": "585e3a742941a28b5023cf6dfc4e20b5",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/prds/phases/phase-06-persistence.md": {
+    "mtime": 1782778006.1145065,
+    "ast_hash": "10b568933bab4378879e80e191f43afc",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/prds/modules/physics.md": {
+    "mtime": 1782778006.1129217,
+    "ast_hash": "1e33548ab8bcab5ba4f8b982a315a300",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/prds/modules/vessel.md": {
+    "mtime": 1782778006.113101,
+    "ast_hash": "bc52875acfdda9d8ce39cc3ced445300",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/prds/modules/simulation.md": {
+    "mtime": 1782778006.1129997,
+    "ast_hash": "0be89e6acb432739ee677cc7df654a66",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/prds/modules/world.md": {
+    "mtime": 1782778006.11321,
+    "ast_hash": "83544f046e5b0a431e8de68e0b18dea2",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/prds/modules/infrastructure.md": {
+    "mtime": 1782778006.1128156,
+    "ast_hash": "22635c361662a7f3b4a2c3b80aa23b02",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/task_04.md": {
+    "mtime": 1782778006.1176605,
+    "ast_hash": "5e0dfc9506a5bc022a8111c86f2a7c4c",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/task_14.md": {
+    "mtime": 1782778006.1187377,
+    "ast_hash": "3e2c88d51c32ba7696e4a469a260ca19",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/task_10.md": {
+    "mtime": 1782778006.1183782,
+    "ast_hash": "8841f288957c8078179c79b878e10762",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/task_01.md": {
+    "mtime": 1782778006.1172945,
+    "ast_hash": "442df2764e0b11e04fa1993887995995",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/task_11.md": {
+    "mtime": 1782778006.1184685,
+    "ast_hash": "44b18de77a74994c04d408db9d11d31c",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/task_05.md": {
+    "mtime": 1782778006.117807,
+    "ast_hash": "178d7350abc6b185b07f82cc9a2f314e",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/task_02.md": {
+    "mtime": 1782778006.117428,
+    "ast_hash": "2df4c6a161c62bc7822df6e7b86a44ef",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/task_12.md": {
+    "mtime": 1782778006.118551,
+    "ast_hash": "05386e69fec915e9de64b694fc224ef8",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/task_06.md": {
+    "mtime": 1782778006.117944,
+    "ast_hash": "823b140d8a81491d102c8fb753af9db9",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/task_07.md": {
+    "mtime": 1782778006.118083,
+    "ast_hash": "759f618db93bd7656e8ae4bacf57ba2e",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/task_03.md": {
+    "mtime": 1782778006.1175466,
+    "ast_hash": "c05fa8273e34f27195e300818ad95dfc",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/task_13.md": {
+    "mtime": 1782778006.1186554,
+    "ast_hash": "3216678bc8c83ce07fc8797784ea0632",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/task_08.md": {
+    "mtime": 1782778006.1182106,
+    "ast_hash": "540e865380c67ca830e8fc6aab7bf690",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/_prd.md": {
+    "mtime": 1782778006.1150434,
+    "ast_hash": "ae81295c2769ba9bedc7e16287826b6a",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/_tasks.md": {
+    "mtime": 1782778006.115257,
+    "ast_hash": "d93ab75b6d29e88d898b5f8bfc80c011",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/_techspec.md": {
+    "mtime": 1782778006.1154518,
+    "ast_hash": "82c3fb38a0e2f07e866a5efafd66bf33",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/task_09.md": {
+    "mtime": 1782778006.118289,
+    "ast_hash": "ec424849d507e5092c669ea3b9b659ae",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/memory/task_04.md": {
+    "mtime": 1782778006.11609,
+    "ast_hash": "aa7bd4ef92d0a5305bfdbca3b78e0cb8",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/memory/task_14.md": {
+    "mtime": 1782778006.1171932,
+    "ast_hash": "e66394ebfb72f147ce667abd86f61d97",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/memory/task_10.md": {
+    "mtime": 1782778006.1167502,
+    "ast_hash": "d5f70d52387590e1ef07d3e4bd0eb6e6",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/memory/task_11.md": {
+    "mtime": 1782778006.1168995,
+    "ast_hash": "34f4b4cc68e2c348d954e98ecb471b37",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/memory/task_05.md": {
+    "mtime": 1782778006.1161885,
+    "ast_hash": "381d6ac48eab934d72677ef38215f998",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/memory/task_02.md": {
+    "mtime": 1782778006.1158993,
+    "ast_hash": "1567dfbf389491f083f9badd5488137a",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/memory/task_12.md": {
+    "mtime": 1782778006.1169755,
+    "ast_hash": "47b7f3eea1113596408a6898534fa8bf",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/memory/task_06.md": {
+    "mtime": 1782778006.1162684,
+    "ast_hash": "6f6001095ee2988a6592b0771f943f3e",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/memory/MEMORY.md": {
+    "mtime": 1782778006.1157641,
+    "ast_hash": "3839cf0e7f16f1a26dd4ac180f132a9a",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/memory/task_07.md": {
+    "mtime": 1782778006.1163678,
+    "ast_hash": "2babfd81a8b8c7d84b75e1f637e64bcf",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/memory/task_03.md": {
+    "mtime": 1782778006.115999,
+    "ast_hash": "9f6c270048c55d67861cee4235df311e",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/memory/task_13.md": {
+    "mtime": 1782778006.1170745,
+    "ast_hash": "6a10b3a57b3f86708b2e14ada62f2d7d",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/memory/task_08.md": {
+    "mtime": 1782778006.1164906,
+    "ast_hash": "c35456d26d1a4bf6130215ead6511136",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/repo-reorganization/memory/task_09.md": {
+    "mtime": 1782778006.1166298,
+    "ast_hash": "8e7a59e639f24810b622822419a39652",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-01-vessel/task_04.md": {
+    "mtime": 1782778006.1099868,
+    "ast_hash": "d36651ff8aef9cf285456f0b6466e012",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-01-vessel/task_01.md": {
+    "mtime": 1782778006.1092603,
+    "ast_hash": "5a2377be29f670237e38823ee02ba312",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-01-vessel/task_05.md": {
+    "mtime": 1782778006.110106,
+    "ast_hash": "0f8fd4a043a9c5cbe59a5573fe9e2f38",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-01-vessel/task_02.md": {
+    "mtime": 1782778006.109398,
+    "ast_hash": "fddf41d213bd20f98f30e7fa80395885",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-01-vessel/task_06.md": {
+    "mtime": 1782778006.110256,
+    "ast_hash": "744f07c409479e2141bd8fa9386ec80e",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-01-vessel/task_07.md": {
+    "mtime": 1782778006.1104279,
+    "ast_hash": "799afcf85b7facca7bcf2b1ccdbfcefe",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-01-vessel/task_03.md": {
+    "mtime": 1782778006.1098464,
+    "ast_hash": "9592fa0ad14a549e63516575f1da5110",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-01-vessel/task_08.md": {
+    "mtime": 1782778006.1105552,
+    "ast_hash": "578658642ebd5f4eb088cb2d11d61d6a",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-01-vessel/_prd.md": {
+    "mtime": 1782778006.1065154,
+    "ast_hash": "b9f1a75fcc83e1b9af863a38710d737b",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-01-vessel/_tasks.md": {
+    "mtime": 1782778006.1066337,
+    "ast_hash": "67bc7b77e3e3c2bf421ab01c59841bd9",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-01-vessel/_techspec.md": {
+    "mtime": 1782778006.1069431,
+    "ast_hash": "ec651b2e70a8096e0f70e8decd362612",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-01-vessel/task_09.md": {
+    "mtime": 1782778006.1106837,
+    "ast_hash": "5cc0b5a286e894666e6e16e6163455fe",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-01-vessel/memory/task_04.md": {
+    "mtime": 1782778006.1084096,
+    "ast_hash": "ce44f6d7f5086d0fd57b8317df230667",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-01-vessel/memory/task_01.md": {
+    "mtime": 1782778006.1074467,
+    "ast_hash": "9f4a1862f01b0e26d81a5c0f93818d18",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-01-vessel/memory/task_05.md": {
+    "mtime": 1782778006.1086771,
+    "ast_hash": "1197a6d8055b7f3ac502ddd4fc8d4607",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-01-vessel/memory/task_02.md": {
+    "mtime": 1782778006.107582,
+    "ast_hash": "d9769179832be371d9d9c1942a03680f",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-01-vessel/memory/task_06.md": {
+    "mtime": 1782778006.1088033,
+    "ast_hash": "a0a7a15c6c891e34004556ad16694597",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-01-vessel/memory/MEMORY.md": {
+    "mtime": 1782778006.107318,
+    "ast_hash": "f20d0ddc39e20b74f50949b244170270",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-01-vessel/memory/task_07.md": {
+    "mtime": 1782778006.1089215,
+    "ast_hash": "7480446c56ddce8ca38755723b1bcf47",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-01-vessel/memory/task_03.md": {
+    "mtime": 1782778006.1081731,
+    "ast_hash": "cdc1431bf3aef7624936edef1cf46029",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-01-vessel/memory/task_08.md": {
+    "mtime": 1782778006.10903,
+    "ast_hash": "5307be1061292bf92cd17fbc5ae80429",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/planning/phase-01-vessel/memory/task_09.md": {
+    "mtime": 1782778006.1091309,
+    "ast_hash": "d8a5dda61cf51ee7fd3eac531975208c",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/legacy/05_maneuver_system.md": {
+    "mtime": 1782778006.10563,
+    "ast_hash": "ad837653e7120ff27522d355f43d6d8e",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/legacy/inicio.md": {
+    "mtime": 1782778006.1062765,
+    "ast_hash": "118251b8662bb842131846bcecf0ca24",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/legacy/04_wave_engine.md": {
+    "mtime": 1782778006.1054742,
+    "ast_hash": "f514489878cdbddd55232437523d1f05",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/legacy/README.md": {
+    "mtime": 1782778006.1061566,
+    "ast_hash": "c5d3764599e8965921dedc42596f5b18",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/legacy/06_math_utilities.md": {
+    "mtime": 1782778006.1057715,
+    "ast_hash": "e173cbb46e7b84949b3dd0d5b52c8941",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/legacy/02_integration_loop.md": {
+    "mtime": 1782778006.105012,
+    "ast_hash": "c308261e6b4b996931d7b91ff3de0958",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/legacy/07_public_apis.md": {
+    "mtime": 1782778006.105918,
+    "ast_hash": "6ac467dde62f5290a3bc1bca7f643b50",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/legacy/03_force_models.md": {
+    "mtime": 1782778006.1051424,
+    "ast_hash": "b4d740ed50eefaac050c204e04b98be2",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/legacy/01_state_and_data_formats.md": {
+    "mtime": 1782778006.1048605,
+    "ast_hash": "4bb5ccfdbbc0e2f4023251eecae2a5f8",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/legacy/08_known_issues.md": {
+    "mtime": 1782778006.10606,
+    "ast_hash": "00f7232e59037957f3fc10c324188319",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/legacy/00_overview.md": {
+    "mtime": 1782778006.1047392,
+    "ast_hash": "70aecc3429883a6b261f5fa61a5e939e",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/architecture/bounded-contexts.md": {
+    "mtime": 1782778006.1020238,
+    "ast_hash": "274616f4d73ab8a4d56e06d1ea001e6d",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/architecture/README.md": {
+    "mtime": 1782778006.1018267,
+    "ast_hash": "840b9b11d1db6268d3a29fee5cae133e",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/architecture/data-flow.md": {
+    "mtime": 1782778006.1025255,
+    "ast_hash": "f7b187f47e0161aead150968cb4d0d13",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/conventions/backend.md": {
+    "mtime": 1782778006.1031141,
+    "ast_hash": "16d5a02efb2a6efee74c3edb881e8256",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/docs/conventions/frontend.md": {
+    "mtime": 1782778006.1032636,
+    "ast_hash": "59640735cf24a2041cb589ef9b291d26",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/.github/workflows/ci.yml": {
+    "mtime": 1782778006.0256395,
+    "ast_hash": "3d8bdd48942279ac36151532be99a328",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/web/index.html": {
+    "mtime": 1782778006.0333254,
+    "ast_hash": "4f40566caaba513cac6cb46366c06614",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/server/CMakeLists.txt": {
+    "mtime": 1782778006.03064,
+    "ast_hash": "961756bee3a614138c3132a2af884076",
+    "semantic_hash": ""
+  },
+  "/Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/apps/fast-time/CMakeLists.txt": {
+    "mtime": 1782778006.0304403,
+    "ast_hash": "c8a11df9b0d9ad89050aece870cd504a",
+    "semantic_hash": ""
   }
 }
