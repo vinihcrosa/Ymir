@@ -1,33 +1,45 @@
+import type { CSSProperties } from 'react'
 import { useScenarioStore } from '../store'
 import { useAreas } from '../hooks/use-areas'
+import { tokens } from '../../../theme/tokens'
+
+const labelStyle: CSSProperties = {
+  display: 'block',
+  marginBottom: tokens.space.xs,
+  fontSize: tokens.fontSize.label,
+  fontWeight: tokens.fontWeight.semibold,
+  color: tokens.color.textSecondary,
+}
+
+const controlStyle: CSSProperties = {
+  width: '100%',
+  height: tokens.size.inputHeight,
+  padding: `0 ${tokens.space.md}px`,
+  boxSizing: 'border-box',
+  fontFamily: tokens.font.sans,
+  fontSize: tokens.fontSize.body,
+  color: tokens.color.textPrimary,
+  background: tokens.color.surface,
+  border: `1px solid ${tokens.color.border}`,
+  borderRadius: tokens.radius.button,
+}
 
 export function ScenarioForm() {
   const { name, areaId, setName, setArea } = useScenarioStore()
   const { areas, loading, error, retry } = useAreas()
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: tokens.space.md }}>
       <div>
-        <label style={{ display: 'block', marginBottom: '0.25rem', fontWeight: 600 }}>
-          Nome do cenário
-        </label>
-        <input
-          type="text"
-          value={name}
-          onChange={e => setName(e.target.value)}
-          style={{ width: '100%', padding: '0.5rem', boxSizing: 'border-box' }}
-        />
+        <label style={labelStyle}>Nome do cenário</label>
+        <input type="text" value={name} onChange={e => setName(e.target.value)} style={controlStyle} />
       </div>
       <div>
-        <label style={{ display: 'block', marginBottom: '0.25rem', fontWeight: 600 }}>
-          Área
-        </label>
+        <label style={labelStyle}>Área</label>
         {error ? (
-          <div>
-            <span style={{ color: 'red', fontSize: '0.875rem' }}>Erro ao carregar áreas.</span>
-            <button type="button" onClick={retry} style={{ marginLeft: '0.5rem' }}>
-              Tentar novamente
-            </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: tokens.space.sm }}>
+            <span style={{ color: tokens.color.danger, fontSize: tokens.fontSize.label }}>Erro ao carregar áreas.</span>
+            <button type="button" onClick={retry}>Tentar novamente</button>
           </div>
         ) : (
           <select
@@ -37,7 +49,7 @@ export function ScenarioForm() {
               const found = areas.find(a => a.id === Number(e.target.value))
               if (found) setArea(found)
             }}
-            style={{ width: '100%', padding: '0.5rem' }}
+            style={controlStyle}
           >
             <option value="">{loading ? 'Carregando áreas...' : 'Selecionar área'}</option>
             {areas.map(a => (

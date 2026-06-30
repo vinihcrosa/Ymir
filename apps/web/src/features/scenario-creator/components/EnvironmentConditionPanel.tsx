@@ -1,54 +1,55 @@
 import { useEnvironmentStore } from '../../../stores/environmentStore'
 import type { EnvironmentConditionDTO, WaveConditionDTO } from '@ymir/types'
+import { tokens } from '../../../theme/tokens'
 
 const panelStyle: React.CSSProperties = {
-  background: '#fff',
-  border: '1px solid #e5e7eb',
-  borderRadius: 8,
-  padding: '16px',
+  background: tokens.color.surface,
+  border: `1px solid ${tokens.color.border}`,
+  borderRadius: tokens.radius.button,
+  padding: tokens.space.lg,
 }
 
 const sectionStyle: React.CSSProperties = {
-  marginBottom: 20,
+  marginBottom: tokens.space.xl,
 }
 
 const sectionTitleStyle: React.CSSProperties = {
-  fontSize: 11,
-  fontWeight: 600,
-  color: '#6b7280',
+  fontSize: tokens.fontSize.sm,
+  fontWeight: tokens.fontWeight.semibold,
+  color: tokens.color.textSubtle,
   textTransform: 'uppercase',
   letterSpacing: '0.05em',
-  marginBottom: 8,
+  marginBottom: tokens.space.sm,
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
 }
 
 const cardStyle: React.CSSProperties = {
-  background: '#f9fafb',
-  border: '1px solid #e5e7eb',
-  borderRadius: 6,
+  background: tokens.color.surfaceAlt,
+  border: `1px solid ${tokens.color.border}`,
+  borderRadius: tokens.radius.md,
   padding: '10px 12px',
-  marginBottom: 8,
+  marginBottom: tokens.space.sm,
 }
 
 const cardHeaderStyle: React.CSSProperties = {
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  marginBottom: 8,
+  marginBottom: tokens.space.sm,
 }
 
 const labelBadgeStyle: React.CSSProperties = {
-  fontSize: 11,
-  fontWeight: 600,
-  color: '#374151',
+  fontSize: tokens.fontSize.sm,
+  fontWeight: tokens.fontWeight.semibold,
+  color: tokens.color.textSecondary,
 }
 
 const temporalNoteStyle: React.CSSProperties = {
-  fontSize: 10,
-  color: '#6b7280',
-  marginTop: 4,
+  fontSize: tokens.fontSize.xs,
+  color: tokens.color.textSubtle,
+  marginTop: tokens.space.xs,
   marginBottom: 6,
   fontStyle: 'italic',
 }
@@ -63,41 +64,42 @@ const kfRowStyle: React.CSSProperties = {
 const fieldGroupStyle: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
-  gap: 2,
+  gap: tokens.space.px,
 }
 
 const labelStyle: React.CSSProperties = {
-  fontSize: 10,
-  color: '#6b7280',
+  fontSize: tokens.fontSize.xs,
+  color: tokens.color.textSubtle,
 }
 
 const inputStyle: React.CSSProperties = {
   width: 70,
   padding: '3px 5px',
-  fontSize: 12,
-  border: '1px solid #d1d5db',
-  borderRadius: 4,
+  fontSize: tokens.fontSize.sm,
+  fontFamily: tokens.font.mono,
+  border: `1px solid ${tokens.color.border}`,
+  borderRadius: tokens.radius.sm,
 }
 
 const helperStyle: React.CSSProperties = {
-  fontSize: 9,
-  color: '#9ca3af',
+  fontSize: tokens.fontSize.xs - 1,
+  color: tokens.color.textHcSubtle,
   marginTop: 1,
 }
 
 const addKfBtnStyle: React.CSSProperties = {
-  fontSize: 11,
-  color: '#1a73e8',
+  fontSize: tokens.fontSize.sm,
+  color: tokens.color.accentText,
   background: 'none',
   border: 'none',
   cursor: 'pointer',
   padding: '2px 4px',
-  marginTop: 2,
+  marginTop: tokens.space.px,
 }
 
 const removeBtnStyle: React.CSSProperties = {
-  fontSize: 14,
-  color: '#9ca3af',
+  fontSize: tokens.fontSize.body,
+  color: tokens.color.textHcSubtle,
   background: 'none',
   border: 'none',
   cursor: 'pointer',
@@ -106,20 +108,20 @@ const removeBtnStyle: React.CSSProperties = {
 }
 
 const addSeriesBtnStyle: React.CSSProperties = {
-  fontSize: 12,
-  color: '#1a73e8',
+  fontSize: tokens.fontSize.sm,
+  color: tokens.color.accentText,
   background: 'none',
-  border: '1px dashed #93c5fd',
-  borderRadius: 4,
+  border: `1px dashed ${tokens.color.accentBorder}`,
+  borderRadius: tokens.radius.sm,
   cursor: 'pointer',
   padding: '4px 10px',
 }
 
 const selectStyle: React.CSSProperties = {
   padding: '3px 5px',
-  fontSize: 12,
-  border: '1px solid #d1d5db',
-  borderRadius: 4,
+  fontSize: tokens.fontSize.sm,
+  border: `1px solid ${tokens.color.border}`,
+  borderRadius: tokens.radius.sm,
 }
 
 function seriesLabel(kfCount: number) {
