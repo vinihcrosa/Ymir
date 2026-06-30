@@ -25,15 +25,11 @@ const controlStyle: CSSProperties = {
 }
 
 export function ScenarioForm() {
-  const { name, areaId, setName, setArea } = useScenarioStore()
+  const { areaId, setArea } = useScenarioStore()
   const { areas, loading, error, retry } = useAreas()
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: tokens.space.md }}>
-      <div>
-        <label style={labelStyle}>Nome do cenário</label>
-        <input type="text" value={name} onChange={e => setName(e.target.value)} style={controlStyle} />
-      </div>
       <div>
         <label style={labelStyle}>Área</label>
         {error ? (
