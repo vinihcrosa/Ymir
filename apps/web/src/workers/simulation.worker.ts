@@ -121,6 +121,17 @@ self.addEventListener('message', (e: MessageEvent) => {
       if (typeof simulation.loadEnvironment === 'function') {
         simulation.loadEnvironment(json)
       }
+      // Apply the sea state to the wave force model (drives heave/roll/pitch).
+      if (typeof simulation.setWaveConditions === 'function') {
+        try {
+          const env = JSON.parse(json) as { waveSeries?: Array<{ Hs?: number; Tp?: number; dirNaut?: number; gamma?: number; spectrum?: string }> }
+          const kf = env.waveSeries?.[0]
+          if (kf) {
+            const spectrumId = kf.spectrum === 'REGULAR' ? 2 : kf.spectrum === 'PIERSON' ? 1 : 0
+            simulation.setWaveConditions(kf.Hs ?? 0, kf.Tp ?? 8, kf.dirNaut ?? 0, kf.gamma ?? 3.3, spectrumId)
+          }
+        } catch { /* malformed env — leave sea calm */ }
+      }
       break
     }
     case 'setActuator': {

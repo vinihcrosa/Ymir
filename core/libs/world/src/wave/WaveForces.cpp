@@ -17,6 +17,12 @@ WaveForces::WaveForces(const Config& cfg, const WaveSpectrum& spectrum)
     q_rao_prev_.fill(0.0);
 }
 
+void WaveForces::setSpectrum(const WaveSpectrum& spectrum)
+{
+    components_ = spectrum.components();
+    q_rao_prev_.fill(0.0);
+}
+
 void WaveForces::resetState() noexcept
 {
     q_rao_prev_.fill(0.0);
