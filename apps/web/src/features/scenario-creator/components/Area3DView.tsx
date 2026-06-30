@@ -1,4 +1,4 @@
-import { Suspense, useMemo, useEffect } from 'react'
+import { Component, Suspense, useMemo, useEffect, type ReactNode } from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
 import { useGLTF, Clone, FlyControls } from '@react-three/drei'
 import * as THREE from 'three'
@@ -6,8 +6,10 @@ import { useScenarioStore } from '../store'
 import { useSimulationStore } from '../../../stores/simulationStore'
 import { useVesselPanelStore } from '../../../stores/vesselPanelStore'
 import { useViewStore, type CameraId } from '../../../stores/viewStore'
+import { useEnvironmentStore } from '../../../stores/environmentStore'
 import { AREA_ROT_X, simToScene, headingToSceneYaw } from '../../../lib/geo3d'
 import { tokens } from '../../../theme/tokens'
+import { Ocean, deriveWaves, waveAt } from './Ocean'
 
 const AREA_BASE = '/assets/3d/baia_de_guanabara'
 const VESSEL_URL = '/assets/3d/vessel/celso_furtado.glb'
@@ -26,6 +28,18 @@ const CAMERAS: Record<Exclude<CameraId, 'Free'>, { x: number; y: number; z: numb
   Bridge: { x: 0, y: 31.5, z: -61.58, yawDeg: 0 },
   Starboard: { x: 16.32, y: 31.5, z: -61.3, yawDeg: 0 },
   Portside: { x: -16.32, y: 31.5, z: -61.3, yawDeg: 0 },
+}
+
+/** Isolates a GLTF-loading subtree so a missing/4xx asset renders nothing instead
+ *  of throwing up the tree and blanking the whole Canvas (ocean, lights, etc.).
+ *  The .glb assets are gitignored (see .gitignore) and may be absent in some envs. */
+class SceneErrorBoundary extends Component<{ children: ReactNode; label: string }, { failed: boolean }> {
+  state = { failed: false }
+  static getDerivedStateFromError() { return { failed: true } }
+  componentDidCatch(err: unknown) {
+    console.warn(`[Area3DView] ${this.props.label} failed to load — skipping`, err)
+  }
+  render() { return this.state.failed ? null : this.props.children }
 }
 
 /** The Baía meshes are Z-up; rotate to Y-up and recentre horizontally on the sim
@@ -123,6 +137,12 @@ export function Area3DView() {
   const target = posed.find((p) => p.instanceId === selectedVesselId) ?? posed[0] ?? null
   const cameraId = useViewStore((s) => s.cameraId)
 
+  // Sea state for the ocean shader: the wave keyframe active at the current sim
+  // time, expanded into Gerstner components. Re-derived only when it changes.
+  const waveSeries = useEnvironmentStore((s) => s.waveSeries)
+  const simTime = running ? state?.t ?? 0 : 0
+  const waves = useMemo(() => deriveWaves(waveAt(waveSeries, simTime)), [waveSeries, simTime])
+
   return (
     <Canvas
       camera={{ fov: 55, near: 1, far: 100000, position: [0, 1200, 1800] }}
@@ -133,17 +153,17 @@ export function Area3DView() {
       <hemisphereLight args={['#bcd8ff', '#24435f', 1.2]} />
       <directionalLight position={[5000, 8000, 4000]} intensity={2.2} />
       <Suspense fallback={null}>
-        <AreaScene />
+        <SceneErrorBoundary label="area mesh">
+          <AreaScene />
+        </SceneErrorBoundary>
         {posed.map((p) => (
-          <VesselModel key={p.instanceId} x={p.x} y={p.y} headingDeg={p.headingDeg} roll={p.roll} pitch={p.pitch} heave={p.heave} />
+          <SceneErrorBoundary key={p.instanceId} label={`vessel ${p.instanceId}`}>
+            <VesselModel x={p.x} y={p.y} headingDeg={p.headingDeg} roll={p.roll} pitch={p.pitch} heave={p.heave} />
+          </SceneErrorBoundary>
         ))}
       </Suspense>
-      {/* Sea at the waterline (Y=0). Large enough to read as open water to the
-          horizon; the bay terrain/islands sit in it. */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
-        <planeGeometry args={[200000, 200000]} />
-        <meshStandardMaterial color="#10597f" metalness={0.2} roughness={0.45} />
-      </mesh>
+      {/* Animated Gerstner sea at the waterline (Y=0), synced to the sim sea state. */}
+      <Ocean waves={waves} />
       {cameraId === 'Free'
         ? <FreeCamera target={target} />
         : <CameraRig target={target} cameraId={cameraId} />}
