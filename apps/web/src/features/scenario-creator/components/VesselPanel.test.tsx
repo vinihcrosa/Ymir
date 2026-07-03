@@ -32,7 +32,7 @@ function resetStores() {
     selectedVesselId: null, vesselTypeId: null, config: null, configLoading: false,
     rudderAngles: {}, thrusterPowers: {}, thrusterAzimuths: {},
   })
-  useSimulationStore.setState({ status: 'idle', state: null, worker: null })
+  useSimulationStore.setState({ status: 'idle', state: null })
 }
 
 describe('VesselPanel', () => {
@@ -75,10 +75,10 @@ describe('VesselPanel', () => {
     expect(screen.getByText('0.0057 rad/s')).toBeInTheDocument()
   })
 
-  it('Controles tab moves a rudder and posts an actuator command', async () => {
+  it('Controles tab moves a rudder and sends an actuator command', async () => {
     vi.stubGlobal('fetch', mockFetchOnce(true))
-    const postMessage = vi.fn()
-    useSimulationStore.setState({ worker: { postMessage } as unknown as Worker })
+    const sendActuator = vi.fn()
+    useSimulationStore.setState({ sendActuator })
     render(<VesselPanel />)
     useVesselPanelStore.getState().open(1, 1)
     await screen.findByText('Dimensões')
@@ -89,14 +89,12 @@ describe('VesselPanel', () => {
     fireEvent.change(sliders[0], { target: { value: '20' } })
 
     expect(useVesselPanelStore.getState().rudderAngles[0]).toBe(20)
-    expect(postMessage).toHaveBeenCalledWith(
-      expect.objectContaining({ type: 'setActuator', deviceType: 'rudder', value: 20 }),
-    )
+    expect(sendActuator).toHaveBeenCalledWith(1, 'rudder', 0, 20)
   })
 
   it('renders an azimuth dial for azimuthal thrusters and reacts to clicks', async () => {
     vi.stubGlobal('fetch', mockFetchOnce(true))
-    useSimulationStore.setState({ worker: { postMessage: vi.fn() } as unknown as Worker })
+    useSimulationStore.setState({ sendActuator: vi.fn() })
     render(<VesselPanel />)
     useVesselPanelStore.getState().open(1, 1)
     await screen.findByText('Dimensões')

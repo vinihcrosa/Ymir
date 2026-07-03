@@ -143,19 +143,19 @@ function ControlesTab({ config, vesselId }: { config: VesselConfigDTO; vesselId:
     rudderAngles, thrusterPowers, thrusterAzimuths,
     setRudderAngle, setThrusterPower, setThrusterAzimuth,
   } = useVesselPanelStore()
-  const { worker } = useSimulationStore()
+  const sendActuator = useSimulationStore((s) => s.sendActuator)
 
   function sendRudder(rudderId: number, deg: number) {
     setRudderAngle(rudderId, deg)
-    worker?.postMessage({ type: 'setActuator', vesselId, deviceType: 'rudder', deviceId: rudderId, value: deg })
+    sendActuator(vesselId, 'rudder', rudderId, deg)
   }
   function sendThrusterPower(thrusterId: number, pct: number) {
     setThrusterPower(thrusterId, pct)
-    worker?.postMessage({ type: 'setActuator', vesselId, deviceType: 'thruster', deviceId: thrusterId, value: pct, value2: thrusterAzimuths[thrusterId] ?? 0 })
+    sendActuator(vesselId, 'thruster', thrusterId, pct, thrusterAzimuths[thrusterId] ?? 0)
   }
   function sendThrusterAzimuth(thrusterId: number, deg: number) {
     setThrusterAzimuth(thrusterId, deg)
-    worker?.postMessage({ type: 'setActuator', vesselId, deviceType: 'thruster', deviceId: thrusterId, value: thrusterPowers[thrusterId] ?? 0, value2: deg })
+    sendActuator(vesselId, 'thruster', thrusterId, thrusterPowers[thrusterId] ?? 0, deg)
   }
 
   if (config.rudders.length === 0 && config.thrusters.length === 0) {

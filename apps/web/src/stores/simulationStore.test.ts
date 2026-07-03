@@ -1,269 +1,205 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach } from 'vitest'
+import type { ClientMessage, ServerMessage } from '@ymir/types'
+import { SimulationSocket } from '../lib/simulation-socket'
+import { useSimulationStore, __setSocketFactory } from './simulationStore'
+import { useEnvironmentStore } from './environmentStore'
+import { useVesselPanelStore } from './vesselPanelStore'
 
-// MockWorker must be defined before the store is imported so that vi.stubGlobal
-// is in place when the module is first evaluated.
-class MockWorker {
-  onmessage: ((e: MessageEvent) => void) | null = null
-  onerror: ((e: ErrorEvent) => void) | null = null
-  postMessage = vi.fn()
-  terminate = vi.fn()
+class FakeWebSocket {
+  static CONNECTING = 0
+  static OPEN = 1
+  static CLOSED = 3
+  static instances: FakeWebSocket[] = []
+  readyState = FakeWebSocket.CONNECTING
+  onopen: (() => void) | null = null
+  onmessage: ((e: { data: string }) => void) | null = null
+  onclose: (() => void) | null = null
+  sent: string[] = []
+  constructor(public url: string) { FakeWebSocket.instances.push(this) }
+  send(data: string) { this.sent.push(data) }
+  close() { this.readyState = FakeWebSocket.CLOSED; this.onclose?.() }
+  open() { this.readyState = FakeWebSocket.OPEN; this.onopen?.() }
+  emit(msg: ServerMessage) { this.onmessage?.({ data: JSON.stringify(msg) }) }
+  get sentMessages(): ClientMessage[] { return this.sent.map((s) => JSON.parse(s) as ClientMessage) }
+}
 
-  /** Helper: simulate an inbound message from the worker */
-  _emit(data: unknown) {
-    this.onmessage?.({ data } as MessageEvent)
+function makeStorage() {
+  const m = new Map<string, string>()
+  return {
+    getItem: (k: string) => m.get(k) ?? null,
+    setItem: (k: string, v: string) => { m.set(k, v) },
+    removeItem: (k: string) => { m.delete(k) },
   }
 }
 
-vi.stubGlobal('Worker', MockWorker)
-
-// Also stub URL constructor used inside start()
-vi.stubGlobal('URL', class {
-  constructor(public href: string, public base?: string) {}
-})
-
-// Import AFTER stubs are in place
-import { useSimulationStore } from './simulationStore'
-import { useEnvironmentStore } from './environmentStore'
-
-// Helper to access raw store state without React hooks
+let storage = makeStorage()
 const store = () => useSimulationStore.getState()
+const lastWs = () => FakeWebSocket.instances[FakeWebSocket.instances.length - 1]
 
 beforeEach(() => {
-  // Reset store to initial state before every test
+  FakeWebSocket.instances = []
+  storage = makeStorage()
+  __setSocketFactory(() => new SimulationSocket({
+    url: 'ws://test/ws',
+    WebSocketImpl: FakeWebSocket as unknown as typeof WebSocket,
+    storage,
+  }))
   store().reset()
   useEnvironmentStore.getState().reset()
-  vi.clearAllMocks()
+  useVesselPanelStore.setState({ selectedVesselId: null, rudderAngles: {}, thrusterPowers: {}, thrusterAzimuths: {} })
 })
 
+afterEach(() => { __setSocketFactory(null) })
+
+/** Boot a session up to a confirmed simulation and return its id. */
+function createSession(dt = 0.05): string {
+  store().play(dt)
+  lastWs().open()
+  lastWs().emit({ type: 'SimulationCreated', simId: 'sim-1' })
+  return 'sim-1'
+}
+
 describe('simulationStore — initial state', () => {
-  it('starts with status idle', () => {
+  it('starts idle with no socket or session', () => {
+    expect(store().status).toBe('idle')
+    expect(store().socket).toBeNull()
+    expect(store().simId).toBeNull()
+    expect(store().scenarioVessels).toEqual([])
+    expect(store().hasSession()).toBe(false)
+  })
+})
+
+describe('simulationStore — play/create flow', () => {
+  it('creates a socket and enters loading on first play', () => {
+    store().play(0.05)
+    expect(store().status).toBe('loading')
+    expect(store().socket).not.toBeNull()
+    expect(FakeWebSocket.instances).toHaveLength(1)
+  })
+
+  it('sends CreateSimulation on open and Play after SimulationCreated', () => {
+    store().loadScenario([{ instanceId: 1, vesselId: 1, name: 'A', x: 0, y: 0, headingDeg: 0 }])
+    store().play(0.1)
+    lastWs().open()
+    expect(lastWs().sentMessages.some((m) => m.type === 'CreateSimulation')).toBe(true)
+    lastWs().emit({ type: 'SimulationCreated', simId: 'sim-9' })
+    expect(store().simId).toBe('sim-9')
+    const play = lastWs().sentMessages.find((m) => m.type === 'Play')
+    expect(play).toEqual({ type: 'Play', simId: 'sim-9', dt: 0.1 })
+    expect(store().status).toBe('running')
+  })
+
+  it('resumes with a Play when a sim id already exists (reconnect)', () => {
+    storage.setItem('ymir.simId', 'sim-existing')
+    store().play(0.05)
+    lastWs().open()
+    const msgs = lastWs().sentMessages
+    expect(msgs).toContainEqual({ type: 'AttachSimulation', simId: 'sim-existing' })
+    expect(msgs.some((m) => m.type === 'Play' && m.simId === 'sim-existing')).toBe(true)
+    expect(store().status).toBe('running')
+  })
+})
+
+describe('simulationStore — server messages', () => {
+  it('State updates the store state', () => {
+    createSession()
+    lastWs().emit({ type: 'State', payload: { t: 3, vessels: [] } })
+    expect(store().state).toEqual({ t: 3, vessels: [] })
+  })
+
+  it('Status paused sets status; ended maps to idle', () => {
+    createSession()
+    lastWs().emit({ type: 'Status', status: 'paused' })
+    expect(store().status).toBe('paused')
+    lastWs().emit({ type: 'Status', status: 'ended' })
     expect(store().status).toBe('idle')
   })
 
-  it('starts with null error, state, and worker', () => {
-    expect(store().error).toBeNull()
-    expect(store().state).toBeNull()
-    expect(store().worker).toBeNull()
+  it('Error sets status error and message', () => {
+    createSession()
+    lastWs().emit({ type: 'Error', message: 'boom' })
+    expect(store().status).toBe('error')
+    expect(store().error).toBe('boom')
   })
 
-  it('starts with empty scenarioVessels', () => {
-    expect(store().scenarioVessels).toEqual([])
+  it('re-syncs actuator state after SimulationCreated', () => {
+    useVesselPanelStore.setState({ selectedVesselId: 1, thrusterPowers: { 0: 80 }, thrusterAzimuths: { 0: 10 }, rudderAngles: { 0: 15 } })
+    createSession()
+    const acts = lastWs().sentMessages.filter((m) => m.type === 'SetActuator')
+    expect(acts.some((m) => m.type === 'SetActuator' && m.deviceType === 'thruster' && m.value === 80)).toBe(true)
+    expect(acts.some((m) => m.type === 'SetActuator' && m.deviceType === 'rudder' && m.value === 15)).toBe(true)
+  })
+
+  it('tracks connection state changes', () => {
+    store().play()
+    expect(store().connection).toBe('connecting')
+    lastWs().open()
+    expect(store().connection).toBe('open')
   })
 })
 
-describe('simulationStore — loadScenario', () => {
-  it('sets scenarioVessels without a worker', () => {
-    const vessels = [{ instanceId: 1, vesselId: 1, name: 'Ship A', x: 0, y: 0, headingDeg: 90 }]
+describe('simulationStore — commands', () => {
+  it('pause sends Pause and sets status paused', () => {
+    const simId = createSession()
+    store().pause()
+    expect(lastWs().sentMessages.some((m) => m.type === 'Pause' && m.simId === simId)).toBe(true)
+    expect(store().status).toBe('paused')
+  })
+
+  it('pause sets paused even without a session', () => {
+    store().pause()
+    expect(store().status).toBe('paused')
+  })
+
+  it('loadScenario forwards to an active session', () => {
+    createSession()
+    const vessels = [{ instanceId: 2, vesselId: 2, name: 'B', x: 1, y: 2, headingDeg: 90 }]
+    store().loadScenario(vessels)
+    expect(lastWs().sentMessages.some((m) => m.type === 'LoadScenario')).toBe(true)
+    expect(store().scenarioVessels).toEqual(vessels)
+  })
+
+  it('loadScenario without a session only stores vessels', () => {
+    const vessels = [{ instanceId: 3, vesselId: 3, name: 'C', x: 0, y: 0, headingDeg: 0 }]
     store().loadScenario(vessels)
     expect(store().scenarioVessels).toEqual(vessels)
   })
 
-  it('posts loadScenario message to existing worker', () => {
-    // Manually set a mock worker into the store
-    const mockWorker = new MockWorker()
-    useSimulationStore.setState({ worker: mockWorker as unknown as Worker, status: 'paused' })
-
-    const vessels = [{ instanceId: 2, vesselId: 2, name: 'Ship B', x: 10, y: 20, headingDeg: 0 }]
-    store().loadScenario(vessels)
-
-    expect(mockWorker.postMessage).toHaveBeenCalledWith({ type: 'loadScenario', vessels })
-    expect(store().scenarioVessels).toEqual(vessels)
-  })
-})
-
-describe('simulationStore — stop', () => {
-  it('sets status to paused and sends stop message to worker', () => {
-    const mockWorker = new MockWorker()
-    useSimulationStore.setState({ worker: mockWorker as unknown as Worker, status: 'running' })
-
-    store().pause()
-
-    expect(store().status).toBe('paused')
-    expect(mockWorker.postMessage).toHaveBeenCalledWith({ type: 'stop' })
+  it('applyEnvironment sends LoadEnvironment when conditions exist', () => {
+    createSession()
+    useEnvironmentStore.setState({ currentSeries: [[{ t: 0, speed: 2, dirNaut: 90 }]] })
+    store().applyEnvironment()
+    const env = lastWs().sentMessages.find((m) => m.type === 'LoadEnvironment')
+    expect(env).toBeTruthy()
   })
 
-  it('sets status to paused even when no worker is present', () => {
-    useSimulationStore.setState({ status: 'running', worker: null })
-    store().pause()
-    expect(store().status).toBe('paused')
+  it('applyEnvironment is a no-op with an empty environment', () => {
+    createSession()
+    store().applyEnvironment()
+    expect(lastWs().sentMessages.some((m) => m.type === 'LoadEnvironment')).toBe(false)
+  })
+
+  it('sendActuator sends SetActuator with the sim id', () => {
+    const simId = createSession()
+    store().sendActuator(1, 'thruster', 0, 75, 20)
+    const act = lastWs().sentMessages.find((m) => m.type === 'SetActuator')
+    expect(act).toEqual({ type: 'SetActuator', simId, vesselId: 1, deviceType: 'thruster', deviceId: 0, value: 75, value2: 20 })
+  })
+
+  it('sendActuator is a no-op without a session', () => {
+    store().sendActuator(1, 'rudder', 0, 10)
+    expect(FakeWebSocket.instances).toHaveLength(0)
   })
 })
 
 describe('simulationStore — reset', () => {
-  it('clears status, error, state, worker, and scenarioVessels', () => {
-    const mockWorker = new MockWorker()
-    useSimulationStore.setState({
-      worker: mockWorker as unknown as Worker,
-      status: 'running',
-      error: 'some error',
-      state: { vessels: [] } as never,
-      scenarioVessels: [{ instanceId: 3, vesselId: 3, name: 'Ship C', x: 5, y: 5, headingDeg: 45 }],
-    })
-
+  it('sends Reset, closes the socket, and clears state', () => {
+    const simId = createSession()
     store().reset()
-
+    expect(lastWs().sentMessages.some((m) => m.type === 'Reset' && m.simId === simId)).toBe(true)
     expect(store().status).toBe('idle')
-    expect(store().error).toBeNull()
-    expect(store().state).toBeNull()
-    expect(store().worker).toBeNull()
+    expect(store().socket).toBeNull()
+    expect(store().simId).toBeNull()
     expect(store().scenarioVessels).toEqual([])
-  })
-
-  it('terminates the worker on reset', () => {
-    const mockWorker = new MockWorker()
-    useSimulationStore.setState({ worker: mockWorker as unknown as Worker, status: 'running' })
-
-    store().reset()
-
-    expect(mockWorker.terminate).toHaveBeenCalledOnce()
-  })
-})
-
-describe('simulationStore — start (with mock worker)', () => {
-  it('transitions to loading then running after worker emits ready', () => {
-    store().play(0.05)
-
-    // Status should be loading while worker is being set up
-    expect(store().status).toBe('loading')
-
-    // Retrieve the worker instance created by start()
-    const mockWorker = store().worker as unknown as MockWorker
-
-    // Simulate the worker posting a 'ready' message
-    mockWorker._emit({ type: 'ready' })
-
-    expect(store().status).toBe('running')
-  })
-
-  it('sends loadScenario before start when scenarioVessels are set', () => {
-    const vessels = [{ instanceId: 4, vesselId: 4, name: 'Ship D', x: 1, y: 2, headingDeg: 180 }]
-    useSimulationStore.setState({ scenarioVessels: vessels })
-
-    store().play(0.05)
-
-    const mockWorker = store().worker as unknown as MockWorker
-    mockWorker._emit({ type: 'ready' })
-
-    const calls = mockWorker.postMessage.mock.calls.map((c) => c[0] as { type: string })
-    const loadCall = calls.find((c) => c.type === 'loadScenario')
-    const startCall = calls.find((c) => c.type === 'start')
-
-    expect(loadCall).toBeDefined()
-    expect(startCall).toBeDefined()
-
-    // loadScenario must precede start
-    const loadIdx = calls.indexOf(loadCall!)
-    const startIdx = calls.indexOf(startCall!)
-    expect(loadIdx).toBeLessThan(startIdx)
-  })
-
-  it('sets status to error when worker emits error message', () => {
-    store().play()
-    const mockWorker = store().worker as unknown as MockWorker
-    mockWorker._emit({ type: 'error', message: 'WASM failed to load' })
-
-    expect(store().status).toBe('error')
-    expect(store().error).toBe('WASM failed to load')
-  })
-
-  it('uses Unknown error fallback when error message is undefined', () => {
-    store().play()
-    const mockWorker = store().worker as unknown as MockWorker
-    mockWorker._emit({ type: 'error' })
-    expect(store().error).toBe('Unknown error')
-  })
-
-  it('handles state message with undefined payload (sets null)', () => {
-    store().play()
-    const mockWorker = store().worker as unknown as MockWorker
-    mockWorker._emit({ type: 'ready' })
-    mockWorker._emit({ type: 'state' })
-    expect(store().state).toBeNull()
-  })
-
-  it('calls postMessage on existing worker when start called again', () => {
-    const mockWorker = new MockWorker()
-    useSimulationStore.setState({ worker: mockWorker as unknown as Worker, status: 'paused' })
-    store().play(0.1)
-    expect(mockWorker.postMessage).toHaveBeenCalledWith({ type: 'start', dt: 0.1 })
-    expect(store().status).toBe('running')
-  })
-})
-
-describe('simulationStore — loadEnvironment on start', () => {
-  it('sends loadEnvironment before start when environment has conditions', () => {
-    useEnvironmentStore.setState({
-      currentSeries: [[{ t: 0, speed: 1.0, dirNaut: 90 }]],
-    })
-
-    store().play(0.05)
-    const mockWorker = store().worker as unknown as MockWorker
-    mockWorker._emit({ type: 'ready' })
-
-    const calls = mockWorker.postMessage.mock.calls.map((c) => c[0] as { type: string })
-    const loadEnvIdx = calls.findIndex((c) => c.type === 'loadEnvironment')
-    const startIdx = calls.findIndex((c) => c.type === 'start')
-
-    expect(loadEnvIdx).toBeGreaterThanOrEqual(0)
-    expect(startIdx).toBeGreaterThanOrEqual(0)
-    expect(loadEnvIdx).toBeLessThan(startIdx)
-  })
-
-  it('does not send loadEnvironment when environment is empty', () => {
-    store().play(0.05)
-    const mockWorker = store().worker as unknown as MockWorker
-    mockWorker._emit({ type: 'ready' })
-
-    const calls = mockWorker.postMessage.mock.calls.map((c) => c[0] as { type: string })
-    expect(calls.some((c) => c.type === 'loadEnvironment')).toBe(false)
-  })
-
-  it('loadEnvironment message contains valid JSON with environment data', () => {
-    useEnvironmentStore.setState({
-      currentSeries: [[{ t: 0, speed: 2.0, dirNaut: 180 }]],
-    })
-
-    store().play(0.05)
-    const mockWorker = store().worker as unknown as MockWorker
-    mockWorker._emit({ type: 'ready' })
-
-    const calls = mockWorker.postMessage.mock.calls.map((c) => c[0])
-    const loadEnvCall = calls.find((c: { type: string }) => c.type === 'loadEnvironment') as
-      | { type: string; json: string }
-      | undefined
-    expect(loadEnvCall).toBeDefined()
-    expect(typeof loadEnvCall!.json).toBe('string')
-    const parsed = JSON.parse(loadEnvCall!.json)
-    expect(parsed.currentSeries).toHaveLength(1)
-    expect(parsed.currentSeries[0][0].speed).toBe(2.0)
-  })
-
-  it('does not send loadEnvironment when only wind conditions are empty', () => {
-    // Explicitly verify wind conditions trigger the send
-    useEnvironmentStore.setState({
-      windSeries: [[{ t: 0, speed: 5.0, dirNaut: 0 }]],
-    })
-
-    store().play(0.05)
-    const mockWorker = store().worker as unknown as MockWorker
-    mockWorker._emit({ type: 'ready' })
-
-    const calls = mockWorker.postMessage.mock.calls.map((c) => c[0] as { type: string })
-    expect(calls.some((c) => c.type === 'loadEnvironment')).toBe(true)
-  })
-
-  it('existing start/stop/loadScenario/setActuator paths unaffected by environment integration', () => {
-    const vessels = [{ instanceId: 1, vesselId: 1, name: 'Ship A', x: 0, y: 0, headingDeg: 0 }]
-    useSimulationStore.setState({ scenarioVessels: vessels })
-
-    store().play(0.05)
-    const mockWorker = store().worker as unknown as MockWorker
-    mockWorker._emit({ type: 'ready' })
-
-    const calls = mockWorker.postMessage.mock.calls.map((c) => c[0] as { type: string })
-    expect(calls.some((c) => c.type === 'loadScenario')).toBe(true)
-    expect(calls.some((c) => c.type === 'start')).toBe(true)
-    // No loadEnvironment when store is empty
-    expect(calls.some((c) => c.type === 'loadEnvironment')).toBe(false)
   })
 })

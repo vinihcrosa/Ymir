@@ -63,7 +63,7 @@ export function AppShell() {
   // current (live) position so the scene doesn't jump back to the start.
   function handlePlay() {
     const sim = useSimulationStore.getState()
-    if (!sim.worker) {
+    if (!sim.socket) {
       loadScenario(vessels)
       play()
       return

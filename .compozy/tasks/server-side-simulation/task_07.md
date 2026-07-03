@@ -1,5 +1,5 @@
 ---
-status: pending
+status: completed
 title: Religar `simulationStore` ao `SimulationSocket`
 type: frontend
 complexity: medium
@@ -33,11 +33,11 @@ componentes React, nada muda.
 </requirements>
 
 ## Subtasks
-- [ ] 7.1 Injetar/instanciar o `SimulationSocket` no store no lugar do `Worker`.
-- [ ] 7.2 Mapear play/pause/reset/loadScenario/applyEnvironment → `ClientMessage`.
-- [ ] 7.3 Atualizar `state`/`status`/`error` a partir de `ServerMessage` e estados de conexão.
-- [ ] 7.4 Reemitir comandos pendentes após (re)conexão.
-- [ ] 7.5 Atualizar os testes do store para o novo backend (transporte mockado, sem motor).
+- [x] 7.1 Injetar/instanciar o `SimulationSocket` no store no lugar do `Worker`.
+- [x] 7.2 Mapear play/pause/reset/loadScenario/applyEnvironment → `ClientMessage`.
+- [x] 7.3 Atualizar `state`/`status`/`error` a partir de `ServerMessage` e estados de conexão.
+- [x] 7.4 Reemitir comandos pendentes após (re)conexão.
+- [x] 7.5 Atualizar os testes do store para o novo backend (transporte mockado, sem motor).
 
 ## Implementation Details
 Ver TechSpec seções "System Architecture" (simulationStore religado) e "Development Sequencing"
