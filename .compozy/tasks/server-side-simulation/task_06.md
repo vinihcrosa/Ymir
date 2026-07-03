@@ -1,5 +1,5 @@
 ---
-status: pending
+status: completed
 title: '`SimulationSocket` (web) — WS client, reconexão, `localStorage`'
 type: frontend
 complexity: medium
@@ -33,11 +33,11 @@ reanexa via `AttachSimulation` ao reabrir. É a peça que substitui o transporte
 </requirements>
 
 ## Subtasks
-- [ ] 6.1 Implementar conexão/reconexão ao `/ws` com URL configurável.
-- [ ] 6.2 (De)serializar mensagens e expor callbacks de estado/status/erro.
-- [ ] 6.3 Persistir/ler `sim_id` no `localStorage` e reanexar na reabertura.
-- [ ] 6.4 Tratar falha de attach (limpar storage, recomeçar) e expor estados de conexão.
-- [ ] 6.5 Escrever testes com WebSocket de teste e `localStorage` mockado.
+- [x] 6.1 Implementar conexão/reconexão ao `/ws` com URL configurável.
+- [x] 6.2 (De)serializar mensagens e expor callbacks de estado/status/erro.
+- [x] 6.3 Persistir/ler `sim_id` no `localStorage` e reanexar na reabertura.
+- [x] 6.4 Tratar falha de attach (limpar storage, recomeçar) e expor estados de conexão.
+- [x] 6.5 Escrever testes com WebSocket de teste e `localStorage` mockado.
 
 ## Implementation Details
 Ver TechSpec seções "System Architecture" (SimulationSocket), "Integration Points" e "Development
