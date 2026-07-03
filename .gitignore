@@ -54,6 +54,8 @@ apps/api/*.db-wal
 
 # Test coverage output
 packages/types/coverage/
+packages/wasm/coverage/
+apps/api/coverage/
 
 # Ad-hoc data files
 current.json

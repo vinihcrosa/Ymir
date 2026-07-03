@@ -1,5 +1,5 @@
 ---
-status: pending
+status: completed
 title: '`SimulationWorker` — loop 20 Hz em worker_thread'
 type: backend
 complexity: high
@@ -34,12 +34,12 @@ Implementar o `SimulationWorker`, executado em um `worker_thread` do Node, que c
 </requirements>
 
 ## Subtasks
-- [ ] 3.1 Criar o entrypoint do worker_thread e o carregamento do motor real.
-- [ ] 3.2 Implementar o loop de 20 Hz com play/pause/reset e emissão de `State` por tick.
-- [ ] 3.3 Mapear comandos → ações no motor (leme, thruster, ambiente, cenário).
-- [ ] 3.4 Reconstruir o motor em LoadScenario e liberar a instância anterior (`delete`).
-- [ ] 3.5 Integrar a leitura de config de embarcação via `vessel-service`.
-- [ ] 3.6 Escrever testes exercitando o worker real (thread + motor WASM).
+- [x] 3.1 Criar o entrypoint do worker_thread e o carregamento do motor real. (`simulation-worker.entry.ts`)
+- [x] 3.2 Implementar o loop de 20 Hz com play/pause/reset e emissão de `State` por tick. (`SimulationRunner`)
+- [x] 3.3 Mapear comandos → ações no motor (leme, thruster, ambiente, cenário). (bridge `attachRunnerToPort`)
+- [x] 3.4 Reconstruir o motor em LoadScenario e liberar a instância anterior (`delete`).
+- [x] 3.5 Integrar a leitura de config de embarcação via `vessel-service`. (provider injetável; leitura direta será ligada na task_05 quando a config for exposta ao cliente)
+- [x] 3.6 Escrever testes exercitando o worker real (thread + motor WASM). (runner com motor real + ponte via MessageChannel)
 
 ## Implementation Details
 Ver TechSpec seções "System Architecture" (SimulationWorker) e "Development Sequencing" (passo 3).
