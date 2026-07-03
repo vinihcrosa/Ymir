@@ -1,4 +1,4 @@
-import { describe, it, expect, afterEach } from 'vitest'
+import { describe, it, expect, afterEach, vi } from 'vitest'
 import { MessageChannel } from 'node:worker_threads'
 import { MessageRouter, WsClient, toServerMessage, type ClientTransport } from './message-router.js'
 import { SimulationManager, type SimWorkerHandle } from './simulation-manager.js'
@@ -76,9 +76,10 @@ describe('MessageRouter', () => {
     const simId = client.simId!
     router.handleRaw(client, JSON.stringify({ type: 'SetActuator', simId, vesselId: 1, deviceType: 'thruster', deviceId: 0, value: 100 }))
     router.handleRaw(client, JSON.stringify({ type: 'Play', simId }))
-    await delay(180)
+    await vi.waitFor(() => {
+      expect(sent.some((m) => m.type === 'State')).toBe(true)
+    }, { timeout: 5000, interval: 25 })
     router.handleRaw(client, JSON.stringify({ type: 'Pause', simId }))
-    expect(sent.some((m) => m.type === 'State')).toBe(true)
     expect(sent.some((m) => m.type === 'Status' && m.status === 'running')).toBe(true)
     await mgr.stop(simId)
   })

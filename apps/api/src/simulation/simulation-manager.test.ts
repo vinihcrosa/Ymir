@@ -1,4 +1,4 @@
-import { describe, it, expect, afterEach } from 'vitest'
+import { describe, it, expect, afterEach, vi } from 'vitest'
 import { MessageChannel, Worker } from 'node:worker_threads'
 import { SimulationManager, type SimWorkerHandle, type Connection } from './simulation-manager.js'
 import { SimulationRunner } from './simulation-runner.js'
@@ -58,12 +58,14 @@ describe('SimulationManager', () => {
 
     mgr.command(id, { type: 'loadScenario', vessels: [{ instanceId: 1, vesselId: 1, name: 'v', x: 0, y: 0, headingDeg: 0 }] })
     mgr.command(id, { type: 'play' })
-    await delay(180)
+    await vi.waitFor(() => {
+      expect(c1.events.some((e) => e.type === 'state')).toBe(true)
+      expect(c2.events.some((e) => e.type === 'state')).toBe(true)
+    }, { timeout: 5000, interval: 25 })
     mgr.command(id, { type: 'pause' })
 
     for (const c of [c1, c2]) {
       expect(c.events.some((e) => e.type === 'status' && e.status === 'running')).toBe(true)
-      expect(c.events.some((e) => e.type === 'state')).toBe(true)
     }
     await mgr.stop(id)
   })
