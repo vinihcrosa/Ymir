@@ -6,7 +6,15 @@ on:
   pull_request:
     branches: [main]
 
+env:
+  # Pinned Emscripten SDK version for reproducible WASM builds. Bump
+  # deliberately; the emsdk cache key below is derived from this value.
+  EMSDK_VERSION: 3.1.61
+
 jobs:
+  # ---------------------------------------------------------------------------
+  # C++ core: native build + ctest matrix (unchanged).
+  # ---------------------------------------------------------------------------
   build-and-test:
     name: ${{ matrix.name }}
     runs-on: ${{ matrix.os }}
@@ -66,3 +74,76 @@ jobs:
 
       - name: Test
         run: ctest --test-dir build --output-on-failure
+
+  # ---------------------------------------------------------------------------
+  # JS/TS workspaces: compile the WASM engine (Emscripten) first, then build
+  # and test. Per ADR-005 the tests run against the REAL WASM engine (no engine
+  # mock), so the WASM artifacts MUST exist before `turbo run test`. The stages
+  # are ordered so a WASM build failure fails early with a clear log, before any
+  # workspace build/test runs.
+  # ---------------------------------------------------------------------------
+  wasm-web:
+    name: WASM + JS workspaces
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # --- Emscripten toolchain (cached) -------------------------------------
+      # setup-emsdk installs emcc/emcmake and, with actions-cache-folder,
+      # persists the SDK download+install between runs keyed by EMSDK_VERSION.
+      - name: Setup Emscripten (emsdk)
+        uses: mymindstorm/setup-emsdk@v14
+        with:
+          version: ${{ env.EMSDK_VERSION }}
+          actions-cache-folder: emsdk-cache-${{ env.EMSDK_VERSION }}
+
+      - name: Verify emcc on PATH
+        run: emcc --version
+
+      - name: Setup Ninja
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends ninja-build
+
+      # --- Node / pnpm -------------------------------------------------------
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # --- Turbo remote-less cache (WASM + build + test) ---------------------
+      # Cache the local turbo cache so unchanged WASM/build/test tasks are
+      # replayed from cache. Keyed by lockfile + C++ sources + turbo config so
+      # the WASM output is rebuilt only when its inputs change.
+      - name: Cache turbo build artifacts
+        uses: actions/cache@v4
+        with:
+          path: node_modules/.cache/turbo
+          key: turbo-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml', 'turbo.json', 'core/**') }}
+          restore-keys: |
+            turbo-${{ runner.os }}-
+
+      # --- Build WASM FIRST so failures surface early with a clear log -------
+      - name: Build WASM engine (Emscripten)
+        run: pnpm build:wasm
+
+      # --- Build then test all JS/TS workspaces ------------------------------
+      # `turbo run test` also declares build:wasm as a test dependency, but we
+      # run build:wasm explicitly above to fail fast on toolchain/compile errors
+      # before spending time on the rest of the graph.
+      - name: Build workspaces
+        run: pnpm build
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Test workspaces
+        run: pnpm test

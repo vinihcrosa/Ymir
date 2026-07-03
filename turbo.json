@@ -3,8 +3,15 @@
   "ui": "tui",
   "tasks": {
     "build:wasm": {
-      "outputs": ["apps/web/public/wasm/**"],
-      "inputs": ["core/**/*.cpp", "core/**/*.h", "core/CMakeLists.txt", "core/cmake/**"],
+      "outputs": ["runtime/**"],
+      "inputs": [
+        "scripts/build-wasm.sh",
+        "$TURBO_ROOT$/core/**/*.cpp",
+        "$TURBO_ROOT$/core/**/*.h",
+        "$TURBO_ROOT$/core/**/*.hpp",
+        "$TURBO_ROOT$/core/CMakeLists.wasm.txt",
+        "$TURBO_ROOT$/core/cmake/**"
+      ],
       "cache": true
     },
     "build": {
@@ -17,7 +24,7 @@
       "persistent": true
     },
     "test": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "build:wasm", "^build:wasm"],
       "outputs": ["coverage/**"],
       "cache": true
     },

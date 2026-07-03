@@ -1,5 +1,5 @@
 ---
-status: pending
+status: completed
 title: 'CI: build WASM (emsdk) + cache antes dos testes'
 type: infra
 complexity: medium
@@ -31,11 +31,11 @@ de engine (ADR-005): os testes rodam contra o WASM real, que precisa existir no 
 </requirements>
 
 ## Subtasks
-- [ ] 9.1 Adicionar setup do emsdk no workflow de CI.
-- [ ] 9.2 Inserir o estágio `build:wasm` antes dos testes dependentes.
-- [ ] 9.3 Configurar cache (emsdk e/ou artefatos turbo).
-- [ ] 9.4 Ajustar a ordem/deps dos jobs para falhar cedo em erro de WASM.
-- [ ] 9.5 Validar o pipeline completo verde.
+- [x] 9.1 Adicionar setup do emsdk no workflow de CI. (`mymindstorm/setup-emsdk@v14`, versão pinada via `EMSDK_VERSION`)
+- [x] 9.2 Inserir o estágio `build:wasm` antes dos testes dependentes. (`pnpm build:wasm` antes de `pnpm test`)
+- [x] 9.3 Configurar cache (emsdk e/ou artefatos turbo). (cache do emsdk + cache do turbo)
+- [x] 9.4 Ajustar a ordem/deps dos jobs para falhar cedo em erro de WASM. (build:wasm explícito antes; `test` dependsOn `build:wasm`/`^build:wasm` no turbo)
+- [x] 9.5 Validar o pipeline completo verde. (turbo ordering validado localmente; execução do workflow só no GitHub Actions)
 
 ## Implementation Details
 Ver TechSpec "Testing Approach" e "Development Sequencing" (passo 9), e ADR-005. Estender

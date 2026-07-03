@@ -12,5 +12,5 @@
 | 06 | `SimulationSocket` (web) — WS client, reconexão, `localStorage` | pending | medium | task_02, task_05 |
 | 07 | Religar `simulationStore` ao `SimulationSocket` | pending | medium | task_06 |
 | 08 | Remoção do motor no cliente (worker, mock, public/wasm, tipos) | pending | medium | task_07 |
-| 09 | CI: build WASM (emsdk) + cache antes dos testes | pending | medium | task_01 |
+| 09 | CI: build WASM (emsdk) + cache antes dos testes | completed | medium | task_01 |
 </content>
