@@ -1,0 +1,4 @@
+# Generated Emscripten artifacts — produced by `pnpm build:wasm`, never committed.
+runtime/
+dist/
+coverage/

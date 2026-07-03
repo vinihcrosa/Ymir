@@ -4,7 +4,7 @@
 
 | # | Title | Status | Complexity | Dependencies |
 |---|-------|--------|------------|--------------|
-| 01 | Pacote `@ymir/wasm` + build Emscripten alvo Node | pending | high | — |
+| 01 | Pacote `@ymir/wasm` + build Emscripten alvo Node | completed | high | — |
 | 02 | Protocolo `ClientMessage`/`ServerMessage` em `packages/types` (add-only) | completed | low | — |
 | 03 | `SimulationWorker` — loop 20 Hz em worker_thread | pending | high | task_01, task_02 |
 | 04 | `SimulationManager` — ciclo de vida, `sim_id`, TTL, limite | pending | high | task_03 |

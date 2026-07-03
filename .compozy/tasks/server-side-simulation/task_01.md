@@ -1,5 +1,5 @@
 ---
-status: pending
+status: completed
 title: Pacote `@ymir/wasm` + build Emscripten alvo Node
 type: infra
 complexity: high
@@ -32,11 +32,11 @@ commitados). Este é o pré-requisito de toda a simulação no servidor.
 </requirements>
 
 ## Subtasks
-- [ ] 1.1 Criar a estrutura do pacote `packages/wasm` (package.json privado, tsconfig, exports).
-- [ ] 1.2 Adaptar `core/build-wasm.sh`/`core/CMakeLists.wasm.txt` para alvo Node e saída no pacote.
-- [ ] 1.3 Implementar o loader (`createSimulationEngine`) e declarar a interface `SimulationEngine`.
-- [ ] 1.4 Ajustar orquestração turbo/scripts para gerar os binários no pacote.
-- [ ] 1.5 Escrever testes que carregam o WASM real e exercitam a superfície da interface.
+- [x] 1.1 Criar a estrutura do pacote `packages/wasm` (package.json privado, tsconfig, exports).
+- [x] 1.2 Adaptar `core/build-wasm.sh`/`core/CMakeLists.wasm.txt` para alvo Node e saída no pacote.
+- [x] 1.3 Implementar o loader (`createSimulationEngine`) e declarar a interface `SimulationEngine`.
+- [x] 1.4 Ajustar orquestração turbo/scripts para gerar os binários no pacote. (script `build:wasm` do pacote; fiação turbo/CI completada na task_09)
+- [x] 1.5 Escrever testes que carregam o WASM real e exercitam a superfície da interface.
 
 ## Implementation Details
 Ver TechSpec seções "Core Interfaces" (interface `SimulationEngine` e `createSimulationEngine`),
