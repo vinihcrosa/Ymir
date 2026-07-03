@@ -1,5 +1,5 @@
 ---
-status: pending
+status: completed
 title: Remoção do motor no cliente (worker, mock, public/wasm, tipos)
 type: refactor
 complexity: medium
@@ -32,11 +32,11 @@ executar após a paridade validada pela task_07.
 </requirements>
 
 ## Subtasks
-- [ ] 8.1 Deletar worker, mock e seus testes.
-- [ ] 8.2 Remover `apps/web/public/wasm/` e referências de carregamento.
-- [ ] 8.3 Remover tipos aposentados de `packages/types` e corrigir importadores.
-- [ ] 8.4 Limpar `vite.config.ts` (COOP/COEP, worker.format) se aplicável.
-- [ ] 8.5 Rodar build + testes do web e confirmar ausência de referências ao motor local.
+- [x] 8.1 Deletar worker, mock e seus testes.
+- [x] 8.2 Remover `apps/web/public/wasm/` e referências de carregamento.
+- [x] 8.3 Remover tipos aposentados de `packages/types` e corrigir importadores.
+- [x] 8.4 Limpar `vite.config.ts` (COOP/COEP, worker.format) se aplicável.
+- [x] 8.5 Rodar build + testes do web e confirmar ausência de referências ao motor local.
 
 ## Implementation Details
 Ver TechSpec "Impact Analysis" (linhas marcadas `deprecated`) e "Development Sequencing" (passo 8).

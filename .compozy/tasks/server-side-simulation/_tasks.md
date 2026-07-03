@@ -11,6 +11,6 @@
 | 05 | `WsGateway` + `MessageRouter` + rota `/ws` | completed | high | task_02, task_04 |
 | 06 | `SimulationSocket` (web) — WS client, reconexão, `localStorage` | completed | medium | task_02, task_05 |
 | 07 | Religar `simulationStore` ao `SimulationSocket` | completed | medium | task_06 |
-| 08 | Remoção do motor no cliente (worker, mock, public/wasm, tipos) | pending | medium | task_07 |
+| 08 | Remoção do motor no cliente (worker, mock, public/wasm, tipos) | completed | medium | task_07 |
 | 09 | CI: build WASM (emsdk) + cache antes dos testes | completed | medium | task_01 |
 </content>
