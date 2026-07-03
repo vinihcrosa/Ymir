@@ -26,6 +26,7 @@ export class SimulationRunner {
   private engine: SimulationEngine
   private readonly engineFactory: () => Promise<SimulationEngine>
   private timer: ReturnType<typeof setInterval> | null = null
+  private disposed = false
 
   private constructor(engine: SimulationEngine, factory: () => Promise<SimulationEngine>) {
     this.engine = engine
@@ -133,8 +134,10 @@ export class SimulationRunner {
     }
   }
 
-  /** Stop the loop and free the engine. */
+  /** Stop the loop and free the engine. Idempotent. */
   dispose(): void {
+    if (this.disposed) return
+    this.disposed = true
     this.stop()
     this.engine.delete()
   }

@@ -1,5 +1,5 @@
 ---
-status: pending
+status: completed
 title: '`SimulationManager` — ciclo de vida, `sim_id`, TTL, limite'
 type: backend
 complexity: high
@@ -32,12 +32,12 @@ simultâneas e a política de TTL de órfãs (default 30 min). É o dono do cicl
 </requirements>
 
 ## Subtasks
-- [ ] 4.1 Implementar o registro `sim_id → { worker, conexões, timer }` e a geração de `sim_id`.
-- [ ] 4.2 Implementar create/stop (spawn/término de worker_thread) com término idempotente.
-- [ ] 4.3 Implementar attach/detach com arme/cancelamento de TTL.
-- [ ] 4.4 Aplicar limite de sims simultâneas.
-- [ ] 4.5 Reencaminhar mensagens do worker → conexões (fan-out por `sim_id`).
-- [ ] 4.6 Escrever testes de ciclo de vida com timers controlados e worker real.
+- [x] 4.1 Implementar o registro `sim_id → { worker, conexões, timer }` e a geração de `sim_id`. (`crypto.randomUUID`)
+- [x] 4.2 Implementar create/stop (spawn/término de worker_thread) com término idempotente.
+- [x] 4.3 Implementar attach/detach com arme/cancelamento de TTL.
+- [x] 4.4 Aplicar limite de sims simultâneas.
+- [x] 4.5 Reencaminhar mensagens do worker → conexões (fan-out por `sim_id`).
+- [x] 4.6 Escrever testes de ciclo de vida com timers controlados e worker real. (fake handle c/ motor real + teste de worker_thread real via tsx)
 
 ## Implementation Details
 Ver TechSpec seções "Core Interfaces" (interface `SimulationManager`), "System Architecture" e
