@@ -4,6 +4,7 @@ import { healthRoutes } from './routes/health.js'
 import { vesselRoutes } from './routes/vessels.js'
 import { scenarioRoutes } from './routes/scenarios.js'
 import { areaRoutes } from './routes/areas.js'
+import { simulationWsPlugin } from './simulation/ws-plugin.js'
 import { runMigrations } from './db/index.js'
 import { seedVessel1, seedPlaceholdersIfEmpty } from './db/seed-vessel1.js'
 import { seedArea } from './db/seed-area.js'
@@ -15,6 +16,7 @@ await app.register(healthRoutes)
 await app.register(vesselRoutes)
 await app.register(scenarioRoutes)
 await app.register(areaRoutes)
+await app.register(simulationWsPlugin)
 
 const port = Number(process.env.PORT ?? 3000)
 const host = process.env.HOST ?? '0.0.0.0'

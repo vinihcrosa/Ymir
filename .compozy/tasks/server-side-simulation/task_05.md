@@ -1,5 +1,5 @@
 ---
-status: pending
+status: completed
 title: '`WsGateway` + `MessageRouter` + rota `/ws`'
 type: backend
 complexity: high
@@ -34,12 +34,12 @@ servidor de ponta a ponta.
 </requirements>
 
 ## Subtasks
-- [ ] 5.1 Adicionar `@fastify/websocket` (v8.x) e registrar o plugin no bootstrap.
-- [ ] 5.2 Criar a rota `GET /ws` e o handler de conexão.
-- [ ] 5.3 Implementar o `MessageRouter` (validação TypeBox + despacho por `type`).
-- [ ] 5.4 Ligar Create/Attach à associação conexão↔`sim_id` no `SimulationManager`.
-- [ ] 5.5 Serializar `ServerMessage` de volta e tratar desconexão (detach).
-- [ ] 5.6 Escrever testes de roundtrip com cliente WebSocket real e motor real.
+- [x] 5.1 Adicionar `@fastify/websocket` (v8.x) e registrar o plugin no bootstrap.
+- [x] 5.2 Criar a rota `GET /ws` e o handler de conexão.
+- [x] 5.3 Implementar o `MessageRouter` (validação TypeBox + despacho por `type`).
+- [x] 5.4 Ligar Create/Attach à associação conexão↔`sim_id` no `SimulationManager`.
+- [x] 5.5 Serializar `ServerMessage` de volta e tratar desconexão (detach).
+- [x] 5.6 Escrever testes de roundtrip com cliente WebSocket real e motor real.
 
 ## Implementation Details
 Ver TechSpec seções "System Architecture" (WsGateway/MessageRouter), "API Endpoints" (`GET /ws`),
