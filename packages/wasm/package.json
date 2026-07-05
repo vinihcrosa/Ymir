@@ -1,0 +1,33 @@
+{
+  "name": "@ymir/wasm",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "runtime"
+  ],
+  "scripts": {
+    "build:wasm": "bash scripts/build-wasm.sh",
+    "build": "tsc",
+    "clean": "rm -rf dist runtime",
+    "test": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@ymir/types": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.8.0",
+    "vitest": "^4.1.9",
+    "@vitest/coverage-v8": "^4.1.9"
+  }
+}

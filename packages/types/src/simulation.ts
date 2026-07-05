@@ -1,5 +1,4 @@
 import { Type, Static } from '@sinclair/typebox'
-import { VesselConfigDTO } from './vessel.js'
 
 export const VesselStateDTO = Type.Object({
   id: Type.Number(),
@@ -21,17 +20,3 @@ export const SimulationStateDTO = Type.Object({
 })
 export type SimulationStateDTO = Static<typeof SimulationStateDTO>
 
-/** Which physics backend the worker actually loaded. */
-export const SimulationEngine = Type.Union([
-  Type.Literal('wasm'), // real C++ dynamics compiled to WebAssembly
-  Type.Literal('mock'), // JS kinematic fallback used when ymir.wasm is not built
-])
-export type SimulationEngine = Static<typeof SimulationEngine>
-
-export const WorkerMessageDTO = Type.Union([
-  Type.Object({ type: Type.Literal('ready'), engine: SimulationEngine }),
-  Type.Object({ type: Type.Literal('state'), payload: SimulationStateDTO }),
-  Type.Object({ type: Type.Literal('error'), message: Type.String() }),
-  Type.Object({ type: Type.Literal('vessel_config'), payload: VesselConfigDTO }),
-])
-export type WorkerMessageDTO = Static<typeof WorkerMessageDTO>

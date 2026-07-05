@@ -1,141 +1,165 @@
 import { create } from 'zustand'
-import type { SimulationStateDTO, SimulationEngine } from '@ymir/types'
+import type { SimulationStateDTO, ScenarioDraftVesselDTO, ServerMessage } from '@ymir/types'
+import { SimulationSocket, type ConnectionState } from '../lib/simulation-socket'
 import { useVesselPanelStore } from './vesselPanelStore'
 import { useEnvironmentStore } from './environmentStore'
 
 type Status = 'idle' | 'loading' | 'running' | 'paused' | 'error'
 
-interface ScenarioDraftVessel {
-  instanceId: number
-  vesselId: number
-  name: string
-  x: number
-  y: number
-  headingDeg: number
+type ScenarioDraftVessel = ScenarioDraftVesselDTO
+
+/** Socket factory — overridable in tests to inject a fake transport. */
+let socketFactory: () => SimulationSocket = () => new SimulationSocket()
+export function __setSocketFactory(factory: (() => SimulationSocket) | null): void {
+  socketFactory = factory ?? (() => new SimulationSocket())
 }
+
+// dt to send with Play once the server confirms a freshly created simulation.
+let pendingPlayDt: number | null = null
 
 interface SimulationStore {
   status: Status
   error: string | null
   state: SimulationStateDTO | null
-  engine: SimulationEngine | null
-  worker: Worker | null
+  connection: ConnectionState | 'idle'
+  socket: SimulationSocket | null
+  simId: string | null
   scenarioVessels: ScenarioDraftVessel[]
-  /** Start (first time) or resume (after pause) the simulation loop. */
+  /** True once a session (socket) exists. */
+  hasSession: () => boolean
+  /** Start (first time: create the sim) or resume the simulation. */
   play: (dt?: number) => void
-  /** Freeze the loop at the current state — does NOT reset position/time. */
+  /** Pause the simulation on the server; state is retained. */
   pause: () => void
+  /** End the simulation, close the socket, and clear local state. */
   reset: () => void
   loadScenario: (vessels: ScenarioDraftVessel[]) => void
-  /** Push the current environment profile to a running/paused worker. */
+  /** Push the current environment profile to the running simulation. */
   applyEnvironment: () => void
+  /** Send an actuator command (rudder/thruster) to a vessel. */
+  sendActuator: (
+    vesselId: number,
+    deviceType: 'rudder' | 'thruster',
+    deviceId: number,
+    value: number,
+    value2?: number,
+  ) => void
 }
 
-export const useSimulationStore = create<SimulationStore>((set, get) => ({
-  status: 'idle',
-  error: null,
-  state: null,
-  engine: null,
-  worker: null,
-  scenarioVessels: [],
+export const useSimulationStore = create<SimulationStore>((set, get) => {
+  function resyncActuators(simId: string): void {
+    const panel = useVesselPanelStore.getState()
+    if (panel.selectedVesselId === null) return
+    const vesselId = panel.selectedVesselId
+    const { socket } = get()
+    if (!socket) return
+    for (const [id, pct] of Object.entries(panel.thrusterPowers)) {
+      const thrusterId = Number(id)
+      socket.send({
+        type: 'SetActuator', simId, vesselId, deviceType: 'thruster',
+        deviceId: thrusterId, value: pct, value2: panel.thrusterAzimuths[thrusterId] ?? 0,
+      })
+    }
+    for (const [id, deg] of Object.entries(panel.rudderAngles)) {
+      socket.send({ type: 'SetActuator', simId, vesselId, deviceType: 'rudder', deviceId: Number(id), value: deg })
+    }
+  }
 
-  play(dt = 0.05) {
-    let { worker } = get()
-
-    if (!worker) {
-      set({ status: 'loading', error: null })
-      worker = new Worker(
-        new URL('../workers/simulation.worker.ts', import.meta.url),
-        { type: 'module' },
-      )
-
-      worker.onmessage = (e: MessageEvent) => {
-        const msg = e.data as { type: string; payload?: SimulationStateDTO; message?: string; engine?: SimulationEngine }
-        switch (msg.type) {
-          case 'ready': {
-            // Worker booted; engine known. We go straight to running below.
-            set({ engine: msg.engine ?? null })
-            const { scenarioVessels } = get()
-            if (scenarioVessels.length > 0) {
-              get().worker!.postMessage({ type: 'loadScenario', vessels: scenarioVessels })
-            }
-            // Re-sync any actuator state that was set before the worker was created.
-            const panel = useVesselPanelStore.getState()
-            if (panel.selectedVesselId !== null) {
-              const vesselId = panel.selectedVesselId
-              const w = get().worker!
-              Object.entries(panel.thrusterPowers).forEach(([id, pct]) => {
-                const thrusterId = Number(id)
-                w.postMessage({
-                  type: 'setActuator', vesselId, deviceType: 'thruster',
-                  deviceId: thrusterId, value: pct,
-                  value2: panel.thrusterAzimuths[thrusterId] ?? 0,
-                })
-              })
-              Object.entries(panel.rudderAngles).forEach(([id, deg]) => {
-                w.postMessage({
-                  type: 'setActuator', vesselId, deviceType: 'rudder',
-                  deviceId: Number(id), value: deg,
-                })
-              })
-            }
-            const envStore = useEnvironmentStore.getState()
-            if (envStore.hasConditions()) {
-              get().worker!.postMessage({ type: 'loadEnvironment', json: envStore.toJson() })
-            }
-            get().worker!.postMessage({ type: 'start', dt })
-            set({ status: 'running' })
-            break
-          }
-          case 'state':
-            set({ state: msg.payload ?? null })
-            break
-          case 'error':
-            set({ status: 'error', error: msg.message ?? 'Unknown error' })
-            break
+  function handleServer(msg: ServerMessage): void {
+    const { socket } = get()
+    switch (msg.type) {
+      case 'SimulationCreated': {
+        set({ simId: msg.simId })
+        if (socket && pendingPlayDt !== null) {
+          socket.send({ type: 'Play', simId: msg.simId, dt: pendingPlayDt })
+          pendingPlayDt = null
+          set({ status: 'running' })
         }
+        resyncActuators(msg.simId)
+        break
       }
+      case 'State':
+        set({ state: msg.payload })
+        break
+      case 'Status':
+        set({ status: msg.status === 'ended' ? 'idle' : msg.status })
+        break
+      case 'Error':
+        set({ status: 'error', error: msg.message })
+        break
+    }
+  }
 
-      worker.onerror = (e) => {
-        set({ status: 'error', error: e.message })
+  return {
+    status: 'idle',
+    error: null,
+    state: null,
+    connection: 'idle',
+    socket: null,
+    simId: null,
+    scenarioVessels: [],
+
+    hasSession: () => get().socket !== null,
+
+    play(dt = 0.05) {
+      let { socket } = get()
+      if (!socket) {
+        socket = socketFactory()
+        socket.onMessage(handleServer)
+        socket.onConnectionChange((c) => set({ connection: c }))
+        set({ socket, status: 'loading', error: null, simId: socket.simId })
+        socket.connect()
       }
+      const { simId, scenarioVessels } = get()
+      if (simId) {
+        socket.send({ type: 'Play', simId, dt })
+        set({ status: 'running' })
+      } else {
+        pendingPlayDt = dt
+        const env = useEnvironmentStore.getState()
+        socket.createSimulation({
+          vessels: scenarioVessels,
+          environmentJson: env.hasConditions() ? env.toJson() : undefined,
+        })
+      }
+    },
 
-      set({ worker })
-    } else {
-      // Resume from the frozen state — the worker keeps the simulation object,
-      // so position and elapsed time carry over.
-      worker.postMessage({ type: 'start', dt })
-      set({ status: 'running' })
-    }
-  },
+    pause() {
+      const { socket, simId } = get()
+      if (socket && simId) socket.send({ type: 'Pause', simId })
+      set({ status: 'paused' })
+    },
 
-  pause() {
-    const { worker } = get()
-    worker?.postMessage({ type: 'stop' })
-    set({ status: 'paused' })
-  },
+    applyEnvironment() {
+      const { socket, simId } = get()
+      const env = useEnvironmentStore.getState()
+      if (socket && simId && env.hasConditions()) {
+        socket.send({ type: 'LoadEnvironment', simId, json: env.toJson() })
+      }
+    },
 
-  applyEnvironment() {
-    const { worker } = get()
-    const envStore = useEnvironmentStore.getState()
-    if (worker && envStore.hasConditions()) {
-      worker.postMessage({ type: 'loadEnvironment', json: envStore.toJson() })
-    }
-  },
+    reset() {
+      const { socket, simId } = get()
+      if (socket && simId) socket.send({ type: 'Reset', simId })
+      // Forget the persisted sim id so the next play() starts a fresh
+      // simulation instead of re-attaching to the old (reset) one.
+      socket?.clearSimId()
+      socket?.close()
+      pendingPlayDt = null
+      set({ status: 'idle', error: null, state: null, connection: 'idle', socket: null, simId: null, scenarioVessels: [] })
+    },
 
-  reset() {
-    const { worker } = get()
-    if (worker) {
-      worker.terminate()
-    }
-    set({ status: 'idle', error: null, state: null, engine: null, worker: null, scenarioVessels: [] })
-  },
+    loadScenario(vessels) {
+      set({ scenarioVessels: vessels })
+      const { socket, simId } = get()
+      if (socket && simId) socket.send({ type: 'LoadScenario', simId, vessels })
+    },
 
-  loadScenario(vessels: ScenarioDraftVessel[]) {
-    set({ scenarioVessels: vessels })
-    const { worker } = get()
-    if (worker) {
-      worker.postMessage({ type: 'loadScenario', vessels })
-    }
-  },
-}))
+    sendActuator(vesselId, deviceType, deviceId, value, value2) {
+      const { socket, simId } = get()
+      if (socket && simId) {
+        socket.send({ type: 'SetActuator', simId, vesselId, deviceType, deviceId, value, value2 })
+      }
+    },
+  }
+})

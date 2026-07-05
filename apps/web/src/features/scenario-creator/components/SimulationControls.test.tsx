@@ -38,23 +38,22 @@ describe('SimulationControls (status strip)', () => {
     expect(screen.getByText(/erro/i)).toBeInTheDocument()
   })
 
-  it('warns when the physics engine fell back to the mock', () => {
-    useSimulationStore.setState({ status: 'running', state: { t: 1, vessels: [] }, engine: 'mock' })
+  it('warns when the connection is reconnecting', () => {
+    useSimulationStore.setState({ status: 'running', state: { t: 1, vessels: [] }, connection: 'reconnecting' })
     render(<SimulationControls />)
-    expect(screen.getByRole('alert')).toHaveTextContent(/mock/i)
-    expect(screen.getByRole('alert')).toHaveTextContent(/build:wasm/)
+    expect(screen.getByRole('alert')).toHaveTextContent(/reconect/i)
   })
 
-  it('confirms when real WASM physics is loaded', () => {
-    useSimulationStore.setState({ status: 'running', state: { t: 1, vessels: [] }, engine: 'wasm' })
+  it('confirms when connected to the server', () => {
+    useSimulationStore.setState({ status: 'running', state: { t: 1, vessels: [] }, connection: 'open' })
     render(<SimulationControls />)
-    expect(screen.getByText(/Física real \(WASM\)/i)).toBeInTheDocument()
+    expect(screen.getByText(/Conectado ao servidor/i)).toBeInTheDocument()
     expect(screen.queryByRole('alert')).toBeNull()
   })
 
-  it('shows no engine badge before the worker reports ready', () => {
-    useSimulationStore.setState({ status: 'idle', engine: null })
+  it('shows no connection badge before a session exists', () => {
+    useSimulationStore.setState({ status: 'idle', connection: 'idle' })
     render(<SimulationControls />)
-    expect(screen.queryByText(/Física/i)).toBeNull()
+    expect(screen.queryByText(/servidor/i)).toBeNull()
   })
 })

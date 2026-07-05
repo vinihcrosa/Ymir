@@ -5,12 +5,18 @@ if(NOT EMSCRIPTEN)
     message(FATAL_ERROR "Emscripten.cmake included but EMSCRIPTEN is not set")
 endif()
 
+# Target environment for the generated module. Default "worker" (web build).
+# Set -DYMIR_WASM_ENVIRONMENT=node for the server-side (Node worker_thread) build.
+if(NOT DEFINED YMIR_WASM_ENVIRONMENT)
+    set(YMIR_WASM_ENVIRONMENT "worker")
+endif()
+
 # Emscripten link flags for the WASM module
 set(YMIR_EMSCRIPTEN_LINK_FLAGS
     "-sEXPORT_ES6=1"
     "-sMODULARIZE=1"
     "-sEXPORT_NAME=createYmirModule"
-    "-sENVIRONMENT=worker"
+    "-sENVIRONMENT=${YMIR_WASM_ENVIRONMENT}"
     "-sINITIAL_MEMORY=67108864"   # 64 MiB
     "-sALLOW_MEMORY_GROWTH=1"
     "-sEXPORTED_RUNTIME_METHODS=ccall,cwrap"
