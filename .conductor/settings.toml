@@ -1,0 +1,44 @@
+"$schema" = "https://conductor.build/schemas/settings.repo.schema.json"
+
+# Ymir — pnpm + turbo monorepo.
+#   apps/api   Fastify server (physics runs here, in worker_threads via WASM)
+#   apps/web   Vite/React client (thin WebSocket terminal)
+#   packages/* @ymir/types, @ymir/wasm (Emscripten → Node WASM)
+#   core       C++ physics engine (compiled to WASM by @ymir/wasm)
+#
+# Ports: each workspace gets CONDUCTOR_PORT..CONDUCTOR_PORT+9.
+#   web → CONDUCTOR_PORT      api → CONDUCTOR_PORT+1
+# Runs are concurrent-safe: the api's SQLite DB (apps/api/*.db) is per-worktree.
+
+[scripts]
+# Install deps, build the shared TS packages, and compile the Node WASM engine.
+# The WASM build needs the Emscripten SDK (emcc/emcmake) on PATH; if it is
+# missing, setup still succeeds and the engine can be built later on demand.
+setup = '''git -C "$CONDUCTOR_ROOT_PATH" fetch --prune origin && git -C "$CONDUCTOR_ROOT_PATH" pull --ff-only || true; pnpm install && pnpm --filter @ymir/types build && pnpm --filter @ymir/wasm build && ( pnpm --filter @ymir/wasm build:wasm || echo "[setup] Emscripten (emcc) not found — server physics unavailable until you run: pnpm --filter @ymir/wasm build:wasm" )'''
+run_mode = "concurrent"
+
+# Default: run api + web together, wired to this workspace's ports.
+[scripts.run.dev]
+command = '''VITE_API_URL="http://localhost:$((CONDUCTOR_PORT+1))" VITE_SIM_WS_URL="ws://localhost:$((CONDUCTOR_PORT+1))/ws" PORT="$((CONDUCTOR_PORT+1))" pnpm exec concurrently -k -n api,web -c blue,green "pnpm --filter @ymir/api dev" "pnpm --filter @ymir/web dev --port $CONDUCTOR_PORT --host"'''
+default = true
+icon = "play"
+
+# API only (Fastify) on CONDUCTOR_PORT+1.
+[scripts.run.api]
+command = '''PORT="$((CONDUCTOR_PORT+1))" pnpm --filter @ymir/api dev'''
+icon = "server"
+
+# Web only (Vite) on CONDUCTOR_PORT, pointed at the api on CONDUCTOR_PORT+1.
+[scripts.run.web]
+command = '''VITE_API_URL="http://localhost:$((CONDUCTOR_PORT+1))" VITE_SIM_WS_URL="ws://localhost:$((CONDUCTOR_PORT+1))/ws" pnpm --filter @ymir/web dev --port $CONDUCTOR_PORT --host'''
+icon = "globe"
+
+# Full monorepo test suite (turbo builds the WASM engine first per turbo.json).
+[scripts.run.test]
+command = "pnpm test"
+icon = "test-tube"
+
+# Rebuild the Node WASM engine on demand (after editing core/ C++).
+[scripts.run.wasm]
+command = "pnpm --filter @ymir/wasm build:wasm"
+icon = "flame"

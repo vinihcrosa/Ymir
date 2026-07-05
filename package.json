@@ -10,6 +10,7 @@
     "clean": "turbo run clean"
   },
   "devDependencies": {
+    "concurrently": "^9.1.0",
     "turbo": "^2.5.4"
   },
   "engines": {
