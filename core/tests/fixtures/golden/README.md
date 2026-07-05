@@ -28,5 +28,9 @@ expresses inertia/stiffness in tonne-based units; the test configs in
 
 ## Scenarios present
 
+- `02_wind` — wind drag (`Fwd`); wind 10 m/s @ 0°, vessel free from rest.
 - `08_restoring` — hydrostatic restoring (`Fr`) + damping (`Fd`); heave offset
   +0.5 m, environment zeroed.
+
+Flow-based scenarios reconstruct the body-frame wind/current from the scenario
+environment + golden heading via `GoldenFrame.h` (`nautToBodyFrame`).

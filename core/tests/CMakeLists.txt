@@ -49,6 +49,7 @@ target_link_libraries(ymir_physics_tests
 catch_discover_tests(ymir_physics_tests)
 
 add_executable(ymir_golden_tests
+    golden/TestGolden02Wind.cpp
     golden/TestGolden08Restoring.cpp
 )
 

@@ -35,25 +35,36 @@ restauração do Ymir bate com o golden a ~3e-5 de erro relativo em pitch ~0.
 
 ## Resultados por força
 
+A convenção de heading do TMS foi reproduzida em `GoldenFrame.h`
+(`nautToBodyFrame`, espelhando `NavalDomain`): o fluxo ambiente (velocidade +
+direção náutica) é rotacionado ao referencial do corpo usando o `yaw` golden.
+Isso destrava as forças dependentes de fluxo (vento, corrente, leme).
+
 | Cenário | Força | Status | Concordância | Observação |
 |---------|-------|--------|--------------|------------|
 | 08_restoring | Restauração `Fr_z` | ✅ valida | ~3e-5 (pitch≈0) → ~6,5% (pitch alto) | Divergência = acoplamento hidrostático off-diagonal `[2][4]/[4][2]` que o Ymir omite por decisão de projeto |
 | 08_restoring | Momento `Mr_y` | ✅ valida | até ~13,5% | Mesma causa (off-diagonal) |
 | 08_restoring | Amortecimento `Fd_z` | ✅ valida | 0,05–0,6% (com movimento); ~7% (baixa velocidade) | Ymir omite um pequeno termo linear de heave presente no TMS |
+| 02_wind | Vento `Fwd_x` | ✅ valida | ~3,5–4,2% (todas as linhas) | Diferença = constante `rho_air` (Ymir 1,225 vs referência ~1,27); sinal e forma corretos |
 
 ### Achados que impedem validação numérica direta (follow-up)
 
+- **Corrente (01) — OBOKATA** — Ymir diverge do golden em **sinal e magnitude**
+  (`Fc_x` Ymir ≈ -83 kN vs golden ≈ +172 kN, erro relativo ~-1,5). Duas causas
+  prováveis: (a) `CurrentForces::computeObokata` usa `frontalHeight·dx` como área
+  seccional (área efetiva ≈ 11,5×350 = 4025 m² vs 1495 m² tabulada) e (b)
+  convenção de sinal do coeficiente/força invertida. Requer conferência contra a
+  referência MATLAB `dynamics` antes de corrigir.
 - **Squat (07)** — o modelo de squat do Ymir diverge do golden em ~4 ordens de
   grandeza (Ymir ≈ -2,1e4 N vs golden ≈ -7,0e8 N). **Não é fator de unidade** —
   é lacuna/bug de modelo. A fórmula do Ymir produz um afundamento `s` ~1e-4 m,
   enquanto o golden implica ~3,3 m. Investigar `SquatForces::computeNaval`
   (uso de `depth = max(|waterDepth|, |z|)` e escala de `nabla/(rho·g·L²)`).
-- **Corrente (01) / Vento (02) / Leme (06) / Onda (03,04)** — dependem do fluxo
-  relativo em **referencial do corpo** (`speedToWater` / `speedToWind`).
-  Reconstruir esses vetores a partir do golden exige reproduzir a convenção de
-  heading do TMS (o golden mostra `yaw = π/2` em repouso, e `Fc` é dominado por
-  surge, não por sway — ou seja, a convenção de ângulo não é trivial). Requer
-  mapear a convenção antes de validar numericamente. Pendente.
+- **Leme (06)** — depende de fluxo (surge inicial 5 m/s); `GoldenFrame` já
+  fornece o fluxo em referencial do corpo, mas o acoplamento com corrente/squat
+  no cenário exige isolar o termo `Frd`. Pendente.
+- **Onda (03,04)** — excitação/deriva espectral; validação exige alinhar fase e
+  espectro. Pendente.
 
 ## Como estender
 

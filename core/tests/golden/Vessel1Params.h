@@ -16,6 +16,7 @@
 
 #include <ymir/physics/forces/DampingForces.h>
 #include <ymir/physics/forces/RestoringForces.h>
+#include <ymir/physics/forces/WindForces.h>
 
 namespace ymir::test
 {
@@ -63,6 +64,37 @@ inline ymir::naval::DampingForces::Config vessel1Damping()
     c.linear[0][0]    = 3.0 * kTonneToSI;
     c.linear[3][3]    = 12854400.0 * kTonneToSI;
     c.quadratic[5][5] = 16446722225.0 * kTonneToSI;
+    return c;
+}
+
+/// WindForces config for vessel1 (source: wind block in vessel1.json).
+/// Wind loads are pure SI (areas m², dimensionless Cd) — no tonne scaling.
+inline ymir::naval::WindForces::Config vessel1Wind()
+{
+    ymir::naval::WindForces::Config c{};
+    c.model           = ymir::naval::WindModel::REGULAR;
+    c.frontalArea     = 2405.0; // wind.area.frontal
+    c.lateralArea     = 4164.0; // wind.area.lateral
+    c.frontalHeight   = 32.5;   // wind.area.frontalHeight
+    c.lateralHeight   = 45.0;   // wind.area.lateralHeight
+    c.midshipDistance = 0.0;
+    c.length_BP       = 350.0;
+    c.beam            = 63.0;
+    c.draft           = 23.0;
+
+    // wind.coefficients: [angle_deg, cdx, cdy, cdz] rows, 0..360 step 10.
+    c.angles = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140,
+                150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270,
+                280, 290, 300, 310, 320, 330, 340, 350, 360};
+    c.cdx = {0.75, 0.77, 0.74, 0.65, 0.515, 0.39, 0.29, 0.21, 0.135, 0.04, -0.07,
+             -0.19, -0.33, -0.48, -0.615, -0.725, -0.825, -0.905, -0.955, -0.905,
+             -0.825, -0.725, -0.615, -0.48, -0.33, -0.19, -0.07, 0.04, 0.135, 0.21,
+             0.29, 0.39, 0.515, 0.65, 0.74, 0.77, 0.75};
+    c.cdy = {0, 0.12, 0.28, 0.425, 0.54, 0.625, 0.675, 0.705, 0.715, 0.72, 0.705,
+             0.68, 0.635, 0.555, 0.43, 0.31, 0.195, 0.09, 0, -0.09, -0.195, -0.31,
+             -0.43, -0.555, -0.635, -0.68, -0.705, -0.72, -0.715, -0.705, -0.675,
+             -0.625, -0.54, -0.425, -0.28, -0.12, 0};
+    c.cdz = std::vector<double>(c.angles.size(), 0.0);
     return c;
 }
 
