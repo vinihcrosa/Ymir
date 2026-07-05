@@ -141,6 +141,9 @@ export const useSimulationStore = create<SimulationStore>((set, get) => {
     reset() {
       const { socket, simId } = get()
       if (socket && simId) socket.send({ type: 'Reset', simId })
+      // Forget the persisted sim id so the next play() starts a fresh
+      // simulation instead of re-attaching to the old (reset) one.
+      socket?.clearSimId()
       socket?.close()
       pendingPlayDt = null
       set({ status: 'idle', error: null, state: null, connection: 'idle', socket: null, simId: null, scenarioVessels: [] })

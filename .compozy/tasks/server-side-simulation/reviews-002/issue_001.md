@@ -3,7 +3,7 @@ provider: manual
 pr: 2
 round: 2
 round_created_at: 2026-07-05T15:16:15Z
-status: pending
+status: resolved
 file: apps/web/src/stores/simulationStore.ts
 line: 141
 severity: medium
@@ -46,5 +46,5 @@ Add a store test asserting that after `reset()` a subsequent `play()` emits
 
 ## Triage
 
-- Decision: `UNREVIEWED`
-- Notes:
+- Decision: `VALID`
+- Notes: Confirmed — `clearSimId()` was only called on the "unknown simulation" error, never on reset, so localStorage kept the id and the next play() re-attached to the old sim. Fixed: `reset()` now calls `socket.clearSimId()` before closing. Test added: "clears the persisted sim id so the next play starts a fresh simulation" asserts the next play() emits CreateSimulation, not AttachSimulation. Full suite green (248 web tests, turbo 7/7).

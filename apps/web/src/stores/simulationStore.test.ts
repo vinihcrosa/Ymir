@@ -202,4 +202,17 @@ describe('simulationStore — reset', () => {
     expect(store().simId).toBeNull()
     expect(store().scenarioVessels).toEqual([])
   })
+
+  it('clears the persisted sim id so the next play starts a fresh simulation', () => {
+    createSession()
+    expect(storage.getItem('ymir.simId')).toBe('sim-1')
+    store().reset()
+    expect(storage.getItem('ymir.simId')).toBeNull()
+
+    store().play(0.05)
+    lastWs().open()
+    const msgs = lastWs().sentMessages
+    expect(msgs.some((m) => m.type === 'CreateSimulation')).toBe(true)
+    expect(msgs.some((m) => m.type === 'AttachSimulation')).toBe(false)
+  })
 })
