@@ -48,6 +48,22 @@ target_link_libraries(ymir_physics_tests
 
 catch_discover_tests(ymir_physics_tests)
 
+add_executable(ymir_golden_tests
+    golden/TestGolden08Restoring.cpp
+)
+
+target_link_libraries(ymir_golden_tests
+    PRIVATE
+        Ymir::Physics
+        Catch2::Catch2WithMain
+)
+
+target_compile_definitions(ymir_golden_tests
+    PRIVATE YMIR_GOLDEN_DIR="${CMAKE_CURRENT_SOURCE_DIR}/fixtures/golden"
+)
+
+catch_discover_tests(ymir_golden_tests)
+
 add_executable(ymir_integrator_tests
     physics/TestIntegrator.cpp
     physics/TestIntegratorRK45.cpp
@@ -143,6 +159,7 @@ if(YMIR_ENABLE_COVERAGE)
         ymir_smoke_tests
         ymir_common_tests
         ymir_physics_tests
+        ymir_golden_tests
         ymir_integrator_tests
         ymir_simulation_tests
         ymir_world_tests
