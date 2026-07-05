@@ -1,0 +1,31 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "extends": ["//"],
+  "tasks": {
+    "build": {
+      "outputs": ["build/**"],
+      "inputs": [
+        "CMakeLists.txt",
+        "cmake/**",
+        "libs/**/*.cpp",
+        "libs/**/*.h",
+        "libs/**/*.hpp",
+        "libs/**/CMakeLists.txt",
+        "tests/**",
+        "apps/**/CMakeLists.txt"
+      ],
+      "cache": false
+    },
+    "test": {
+      "dependsOn": ["build"],
+      "inputs": [
+        "libs/**",
+        "tests/**",
+        "CMakeLists.txt",
+        "cmake/**"
+      ],
+      "outputs": [],
+      "cache": false
+    }
+  }
+}
