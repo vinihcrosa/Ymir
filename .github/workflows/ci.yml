@@ -30,10 +30,11 @@ jobs:
             os: macos-14
             cmake_extra: ""
 
-          - name: Windows x86_64
-            os: windows-latest
-            cmake_extra: >-
-              -DCMAKE_TOOLCHAIN_FILE=$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
+          # Windows native build is intentionally omitted: the engine ships as
+          # WASM-in-Node (see @ymir/wasm + the "WASM + JS workspaces" job), there
+          # is no native Windows target, and CGAL/SUNDIALS are not provisioned on
+          # the Windows runner. Re-add with vcpkg deps when a native Windows
+          # target actually exists.
 
     steps:
       - name: Checkout
@@ -52,15 +53,6 @@ jobs:
         if: runner.os == 'macOS'
         run: |
           brew install ninja cgal sundials
-
-      - name: Install dependencies (Windows)
-        if: runner.os == 'Windows'
-        run: |
-          # vcpkg is pre-installed on windows-latest
-          # CGAL and SUNDIALS are optional until M1/M2 — skipped here to avoid
-          # long compile times. Add when needed:
-          #   vcpkg install cgal:x64-windows sundials:x64-windows
-          choco install ninja --no-progress
 
       - name: Configure
         # The C++ project lives in core/ (there is no root CMakeLists.txt).
