@@ -87,8 +87,6 @@ export const useSimulationStore = create<SimulationStore>((set, get) => {
       case 'Error':
         set({ status: 'error', error: msg.message })
         break
-      case 'VesselConfig':
-        break
     }
   }
 

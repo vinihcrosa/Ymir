@@ -17,14 +17,32 @@ export interface SimulationSocketOptions {
   WebSocketImpl?: typeof WebSocket
   /** Persists the sim id across reloads (defaults to localStorage). */
   storage?: StorageLike
-  /** Delay before an automatic reconnect attempt. */
+  /** Base delay before an automatic reconnect attempt (grows exponentially). */
   reconnectDelayMs?: number
+  /** Cap on the exponential reconnect backoff. */
+  maxReconnectDelayMs?: number
+  /** Max buffered commands while disconnected (drops oldest beyond this). */
+  maxQueueSize?: number
 }
 
 const SIM_ID_KEY = 'ymir.simId'
-const DEFAULT_URL =
-  (import.meta.env?.VITE_SIM_WS_URL as string | undefined) ?? 'ws://localhost:3000/ws'
 const DEFAULT_RECONNECT_MS = 1000
+const DEFAULT_MAX_RECONNECT_MS = 30000
+const DEFAULT_MAX_QUEUE = 1000
+
+/**
+ * Resolve the WebSocket URL: explicit env override first, otherwise derive from
+ * the page origin so it works under TLS (wss) and behind reverse proxies.
+ */
+export function defaultWsUrl(): string {
+  const override = import.meta.env?.VITE_SIM_WS_URL as string | undefined
+  if (override) return override
+  if (typeof location !== 'undefined' && location.host) {
+    const scheme = location.protocol === 'https:' ? 'wss' : 'ws'
+    return `${scheme}://${location.host}/ws`
+  }
+  return 'ws://localhost:3000/ws'
+}
 
 /**
  * Client transport to the server-side simulation. Owns the WebSocket lifecycle
@@ -37,17 +55,22 @@ export class SimulationSocket {
   private readonly WebSocketImpl: typeof WebSocket
   private readonly storage: StorageLike
   private readonly reconnectDelayMs: number
+  private readonly maxReconnectDelayMs: number
+  private readonly maxQueue: number
   private readonly messageListeners = new Set<MessageListener>()
   private readonly connectionListeners = new Set<ConnectionListener>()
   private queue: ClientMessage[] = []
   private intentionalClose = false
   private reconnectTimer: ReturnType<typeof setTimeout> | null = null
+  private reconnectAttempts = 0
 
   constructor(opts: SimulationSocketOptions = {}) {
-    this.url = opts.url ?? DEFAULT_URL
+    this.url = opts.url ?? defaultWsUrl()
     this.WebSocketImpl = opts.WebSocketImpl ?? globalThis.WebSocket
     this.storage = opts.storage ?? globalThis.localStorage
     this.reconnectDelayMs = opts.reconnectDelayMs ?? DEFAULT_RECONNECT_MS
+    this.maxReconnectDelayMs = opts.maxReconnectDelayMs ?? DEFAULT_MAX_RECONNECT_MS
+    this.maxQueue = opts.maxQueueSize ?? DEFAULT_MAX_QUEUE
   }
 
   get simId(): string | null {
@@ -71,6 +94,7 @@ export class SimulationSocket {
     const ws = new this.WebSocketImpl(this.url)
     this.ws = ws
     ws.onopen = () => {
+      this.reconnectAttempts = 0 // successful open resets the backoff
       this.emitConnection('open')
       const stored = this.simId
       if (stored) this.rawSend({ type: 'AttachSimulation', simId: stored })
@@ -83,7 +107,13 @@ export class SimulationSocket {
         this.emitConnection('closed')
       } else {
         this.emitConnection('reconnecting')
-        this.reconnectTimer = setTimeout(() => this.connect(), this.reconnectDelayMs)
+        // Capped exponential backoff so a downed server isn't hammered.
+        const delay = Math.min(
+          this.maxReconnectDelayMs,
+          this.reconnectDelayMs * 2 ** this.reconnectAttempts,
+        )
+        this.reconnectAttempts++
+        this.reconnectTimer = setTimeout(() => this.connect(), delay)
       }
     }
   }
@@ -98,6 +128,7 @@ export class SimulationSocket {
     if (this.ws && this.ws.readyState === this.WebSocketImpl.OPEN) {
       this.rawSend(msg)
     } else {
+      if (this.queue.length >= this.maxQueue) this.queue.shift() // drop oldest
       this.queue.push(msg)
     }
   }

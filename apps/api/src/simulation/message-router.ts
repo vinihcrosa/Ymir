@@ -16,8 +16,6 @@ export function toServerMessage(event: WorkerEvent): ServerMessage | null {
       return { type: 'State', payload: event.payload }
     case 'status':
       return { type: 'Status', status: event.status }
-    case 'vesselConfig':
-      return { type: 'VesselConfig', payload: event.payload }
     case 'error':
       return { type: 'Error', message: event.message }
     case 'ready':

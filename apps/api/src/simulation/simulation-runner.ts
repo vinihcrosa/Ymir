@@ -46,8 +46,11 @@ export class SimulationRunner {
    */
   async loadScenario(vessels: ScenarioDraftVesselDTO[]): Promise<void> {
     this.stop()
+    // Build the replacement before freeing the old engine so a factory failure
+    // leaves the runner in a valid, still-usable state.
+    const next = await this.engineFactory()
     this.engine.delete()
-    this.engine = await this.engineFactory()
+    this.engine = next
     for (const v of vessels) {
       this.engine.addVesselAt(v.instanceId, v.x, v.y, v.headingDeg * DEG_TO_RAD)
     }

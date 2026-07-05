@@ -1,4 +1,4 @@
-import type { SimulationStateDTO, VesselConfigDTO, ScenarioDraftVesselDTO } from '@ymir/types'
+import type { SimulationStateDTO, ScenarioDraftVesselDTO } from '@ymir/types'
 
 /**
  * Internal message protocol between the main thread (SimulationManager) and a
@@ -24,5 +24,4 @@ export type WorkerEvent =
   | { type: 'ready' }
   | { type: 'state'; payload: SimulationStateDTO }
   | { type: 'status'; status: 'running' | 'paused' | 'ended' }
-  | { type: 'vesselConfig'; payload: VesselConfigDTO }
   | { type: 'error'; message: string }

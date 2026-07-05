@@ -31,6 +31,23 @@ function collector(): Connection & { events: WorkerEvent[] } {
   return { events, send: (e) => events.push(e) }
 }
 
+/** A worker double whose message/error channels the test can drive directly. */
+function controllableWorkerFactory() {
+  let msgCb: ((e: WorkerEvent) => void) | null = null
+  let errCb: ((err: unknown) => void) | null = null
+  const factory: () => SimWorkerHandle = () => ({
+    postMessage: () => {},
+    on: (_e, listener) => { msgCb = listener as (e: WorkerEvent) => void },
+    onError: (listener) => { errCb = listener },
+    terminate: () => {},
+  })
+  return {
+    factory,
+    emit: (e: WorkerEvent) => msgCb?.(e),
+    fail: (err: unknown) => errCb?.(err),
+  }
+}
+
 const delay = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
 describe('SimulationManager', () => {
@@ -93,6 +110,29 @@ describe('SimulationManager', () => {
     await delay(90)
     expect(mgr.size).toBe(1) // survived past the original TTL
     await mgr.stop(id)
+  })
+
+  it('surfaces a worker error to clients and tears the sim down', () => {
+    const ctl = controllableWorkerFactory()
+    const mgr = new SimulationManager({ workerFactory: ctl.factory })
+    const id = mgr.create()
+    const c = collector()
+    mgr.attach(id, c)
+    ctl.fail(new Error('engine crashed'))
+    expect(c.events.some((e) => e.type === 'error' && e.message === 'engine crashed')).toBe(true)
+    expect(mgr.size).toBe(0)
+  })
+
+  it('replays the latest status and snapshot to a client that attaches later', () => {
+    const ctl = controllableWorkerFactory()
+    const mgr = new SimulationManager({ workerFactory: ctl.factory })
+    const id = mgr.create()
+    ctl.emit({ type: 'status', status: 'paused' })
+    ctl.emit({ type: 'state', payload: { t: 5, vessels: [] } })
+    const c = collector()
+    mgr.attach(id, c)
+    expect(c.events).toContainEqual({ type: 'status', status: 'paused' })
+    expect(c.events).toContainEqual({ type: 'state', payload: { t: 5, vessels: [] } })
   })
 
   it('stop is idempotent', async () => {

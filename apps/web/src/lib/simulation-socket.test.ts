@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { SimulationSocket } from './simulation-socket'
+import { SimulationSocket, defaultWsUrl } from './simulation-socket'
 import type { ClientMessage, ServerMessage } from '@ymir/types'
 
 class FakeWebSocket {
@@ -117,6 +117,44 @@ describe('SimulationSocket', () => {
     }
   })
 
+  it('grows the reconnect delay with exponential backoff', () => {
+    vi.useFakeTimers()
+    try {
+      const { socket } = makeSocket() // reconnectDelayMs: 50
+      socket.connect()
+      // First unexpected drop (before ever opening): delay = 50 * 2^0 = 50ms.
+      last().serverClose()
+      vi.advanceTimersByTime(50)
+      expect(FakeWebSocket.instances.length).toBe(2)
+      // Second drop without opening: delay = 50 * 2^1 = 100ms.
+      last().serverClose()
+      vi.advanceTimersByTime(60)
+      expect(FakeWebSocket.instances.length).toBe(2) // not yet — needs 100ms
+      vi.advanceTimersByTime(50)
+      expect(FakeWebSocket.instances.length).toBe(3)
+    } finally {
+      vi.useRealTimers()
+    }
+  })
+
+  it('caps the offline command queue, dropping the oldest', () => {
+    const socket = new SimulationSocket({
+      url: 'ws://test/ws',
+      WebSocketImpl: FakeWebSocket as unknown as typeof WebSocket,
+      storage: makeStorage(),
+      maxQueueSize: 2,
+    })
+    socket.connect() // not opened → sends are queued
+    socket.send({ type: 'Play', simId: 'a' })
+    socket.send({ type: 'Pause', simId: 'b' })
+    socket.send({ type: 'Reset', simId: 'c' })
+    last().open()
+    const sent = last().sentMessages
+    expect(sent).toContainEqual({ type: 'Pause', simId: 'b' })
+    expect(sent).toContainEqual({ type: 'Reset', simId: 'c' })
+    expect(sent).not.toContainEqual({ type: 'Play', simId: 'a' }) // oldest dropped
+  })
+
   it('does not reconnect after an intentional close', () => {
     vi.useFakeTimers()
     try {
@@ -140,6 +178,12 @@ describe('SimulationSocket', () => {
     last().open()
     socket.createSimulation({ vessels: [] })
     expect(last().sentMessages).toContainEqual({ type: 'CreateSimulation', scenario: { vessels: [] } })
+  })
+
+  it('defaultWsUrl derives a ws/wss URL from the page origin', () => {
+    const url = defaultWsUrl()
+    expect(url).toMatch(/^wss?:\/\//)
+    expect(url.endsWith('/ws')).toBe(true)
   })
 
   it('onMessage returns an unsubscribe function', () => {

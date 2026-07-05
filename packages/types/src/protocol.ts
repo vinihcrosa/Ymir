@@ -1,6 +1,5 @@
 import { Type, Static } from '@sinclair/typebox'
 import { SimulationStateDTO } from './simulation.js'
-import { VesselConfigDTO } from './vessel.js'
 
 // ── Shared payloads ──────────────────────────────────────────────────────────
 
@@ -62,7 +61,6 @@ export const ServerMessage = Type.Union([
     type: Type.Literal('Status'),
     status: Type.Union([Type.Literal('running'), Type.Literal('paused'), Type.Literal('ended')]),
   }),
-  Type.Object({ type: Type.Literal('VesselConfig'), payload: VesselConfigDTO }),
   Type.Object({ type: Type.Literal('Error'), message: Type.String() }),
 ])
 export type ServerMessage = Static<typeof ServerMessage>

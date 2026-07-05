@@ -8,6 +8,8 @@ export type SimId = string
 export interface SimWorkerHandle {
   postMessage(cmd: WorkerCommand): void
   on(event: 'message', listener: (event: WorkerEvent) => void): void
+  /** Subscribe to fatal worker failures (crash/exit). Optional for test doubles. */
+  onError?(listener: (err: unknown) => void): void
   terminate(): void | Promise<void>
 }
 
@@ -33,6 +35,9 @@ interface SimEntry {
   handle: SimWorkerHandle
   connections: Set<Connection>
   ttlTimer: ReturnType<typeof setTimeout> | null
+  // Last snapshot/status, replayed to clients that attach later (reconnect).
+  lastState: WorkerEvent | null
+  lastStatus: WorkerEvent | null
 }
 
 const DEFAULT_MAX = 2
@@ -45,6 +50,10 @@ function defaultWorkerFactory(): SimWorkerHandle {
   return {
     postMessage: (cmd) => worker.postMessage(cmd),
     on: (event, listener) => worker.on(event, listener),
+    onError: (listener) => {
+      worker.on('error', listener)
+      worker.on('exit', (code) => { if (code !== 0) listener(new Error(`worker exited with code ${code}`)) })
+    },
     terminate: async () => { await worker.terminate() },
   }
 }
@@ -81,8 +90,12 @@ export class SimulationManager {
     }
     const simId = this.generateId()
     const handle = this.workerFactory()
-    const entry: SimEntry = { handle, connections: new Set(), ttlTimer: null }
+    const entry: SimEntry = { handle, connections: new Set(), ttlTimer: null, lastState: null, lastStatus: null }
     handle.on('message', (event) => this.fanOut(simId, event))
+    handle.onError?.((err) => {
+      this.fanOut(simId, { type: 'error', message: err instanceof Error ? err.message : String(err) })
+      void this.stop(simId)
+    })
     this.entries.set(simId, entry)
     return simId
   }
@@ -96,6 +109,10 @@ export class SimulationManager {
       clearTimeout(entry.ttlTimer)
       entry.ttlTimer = null
     }
+    // Replay the latest status + snapshot so a (re)attaching client sees the
+    // current state immediately, even while the simulation is paused.
+    if (entry.lastStatus) conn.send(entry.lastStatus)
+    if (entry.lastState) conn.send(entry.lastState)
     return true
   }
 
@@ -126,6 +143,8 @@ export class SimulationManager {
   private fanOut(simId: SimId, event: WorkerEvent): void {
     const entry = this.entries.get(simId)
     if (!entry) return
+    if (event.type === 'state') entry.lastState = event
+    else if (event.type === 'status') entry.lastStatus = event
     for (const conn of entry.connections) conn.send(event)
   }
 }
