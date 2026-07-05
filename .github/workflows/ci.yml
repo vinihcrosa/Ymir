@@ -63,8 +63,9 @@ jobs:
           choco install ninja --no-progress
 
       - name: Configure
+        # The C++ project lives in core/ (there is no root CMakeLists.txt).
         run: >
-          cmake -B build
+          cmake -S core -B build
           -DCMAKE_BUILD_TYPE=Release
           -DYMIR_BUILD_TESTS=ON
           ${{ matrix.cmake_extra }}
@@ -113,7 +114,9 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          # Node 22: stable global WebSocket (used by the /ws integration test)
+          # and matches the repo's local/dev runtime.
+          node-version: 22
           cache: pnpm
 
       - name: Install dependencies
