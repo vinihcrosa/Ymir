@@ -1,16 +1,16 @@
-# Graph Report - rio-de-janeiro  (2026-07-05)
+# Graph Report - nostalgic-thompson-49408c  (2026-06-30)
 
 ## Corpus Check
-- 499 files · ~366,431 words
+- 445 files · ~339,278 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 6215 nodes · 7411 edges · 495 communities (473 shown, 22 thin omitted)
+- 5603 nodes · 6660 edges · 447 communities (430 shown, 17 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 41 edges (avg confidence: 0.88)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `2b760d4e`
+- Built from commit: `3c41918d`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -163,7 +163,6 @@
 - [[_COMMUNITY_Community 147|Community 147]]
 - [[_COMMUNITY_Community 148|Community 148]]
 - [[_COMMUNITY_Community 149|Community 149]]
-- [[_COMMUNITY_Community 163|Community 163]]
 - [[_COMMUNITY_Community 164|Community 164]]
 - [[_COMMUNITY_Community 165|Community 165]]
 - [[_COMMUNITY_Community 166|Community 166]]
@@ -434,80 +433,36 @@
 - [[_COMMUNITY_Community 443|Community 443]]
 - [[_COMMUNITY_Community 444|Community 444]]
 - [[_COMMUNITY_Community 445|Community 445]]
-- [[_COMMUNITY_Community 446|Community 446]]
-- [[_COMMUNITY_Community 447|Community 447]]
 - [[_COMMUNITY_Community 448|Community 448]]
-- [[_COMMUNITY_Community 449|Community 449]]
-- [[_COMMUNITY_Community 450|Community 450]]
-- [[_COMMUNITY_Community 451|Community 451]]
-- [[_COMMUNITY_Community 452|Community 452]]
-- [[_COMMUNITY_Community 453|Community 453]]
-- [[_COMMUNITY_Community 454|Community 454]]
-- [[_COMMUNITY_Community 455|Community 455]]
-- [[_COMMUNITY_Community 456|Community 456]]
-- [[_COMMUNITY_Community 457|Community 457]]
-- [[_COMMUNITY_Community 458|Community 458]]
-- [[_COMMUNITY_Community 459|Community 459]]
-- [[_COMMUNITY_Community 460|Community 460]]
-- [[_COMMUNITY_Community 461|Community 461]]
-- [[_COMMUNITY_Community 462|Community 462]]
-- [[_COMMUNITY_Community 463|Community 463]]
-- [[_COMMUNITY_Community 464|Community 464]]
-- [[_COMMUNITY_Community 465|Community 465]]
-- [[_COMMUNITY_Community 466|Community 466]]
-- [[_COMMUNITY_Community 467|Community 467]]
-- [[_COMMUNITY_Community 468|Community 468]]
-- [[_COMMUNITY_Community 469|Community 469]]
-- [[_COMMUNITY_Community 470|Community 470]]
-- [[_COMMUNITY_Community 471|Community 471]]
-- [[_COMMUNITY_Community 472|Community 472]]
-- [[_COMMUNITY_Community 473|Community 473]]
-- [[_COMMUNITY_Community 474|Community 474]]
-- [[_COMMUNITY_Community 475|Community 475]]
-- [[_COMMUNITY_Community 476|Community 476]]
-- [[_COMMUNITY_Community 477|Community 477]]
-- [[_COMMUNITY_Community 478|Community 478]]
-- [[_COMMUNITY_Community 479|Community 479]]
-- [[_COMMUNITY_Community 480|Community 480]]
-- [[_COMMUNITY_Community 481|Community 481]]
-- [[_COMMUNITY_Community 482|Community 482]]
-- [[_COMMUNITY_Community 483|Community 483]]
-- [[_COMMUNITY_Community 484|Community 484]]
-- [[_COMMUNITY_Community 485|Community 485]]
-- [[_COMMUNITY_Community 486|Community 486]]
-- [[_COMMUNITY_Community 487|Community 487]]
-- [[_COMMUNITY_Community 488|Community 488]]
-- [[_COMMUNITY_Community 489|Community 489]]
-- [[_COMMUNITY_Community 490|Community 490]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `StubDomain` - 36 edges
-2. `YmirSimulation` - 31 edges
-3. `useScenarioStore` - 26 edges
-4. `SimulationRunner` - 20 edges
-5. `Task Breakdown` - 20 edges
-6. `NavalDomain` - 20 edges
-7. `SimulationSocket` - 19 edges
-8. `ADR-006: Worker `loadEnvironment` Message Protocol` - 18 edges
-9. `ADR-005: C++ EnvironmentTimeline as Keyframe Resolution Layer` - 18 edges
-10. `Monorepo Migration — Design` - 17 edges
+2. `useScenarioStore` - 26 edges
+3. `YmirSimulation` - 25 edges
+4. `Task Breakdown` - 20 edges
+5. `NavalDomain` - 20 edges
+6. `Monorepo Migration — Design` - 17 edges
+7. `Tasks` - 17 edges
+8. `compilerOptions` - 16 edges
+9. `useSimulationStore` - 16 edges
+10. `World (thin orchestrator)` - 16 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `AI-Assisted Development Guidelines` --references--> `Compozy CLI`  [INFERRED]
   AGENTS.md → .agents/skills/compozy/SKILL.md
-- `YmirSimulation` --references--> `map`  [EXTRACTED]
-  /Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/nostalgic-thompson-49408c/core/src/wasm/YmirBindings.cpp → core/src/wasm/YmirBindings.cpp
-- `YmirSimulation` --references--> `RudderForces`  [EXTRACTED]
-  /Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/nostalgic-thompson-49408c/core/src/wasm/YmirBindings.cpp → core/src/wasm/YmirBindings.cpp
-- `YmirSimulation` --references--> `ThrustForces`  [EXTRACTED]
-  /Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/nostalgic-thompson-49408c/core/src/wasm/YmirBindings.cpp → core/src/wasm/YmirBindings.cpp
-- `YmirSimulation` --references--> `unique_ptr`  [EXTRACTED]
-  /Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/nostalgic-thompson-49408c/core/src/wasm/YmirBindings.cpp → core/src/wasm/YmirBindings.cpp
+- `core (Docker Service)` --implements--> `Ymir Project`  [INFERRED]
+  docker-compose.yml → README.md
+- `GitHub CI Workflow` --references--> `core CMakeLists`  [INFERRED]
+  .github/workflows/ci.yml → core/CMakeLists.txt
+- `Web App index.html` --related_to--> `ymir_wasm WASM Module`  [INFERRED]
+  apps/web/index.html → core/CMakeLists.wasm.txt
+- `defaultCfg()` --references--> `CvodeConfig`  [EXTRACTED]
+  /Users/viniciusrosa/Documents/GitHub/Ymir/.claude/worktrees/upbeat-torvalds-50df58/core/tests/simulation/TestActuatorIntegration.cpp → core/tests/simulation/TestActuatorIntegration.cpp
 
 ## Import Cycles
 - None detected.
 
-## Communities (495 total, 22 thin omitted)
+## Communities (447 total, 17 thin omitted)
 
 ### Community 0 - "Vessel Domain Concepts"
 Cohesion: 0.14
@@ -522,12 +477,12 @@ Cohesion: 0.18
 Nodes (11): lower, upper, dimensions, beam, bounds, draft, lengthPerpendiculars, mass (+3 more)
 
 ### Community 3 - "WASM Bindings"
-Cohesion: 0.11
-Nodes (14): string, map, RudderForces, string, ThrustForces, World, val, YmirSimulation (+6 more)
+Cohesion: 0.12
+Nodes (9): string, val, YmirSimulation, domain_, initialized_, rudders_, thrusters_, waves_ (+1 more)
 
 ### Community 4 - "Physics Bodies & Persistence"
-Cohesion: 0.26
-Nodes (17): json, Matrix6x6, path, string, Vector6, json, load(), loadBodyDefinitionFile() (+9 more)
+Cohesion: 0.05
+Nodes (50): AbstractBody, BodyDefinition, namespace, namespace, json, Matrix6x6, path, string (+42 more)
 
 ### Community 5 - "Architecture & Integrators"
 Cohesion: 0.05
@@ -542,8 +497,8 @@ Cohesion: 0.08
 Nodes (33): ADR D-MONO-01: pnpm + Turborepo (not NX), ADR D-MONO-02: Dormand-Prince RK45 (not SUNDIALS), ADR D-MONO-03: Embind (not C API manual), ADR D-MONO-04: Fastify + TypeBox (not Express + Zod), ADR D-MONO-05: Web Worker para WASM, ADR D-MONO-06: SQLite + Drizzle (not Postgres), ADR D-MONO-07: Zustand (not Redux), Ymir Roadmap (+25 more)
 
 ### Community 8 - "NavalDomain Simulation"
-Cohesion: 0.08
-Nodes (45): array, BodyEntry, BodyPosition, CouplingRegistry, DynamicVessel, Environment, NavalContext, NavalForceModel (+37 more)
+Cohesion: 0.21
+Nodes (20): array, BodyEntry, NavalContext, string, bodyState(), buildContext(), distanceBetween(), initialize() (+12 more)
 
 ### Community 9 - "Repo Reorganization"
 Cohesion: 0.14
@@ -554,36 +509,36 @@ Cohesion: 0.16
 Nodes (14): Ymir Agent Guidelines, AI-Assisted Development Guidelines, Architecture Rules, C API Boundary Rules, Coding Standards, Commit Discipline, Documentation Rules, Lessons from Legacy (+6 more)
 
 ### Community 11 - "Physics Library Headers"
-Cohesion: 0.14
-Nodes (14): BodyState, Forces, Matrix6x6, string, ConstantForce, f_, diagonalMass(), SpringForce (+6 more)
+Cohesion: 0.07
+Nodes (26): namespace, namespace, BodyState, Forces, BodyState, Forces, Matrix6x6, string (+18 more)
 
 ### Community 12 - "Monorepo Build Pipeline"
 Cohesion: 0.07
 Nodes (27): cache, dependsOn, outputs, cache, inputs, outputs, cache, cache (+19 more)
 
 ### Community 13 - "Scenario Creator UI"
-Cohesion: 0.07
-Nodes (28): card, cardTitle, content, ControlesTab(), header, panel, PanelTab, row (+20 more)
+Cohesion: 0.06
+Nodes (30): card, cardTitle, content, ControlesTab(), header, panel, PanelTab, row (+22 more)
 
 ### Community 14 - "WASM Web Workers"
-Cohesion: 0.07
-Nodes (28): 10. Impacto por área (resumo), 11. Riscos e decisões abertas, 12. Critérios de aceite (herdados do PRD phase-03-server), 13. Não-metas, 14. Próximos passos, 1. Objetivo, 2. Estado atual (diagnóstico), 3. Arquitetura alvo (+20 more)
+Cohesion: 0.12
+Nodes (11): SimulationStateDTO, ActuatorStore, createMockModule(), MockYmirSimulation, applyScenarioVessels(), fetchVesselConfig(), initWasm(), pendingVessels (+3 more)
 
 ### Community 15 - "API Package Deps"
-Cohesion: 0.07
-Nodes (27): dependencies, better-sqlite3, drizzle-orm, fastify, @fastify/cors, @fastify/websocket, @sinclair/typebox, @ymir/types (+19 more)
+Cohesion: 0.11
+Nodes (22): dependencies, better-sqlite3, drizzle-orm, fastify, @fastify/cors, @sinclair/typebox, @ymir/types, devDependencies (+14 more)
 
 ### Community 16 - "Phase 2 World Concepts"
 Cohesion: 0.18
 Nodes (23): 12-Step Simulation Tick, AnchoringSystem + Chain + Catenary, CollisionSystem (Broad/Narrow Phase + Response), ymir::Environment (World Layer), EventBus (Pub/Sub), apps/fast-time (Batch Runner), MooringSystem + MooringCable, Protobuf Message Schemas (proto/) (+15 more)
 
 ### Community 17 - "BerthManeuverSystem"
-Cohesion: 0.18
-Nodes (30): BerthManeuverSystem(), buildNavMc(), checkTransitions(), computeLateralError(), currentPhase(), PID::reset(), PID::update(), setCouplingRegistry() (+22 more)
+Cohesion: 0.21
+Nodes (26): checkTransitions(), computeLateralError(), currentPhase(), PID::reset(), PID::update(), setCouplingRegistry(), update(), updateNavigating() (+18 more)
 
 ### Community 18 - "Coupling Domain Tests"
-Cohesion: 0.13
-Nodes (24): Config, CvodeConfig, DynamicVessel, RigidBody6DOF, unique_ptr, Vector6, VesselConfig, World (+16 more)
+Cohesion: 0.09
+Nodes (33): BodyState, Config, CvodeConfig, DynamicVessel, RigidBody6DOF, size_t, unique_ptr, Vector6 (+25 more)
 
 ### Community 19 - "NavalSimulation Core"
 Cohesion: 0.09
@@ -602,20 +557,16 @@ Cohesion: 0.26
 Nodes (21): fast-time App CMakeLists, server App CMakeLists, Web App index.html, core CMakeLists, core WASM CMakeLists, core Tests CMakeLists, GitHub CI Workflow, ymir_common Library CMakeLists (+13 more)
 
 ### Community 23 - "Scenario Creator Hooks"
-Cohesion: 0.09
-Nodes (26): AreaMapView(), controlStyle, labelStyle, ScenarioForm(), Sidebar(), SimulationControls(), mockArea, mockArea (+18 more)
+Cohesion: 0.10
+Nodes (25): AreaMapView(), controlStyle, labelStyle, ScenarioForm(), Sidebar(), SimulationControls(), mockArea, mockArea (+17 more)
 
 ### Community 24 - "Web TypeScript Config"
 Cohesion: 0.11
 Nodes (18): compilerOptions, allowImportingTsExtensions, esModuleInterop, jsx, lib, module, moduleResolution, noEmit (+10 more)
 
 ### Community 25 - "Actuator Integration Tests"
-Cohesion: 0.27
-Nodes (17): Config, CvodeConfig, RigidBody6DOF, unique_ptr, defaultCfg(), makeBody(), makeRealisticBody(), makeVlccBody() (+9 more)
-
-### Community 26 - "Simulation UI Controls"
-Cohesion: 0.05
-Nodes (28): ConnectionListener, ConnectionState, defaultWsUrl(), MessageListener, SimulationSocket, SimulationSocketOptions, StorageLike, FakeWebSocket (+20 more)
+Cohesion: 0.18
+Nodes (23): Config, CvodeConfig, InertialConfig, RestoringConfig, RigidBody6DOF, unique_ptr, defaultCfg(), makeBody() (+15 more)
 
 ### Community 27 - "Shared Types Package"
 Cohesion: 0.14
@@ -630,8 +581,8 @@ Cohesion: 0.13
 Nodes (22): BodyState, ForceModel, Forces, Matrix6x6, RK45Config, unique_ptr, Vector6, addForceModel() (+14 more)
 
 ### Community 30 - "IDomain Interface Tests"
-Cohesion: 0.15
-Nodes (12): namespace, IDomain, BodyPosition, string, vector, ymir(), namespace, BodyPosition (+4 more)
+Cohesion: 0.16
+Nodes (10): BodyPosition, BodyState, string, vector, BodyPosition, BodyState, string, vector (+2 more)
 
 ### Community 31 - "Legacy Wave & Docs"
 Cohesion: 0.16
@@ -650,8 +601,8 @@ Cohesion: 0.12
 Nodes (15): acceleration, body, position, velocity, acceleration, body, position, velocity (+7 more)
 
 ### Community 35 - "Root Package Config"
-Cohesion: 0.12
-Nodes (16): devDependencies, concurrently, turbo, engines, node, pnpm, name, packageManager (+8 more)
+Cohesion: 0.15
+Nodes (15): devDependencies, turbo, engines, node, pnpm, name, packageManager, private (+7 more)
 
 ### Community 36 - "BerthManeuver Tests"
 Cohesion: 0.18
@@ -662,8 +613,8 @@ Cohesion: 0.20
 Nodes (15): D8: Thruster and Rudder as Entities with Own State, Legacy BerthManeuverSystem (FSM Docking), Legacy FilterActuator (1st Order Low-Pass), Legacy ManeuverController (LOS + PID), Legacy PrescribedController, Legacy RateLimitedActuator, Legacy ManeuverSystem, BerthManeuverSystem FSM (Docking with Tugs) (+7 more)
 
 ### Community 38 - "Bounded Context Arch"
-Cohesion: 0.33
-Nodes (15): Architecture: Bounded Contexts, Architecture: Data Flow and Tick Sequence, Architecture README, Bounded Context Architecture, CVODE Integration Loop, 12-Step Deterministic Tick Sequence, ymir_common (CMake target), ymir_persistence (CMake target) (+7 more)
+Cohesion: 0.25
+Nodes (18): Architecture: Bounded Contexts, Architecture: Data Flow and Tick Sequence, Architecture README, BodyEntry (NavalSimulation per-body struct), Bounded Context Architecture, CVODE Integration Loop, NavalSimulation, 12-Step Deterministic Tick Sequence (+10 more)
 
 ### Community 39 - "Types TypeScript Config"
 Cohesion: 0.14
@@ -710,8 +661,8 @@ Cohesion: 0.18
 Nodes (10): acceleration, body, position, velocity, bodies, 1, bodyTypes, simple_box (+2 more)
 
 ### Community 50 - "Current Force Model"
-Cohesion: 0.24
-Nodes (18): BodyState, Config, Forces, NavalContext, computeNaval(), computeObokata(), computeRegular(), CurrentForces() (+10 more)
+Cohesion: 0.29
+Nodes (14): BodyState, Config, Forces, NavalContext, computeNaval(), computeObokata(), computeRegular(), CurrentForces() (+6 more)
 
 ### Community 51 - "PrescribedController Tests"
 Cohesion: 0.19
@@ -762,8 +713,8 @@ Cohesion: 0.20
 Nodes (12): Config, NavalContext, RudderConfig, ThrusterConfig, makeCfg(), makeCtx(), makeRudderCfg(), makeThrusterCfg() (+4 more)
 
 ### Community 63 - "Wave Forces Impl"
-Cohesion: 0.10
-Nodes (23): BodyState, Config, Forces, NavalContext, vector, WaveSpectrum, BodyState, Config (+15 more)
+Cohesion: 0.14
+Nodes (16): BodyState, Config, Forces, NavalContext, vector, WaveSpectrum, BodyState, Config (+8 more)
 
 ### Community 64 - "CouplingForceModel Tests"
 Cohesion: 0.27
@@ -794,8 +745,8 @@ Cohesion: 0.15
 Nodes (13): BodyState, Forces, NavalContext, RestoringConfig, Vector6, applyStaticEquilibrium(), computeNaval(), RestoringForces() (+5 more)
 
 ### Community 71 - "Squat Forces"
-Cohesion: 0.13
-Nodes (14): BodyState, Config, Forces, NavalContext, computeNaval(), SquatForces(), BodyState, Config (+6 more)
+Cohesion: 0.18
+Nodes (10): BodyState, Config, Forces, NavalContext, computeNaval(), SquatForces(), BodyState, Config (+2 more)
 
 ### Community 72 - "Tug Forces"
 Cohesion: 0.18
@@ -838,8 +789,8 @@ Cohesion: 0.48
 Nodes (5): setCurrent(), setSeaState(), setTide(), setWaterDepth(), setWind()
 
 ### Community 82 - "Community 82"
-Cohesion: 0.32
-Nodes (9): Config, NavalContext, makeCtx(), makeObokataCfg(), makeRegularCfg(), Config, NavalContext, Config (+1 more)
+Cohesion: 0.39
+Nodes (7): Config, NavalContext, makeCtx(), makeObokataCfg(), makeRegularCfg(), Config, NavalContext
 
 ### Community 83 - "Community 83"
 Cohesion: 0.33
@@ -874,8 +825,8 @@ Cohesion: 0.27
 Nodes (11): array, Config, NavalContext, vector, makeCtx(), makeSingleRudder(), makeTable(), array (+3 more)
 
 ### Community 91 - "Community 91"
-Cohesion: 0.33
-Nodes (8): NavalContext, WaveSpectrum, NavalContext, WaveSpectrum, NavalContext, WaveSpectrum, makeCtx(), makeSpectrum()
+Cohesion: 0.43
+Nodes (6): NavalContext, WaveSpectrum, NavalContext, WaveSpectrum, makeCtx(), makeSpectrum()
 
 ### Community 92 - "Community 92"
 Cohesion: 0.40
@@ -1002,8 +953,8 @@ Cohesion: 0.60
 Nodes (3): NavalContext, makeCtx(), NavalContext
 
 ### Community 124 - "Community 124"
-Cohesion: 0.43
-Nodes (4): NavalContext, makeCtx(), NavalContext, NavalContext
+Cohesion: 0.60
+Nodes (3): NavalContext, makeCtx(), NavalContext
 
 ### Community 125 - "Community 125"
 Cohesion: 0.60
@@ -1066,8 +1017,8 @@ Cohesion: 0.40
 Nodes (3): namespace, namespace, naval()
 
 ### Community 141 - "Community 141"
-Cohesion: 0.29
-Nodes (4): namespace, namespace, namespace, naval()
+Cohesion: 0.40
+Nodes (3): namespace, namespace, naval()
 
 ### Community 142 - "Community 142"
 Cohesion: 0.40
@@ -1110,8 +1061,8 @@ Cohesion: 0.07
 Nodes (26): Agent Management, CLI Command Reference, Common Flags, `compozy agents inspect <name>`, `compozy agents list`, `compozy archive`, `compozy exec [prompt]`, `compozy ext doctor` (+18 more)
 
 ### Community 175 - "Community 175"
-Cohesion: 0.05
-Nodes (35): addKfBtnStyle, addSeriesBtnStyle, cardHeaderStyle, cardStyle, EnvironmentConditionPanel(), fieldGroupStyle, helperStyle, inputStyle (+27 more)
+Cohesion: 0.07
+Nodes (27): addKfBtnStyle, addSeriesBtnStyle, cardHeaderStyle, cardStyle, EnvironmentConditionPanel(), fieldGroupStyle, helperStyle, inputStyle (+19 more)
 
 ### Community 176 - "Community 176"
 Cohesion: 0.07
@@ -1126,8 +1077,8 @@ Cohesion: 0.07
 Nodes (25): Architecture Decision Records, Build Order, CMake Dependency Graph, Component Overview, Core Interfaces, Development Sequencing, Documentation Files to Create, Doxygen Configuration (+17 more)
 
 ### Community 179 - "Community 179"
-Cohesion: 0.20
-Nodes (25): BodyPosition POD Struct, CouplingForceModel, CouplingRegistry, DomainRegistry, Environment (World-level shared), GlobalClock, IDomain Interface, Jacobi Coupling (one-tick latency) (+17 more)
+Cohesion: 0.18
+Nodes (27): CouplingForceModel, CouplingPort, CouplingRegistry, DomainRegistry, Environment (World-level shared), GlobalClock, IDomain Interface, Jacobi Coupling (one-tick latency) (+19 more)
 
 ### Community 180 - "Community 180"
 Cohesion: 0.17
@@ -1182,8 +1133,8 @@ Cohesion: 0.11
 Nodes (16): Comandos, Componentes, Convenções de testes E2E (Playwright), Convenções de testes unitários (Vitest), Custom Hooks, Dois níveis obrigatórios, Estado, Estrutura de Pastas (+8 more)
 
 ### Community 193 - "Community 193"
-Cohesion: 0.08
-Nodes (26): ADR-006: Worker `loadEnvironment` Message Protocol, Alternative 1: Embed environment in `loadScenario` payload, Alternative 2: Per-step `setEnvironment` messages (frontend resolves), Alternative 3: `loadEnvironment` as chosen, Alternatives Considered, Consequences, Context, Date (+18 more)
+Cohesion: 0.12
+Nodes (15): ADR-006: Worker `loadEnvironment` Message Protocol, Alternative 1: Embed environment in `loadScenario` payload, Alternative 2: Per-step `setEnvironment` messages (frontend resolves), Alternative 3: `loadEnvironment` as chosen, Alternatives Considered, Consequences, Context, Date (+7 more)
 
 ### Community 194 - "Community 194"
 Cohesion: 0.12
@@ -1222,8 +1173,8 @@ Cohesion: 0.12
 Nodes (15): Critérios de Sucesso, Declaração do Problema, Edge Cases, Fora de Escopo, Objetivos, Rastreabilidade de Requisitos, SC-P1-01 — Selecionar área e visualizar mapa ⭐ MVP, SC-P1-02 — Adicionar e posicionar embarcações ⭐ MVP (+7 more)
 
 ### Community 203 - "Community 203"
-Cohesion: 0.08
-Nodes (25): ADR-005: C++ EnvironmentTimeline as Keyframe Resolution Layer, Alternative A: Frontend-owned resolution, Alternative B (chosen): C++ EnvironmentTimeline, Alternatives Considered, Consequences, Context, Date, Decision (+17 more)
+Cohesion: 0.12
+Nodes (14): ADR-005: C++ EnvironmentTimeline as Keyframe Resolution Layer, Alternative A: Frontend-owned resolution, Alternative B (chosen): C++ EnvironmentTimeline, Alternatives Considered, Consequences, Context, Date, Decision (+6 more)
 
 ### Community 204 - "Community 204"
 Cohesion: 0.13
@@ -1235,7 +1186,7 @@ Nodes (14): ADR-XXX: [Title], Alternative 1: [Name], Alternative 2: [Name], Alte
 
 ### Community 206 - "Community 206"
 Cohesion: 0.11
-Nodes (19): MyScenariosPage(), navigate, scenarios, ScenarioCard(), ScenarioCardProps, useScenarios(), CreateAreaDTO, OriginDTO (+11 more)
+Nodes (18): MyScenariosPage(), navigate, scenarios, ScenarioCard(), ScenarioCardProps, useScenarios(), CreateAreaDTO, OriginDTO (+10 more)
 
 ### Community 207 - "Community 207"
 Cohesion: 0.12
@@ -1266,20 +1217,20 @@ Cohesion: 0.12
 Nodes (14): Acceptance Criteria, BroadPhase, CollisionEvent, CollisionResponse, Decisões Abertas para TechSpec, Escopo, Estado Atual (entrada da fase), Excluído desta fase (+6 more)
 
 ### Community 214 - "Community 214"
-Cohesion: 0.09
-Nodes (23): ADR-001: Phased Rollout — Uniform Conditions Before Grid Maps, Alternative 1: Full Delivery in One Phase, Alternative 2: Grid-Only (No Uniform), Alternatives Considered, Consequences, Context, Date, Decision (+15 more)
+Cohesion: 0.13
+Nodes (13): ADR-001: Phased Rollout — Uniform Conditions Before Grid Maps, Alternative 1: Full Delivery in One Phase, Alternative 2: Grid-Only (No Uniform), Alternatives Considered, Consequences, Context, Date, Decision (+5 more)
 
 ### Community 215 - "Community 215"
-Cohesion: 0.09
-Nodes (23): ADR-002: Homogeneous Condition Collections (No Mixing Uniform and Grid), Alternative 1: Allow Mixed Collections, Alternative 2: Only One Format Per Simulation, Alternatives Considered, Consequences, Context, Date, Decision (+15 more)
+Cohesion: 0.13
+Nodes (13): ADR-002: Homogeneous Condition Collections (No Mixing Uniform and Grid), Alternative 1: Allow Mixed Collections, Alternative 2: Only One Format Per Simulation, Alternatives Considered, Consequences, Context, Date, Decision (+5 more)
 
 ### Community 216 - "Community 216"
-Cohesion: 0.09
-Nodes (23): ADR-003: Independent Evaluation + Vector Sum for Multiple Grid Maps, Alternative 1: Unified Grid Reprojection, Alternative 2: Nearest-Neighbor Outside Grid (match dynamics), Alternatives Considered, Consequences, Context, Date, Decision (+15 more)
+Cohesion: 0.13
+Nodes (13): ADR-003: Independent Evaluation + Vector Sum for Multiple Grid Maps, Alternative 1: Unified Grid Reprojection, Alternative 2: Nearest-Neighbor Outside Grid (match dynamics), Alternatives Considered, Consequences, Context, Date, Decision (+5 more)
 
 ### Community 217 - "Community 217"
-Cohesion: 0.09
-Nodes (23): ADR-004: Temporal Keyframe Evolution for All Condition Types, Alternative 1: Temporal Evolution Only for Current, Alternative 2: Continuous Analytical Functions, Alternatives Considered, Consequences, Context, Date, Decision (+15 more)
+Cohesion: 0.13
+Nodes (13): ADR-004: Temporal Keyframe Evolution for All Condition Types, Alternative 1: Temporal Evolution Only for Current, Alternative 2: Continuous Analytical Functions, Alternatives Considered, Consequences, Context, Date, Decision (+5 more)
 
 ### Community 218 - "Community 218"
 Cohesion: 0.13
@@ -1406,8 +1357,8 @@ Cohesion: 0.17
 Nodes (10): Deliverables, Dependent Files, Implementation Details, Overview, Related ADRs, Relevant Files, Subtasks, Success Criteria (+2 more)
 
 ### Community 249 - "Community 249"
-Cohesion: 0.31
-Nodes (10): IDomain Abstract Interface, NavalSimulation (Deprecated), Phase-02 World Workflow Memory, Task 01: ymir::Environment Class, Task 02: IDomain Interface + BodyPosition, Task 03: CouplingRegistry, Task 04: CouplingForceModel, Task 05: NavalDomain (+2 more)
+Cohesion: 0.27
+Nodes (11): BodyPosition POD Struct, IDomain Abstract Interface, NavalSimulation (Deprecated), Phase-02 World Workflow Memory, Task 01: ymir::Environment Class, Task 02: IDomain Interface + BodyPosition, Task 03: CouplingRegistry, Task 04: CouplingForceModel (+3 more)
 
 ### Community 250 - "Community 250"
 Cohesion: 0.17
@@ -1578,8 +1529,8 @@ Cohesion: 0.18
 Nodes (9): Contexto, Critérios de Aceitação, Feature Spec: Vessel Data — Banco de Dados, Endpoints e Integração com Simulação, Fora de Escopo, R01 — Expansão do Banco de Dados, R02 — Endpoint de Configuração Completa, R03 — Arquitetura em Camadas, R04 — Integração com Simulação (+1 more)
 
 ### Community 292 - "Community 292"
-Cohesion: 0.40
-Nodes (3): namespace, namespace, ymir()
+Cohesion: 0.20
+Nodes (7): namespace, namespace, IDomain, ymir(), namespace, namespace, ymir()
 
 ### Community 293 - "Community 293"
 Cohesion: 0.20
@@ -1922,7 +1873,7 @@ Cohesion: 0.13
 Nodes (14): Errors / Corrections, Files / Surfaces, Important Decisions, Learnings, Objective Snapshot, Ready for Next Run, Task Memory: task_09.md, Errors / Corrections (+6 more)
 
 ### Community 395 - "Community 395"
-Cohesion: 0.11
+Cohesion: 0.12
 Nodes (16): 1. Design tokens, 2. Component primitives to build, 3. Screen-by-screen plan, 4. Phasing, 5. Dynamics (physics only), 6. Test plan, DEFERRED (leave unimplemented per instruction), Key file map (target app, absolute paths) (+8 more)
 
 ### Community 396 - "Community 396"
@@ -2034,11 +1985,11 @@ Cohesion: 0.53
 Nodes (4): CouplingRegistry, Environment, CouplingRegistry, Environment
 
 ### Community 423 - "Community 423"
-Cohesion: 0.14
+Cohesion: 0.15
 Nodes (12): (a) Home / "Meus cenários" — scenario list, (b) Running simulation UI, Components, Instructor App — Home (Meus cenários) + Running Simulation UI, Key Portuguese strings (`config/intl/translations-pt-BR.json`), Layout, Layout & flow, Notable stubs / non-wired UI (+4 more)
 
 ### Community 424 - "Community 424"
-Cohesion: 0.14
+Cohesion: 0.15
 Nodes (12): Components inventory & states, Condicoes ambientais do cenario e da simulacao, Design tokens (from get_variable_defs + observed), Exact text & labels (verbatim from pixels), Interactions / flows, Layout regions (full screen = 1920×972), Notes — DEFER (not yet cleanly implementable), Purpose / when shown (+4 more)
 
 ### Community 425 - "Community 425"
@@ -2046,256 +1997,100 @@ Cohesion: 0.40
 Nodes (4): BodyPosition, vector, BodyPosition, vector
 
 ### Community 426 - "Community 426"
-Cohesion: 0.09
-Nodes (22): Architecture Decision Records, Core Features, Fase 2 — Persistência e retomada, Fase 3 — Multiusuário e múltiplas simulações, Goals, High-Level Technical Constraints, MVP (Fase 1) — Fundação, Non-Goals (Out of Scope) (+14 more)
+Cohesion: 0.27
+Nodes (6): mockArea, VesselPicker(), VesselPickerProps, MOCK_VESSEL, useVessels(), VesselDTO
 
 ### Community 427 - "Community 427"
 Cohesion: 0.09
 Nodes (24): Area3DView(), CAMERAS, CameraSelector(), ViewToggle(), CameraId, useViewStore, ViewMode, ViewStore (+16 more)
 
 ### Community 428 - "Community 428"
-Cohesion: 0.18
-Nodes (9): map, RudderForces, ThrustForces, WaveSpectrum, World, WaveSpectrum, EMSCRIPTEN_BINDINGS(), makeWaveSpectrum() (+1 more)
+Cohesion: 0.20
+Nodes (9): map, RudderForces, ThrustForces, WaveSpectrum, World, EMSCRIPTEN_BINDINGS(), makeWaveSpectrum(), WaveForces (+1 more)
 
 ### Community 430 - "Community 430"
-Cohesion: 0.17
+Cohesion: 0.18
 Nodes (10): 1. Routes (`app/Root/index.tsx`, react-router-dom `<Routes>`), 2. End-to-end flow, 3. Step orders (local, not routed), 4. Form state strategy, 5. Validation, 6. Panel system, 7. Component inventory (name → responsibility → key props), 8. Portuguese UI strings (+2 more)
 
 ### Community 431 - "Community 431"
-Cohesion: 0.09
-Nodes (22): API Endpoints, Architecture Decision Records, Build Order, Component Overview, Core Interfaces, Data Flow, Data Models, Development Sequencing (+14 more)
+Cohesion: 0.22
+Nodes (8): hintsRowStyle, inputStyle, labelStyle, readoutStyle, rootStyle, Slider(), SliderProps, topRowStyle
 
 ### Community 432 - "Community 432"
 Cohesion: 0.25
 Nodes (6): Button(), ButtonProps, ButtonSize, ButtonVariant, sizeStyle, VariantStyle
 
 ### Community 433 - "Community 433"
-Cohesion: 0.10
-Nodes (21): dependencies, @ymir/types, devDependencies, @types/node, typescript, vitest, @vitest/coverage-v8, exports (+13 more)
+Cohesion: 0.29
+Nodes (8): NavalForceModel, RigidBody6DOF, unique_ptr, addBody(), addNavalForceModel(), NavalForceModel, RigidBody6DOF, unique_ptr
 
 ### Community 434 - "Community 434"
-Cohesion: 0.29
-Nodes (9): Config, RestoringConfig, Config, RestoringConfig, vlccCurrentConfig(), vlccDampingConfig(), vlccRestoringConfig(), vlccRudderConfig() (+1 more)
+Cohesion: 0.31
+Nodes (7): Config, RestoringConfig, vlccCurrentConfig(), vlccDampingConfig(), vlccRestoringConfig(), vlccRudderConfig(), vlccThrustConfig()
 
 ### Community 435 - "Community 435"
-Cohesion: 0.20
+Cohesion: 0.22
 Nodes (8): Architecture overview, Guidance for building matching primitives (Ymir web), i18n setup (`config/intl/`), Instructor Design-System Inventory, Provider / app wiring (`App.tsx`), Reusable components (name → purpose → key props/variants), Styling approach, Theme tokens (`TechnomarTheme`)
 
 ### Community 436 - "Community 436"
-Cohesion: 0.20
+Cohesion: 0.22
 Nodes (8): Components, Design tokens (from get_variable_defs + observed), Embarcacoes, ancoras e linhas, Exact text & labels (verbatim Portuguese/English as shown), Interactions / flows, Layout regions, Notes (DEFER / not-yet-implementable), Purpose / when shown
 
 ### Community 437 - "Community 437"
-Cohesion: 0.21
-Nodes (12): InertialConfig, Matrix6x6, RigidBody6DOF, unique_ptr, InertialConfig, Matrix6x6, RigidBody6DOF, unique_ptr (+4 more)
+Cohesion: 0.32
+Nodes (8): InertialConfig, Matrix6x6, RigidBody6DOF, unique_ptr, makeBodyAt(), vlccAddedMass(), vlccInertialConfig(), vlccMassMatrix()
 
 ### Community 438 - "Community 438"
-Cohesion: 0.22
+Cohesion: 0.25
 Nodes (7): Components & visible states, Design tokens (from get_variable_defs + observed), Exact text & labels (verbatim), Interactions / flows, Layout do instrutor (app shell / topbar / panels), Layout regions (1920 × 972 reference frame), Notes (DEFER / not yet implementable)
 
 ### Community 439 - "Community 439"
-Cohesion: 0.22
+Cohesion: 0.25
 Nodes (7): Components, Design tokens (from get_variable_defs + observed), Exact text & labels (verbatim), Informacoes do cenario e da simulacao, Interactions / flows, Layout regions (frame is 1920×972), Notes
 
 ### Community 440 - "Community 440"
-Cohesion: 0.25
+Cohesion: 0.29
 Nodes (6): (1) Mapping table — MATLAB module → Ymir equivalent, (2) Physics discrepancies / missing force terms, (3) File:line pointers (Ymir) per force term, Bottom line, Progress / status, Ymir vs MATLAB Dynamics — Naval Physics Comparison
 
 ### Community 441 - "Community 441"
-Cohesion: 0.19
-Nodes (10): realEngineWorkerFactory(), disposers, realEngineWorkerFactory(), SimulationRunnerOptions, attachRunnerToPort(), MessagePortLike, cleanups, WorkerCommand (+2 more)
+Cohesion: 0.29
+Nodes (7): DynamicVessel, RudderForces, ThrustForces, registerVessel(), DynamicVessel, RudderForces, ThrustForces
 
 ### Community 442 - "Community 442"
 Cohesion: 0.40
 Nodes (5): array, vector, foilTable(), array, vector
 
 ### Community 443 - "Community 443"
-Cohesion: 0.17
-Nodes (8): ClientTransport, MessageRouter, disposers, V, toServerMessage(), toWorkerCommand(), WsClient, Connection
+Cohesion: 0.67
+Nodes (4): BerthManeuverSystem(), buildNavMc(), Config, Config
 
 ### Community 444 - "Community 444"
-Cohesion: 0.13
-Nodes (12): namespace, namespace, BodyState, Forces, ForceModel, ymir(), naval(), TestForce (+4 more)
-
-### Community 446 - "Community 446"
-Cohesion: 0.12
-Nodes (15): ADR-006: Ciclo de vida de simulação — `sim_id`, reconexão via `localStorage`, TTL de órfãs, Alternative 1: Servidor lista sims ativas para o cliente escolher, Alternative 2: Simulação nunca encerra sozinha, Alternative 3: Encerrar imediatamente ao desconectar, Alternatives Considered, Consequences, Context, Date (+7 more)
-
-### Community 447 - "Community 447"
-Cohesion: 0.13
-Nodes (14): ADR-001: Motor de simulação no servidor via WASM em Node, cliente como terminal remoto, Alternative 1: Servidor C++ nativo com WebSocket + Protobuf (`apps/server`), Alternative 2: Manter a física no cliente / modo offline, Implementation Notes, Alternatives Considered, Consequences, Context, Date (+6 more)
-
-### Community 449 - "Community 449"
-Cohesion: 0.13
-Nodes (14): ADR-002: Uma simulação por `worker_thread` do Node, Alternative 1: In-process no event loop principal (`setInterval` por sim), Alternative 2: Processo/serviço Node separado (revive `apps/server` como Node), Implementation Notes, Alternatives Considered, Consequences, Context, Date (+6 more)
-
-### Community 450 - "Community 450"
-Cohesion: 0.13
-Nodes (14): ADR-003: Módulo WASM como pacote interno `@ymir/wasm` com alvo de build Node, Alternative 1: WASM direto em `apps/api/wasm/`, Alternative 2: Manter em `apps/web/public/wasm` e o Node carregar de lá, Implementation Notes, Alternatives Considered, Consequences, Context, Date (+6 more)
-
-### Community 451 - "Community 451"
-Cohesion: 0.13
-Nodes (14): ADR-004: Transporte WebSocket + JSON com contrato `ClientMessage`/`ServerMessage`, Alternative 1: Reusar/estender `WorkerMessageDTO` como contrato de rede, Alternative 2: Protobuf / serialização binária, Implementation Notes, Alternatives Considered, Consequences, Context, Date (+6 more)
-
-### Community 452 - "Community 452"
-Cohesion: 0.13
-Nodes (14): ADR-005: Testes contra o motor real; sem mock de engine; WASM compilado no CI, Alternative 1: Interface de motor + fake em Node para unit tests, Alternative 2: Reaproveitar o mock antigo como fixture de teste, Alternatives Considered, Consequences, Context, Date, Decision (+6 more)
-
-### Community 453 - "Community 453"
-Cohesion: 0.16
-Nodes (9): SimEntry, SimId, SimulationManagerOptions, SimWorkerHandle, WorkerFactory, SimulationWsOptions, simulationWsPlugin(), disposers (+1 more)
-
-### Community 454 - "Community 454"
-Cohesion: 0.21
-Nodes (9): namespace, namespace, buildSimulation(), persistence(), Scenario, Simulation, naval(), namespace (+1 more)
-
-### Community 455 - "Community 455"
-Cohesion: 0.15
-Nodes (12): compilerOptions, declaration, esModuleInterop, module, moduleResolution, outDir, rootDir, skipLibCheck (+4 more)
-
-### Community 456 - "Community 456"
-Cohesion: 0.22
-Nodes (7): AbstractBody, namespace, namespace, ymir(), ymir(), namespace, namespace
-
-### Community 457 - "Community 457"
-Cohesion: 0.18
-Nodes (10): Deliverables, Dependent Files, Implementation Details, Overview, Related ADRs, Relevant Files, Subtasks, Success Criteria (+2 more)
-
-### Community 458 - "Community 458"
-Cohesion: 0.18
-Nodes (10): Deliverables, Dependent Files, Implementation Details, Overview, Related ADRs, Relevant Files, Subtasks, Success Criteria (+2 more)
-
-### Community 459 - "Community 459"
-Cohesion: 0.18
-Nodes (10): Deliverables, Dependent Files, Implementation Details, Overview, Related ADRs, Relevant Files, Subtasks, Success Criteria (+2 more)
-
-### Community 460 - "Community 460"
-Cohesion: 0.18
-Nodes (10): Deliverables, Dependent Files, Implementation Details, Overview, Related ADRs, Relevant Files, Subtasks, Success Criteria (+2 more)
-
-### Community 461 - "Community 461"
-Cohesion: 0.18
-Nodes (10): Deliverables, Dependent Files, Implementation Details, Overview, Related ADRs, Relevant Files, Subtasks, Success Criteria (+2 more)
-
-### Community 462 - "Community 462"
-Cohesion: 0.18
-Nodes (10): Deliverables, Dependent Files, Implementation Details, Overview, Related ADRs, Relevant Files, Subtasks, Success Criteria (+2 more)
-
-### Community 463 - "Community 463"
-Cohesion: 0.18
-Nodes (10): Deliverables, Dependent Files, Implementation Details, Overview, Related ADRs, Relevant Files, Subtasks, Success Criteria (+2 more)
-
-### Community 464 - "Community 464"
-Cohesion: 0.18
-Nodes (10): Deliverables, Dependent Files, Implementation Details, Overview, Related ADRs, Relevant Files, Subtasks, Success Criteria (+2 more)
-
-### Community 465 - "Community 465"
-Cohesion: 0.18
-Nodes (10): Deliverables, Dependent Files, Implementation Details, Overview, Related ADRs, Relevant Files, Subtasks, Success Criteria (+2 more)
-
-### Community 466 - "Community 466"
-Cohesion: 0.20
-Nodes (8): namespace, BodyState, size_t, namespace, ymir(), stateFromRow(), ymir(), GoldenCsv
-
-### Community 467 - "Community 467"
-Cohesion: 0.27
-Nodes (8): BodyState, unique_ptr, addBody(), hasBody(), state(), step(), BodyState, unique_ptr
-
-### Community 468 - "Community 468"
-Cohesion: 0.22
-Nodes (8): Engine behavior found while generating this data (important), How this dataset was produced, Layout, Not covered, outDymLoads_body0.csv columns (per-force golden), Reference Scenarios — cross-engine validation, Run, Scenarios
-
-### Community 470 - "Community 470"
-Cohesion: 0.25
-Nodes (7): Achados que impedem validação numérica direta (follow-up), Como estender, Convenção de unidades (crítica), Estratégia dos testes, Objetivo, Resultados por força, Validação cruzada com dataset golden (TMS Dynamics 3.0)
-
-### Community 471 - "Community 471"
-Cohesion: 0.36
-Nodes (5): createSimulationEngine(), EmscriptenModule, loadModule(), SimulationEngine, YmirModuleFactory
-
-### Community 472 - "Community 472"
-Cohesion: 0.38
-Nodes (5): RigidBody6DOF, unique_ptr, makeRestingBody(), RigidBody6DOF, unique_ptr
-
-### Community 473 - "Community 473"
 Cohesion: 0.40
-Nodes (4): BodyDefinition, namespace, persistence(), namespace
+Nodes (5): BodyPosition, vector, allBodyPositions(), BodyPosition, vector
 
-### Community 474 - "Community 474"
+### Community 445 - "Community 445"
 Cohesion: 0.40
-Nodes (6): size_t, WorldSnapshot, bodyCount(), snapshotContainsBody(), size_t, WorldSnapshot
-
-### Community 475 - "Community 475"
-Cohesion: 0.40
-Nodes (4): Files per scenario, Golden fixtures — TMS Dynamics 3.0 cross-engine validation, Scenarios present, Units
-
-### Community 476 - "Community 476"
-Cohesion: 0.50
-Nodes (3): Issue 001: Worker thread errors/exits are not surfaced or cleaned up, Review Comment, Triage
-
-### Community 477 - "Community 477"
-Cohesion: 0.50
-Nodes (3): Issue 002: AttachSimulation delivers no immediate snapshot on reconnect, Review Comment, Triage
-
-### Community 478 - "Community 478"
-Cohesion: 0.50
-Nodes (3): Issue 003: Reconnect has no backoff/cap and the command queue is unbounded, Review Comment, Triage
-
-### Community 479 - "Community 479"
-Cohesion: 0.50
-Nodes (3): Issue 004: Default WS URL hardcodes ws://localhost:3000 and ignores HTTPS, Review Comment, Triage
-
-### Community 480 - "Community 480"
-Cohesion: 0.50
-Nodes (3): Issue 005: loadScenario frees the engine before the new one is built, Review Comment, Triage
-
-### Community 481 - "Community 481"
-Cohesion: 0.50
-Nodes (3): Issue 006: Dead VesselConfig message path — defined but never emitted, Review Comment, Triage
-
-### Community 482 - "Community 482"
-Cohesion: 0.50
-Nodes (3): Issue 001: reset() does not clear the persisted sim_id, Review Comment, Triage
-
-### Community 485 - "Community 485"
-Cohesion: 1.00
-Nodes (3): BodyEntry (NavalSimulation per-body struct), NavalSimulation, ADR-004: NavalSimulation Refactor for N Bodies
-
-### Community 486 - "Community 486"
-Cohesion: 1.00
-Nodes (3): CouplingPort, TugParametricForces, ADR-002: Tugs Promoted to Independent Physics Bodies with CouplingPort
-
-### Community 487 - "Community 487"
-Cohesion: 0.67
-Nodes (3): InertialConfig, vlccInertialCfg(), InertialConfig
-
-### Community 488 - "Community 488"
-Cohesion: 0.67
-Nodes (3): RestoringConfig, vlccRestoringCfg(), RestoringConfig
-
-### Community 489 - "Community 489"
-Cohesion: 0.67
-Nodes (3): BodyState, requireFiniteState(), BodyState
+Nodes (5): CouplingRegistry, Environment, onAddedToWorld(), CouplingRegistry, Environment
 
 ## Knowledge Gaps
-- **3438 isolated node(s):** `$schema`, `ui`, `outputs`, `inputs`, `cache` (+3433 more)
+- **3103 isolated node(s):** `outputs`, `inputs`, `cache`, `dependsOn`, `outputs` (+3098 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **22 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **17 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Simulation` connect `Community 454` to `Physics Bodies & Persistence`, `Physics Library Headers`, `Community 467`, `Community 472`, `IDomain Interface Tests`?**
+- **Why does `Simulation` connect `Physics Bodies & Persistence` to `Physics Library Headers`, `Community 292`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
-- **Why does `NavalDomain` connect `Community 251` to `WASM Bindings`, `NavalDomain Simulation`, `Community 428`, `Coupling Domain Tests`, `Actuator Integration Tests`?**
+- **Why does `IDomain` connect `Community 287` to `Community 296`, `Community 292`, `World Orchestrator Tests`, `IDomain Interface Tests`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
-- **Why does `WaveForces` connect `Wave Forces Impl` to `WASM Bindings`, `Community 91`, `Community 428`?**
+- **Why does `IDomain` connect `Community 292` to `Community 296`, `World Orchestrator Tests`, `IDomain Interface Tests`, `Community 287`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
-- **What connects `$schema`, `ui`, `outputs` to the rest of the system?**
-  _3460 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `outputs`, `inputs`, `cache` to the rest of the system?**
+  _3125 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Vessel Domain Concepts` be split into smaller, more focused modules?**
   _Cohesion score 0.14112903225806453 - nodes in this community are weakly interconnected._
 - **Should `API Database Layer` be split into smaller, more focused modules?**
   _Cohesion score 0.07372549019607844 - nodes in this community are weakly interconnected._
 - **Should `WASM Bindings` be split into smaller, more focused modules?**
-  _Cohesion score 0.11067193675889328 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected._
