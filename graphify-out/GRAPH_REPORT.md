@@ -1,16 +1,16 @@
 # Graph Report - rio-de-janeiro  (2026-07-05)
 
 ## Corpus Check
-- 499 files · ~366,431 words
+- 506 files · ~373,388 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 6215 nodes · 7411 edges · 495 communities (473 shown, 22 thin omitted)
+- 6286 nodes · 7480 edges · 501 communities (477 shown, 24 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 41 edges (avg confidence: 0.88)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `2b760d4e`
+- Built from commit: `81618bc6`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -479,6 +479,12 @@
 - [[_COMMUNITY_Community 488|Community 488]]
 - [[_COMMUNITY_Community 489|Community 489]]
 - [[_COMMUNITY_Community 490|Community 490]]
+- [[_COMMUNITY_Community 495|Community 495]]
+- [[_COMMUNITY_Community 496|Community 496]]
+- [[_COMMUNITY_Community 497|Community 497]]
+- [[_COMMUNITY_Community 498|Community 498]]
+- [[_COMMUNITY_Community 499|Community 499]]
+- [[_COMMUNITY_Community 500|Community 500]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `StubDomain` - 36 edges
@@ -507,7 +513,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (495 total, 22 thin omitted)
+## Communities (501 total, 24 thin omitted)
 
 ### Community 0 - "Vessel Domain Concepts"
 Cohesion: 0.14
@@ -602,8 +608,8 @@ Cohesion: 0.26
 Nodes (21): fast-time App CMakeLists, server App CMakeLists, Web App index.html, core CMakeLists, core WASM CMakeLists, core Tests CMakeLists, GitHub CI Workflow, ymir_common Library CMakeLists (+13 more)
 
 ### Community 23 - "Scenario Creator Hooks"
-Cohesion: 0.09
-Nodes (26): AreaMapView(), controlStyle, labelStyle, ScenarioForm(), Sidebar(), SimulationControls(), mockArea, mockArea (+18 more)
+Cohesion: 0.10
+Nodes (23): controlStyle, labelStyle, ScenarioForm(), Sidebar(), SimulationControls(), mockArea, mockArea, VesselList() (+15 more)
 
 ### Community 24 - "Web TypeScript Config"
 Cohesion: 0.11
@@ -630,8 +636,8 @@ Cohesion: 0.13
 Nodes (22): BodyState, ForceModel, Forces, Matrix6x6, RK45Config, unique_ptr, Vector6, addForceModel() (+14 more)
 
 ### Community 30 - "IDomain Interface Tests"
-Cohesion: 0.15
-Nodes (12): namespace, IDomain, BodyPosition, string, vector, ymir(), namespace, BodyPosition (+4 more)
+Cohesion: 0.19
+Nodes (9): namespace, IDomain, string, ymir(), IDomain, namespace, string, StubDomain (+1 more)
 
 ### Community 31 - "Legacy Wave & Docs"
 Cohesion: 0.16
@@ -702,8 +708,8 @@ Cohesion: 0.17
 Nodes (12): Architecture Decisions Log, D10: User Owns Vessel; NavalSimulation Receives Reference, D11: NavalSimulation Becomes Multi-Body in Phase 1, D1: World as Domain Orchestrator, D2: Jacobi (Loose) Coupling as Default, D3: Domain Creates and Registers Its Own Bodies, D4: Bodies with Multiple Domains via ForceModels, D5: NavalSimulation Replaced by NavalDomain+World in Phase 2 (+4 more)
 
 ### Community 48 - "Map & Geo Components"
-Cohesion: 0.20
-Nodes (10): MapRefBinder(), createVesselIcon(), VesselMarker(), VesselMarkerProps, isInsidePolygon(), latlngToMeters(), metersToLatLng(), origin (+2 more)
+Cohesion: 0.24
+Nodes (8): MapRefBinder(), createVesselIcon(), VesselMarker(), VesselMarkerProps, isInsidePolygon(), latlngToMeters(), metersToLatLng(), origin
 
 ### Community 49 - "Initial Velocity Scenarios"
 Cohesion: 0.18
@@ -778,8 +784,8 @@ Cohesion: 0.24
 Nodes (8): naval(), ymir(), namespace, namespace, ManeuverController, namespace, namespace, naval()
 
 ### Community 67 - "Core Package Config"
-Cohesion: 0.31
-Nodes (7): name, private, scripts, build:wasm, clean, test, version
+Cohesion: 0.22
+Nodes (8): name, private, scripts, build, build:wasm, clean, test, version
 
 ### Community 68 - "CI Review Skills"
 Cohesion: 0.29
@@ -794,8 +800,8 @@ Cohesion: 0.15
 Nodes (13): BodyState, Forces, NavalContext, RestoringConfig, Vector6, applyStaticEquilibrium(), computeNaval(), RestoringForces() (+5 more)
 
 ### Community 71 - "Squat Forces"
-Cohesion: 0.13
-Nodes (14): BodyState, Config, Forces, NavalContext, computeNaval(), SquatForces(), BodyState, Config (+6 more)
+Cohesion: 0.18
+Nodes (10): BodyState, Config, Forces, NavalContext, computeNaval(), SquatForces(), BodyState, Config (+2 more)
 
 ### Community 72 - "Tug Forces"
 Cohesion: 0.18
@@ -810,8 +816,8 @@ Cohesion: 0.06
 Nodes (30): AI-assisted development, Architecture overview, Architecture rules, Backend (apps/api), Bounded Contexts, C API boundary, C++ (libs/physics, libs/simulation, libs/vessel, …), Coding standards (+22 more)
 
 ### Community 75 - "Damping Forces"
-Cohesion: 0.18
-Nodes (10): BodyState, Config, Forces, NavalContext, computeNaval(), DampingForces(), BodyState, Config (+2 more)
+Cohesion: 0.29
+Nodes (6): BodyState, Config, Forces, NavalContext, computeNaval(), DampingForces()
 
 ### Community 76 - "Inertial Forces"
 Cohesion: 0.18
@@ -890,8 +896,8 @@ Cohesion: 0.40
 Nodes (4): namespace, namespace, naval(), TugMode()
 
 ### Community 95 - "Community 95"
-Cohesion: 0.38
-Nodes (5): RigidBody6DOF, unique_ptr, makeTestBody(), RigidBody6DOF, unique_ptr
+Cohesion: 0.67
+Nodes (3): RigidBody6DOF, unique_ptr, makeTestBody()
 
 ### Community 96 - "Community 96"
 Cohesion: 0.38
@@ -928,10 +934,6 @@ Nodes (3): namespace, ymir(), namespace
 ### Community 105 - "Community 105"
 Cohesion: 0.40
 Nodes (3): namespace, ymir(), namespace
-
-### Community 106 - "Community 106"
-Cohesion: 0.40
-Nodes (3): naval(), namespace, namespace
 
 ### Community 107 - "Community 107"
 Cohesion: 0.40
@@ -1022,10 +1024,6 @@ Cohesion: 0.40
 Nodes (3): namespace, naval(), namespace
 
 ### Community 130 - "Community 130"
-Cohesion: 0.40
-Nodes (3): namespace, naval(), namespace
-
-### Community 131 - "Community 131"
 Cohesion: 0.40
 Nodes (3): namespace, naval(), namespace
 
@@ -1235,7 +1233,7 @@ Nodes (14): ADR-XXX: [Title], Alternative 1: [Name], Alternative 2: [Name], Alte
 
 ### Community 206 - "Community 206"
 Cohesion: 0.11
-Nodes (19): MyScenariosPage(), navigate, scenarios, ScenarioCard(), ScenarioCardProps, useScenarios(), CreateAreaDTO, OriginDTO (+11 more)
+Nodes (18): MyScenariosPage(), navigate, scenarios, ScenarioCard(), ScenarioCardProps, useScenarios(), CreateAreaDTO, OriginDTO (+10 more)
 
 ### Community 207 - "Community 207"
 Cohesion: 0.12
@@ -1558,8 +1556,8 @@ Cohesion: 0.18
 Nodes (9): Apps (stubs), C API Planejada, Contextos e Responsabilidades, Fluxo de Dados (runtime), Integrador ODE, Modelo de Bounded Contexts, Módulos de Força (ymir_physics), Regras Arquiteturais (AGENTS.md) (+1 more)
 
 ### Community 287 - "Community 287"
-Cohesion: 0.17
-Nodes (12): BodyState, CouplingRegistry, Environment, string, IDomain, BodyState, CouplingRegistry, Environment (+4 more)
+Cohesion: 0.18
+Nodes (11): BodyState, CouplingRegistry, Environment, string, BodyState, CouplingRegistry, Environment, string (+3 more)
 
 ### Community 288 - "Community 288"
 Cohesion: 0.18
@@ -1762,8 +1760,8 @@ Cohesion: 0.22
 Nodes (7): Blockers, Decisions, Deferred Ideas, Lessons Learned, Preferences, Todos, Ymir — State
 
 ### Community 338 - "Community 338"
-Cohesion: 0.68
-Nodes (8): Task 01: Environment Class + NavalEnvironment Deprecated, Task 02: IDomain Interface + BodyPosition Struct, Task 03: CouplingRegistry, Task 04: CouplingForceModel, Task 05: NavalDomain + NavalSimulation Deprecation, Task 06: BerthManeuverSystem Coupling Update, Task 07: WorldSnapshot + World Orchestrator + Integration Tests, Phase 2 Task List
+Cohesion: 0.42
+Nodes (11): CouplingPort, TugParametricForces, Task 01: Environment Class + NavalEnvironment Deprecated, Task 02: IDomain Interface + BodyPosition Struct, Task 03: CouplingRegistry, Task 04: CouplingForceModel, Task 05: NavalDomain + NavalSimulation Deprecation, Task 06: BerthManeuverSystem Coupling Update (+3 more)
 
 ### Community 339 - "Community 339"
 Cohesion: 0.22
@@ -2050,8 +2048,8 @@ Cohesion: 0.09
 Nodes (22): Architecture Decision Records, Core Features, Fase 2 — Persistência e retomada, Fase 3 — Multiusuário e múltiplas simulações, Goals, High-Level Technical Constraints, MVP (Fase 1) — Fundação, Non-Goals (Out of Scope) (+14 more)
 
 ### Community 427 - "Community 427"
-Cohesion: 0.09
-Nodes (24): Area3DView(), CAMERAS, CameraSelector(), ViewToggle(), CameraId, useViewStore, ViewMode, ViewStore (+16 more)
+Cohesion: 0.10
+Nodes (23): Area3DView(), AreaMapView(), CAMERAS, CameraSelector(), ViewToggle(), AppShell(), mockArea, MapStore (+15 more)
 
 ### Community 428 - "Community 428"
 Cohesion: 0.18
@@ -2194,8 +2192,8 @@ Cohesion: 0.18
 Nodes (10): Deliverables, Dependent Files, Implementation Details, Overview, Related ADRs, Relevant Files, Subtasks, Success Criteria (+2 more)
 
 ### Community 466 - "Community 466"
-Cohesion: 0.20
-Nodes (8): namespace, BodyState, size_t, namespace, ymir(), stateFromRow(), ymir(), GoldenCsv
+Cohesion: 0.15
+Nodes (10): namespace, namespace, BodyState, size_t, namespace, ymir(), ymir(), stateFromRow() (+2 more)
 
 ### Community 467 - "Community 467"
 Cohesion: 0.27
@@ -2206,8 +2204,8 @@ Cohesion: 0.22
 Nodes (8): Engine behavior found while generating this data (important), How this dataset was produced, Layout, Not covered, outDymLoads_body0.csv columns (per-force golden), Reference Scenarios — cross-engine validation, Run, Scenarios
 
 ### Community 470 - "Community 470"
-Cohesion: 0.25
-Nodes (7): Achados que impedem validação numérica direta (follow-up), Como estender, Convenção de unidades (crítica), Estratégia dos testes, Objetivo, Resultados por força, Validação cruzada com dataset golden (TMS Dynamics 3.0)
+Cohesion: 0.22
+Nodes (8): Achados que impedem validação numérica direta (follow-up), Como estender, Convenção de unidades (crítica), Correções aplicadas nesta leva (ver `docs/planning/force-model-alignment/`), Estratégia dos testes, Objetivo, Resultados por força, Validação cruzada com dataset golden (TMS Dynamics 3.0)
 
 ### Community 471 - "Community 471"
 Cohesion: 0.36
@@ -2262,8 +2260,8 @@ Cohesion: 1.00
 Nodes (3): BodyEntry (NavalSimulation per-body struct), NavalSimulation, ADR-004: NavalSimulation Refactor for N Bodies
 
 ### Community 486 - "Community 486"
-Cohesion: 1.00
-Nodes (3): CouplingPort, TugParametricForces, ADR-002: Tugs Promoted to Independent Physics Bodies with CouplingPort
+Cohesion: 0.08
+Nodes (24): Check 1 — Granularidade, Check 2 — Diagrama × Definição, Check 3 — Co-locação de teste, Convenções de teste e gate (não há TESTING.md), Execution Plan, Ordem recomendada de execução, Phase 1: Foundation (Sequential), Phase 2: Correções (Parallel após deps) (+16 more)
 
 ### Community 487 - "Community 487"
 Cohesion: 0.67
@@ -2277,22 +2275,46 @@ Nodes (3): RestoringConfig, vlccRestoringCfg(), RestoringConfig
 Cohesion: 0.67
 Nodes (3): BodyState, requireFiniteState(), BodyState
 
+### Community 495 - "Community 495"
+Cohesion: 0.10
+Nodes (19): Decisões (gray areas resolvidas com o usuário), Edge Cases, Especificação — Alinhamento dos Modelos de Força ao Golden (TMS Dynamics 3.0), Goals, Out of Scope, P1: Corrigir corrente (OBOKATA) ⭐ MVP, P1: Corrigir squat ⭐ MVP, P1: Reconciliar constantes físicas (vento e globais) (+11 more)
+
+### Community 496 - "Community 496"
+Cohesion: 0.11
+Nodes (17): Achado que corrige a spec ⚠️, Architecture Overview, Code Reuse Analysis, Como abordar (HOW), Componentes (fórmula ref → mudança no Ymir), Design — Alinhamento dos Modelos de Força ao Golden, Error Handling / Tolerância, FMA-01 · Corrente (OBOKATA) — 2 bugs (+9 more)
+
+### Community 497 - "Community 497"
+Cohesion: 0.15
+Nodes (12): cache, inputs, outputs, extends, $schema, tasks, build, test (+4 more)
+
+### Community 498 - "Community 498"
+Cohesion: 0.25
+Nodes (7): centerStyle, clusterStyle, disabledStyle, rootStyle, TopBar(), TopBarActionsDisabled, TopBarProps
+
+### Community 499 - "Community 499"
+Cohesion: 0.67
+Nodes (6): record(), run_cpp(), run_e2e(), run_js(), section(), run-all-tests.sh script
+
+### Community 500 - "Community 500"
+Cohesion: 0.53
+Nodes (4): BodyPosition, vector, BodyPosition, vector
+
 ## Knowledge Gaps
-- **3438 isolated node(s):** `$schema`, `ui`, `outputs`, `inputs`, `cache` (+3433 more)
+- **3494 isolated node(s):** `$schema`, `ui`, `outputs`, `inputs`, `cache` (+3489 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **22 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **24 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Simulation` connect `Community 454` to `Physics Bodies & Persistence`, `Physics Library Headers`, `Community 467`, `Community 472`, `IDomain Interface Tests`?**
+- **Why does `ManeuverController` connect `BerthManeuver Headers` to `ManeuverController Impl`, `Vessel Integration Tests`, `BerthManeuverSystem`, `DynamicVessel Tests`, `ManeuverController Tests`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
 - **Why does `NavalDomain` connect `Community 251` to `WASM Bindings`, `NavalDomain Simulation`, `Community 428`, `Coupling Domain Tests`, `Actuator Integration Tests`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
 - **Why does `WaveForces` connect `Wave Forces Impl` to `WASM Bindings`, `Community 91`, `Community 428`?**
-  _High betweenness centrality (0.001) - this node is a cross-community bridge._
+  _High betweenness centrality (0.000) - this node is a cross-community bridge._
 - **What connects `$schema`, `ui`, `outputs` to the rest of the system?**
-  _3460 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _3516 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Vessel Domain Concepts` be split into smaller, more focused modules?**
   _Cohesion score 0.14112903225806453 - nodes in this community are weakly interconnected._
 - **Should `API Database Layer` be split into smaller, more focused modules?**
