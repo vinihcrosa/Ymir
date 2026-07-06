@@ -45,7 +45,7 @@ TEST_CASE("PhysicalConstants values")
 {
     REQUIRE(g == Approx(9.81));
     REQUIRE(rho_water == Approx(1025.0));
-    REQUIRE(rho_air == Approx(1.225));
+    REQUIRE(rho_air == Approx(1.275));
 }
 
 TEST_CASE("NavalEnvironment default values")

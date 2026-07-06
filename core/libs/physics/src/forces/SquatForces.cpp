@@ -10,7 +10,6 @@ namespace ymir::naval
 
 SquatForces::SquatForces(const Config& cfg)
     : cfg_(cfg)
-    , nabla_(cfg.volumetricWeight / (rho_water * g))
 {
     // Squat coefficient Cs lookup — matches MATLAB VesselFastTime.squatForce
     // ordering (dynamics repo): Cb>1 passes through, then the banded table.
@@ -23,8 +22,15 @@ SquatForces::SquatForces(const Config& cfg)
 
 Forces SquatForces::computeNaval(const BodyState& state, const NavalContext& ctx)
 {
+    // Heave relative to still-water equilibrium. The reference's q[2] is zero at
+    // the floating waterline; Ymir's state.z() is draft-referenced (z ≈ -draft at
+    // equilibrium), so shift by +draft to match the reference convention. Using the
+    // raw draft-referenced z here makes |z| (~draft) wrongly dominate the depth and
+    // invert the seabed clamp.
+    const double zRel = state.z() + cfg_.draft;
+
     // Effective water depth
-    double depth = std::max(std::abs(ctx.waterDepth + ctx.tide), std::abs(state.z()));
+    double depth = std::max(std::abs(ctx.waterDepth + ctx.tide), std::abs(zRel));
     if (depth < 0.01) depth = 0.01;  // guard against zero
 
     double v2   = ctx.speedToWater[0] * ctx.speedToWater[0]
@@ -45,11 +51,15 @@ Forces SquatForces::computeNaval(const BodyState& state, const NavalContext& ctx
     double denom = 1.0 - Fn * Fn;
     if (denom <= 0.0) denom = 1e-6;
 
+    // Sinkage — matches reference squatForces/SquatForces.cpp:48-49:
+    //   s = -(Cs+Cf) * volumetricWeight/(rho*g*L^2) * Fn^2 / sqrt(1-Fn^2)
+    // (volumetricWeight is a weight in N; single division by rho*g).
     double L2 = cfg_.length_BP * cfg_.length_BP;
-    double s  = -(Cs_ + Cf) * (nabla_ / (rho_water * g * L2)) * Fn * Fn / std::sqrt(denom);
+    double s  = -(Cs_ + Cf) * (cfg_.volumetricWeight / (rho_water * g * L2)) * Fn * Fn
+                / std::sqrt(denom);
 
-    // Clamp: cannot sink below seabed
-    double s_min = -(depth + 0.1 + state.z());
+    // Clamp: cannot sink below seabed (reference: s = max(-depth-0.1-q[2], s))
+    double s_min = -(depth + 0.1 + zRel);
     if (s < s_min) s = s_min;
 
     Forces fsq;

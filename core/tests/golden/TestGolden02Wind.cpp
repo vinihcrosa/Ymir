@@ -61,11 +61,11 @@ TEST_CASE("Golden 02: wind force matches TMS Dynamics", "[golden][wind]")
 
         Forces f = model.compute(bs);
 
-        // Longitudinal wind drag. Ymir agrees with TMS in sign and shape to
-        // ~4%; the residual is the air-density constant (Ymir rho_air = 1.225
-        // vs the reference's ~1.27). A 5% relative tolerance bounds the full
-        // trajectory; tighten it if rho_air is reconciled.
-        REQUIRE(f.f[0] == Catch::Approx(loads.at(r, "Fwd_x")).epsilon(5e-2).margin(1e3));
+        // Longitudinal wind drag. With rho_air reconciled to the reference
+        // (1.275) the mean error is ~0; the residual spread (<3%) is the golden's
+        // own apparent-wind variation (TMS subtracts vessel velocity; this test
+        // feeds pure wind). Closing to <2% needs the apparent-wind change (T8).
+        REQUIRE(f.f[0] == Catch::Approx(loads.at(r, "Fwd_x")).epsilon(3e-2).margin(1e3));
 
         // Beam force and yaw moment are zero for this bow-on heading
         // (cdy = 0 at 180° incidence).

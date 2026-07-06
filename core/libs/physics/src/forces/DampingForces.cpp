@@ -16,16 +16,21 @@ Forces DampingForces::computeNaval(const BodyState& state, const NavalContext& c
     // Potential (radiation) damping
     Vector6 fd_pot = ymir::math::matVecProduct(cfg_.potential, qdot, -1.0);
 
-    // Auxiliary velocity: surge+sway use speedToWater, rest use qdot
+    // Auxiliary velocity: surge+sway use speedToWater, rest use qdot. NOTE: the
+    // reference uses -speedToWater because its speedToWater is fluid-relative-to-
+    // vessel; Ymir's speedToWater is vessel-relative-to-water (bs.u() - current),
+    // the opposite sign, so no negation is needed here for damping to oppose motion.
     Vector6 aux{};
     aux[0] = ctx.speedToWater[0];
     aux[1] = ctx.speedToWater[1];
     for (int i = 2; i < 6; ++i)
         aux[i] = qdot[i];
 
-    // Exponential decay factor (based on surge+sway norm)
-    double vNorm2    = aux[0] * aux[0] + aux[1] * aux[1];
-    double decay     = std::exp(-cfg_.linearDampingCoeff * vNorm2);
+    // Exponential decay factor — reference uses the full 6-DOF velocity norm.
+    double vNorm2 = 0.0;
+    for (int i = 0; i < 6; ++i)
+        vNorm2 += aux[i] * aux[i];
+    double decay = std::exp(-cfg_.linearDampingCoeff * vNorm2);
 
     Vector6 exp_vel{};
     exp_vel[0] = aux[0] * decay;
