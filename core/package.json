@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "build": "cmake -S . -B build -G Ninja -DYMIR_BUILD_TESTS=ON -DYMIR_BUILD_APPS=OFF && cmake --build build",
     "build:wasm": "bash build-wasm.sh",
     "test": "ctest --test-dir build --output-on-failure",
     "clean": "rm -rf build build-wasm"

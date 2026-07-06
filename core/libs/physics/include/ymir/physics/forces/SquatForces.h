@@ -14,6 +14,7 @@ public:
         double volumetricWeight  = 0.0;   // N
         double length_BP         = 100.0; // m
         double hydroRestHeave    = 0.0;   // N/m — hydro_rest[2][2]
+        double draft             = 0.0;   // m — heave origin offset (z_equilibrium = -draft)
     };
 
     explicit SquatForces(const Config& cfg);
@@ -25,7 +26,6 @@ private:
 
     Config cfg_;
     double Cs_;    // cached block coefficient lookup
-    double nabla_; // volumetric displacement (m³)
 };
 
 } // namespace ymir::naval
