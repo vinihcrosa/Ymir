@@ -44,27 +44,40 @@ Isso destrava as forças dependentes de fluxo (vento, corrente, leme).
 |---------|-------|--------|--------------|------------|
 | 08_restoring | Restauração `Fr_z` | ✅ valida | ~3e-5 (pitch≈0) → ~6,5% (pitch alto) | Divergência = acoplamento hidrostático off-diagonal `[2][4]/[4][2]` que o Ymir omite por decisão de projeto |
 | 08_restoring | Momento `Mr_y` | ✅ valida | até ~13,5% | Mesma causa (off-diagonal) |
-| 08_restoring | Amortecimento `Fd_z` | ✅ valida | 0,05–0,6% (com movimento); ~7% (baixa velocidade) | Ymir omite um pequeno termo linear de heave presente no TMS |
-| 02_wind | Vento `Fwd_x` | ✅ valida | ~3,5–4,2% (todas as linhas) | Diferença = constante `rho_air` (Ymir 1,225 vs referência ~1,27); sinal e forma corretos |
+| 08_restoring | Amortecimento `Fd_z` | ✅ valida | 0,05–0,6% (com movimento); ~7% (baixa velocidade) | `vNorm2` do decay agora usa os 6 DOF (alinhado à referência) |
+| 02_wind | Vento `Fwd_x` | ✅ valida | <3% (todas as linhas) | `rho_air` reconciliado a **1,275** (valor da referência); resíduo restante é vento aparente (T8, pendente) |
+
+### Correções aplicadas nesta leva (ver `docs/planning/force-model-alignment/`)
+
+- **`rho_air` 1,225 → 1,275** (`PhysicalConstants.h`) — casa o desvio de ~4% do
+  vento. Confirmado contra `PhysicalProps.cpp` da referência.
+- **Squat — divisão dupla por (ρ·g) corrigida** (`SquatForces.cpp`): o numerador
+  do sinkage agora é `volumetricWeight/(ρ·g·L²)` (divisão única, como a
+  referência), não `nabla_/(ρ·g·L²)`. Também corrigida a origem de heave
+  (`z_rel = z + draft`) no cálculo de profundidade/clamp. Squat saiu de ~4 ordens
+  de erro para a **ordem correta** (e8). **Parcial**: ainda não ≤5% no cenário
+  `07` (calado 23 m em água de 7 m é semi-artificial; a dinâmica de profundidade
+  precisa de um rerun da referência p/ fechar).
 
 ### Achados que impedem validação numérica direta (follow-up)
 
-- **Corrente (01) — OBOKATA** — Ymir diverge do golden em **sinal e magnitude**
-  (`Fc_x` Ymir ≈ -83 kN vs golden ≈ +172 kN, erro relativo ~-1,5). Duas causas
-  prováveis: (a) `CurrentForces::computeObokata` usa `frontalHeight·dx` como área
-  seccional (área efetiva ≈ 11,5×350 = 4025 m² vs 1495 m² tabulada) e (b)
-  convenção de sinal do coeficiente/força invertida. Requer conferência contra a
-  referência MATLAB `dynamics` antes de corrigir.
-- **Squat (07)** — o modelo de squat do Ymir diverge do golden em ~4 ordens de
-  grandeza (Ymir ≈ -2,1e4 N vs golden ≈ -7,0e8 N). **Não é fator de unidade** —
-  é lacuna/bug de modelo. A fórmula do Ymir produz um afundamento `s` ~1e-4 m,
-  enquanto o golden implica ~3,3 m. Investigar `SquatForces::computeNaval`
-  (uso de `depth = max(|waterDepth|, |z|)` e escala de `nabla/(rho·g·L²)`).
-- **Leme (06)** — depende de fluxo (surge inicial 5 m/s); `GoldenFrame` já
-  fornece o fluxo em referencial do corpo, mas o acoplamento com corrente/squat
-  no cenário exige isolar o termo `Frd`. Pendente.
-- **Onda (03,04)** — excitação/deriva espectral; validação exige alinhar fase e
-  espectro. Pendente.
+- **Corrente (01) — OBOKATA** — investigada a fundo. As correções que casam o
+  golden **em repouso** (usar `atan2(vc)` sem negar → sinal; área
+  `sub_depth·dx` → magnitude; `Fc_x` passa de -83 kN para +166 kN vs golden
+  +172 kN, ~4% em `t≈0`) **quebram a física de auto-propulsão**: com o vessel se
+  movendo, a força de corrente vira **anti-arrasto** (testes de integração 186/187
+  falham — sem desaceleração / integrador diverge). Causa: conflito de convenção
+  de sinal de `speedToWater` (Ymir = `vessel − fluido`; referência = oposto) e o
+  papel corrente-vs-amortecimento no auto-movimento. **Revertido** — não é seguro
+  aplicar sem resolver essa convenção. Requer análise de projeto dedicada.
+- **Squat (07)** — ver "Correções": divisão dupla resolvida; fechamento ≤5%
+  pendente (dinâmica de profundidade / cenário artificial).
+- **Restauração (08)** — ⚠️ **corrigido o entendimento**: a referência **também é
+  diagonal** (sem off-diagonal). O resíduo (6,5%/13,5%) é **cruzamento por zero**
+  no assentamento, não bug de modelo. Sem mudança de código.
+- **Leme (06)** — pendente (T9); fórmula de referência mapeada no design.
+- **Onda (03,04)** — pendente (T10); fase `rand()` sem seed → validar mean-drift +
+  estatística.
 
 ## Como estender
 
