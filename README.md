@@ -1,5 +1,7 @@
 # Ymir
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 6-DOF naval physics simulator — rigid-body hydrodynamics for ships and floating platforms under current, wind, waves, thrusters, rudders, and tug interactions.
 
 The engine is domain-agnostic by design. The naval module is the first application.
@@ -71,3 +73,7 @@ ctest --test-dir build
 
 - [docs/architecture/README.md](docs/architecture/README.md) — architecture wiki: bounded-context map, data-flow diagrams, ADR index
 - [AGENTS.md](AGENTS.md) — contributor rules, coding standards, include conventions, commit discipline
+
+## License
+
+MIT — see [LICENSE](LICENSE).

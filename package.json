@@ -1,6 +1,13 @@
 {
   "name": "ymir",
+  "version": "0.1.0",
   "private": true,
+  "description": "6-DOF naval physics simulator — rigid-body hydrodynamics for ships and floating platforms under current, wind, waves, thrusters, rudders, and tug interactions.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vinihcrosa/Ymir.git"
+  },
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
